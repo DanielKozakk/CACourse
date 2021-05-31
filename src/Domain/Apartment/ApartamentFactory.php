@@ -49,6 +49,6 @@ class ApartamentFactory
         foreach ($roomsDefinition as $name => $size) {
             $rooms[] = new Room($name, new SquareMeter($size));
         }
-        return new Apartment($ownerId, $address, $description);
+        return new Apartment($ownerId, $address,$rooms, $description);
     }
 }

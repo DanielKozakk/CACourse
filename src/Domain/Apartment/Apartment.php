@@ -20,15 +20,21 @@ class Apartment
     private $description;
 
     /**
+     * @var Room[]
+     */
+    private $rooms;
+
+    /**
      * Apartment constructor.
      * @param string $ownerId
      * @param Address $address
      * @param string $description
      */
-    public function __construct(string $ownerId, \App\Domain\Apartment\Address $address, string $description)
+    public function __construct(string $ownerId, \App\Domain\Apartment\Address $address,array $rooms, string $description)
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
+        $this->rooms = $rooms;
     }
 }
