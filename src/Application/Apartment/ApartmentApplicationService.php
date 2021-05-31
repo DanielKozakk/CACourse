@@ -3,11 +3,8 @@
 
 namespace App\Application\Apartment;
 
+use App\Domain\Apartment\ApartamentFactory;
 
-use App\Domain\Apartment\Address;
-use App\Domain\Apartment\Apartment;
-use App\Domain\Apartment\Room;
-use App\Domain\Apartment\SquareMeter;
 
 class ApartmentApplicationService
 {
@@ -24,23 +21,10 @@ class ApartmentApplicationService
         array $roomsDefinition
     ) : void{
 
-        $address = new Address($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
-        /**
-         * @var Room[]
-         */
-        $rooms = [];
-        /**
-         * @var $name string
-         * @var $size float
-         */
-        foreach ($roomsDefinition as $name => $size){
-            $rooms[] = new Room($name, new SquareMeter($size));
-        }
-        $apartment = new Apartment($ownerId, $address, $description);
-
-
+        $apartment = (new ApartamentFactory())->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
 
     }
+
 
 
 
