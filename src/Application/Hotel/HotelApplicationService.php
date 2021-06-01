@@ -23,21 +23,6 @@ class HotelApplicationService
         return $hotelFactory->create($name, $street, $postalCode, $city, $country);
     }
 
-    /**
-     * @param string $hotelId
-     * @param int $number
-     * @param string $description
-     * @param array $rooms
-     */
-    public function addRoomToHotel(
-        string $hotelId,
-        int $number,
-        string $description,
-        array $rooms
-    ){
 
-
-
-    }
 
 }
