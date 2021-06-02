@@ -7,6 +7,8 @@ namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
 
@@ -23,8 +25,8 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
     }
 
     /**
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function saveApartment(Apartment $apartment)
     {
