@@ -24,7 +24,6 @@ class ApartmentApplicationService
         $this->apartmentRepository = $apartmentRepository;
     }
 
-
     public function add(
         string $ownerId,
         String $street,
@@ -40,8 +39,5 @@ class ApartmentApplicationService
 
         $this->apartmentRepository->save($apartment);
     }
-
-
-
 
 }
