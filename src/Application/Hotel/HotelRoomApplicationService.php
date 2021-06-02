@@ -24,8 +24,8 @@ class HotelRoomApplicationService
         int $number,
         array $spacesDefinition,
         string $description
-    ){
-
+    ): HotelRoom
+    {
         return (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
     }
 }

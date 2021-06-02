@@ -1,16 +1,15 @@
 <?php
 
 
-namespace App\Infrastructure\Persistance\Doctrine\Apartment;
+namespace App\Infrastructure\Persistance\Doctrine\Hotel;
 
 
 use App\Domain\Apartment\Apartment;
 use App\Domain\Hotel\Hotel;
-use App\Infrastructure\Persistance\Doctrine\DoctrineSqlApartmentRepository;
 use App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class SqlHotelRepository implements \App\Domain\Apartment\ApartmentRepository
+class SqlHotelRepository implements \App\Domain\Hotel\HotelRepository
 {
 
     /**
@@ -29,12 +28,12 @@ class SqlHotelRepository implements \App\Domain\Apartment\ApartmentRepository
 
 
     /**
-     * @param Hotel $apartment
+     * @param Hotel $hotel
      * @return void
      */
 
-    function save(Apartment $apartment)
+    function save(Hotel $hotel)
     {
-        $this->doctrineHotelRepository->saveHotel($apartment);
+        $this->doctrineHotelRepository->saveHotel($hotel);
     }
 }
