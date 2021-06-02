@@ -3,7 +3,11 @@
 
 namespace App\Domain\Apartment;
 
+use Doctrine\ORM\Mapping\Embeddable;
 
+/**
+ * @Embeddable
+ */
 class Address
 {
     /**

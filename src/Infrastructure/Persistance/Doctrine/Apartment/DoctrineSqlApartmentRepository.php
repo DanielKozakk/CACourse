@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Infrastructure\Persistance\Doctrine;
+namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
 
 use App\Domain\Apartment\Apartment;
