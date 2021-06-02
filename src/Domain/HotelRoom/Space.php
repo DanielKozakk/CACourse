@@ -3,16 +3,24 @@
 
 namespace App\Domain\HotelRoom;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 
+/**
+ *  @Entity()
+ */
 class Space
 {
     /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var SquareMeter
+     * @ORM\Column(type="float")
      */
     private $squareMeter;
 

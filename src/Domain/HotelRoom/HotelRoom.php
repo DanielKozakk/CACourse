@@ -3,28 +3,54 @@
 
 namespace App\Domain\HotelRoom;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 
+/**
+ *  @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\HotelRoom\DoctrineSqlHotelRoomRepository")
+ */
 class HotelRoom
 {
-    /**
-     * @var string
-     */
-    private $hotelId;
 
     /**
-     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
      */
     private $number;
 
     /**
+     *
+    /**
      * @var Space[]
+     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotelRoom")
+     *
      */
     private $spacesDefinition;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Hotel::class, inversedBy="rooms")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hotel;
+
 
     /**
      * HotelRoom constructor.

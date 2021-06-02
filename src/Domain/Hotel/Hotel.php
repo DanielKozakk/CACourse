@@ -7,12 +7,13 @@ namespace App\Domain\Hotel;
 use App\Domain\Apartment\Room;
 use App\Domain\HotelRoom\HotelRoom;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 
 
 /**
  * Class Hotel
  * @package App\Domain\Hotel
- *  @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository")
+ *  @ORM\Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository")
  */
 class Hotel
 {
@@ -40,7 +41,7 @@ class Hotel
 
     /**
      * @var HotelRoom[]
-     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotelId")
+     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotel")
      */
     private $rooms = [];
 
