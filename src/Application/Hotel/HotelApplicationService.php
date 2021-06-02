@@ -11,18 +11,29 @@ use App\Domain\Hotel\HotelFactory;
 class HotelApplicationService
 {
 
+    /**
+     *
+     */
+
+    /**
+     * @param string $name
+     * @param string $street
+     * @param string $postalCode
+     * @param string $city
+     * @param string $country
+     * @return Hotel
+     */
     public function createHotel(
         string $name,
         string $street,
         string $postalCode,
         string $city,
         string $country
-    ) :Hotel{
-
+    ): Hotel
+    {
         $hotelFactory = new HotelFactory();
         return $hotelFactory->create($name, $street, $postalCode, $city, $country);
     }
-
 
 
 }

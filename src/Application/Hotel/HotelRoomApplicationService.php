@@ -17,19 +17,15 @@ class HotelRoomApplicationService
      * @param int $number
      * @param string $description
      * @param array $rooms
+     * @return HotelRoom
      */
-    public function addRoomToHotel(
+    public function create(
         string $hotelId,
         int $number,
         array $spacesDefinition,
         string $description
     ){
 
-        /**
-         * @var HotelRoom
-         */
-        $hotelRoom = (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
-
-
+        return (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
     }
 }

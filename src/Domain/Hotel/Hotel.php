@@ -5,6 +5,7 @@ namespace App\Domain\Hotel;
 
 
 use App\Domain\Apartment\Room;
+use App\Domain\HotelRoom\HotelRoom;
 
 class Hotel
 {
@@ -20,7 +21,7 @@ class Hotel
     private $address;
 
     /**
-     * @var Room[]
+     * @var HotelRoom[]
      */
     private $rooms = [];
 
