@@ -16,15 +16,15 @@ class HotelApplicationService
     /**
      * @var HotelRepository
      */
-    private $sqlHotelRepository;
+    private $hotelRepository;
 
     /**
      * HotelApplicationService constructor.
-     * @param HotelRepository $sqlHotelRepository
+     * @param HotelRepository $hotelRepository
      */
-    public function __construct(HotelRepository $sqlHotelRepository)
+    public function __construct(HotelRepository $hotelRepository)
     {
-        $this->sqlHotelRepository = $sqlHotelRepository;
+        $this->hotelRepository = $hotelRepository;
     }
 
     /**
@@ -44,7 +44,7 @@ class HotelApplicationService
     {
         $hotelFactory = new HotelFactory();
         $hotel = $hotelFactory->create($name, $street, $postalCode, $city, $country);
-        $this->sqlHotelRepository->save($hotel);
+        $this->hotelRepository->save($hotel);
     }
 
 }
