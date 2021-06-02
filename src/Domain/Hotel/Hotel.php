@@ -13,6 +13,10 @@ class Hotel
     /**
      * @var string
      */
+    private $id;
+    /**
+     * @var string
+     */
     private $name;
 
     /**
