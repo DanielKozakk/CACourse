@@ -15,8 +15,8 @@ class HotelRoomApplicationService
     /**
      * @param string $hotelId
      * @param int $number
+     * @param array $spacesDefinition
      * @param string $description
-     * @param array $rooms
      * @return HotelRoom
      */
     public function create(
