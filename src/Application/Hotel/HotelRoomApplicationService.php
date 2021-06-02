@@ -9,23 +9,41 @@ use App\Domain\Hotel\Hotel;
 use App\Domain\Hotel\HotelFactory;
 use App\Domain\HotelRoom\HotelRoom;
 use App\Domain\HotelRoom\HotelRoomFactory;
+use App\Domain\HotelRoom\HotelRoomRepository;
 
 class HotelRoomApplicationService
 {
+
+    /**
+     * @var HotelRoomRepository
+     */
+    private $hotelRoomRepository;
+
+    /**
+     * HotelRoomApplicationService constructor.
+     * @param HotelRoomRepository $hotelRoomRepository
+     */
+    public function __construct(HotelRoomRepository $hotelRoomRepository)
+    {
+        $this->hotelRoomRepository = $hotelRoomRepository;
+    }
+
     /**
      * @param string $hotelId
      * @param int $number
      * @param array $spacesDefinition
      * @param string $description
-     * @return HotelRoom
      */
-    public function create(
+    public function add(
         string $hotelId,
         int $number,
         array $spacesDefinition,
         string $description
-    ): HotelRoom
+    )
     {
-        return (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
+        $hotelRoom =  (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
+
+        $this->hotelRoomRepository->save($hotelRoom);
+
     }
 }
