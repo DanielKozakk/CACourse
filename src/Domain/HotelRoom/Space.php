@@ -20,7 +20,8 @@ class Space
 
     /**
      * @var SquareMeter
-     * @ORM\Column(type="float")
+     * @ORM\Embedded
+     *
      */
     private $squareMeter;
 

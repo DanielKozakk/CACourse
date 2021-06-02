@@ -3,27 +3,31 @@
 
 namespace App\Domain\Hotel;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Embeddable
+ */
 class Address
 {
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $street;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $postalCode;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $city;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $country;
 
