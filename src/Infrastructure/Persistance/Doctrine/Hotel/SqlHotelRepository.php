@@ -5,34 +5,36 @@ namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
 
 use App\Domain\Apartment\Apartment;
+use App\Domain\Hotel\Hotel;
 use App\Infrastructure\Persistance\Doctrine\DoctrineSqlApartmentRepository;
+use App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepository
+class SqlHotelRepository implements \App\Domain\Apartment\ApartmentRepository
 {
 
     /**
-     * @var DoctrineSqlApartmentRepository
+     * @var DoctrineSqlHotelRepository
      */
-    private $doctrineApartmentRepository;
+    private $doctrineHotelRepository;
 
     /**
      * ApartmentRepository constructor.
-     * @param ServiceEntityRepository $doctrineApartmentRepository
+     * @param DoctrineSqlHotelRepository $doctrineHotelRepository
      */
-    public function __construct(ServiceEntityRepository $doctrineApartmentRepository)
+    public function __construct(DoctrineSqlHotelRepository $doctrineHotelRepository)
     {
-        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
+        $this->doctrineHotelRepository = $doctrineHotelRepository;
     }
 
 
     /**
-     * @param Apartment $apartment
-     * @return mixed|void
+     * @param Hotel $apartment
+     * @return void
      */
 
     function save(Apartment $apartment)
     {
-        $this->doctrineApartmentRepository->saveApartment($apartment);
+        $this->doctrineHotelRepository->saveHotel($apartment);
     }
 }
