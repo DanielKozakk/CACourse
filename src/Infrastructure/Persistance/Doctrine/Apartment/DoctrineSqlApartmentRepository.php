@@ -9,17 +9,18 @@ use App\Domain\Apartment\ApartmentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
-    private $entityManager;
+
 
     /**
      * DoctrineApartmentRepository constructor.
      * @param $entityManager
      */
+    private $entityManager;
+
     public function __construct()
     {
         $this->entityManager = $this->getEntityManager();
     }
-
 
     public function saveApartment(Apartment $apartment)
     {
