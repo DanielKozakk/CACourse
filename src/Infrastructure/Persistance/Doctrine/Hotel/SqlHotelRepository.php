@@ -5,7 +5,7 @@ namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
 
 use App\Domain\Apartment\Apartment;
-use App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository;
+use App\Infrastructure\Persistance\Doctrine\DoctrineSqlApartmentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepository
@@ -18,9 +18,9 @@ class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepositor
 
     /**
      * ApartmentRepository constructor.
-     * @param DoctrineSqlApartmentRepository $doctrineApartmentRepository
+     * @param ServiceEntityRepository $doctrineApartmentRepository
      */
-    public function __construct(DoctrineSqlApartmentRepository $doctrineApartmentRepository)
+    public function __construct(ServiceEntityRepository $doctrineApartmentRepository)
     {
         $this->doctrineApartmentRepository = $doctrineApartmentRepository;
     }
