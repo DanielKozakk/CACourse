@@ -1,15 +1,11 @@
 <?php
 
-
 namespace App\Infrastructure\Persistance\Doctrine\Hotel;
 
-
-use App\Domain\Apartment\Apartment;
 use App\Domain\Hotel\Hotel;
-use App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Domain\Hotel\HotelRepository;
 
-class SqlHotelRepository implements \App\Domain\Hotel\HotelRepository
+class SqlHotelRepository implements HotelRepository
 {
 
     /**
