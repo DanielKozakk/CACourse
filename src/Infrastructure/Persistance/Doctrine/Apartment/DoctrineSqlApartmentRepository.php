@@ -22,6 +22,10 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
         $this->entityManager = $this->getEntityManager();
     }
 
+    /**
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function saveApartment(Apartment $apartment)
     {
         $this->entityManager->persist($apartment);
