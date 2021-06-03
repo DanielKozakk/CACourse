@@ -24,29 +24,18 @@ class ApartmentRestController extends AbstractController
     {
         $this->apartmentApplicationService = $apartmentApplicationService;
     }
-//
-//    #[Route('/apartment', name: 'apartment')]
-    public function addApartment()
-    {
-        return $this->apartmentApplicationService->add();
+
+    public function addApartment(ApartmentDto $apartmentDto):void{
+
+        $this->apartmentApplicationService->add($apartmentDto->getOwnerId(),
+            $apartmentDto->getStreet(),
+            $apartmentDto->getPostalCode(),
+            $apartmentDto->getHouseNumber(),
+            $apartmentDto->getApartmentNumber(),
+            $apartmentDto->getCity(),
+            $apartmentDto->getCountry(),
+            $apartmentDto->getDescription(),
+            $apartmentDto->getRoomsDefinition());
     }
-
-    public function add(
-
-    ):void{
-
-//        string $ownerId,
-//        String $street,
-//        string $postalCode,
-//        string $houseNumber,
-//        string $apartmentNumber,
-//        string $city,
-//        string $country,
-//        string $description,
-//        array $roomsDefinition
-        $this->apartmentApplicationService->add();
-    }
-
-
 
 }
