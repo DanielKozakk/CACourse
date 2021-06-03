@@ -35,13 +35,12 @@ class HotelRoomApplicationService
      * @param string $description
      */
     public function add(
-        string $hotelId,
         int $number,
         array $spacesDefinition,
         string $description
     )
     {
-        $hotelRoom =  (new HotelRoomFactory())->create($hotelId, $number, $spacesDefinition, $description);
+        $hotelRoom =  (new HotelRoomFactory())->create($number, $spacesDefinition, $description);
 
         $this->hotelRoomRepository->save($hotelRoom);
 

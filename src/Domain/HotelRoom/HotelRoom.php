@@ -54,14 +54,12 @@ class HotelRoom
 
     /**
      * HotelRoom constructor.
-     * @param string $hotelId
      * @param int $number
      * @param Space[] $spacesDefinition
      * @param string $description
      */
-    public function __construct(string $hotelId, int $number, array $spacesDefinition, string $description)
+    public function __construct( int $number, array $spacesDefinition, string $description)
     {
-        $this->hotelId = $hotelId;
         $this->number = $number;
         $this->spacesDefinition = $spacesDefinition;
         $this->description = $description;
