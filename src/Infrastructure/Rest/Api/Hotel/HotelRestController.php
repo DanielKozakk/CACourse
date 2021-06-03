@@ -13,7 +13,7 @@ class HotelRestController extends AbstractController
     /**
      * @var HotelApplicationService
      */
-    private $hotelApplicationService;
+    private HotelApplicationService $hotelApplicationService;
 
     /**
      * HotelRestController constructor.

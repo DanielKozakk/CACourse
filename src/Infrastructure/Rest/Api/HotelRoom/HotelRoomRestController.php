@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Infrastructure\Rest\Api\HotelRoom;
 
-
 use App\Application\Hotel\HotelRoomApplicationService;
-use App\Domain\HotelRoom\HotelRoom;
-use App\Infrastructure\Rest\Api\Hotel\HotelDto;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class HotelRoomRestController
+class HotelRoomRestController extends AbstractController
 {
     /**
      * @var HotelRoomApplicationService
