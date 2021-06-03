@@ -6,24 +6,30 @@ namespace App\Application\Apartment;
 use App\Domain\Apartment\ApartamentFactory;
 use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentRepository;
+use App\Domain\Apartment\EventChannel;
 use App\Domain\Apartment\Period;
 
 
 class ApartmentApplicationService
 {
-
     /**
      * @var ApartmentRepository
      */
-    private $apartmentRepository;
+    private ApartmentRepository $apartmentRepository;
+
+    /**
+     * @var EventChannel
+     */
+    private EventChannel $eventChannel;
 
     /**
      * ApartmentApplicationService constructor.
      * @param ApartmentRepository $apartmentRepository
      */
-    public function __construct(ApartmentRepository $apartmentRepository)
+    public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel)
     {
         $this->apartmentRepository = $apartmentRepository;
+        $this->eventChannel = $eventChannel;
     }
 
     public function add(
@@ -51,12 +57,7 @@ class ApartmentApplicationService
          */
         $period = new Period($start, $end);
 
-        /**
-         * @var Apartment
-         */
-
-        $apartment->book($tenantId, $period);
-
+        $apartment->book($tenantId, $period, $this->eventChannel);
     }
 
 }

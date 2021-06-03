@@ -4,7 +4,6 @@
 namespace App\Domain\Apartment;
 
 
-use App\Domain\Apartment\Apartment\ApartmentBooked;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -62,8 +61,9 @@ class Apartment
         $this->rooms = $rooms;
     }
 
-    public function book(string $tenantId, Period $period)
+    public function book(string $tenantId, Period $period, EventChannel $eventChannel)
     {
-        $apartmentBooked = (new ApartmentBooked)->create($this->id, $this->ownerId, $tenantId, $period);
+        $apartmentBooked =  ApartmentBooked::create($this->id, $this->ownerId, $tenantId, $period);
+        $eventChannel->publish($apartmentBooked);
     }
 }

@@ -10,13 +10,13 @@ class Period
     /**
      * @var \DateTime
      */
-    private $start;
+    private \DateTime $start;
 
 
     /**
      * @var \DateTime
      */
-    private $end;
+    private \DateTime $end;
 
     /**
      * Period constructor.
@@ -29,4 +29,19 @@ class Period
         $this->end = $end;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getStart(): \DateTime
+    {
+        return $this->start;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEnd(): \DateTime
+    {
+        return $this->end;
+    }
 }

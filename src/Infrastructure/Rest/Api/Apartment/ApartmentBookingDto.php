@@ -26,13 +26,13 @@ class ApartmentBookingDto
      * ApartmentBookingDto constructor.
      * @param string $tenantId
      * @param \DateTime $start
-     * @param \DateTime $aend
+     * @param \DateTime $end
      */
-    public function __construct(string $tenantId, \DateTime $start, \DateTime $aend)
+    public function __construct(string $tenantId, \DateTime $start, \DateTime $end)
     {
         $this->tenantId = $tenantId;
         $this->start = $start;
-        $this->aend = $aend;
+        $this->end = $end;
     }
 
     /**
