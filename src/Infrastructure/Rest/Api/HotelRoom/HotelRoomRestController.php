@@ -15,7 +15,7 @@ class HotelRoomRestController
     /**
      * @var HotelRoomApplicationService
      */
-    private $hotelRoomApplicationService;
+    private HotelRoomApplicationService $hotelRoomApplicationService;
 
     /**
      * HotelRoomRestController constructor.
