@@ -16,7 +16,7 @@ class HotelApplicationService
     /**
      * @var HotelRepository
      */
-    private $hotelRepository;
+    private HotelRepository $hotelRepository;
 
     /**
      * HotelApplicationService constructor.

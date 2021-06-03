@@ -3,14 +3,10 @@
 
 namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
-
 use App\Domain\Apartment\Apartment;
-use App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepository
 {
-
     /**
      * @var DoctrineSqlApartmentRepository
      */
@@ -25,12 +21,10 @@ class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepositor
         $this->doctrineApartmentRepository = $doctrineApartmentRepository;
     }
 
-
     /**
      * @param Apartment $apartment
-     * @return mixed|void
+     * @return void
      */
-
     function save(Apartment $apartment)
     {
         $this->doctrineApartmentRepository->saveApartment($apartment);
