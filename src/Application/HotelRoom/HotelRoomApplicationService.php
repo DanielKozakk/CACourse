@@ -1,13 +1,8 @@
 <?php
 
 
-namespace App\Application\Hotel;
+namespace App\Application\HotelRoom;
 
-
-use App\Domain\Apartment\Room;
-use App\Domain\Hotel\Hotel;
-use App\Domain\Hotel\HotelFactory;
-use App\Domain\HotelRoom\HotelRoom;
 use App\Domain\HotelRoom\HotelRoomFactory;
 use App\Domain\HotelRoom\HotelRoomRepository;
 

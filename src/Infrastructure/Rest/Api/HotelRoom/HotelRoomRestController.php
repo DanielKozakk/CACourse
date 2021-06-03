@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Rest\Api\HotelRoom;
 
-use App\Application\Hotel\HotelRoomApplicationService;
+use App\Application\HotelRoom\HotelRoomApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HotelRoomRestController extends AbstractController
