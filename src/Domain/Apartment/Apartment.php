@@ -4,6 +4,7 @@
 namespace App\Domain\Apartment;
 
 
+use App\Domain\Apartment\Apartment\ApartmentBooked;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -22,6 +23,12 @@ class Apartment
      * @ORM\Column(type="integer")
      *
      * @var string
+     */
+    private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
      */
     private $ownerId;
     /**
@@ -57,6 +64,6 @@ class Apartment
 
     public function book(string $tenantId, Period $period)
     {
-
+        $apartmentBooked = (new ApartmentBooked)->create($this->id, $this->ownerId, $tenantId, $period);
     }
 }
