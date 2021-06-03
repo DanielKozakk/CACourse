@@ -54,4 +54,9 @@ class Apartment
         $this->description = $description;
         $this->rooms = $rooms;
     }
+
+    public function book(string $tenantId, Period $period)
+    {
+
+    }
 }

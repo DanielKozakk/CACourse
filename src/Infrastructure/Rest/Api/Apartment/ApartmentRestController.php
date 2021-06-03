@@ -40,6 +40,6 @@ class ApartmentRestController extends AbstractController
 
     public function book(string $id, ApartmentBookingDto $apartmentBookingDto){
 
-
+        $this->apartmentApplicationService->book($id, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
 }

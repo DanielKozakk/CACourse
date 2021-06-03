@@ -29,4 +29,9 @@ class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepositor
     {
         $this->doctrineApartmentRepository->saveApartment($apartment);
     }
+
+    public function findById(string $id) : Apartment
+    {
+        return $this->doctrineApartmentRepository->findApartmentById($id);
+    }
 }

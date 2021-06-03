@@ -20,7 +20,7 @@ class ApartmentBookingDto
     /**
      * @var \DateTime
      */
-    private $aend;
+    private $end;
 
     /**
      * ApartmentBookingDto constructor.
@@ -54,9 +54,9 @@ class ApartmentBookingDto
     /**
      * @return \DateTime
      */
-    public function getAend(): \DateTime
+    public function getEnd(): \DateTime
     {
-        return $this->aend;
+        return $this->end;
     }
 
 

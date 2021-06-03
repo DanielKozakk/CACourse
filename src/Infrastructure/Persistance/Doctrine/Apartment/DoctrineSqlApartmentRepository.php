@@ -33,4 +33,11 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
         $this->entityManager->persist($apartment);
         $this->entityManager->flush();
     }
+
+    public function findApartmentById(string $id){
+
+        $queryBuidler = $this->createQueryBuilder('a');
+        return $queryBuidler->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
+
+    }
 }

@@ -4,7 +4,9 @@
 namespace App\Application\Apartment;
 
 use App\Domain\Apartment\ApartamentFactory;
+use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentRepository;
+use App\Domain\Apartment\Period;
 
 
 class ApartmentApplicationService
@@ -38,6 +40,23 @@ class ApartmentApplicationService
         $apartment = (new ApartamentFactory())->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
 
         $this->apartmentRepository->save($apartment);
+    }
+
+    public function book(string $id, string $tenantId, \DateTime $start, \DateTime $end)
+    {
+        $apartment = $this->apartmentRepository->findById($id);
+
+        /**
+         * @var Period
+         */
+        $period = new Period($start, $end);
+
+        /**
+         * @var Apartment
+         */
+
+        $apartment->book($tenantId, $period);
+
     }
 
 }

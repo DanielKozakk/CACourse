@@ -11,4 +11,6 @@ interface ApartmentRepository
      * @return mixed
      */
     function save(Apartment $apartment);
+
+    public function findById(string $id) : Apartment;
 }
