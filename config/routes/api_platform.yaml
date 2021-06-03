@@ -19,10 +19,10 @@ add_hotel:
         _api_item_operation_name: post_publication
     prefix: /hotel
 add_hotel_room:
-    path: /hotel_room
+    path: /hotelroom
     methods: ['POST']
     defaults:
         _controller: App\Controller\HotelRoomRestController::addHotelRoom
         _api_resource_class: App\Domain\HotelRoom\HotelRoom
         _api_item_operation_name: post_publication
-    prefix: /hotel_room
+    prefix: /hotelroom
