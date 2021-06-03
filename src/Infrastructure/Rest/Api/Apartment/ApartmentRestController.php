@@ -38,4 +38,8 @@ class ApartmentRestController extends AbstractController
             $apartmentDto->getRoomsDefinition());
     }
 
+    public function book(string $id, ApartmentBookingDto $apartmentBookingDto){
+
+
+    }
 }
