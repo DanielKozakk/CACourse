@@ -10,8 +10,6 @@ use App\Infrastructure\Rest\Api\Hotel\HotelDto;
 
 class HotelRoomRestController
 {
-
-
     /**
      * @var HotelRoomApplicationService
      */
