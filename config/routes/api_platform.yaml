@@ -1,0 +1,12 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: /api
+add_apartment:
+    path: /apartment
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\ApartmentRestController::addApartment
+        _api_resource_class: App\Domain\Apartment\Apartment
+        _api_item_operation_name: post_publication
+    prefix: /apartment
