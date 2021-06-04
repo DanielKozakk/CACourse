@@ -36,8 +36,8 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
 
     public function findApartmentById(string $id){
 
-        $queryBuidler = $this->createQueryBuilder('a');
-        return $queryBuidler->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
+        $queryBuilder = $this->createQueryBuilder('a');
+        return $queryBuilder->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
 
     }
 }

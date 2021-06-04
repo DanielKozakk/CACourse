@@ -64,6 +64,6 @@ class Apartment
     public function book(string $tenantId, Period $period, EventChannel $eventChannel)
     {
         $apartmentBooked =  ApartmentBooked::create($this->id, $this->ownerId, $tenantId, $period);
-        $eventChannel->publish($apartmentBooked);
+        $eventChannel->publishApartmentBooked($apartmentBooked);
     }
 }

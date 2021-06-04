@@ -29,5 +29,10 @@ class DoctrineSqlHotelRoomRepository extends ServiceEntityRepository
         $this->entityManager->persist($hotelRoom);
         $this->entityManager->flush();
     }
+    public function findHotelRoomById(string $id){
 
+        $queryBuilder = $this->createQueryBuilder('a');
+        return $queryBuilder->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
+
+    }
 }

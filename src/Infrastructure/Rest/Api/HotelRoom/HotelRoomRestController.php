@@ -28,4 +28,9 @@ class HotelRoomRestController extends AbstractController
             $hotelRoomDto->getDescription()
         );
     }
+
+    public function book(int $id, HotelRoomBookingDto $hotelRoomBookingDto){
+        $this->hotelRoomApplicationService->book($id,$hotelRoomBookingDto->getTenantId(), $hotelRoomBookingDto->getStartDate(), $hotelRoomBookingDto->getEndDate());
+    }
+
 }
