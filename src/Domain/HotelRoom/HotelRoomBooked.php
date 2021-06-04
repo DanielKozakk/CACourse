@@ -4,8 +4,6 @@
 namespace App\Domain\HotelRoom;
 
 
-use App\Domain\Apartment\ApartmentBooked;
-use App\Domain\Apartment\Period;
 
 class HotelRoomBooked
 {
@@ -32,7 +30,7 @@ class HotelRoomBooked
     /**
      * @var Period
      */
-    private string $period;
+    private Period $period;
 
     /**
      * HotelRoomBooked constructor.

@@ -64,4 +64,13 @@ class Hotel
         $this->rooms[] = $room;
     }
 
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+
 }

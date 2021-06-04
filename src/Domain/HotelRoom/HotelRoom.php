@@ -4,6 +4,7 @@
 namespace App\Domain\HotelRoom;
 
 use App\Domain\Apartment\EventChannel;
+use App\Domain\Hotel\Hotel;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -12,7 +13,6 @@ use Doctrine\ORM\Mapping\Entity;
  */
 class HotelRoom
 {
-
     /**
      *
      * @ORM\Id
@@ -25,17 +25,13 @@ class HotelRoom
 
     /**
      * @var integer
-     *
      * @ORM\Column(type="integer")
      */
     private $number;
 
     /**
-     *
-    /**
      * @var Space[]
      * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotelRoom")
-     *
      */
     private $spacesDefinition;
 
@@ -47,11 +43,11 @@ class HotelRoom
     private $description;
 
     /**
+     * @var Hotel
      * @ORM\ManyToOne(targetEntity=Hotel::class, inversedBy="rooms")
      * @ORM\JoinColumn(nullable=false)
      */
     private $hotel;
-
 
     /**
      * HotelRoom constructor.
@@ -59,15 +55,16 @@ class HotelRoom
      * @param Space[] $spacesDefinition
      * @param string $description
      */
-    public function __construct( int $number, array $spacesDefinition, string $description)
+    public function __construct( int $number, array $spacesDefinition, string $description, Hotel $hotel)
     {
+        $this->hotel = $hotel;
         $this->number = $number;
         $this->spacesDefinition = $spacesDefinition;
         $this->description = $description;
     }
 
     public function book($tenantId, Period $period, EventChannel $eventChannel){
-        $eventChannel->publishHotelRoomBooked(HotelRoomBooked::create($this->id, $tenantId, $period));
+        $eventChannel->publishHotelRoomBooked(HotelRoomBooked::create($this->id, $this->hotel->getId(), $tenantId, $period));
     }
 
 }
