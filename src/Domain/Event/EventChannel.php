@@ -9,8 +9,8 @@ use phpDocumentor\Reflection\Types\Integer;
 
 interface EventChannel
 {
-
     public function publishApartmentBooked(ApartmentBooked $apartmentBooked);
+
     public function publishHotelRoomBooked(HotelRoomBooked $apartmentBooked);
 
 }

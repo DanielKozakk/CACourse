@@ -5,12 +5,14 @@ namespace App\Domain\HotelRoom;
 
 
 
+use DateTime;
+
 class HotelRoomBooked
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $hotelRoomBookedCreationTime;
+    private DateTime $hotelRoomBookedCreationTime;
     /**
      * @var string
      */
@@ -34,14 +36,14 @@ class HotelRoomBooked
 
     /**
      * HotelRoomBooked constructor.
-     * @param \DateTime $hotelRoomBookedCreationTime
+     * @param DateTime $hotelRoomBookedCreationTime
      * @param string $eventId
      * @param string $hotelRoomId
      * @param string $hotelId
      * @param string $tenantId
      * @param Period $period
      */
-    private function __construct(\DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelRoomId,  string $hotelId,string $tenantId, Period $period)
+    private function __construct(DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelRoomId, string $hotelId, string $tenantId, Period $period)
     {
         $this->hotelRoomBookedCreationTime = $hotelRoomBookedCreationTime;
         $this->eventId = $eventId;
@@ -54,15 +56,15 @@ class HotelRoomBooked
     public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelRoomBooked
     {
         $eventId = uniqid();
-        $creationDateTime = new \DateTime();
+        $creationDateTime = new DateTime();
 
         return new HotelRoomBooked( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period);
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getHotelRoomBookedCreationTime(): \DateTime
+    public function getHotelRoomBookedCreationTime(): DateTime
     {
         return $this->hotelRoomBookedCreationTime;
     }
@@ -102,7 +104,7 @@ class HotelRoomBooked
     /**
      * @return Period
      */
-    public function getPeriod(): Period|string
+    public function getPeriod(): Period
     {
         return $this->period;
     }
