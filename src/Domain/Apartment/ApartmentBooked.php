@@ -32,10 +32,8 @@ class ApartmentBooked
 
     public static function create(string $apartmentId, string $ownerId, string $tenantId, \App\Domain\Apartment\Period $period): ApartmentBooked
     {
-
         $eventId = uniqid();
         $creationDateTime = new \DateTime();
-
 
         return new ApartmentBooked($eventId, $creationDateTime, $apartmentId, $ownerId, $tenantId, $period);
     }
