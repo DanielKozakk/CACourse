@@ -1,9 +1,10 @@
 <?php
 
 
-namespace App\Domain\Apartment;
+namespace App\Domain\Event;
 
 
+use App\Domain\Apartment\ApartmentBooked;
 use App\Domain\HotelRoom\HotelRoomBooked;
 use phpDocumentor\Reflection\Types\Integer;
 
