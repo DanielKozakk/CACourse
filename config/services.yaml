@@ -27,7 +27,7 @@ services:
         resource: '../src/Infrastructure/Controller/'
         tags: ['controller.service_arguments']
 
-    app.domain.event:
-        class: 'App\Domain\Event\EventChannelImplementation'
+    app.infrastructure.event.dispatcher.standard:
+        class: 'App\Infrastructure\Event\Dispatcher\StandardDispatcherEventChannel'
 
-    App\Domain\Apartment\EventChannel: '@app.domain.event'
+    App\Domain\Apartment\EventChannel: '@app.infrastructure.event.dispatcher.standard'

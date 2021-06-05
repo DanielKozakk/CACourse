@@ -4,6 +4,7 @@
 namespace App\Domain\Apartment;
 
 
+use App\Domain\Event\EventChannel;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -65,5 +66,6 @@ class Apartment
     {
         $apartmentBooked =  ApartmentBooked::create($this->id, $this->ownerId, $tenantId, $period);
         $eventChannel->publishApartmentBooked($apartmentBooked);
+
     }
 }

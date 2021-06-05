@@ -4,8 +4,12 @@
 namespace App\Domain\Apartment;
 
 
-class ApartmentBooked
+use Symfony\Contracts\EventDispatcher\Event;
+
+class ApartmentBooked extends Event
 {
+    public const NAME = 'apartment.booked';
+
     private string $eventId;
     private \DateTime $creationDateTime;
     private string $apartmentId;
