@@ -32,4 +32,9 @@ class SqlHotelRoomRepository implements HotelRoomRepository
     public function findHotelRoomById($id) : HotelRoom{
         return $this->doctrineSqlHotelRoomRepository->findHotelRoomById($id);
     }
+
+    public function findById(string $id): HotelRoom
+    {
+
+    }
 }

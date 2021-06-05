@@ -11,7 +11,7 @@ class SqlHotelRepository implements HotelRepository
     /**
      * @var DoctrineSqlHotelRepository
      */
-    private $doctrineHotelRepository;
+    private DoctrineSqlHotelRepository $doctrineHotelRepository;
 
     /**
      * ApartmentRepository constructor.
