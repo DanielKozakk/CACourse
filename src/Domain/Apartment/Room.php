@@ -9,10 +9,17 @@ use Doctrine\ORM\Mapping\Entity;
 /**
  * Class Room
  * @package App\Domain\Apartment
- * @Entity()
+ * @Entity
  */
 class Room
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -31,13 +38,17 @@ class Room
 
     /**
      * Room constructor.
+     * @param $id
      * @param string $name
      * @param SquareMeter $squareMeter
+     * @param $apartment
      */
-    public function __construct(string $name, SquareMeter $squareMeter)
+    public function __construct($id, string $name, SquareMeter $squareMeter, $apartment)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->squareMeter = $squareMeter;
+        $this->apartment = $apartment;
     }
 
 
