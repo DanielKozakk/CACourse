@@ -31,7 +31,7 @@ class HotelRoom
 
     /**
      * @var Space[]
-     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotelRoom")
+     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom")
      */
     private $spacesDefinition;
 

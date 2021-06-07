@@ -22,11 +22,13 @@ class Room
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var SquareMeter
+     * @ORM\Column(type="float")
      */
     private $squareMeter;
 

@@ -11,6 +11,13 @@ use Doctrine\ORM\Mapping\Entity;
  */
 class Space
 {
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
     /**
      * @var string
      *
@@ -20,10 +27,16 @@ class Space
 
     /**
      * @var SquareMeter
-     * @ORM\Embedded
+     * @ORM\Embedded(class="SquareMeter")
      *
      */
     private $squareMeter;
+
+    /**
+     * @var HotelRoom
+     * @ORM\ManyToOne(targetEntity="HotelRoom")
+     */
+    private $hotelRoom;
 
     /**
      * Space constructor.
