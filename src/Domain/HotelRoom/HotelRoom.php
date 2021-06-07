@@ -64,7 +64,7 @@ class HotelRoom
     }
 
     public function book($tenantId, Period $period, EventChannel $eventChannel){
-        $eventChannel->publishHotelRoomBooked(HotelRoomBooked::create($this->id, $this->hotel->getId(), $tenantId, $period));
+        $eventChannel->publishHotelRoomBooked(HotelRoomBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $period));
     }
 
 }
