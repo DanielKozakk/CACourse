@@ -60,16 +60,6 @@ class ApartmentBookingHistory
         return $this->bookings;
     }
 
-    public function addBooking(ApartmentBooking $booking): self
-    {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings[] = $booking;
-            $booking->setApartmentBookingHistory($this);
-        }
-
-        return $this;
-    }
-
     public function removeBooking(ApartmentBooking $booking): self
     {
         if ($this->bookings->removeElement($booking)) {
@@ -77,6 +67,16 @@ class ApartmentBookingHistory
             if ($booking->getApartmentBookingHistory() === $this) {
                 $booking->setApartmentBookingHistory(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function add(ApartmentBooking $booking) : self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setApartmentBookingHistory($this);
         }
 
         return $this;
