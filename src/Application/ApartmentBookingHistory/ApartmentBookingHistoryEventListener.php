@@ -1,13 +1,15 @@
 <?php
 
 
-namespace App\Application\ApartmentBookingHistoryEventListener;
+namespace App\Application\ApartmentBookingHistory;
 
 
 use App\Domain\Apartment\ApartmentBookedEvent;
 use App\Domain\ApartmentBookingHistory\ApartmentBooking;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistory;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
+use App\Domain\ApartmentBookingHistory\BookingPeriod;
+use App\Domain\ApartmentBookingHistory\BookingStep;
 
 class ApartmentBookingHistoryEventListener
 {
@@ -26,26 +28,31 @@ class ApartmentBookingHistoryEventListener
     }
 
 
-    public function onApartmentBooked(ApartmentBookedEvent $apartmentBookedEvent){
+    public function onApartmentBooked(ApartmentBookedEvent $apartmentBookedEvent)
+    {
 
         /** @var ApartmentBookingHistory */
         $apartmentBookingHistory = $this->getApartmentBookingHistoryFor($apartmentBookedEvent->getApartmentId());
 
+        /** @var BookingPeriod */
+        $bookingPeriod = new BookingPeriod($apartmentBookedEvent->getPeriodStart(), $apartmentBookedEvent->getPeriodEnd());
+
         $apartmentBookingHistory->add(
             ApartmentBooking::start(
+                new BookingStep(BookingStep::START),
                 $apartmentBookedEvent->getOwnerId(),
                 $apartmentBookedEvent->getTenantId(),
-                $apartmentBookedEvent->getPeriodStart(),
-                $apartmentBookedEvent->getPeriodEnd(),
+                $bookingPeriod
             )
         );
 
         $this->apartmentBookingHistoryRepository->save($apartmentBookingHistory);
     }
 
-    private function getApartmentBookingHistoryFor(String $apartmentId) : ApartmentBookingHistory {
+    private function getApartmentBookingHistoryFor(string $apartmentId): ApartmentBookingHistory
+    {
 
-        if($this->apartmentBookingHistoryRepository->existFor($apartmentId)){
+        if ($this->apartmentBookingHistoryRepository->existFor($apartmentId)) {
             return $this->apartmentBookingHistoryRepository->findFor($apartmentId);
         } else {
             return new ApartmentBookingHistory($apartmentId);

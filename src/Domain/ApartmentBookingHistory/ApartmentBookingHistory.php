@@ -6,6 +6,14 @@ namespace App\Domain\ApartmentBookingHistory;
 
 class ApartmentBookingHistory
 {
+
+    /**
+     * @var ApartmentBooking[]
+     */
+     private array $apartmentBookings;
+    /**
+     * @var string
+     */
     private $apartmentId;
 
     /**
@@ -19,6 +27,7 @@ class ApartmentBookingHistory
 
     public function add(ApartmentBooking $apartmentBooking)
     {
+        $this->apartmentBookings[] = $apartmentBooking;
     }
 
 
