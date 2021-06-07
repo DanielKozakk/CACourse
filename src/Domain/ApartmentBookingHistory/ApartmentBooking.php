@@ -4,13 +4,38 @@
 namespace App\Domain\ApartmentBookingHistory;
 
 use Doctrine\ORM\Mapping as ORM;
-
+/**
+ * @ORM\Entity
+ */
 class ApartmentBooking
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Embedded
+     */
     private BookingStep $bookingStep;
+    /**
+     * @ORM\Column(type="datetime", length=255)
+     */
     private \DateTime $dateTime;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private string $getOwnerId;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private string $getTenantId;
+
+    /**
+     * @ORM\Embedded
+     */
     private BookingPeriod $bookingPeriod;
 
     /**
