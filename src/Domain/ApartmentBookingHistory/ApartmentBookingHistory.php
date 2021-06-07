@@ -13,14 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ApartmentBookingHistory
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
-    /**
+    /** @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
     private $apartmentId;
@@ -30,14 +24,15 @@ class ApartmentBookingHistory
      */
     private $bookings;
 
-    public function __construct()
+    public function __construct(string $apartmentId)
     {
         $this->bookings = new ArrayCollection();
+        $this->apartmentId = $apartmentId;
     }
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->apartmentId;
     }
 
     public function getApartmentId(): ?string
