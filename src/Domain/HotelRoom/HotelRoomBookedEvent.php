@@ -7,7 +7,7 @@ namespace App\Domain\HotelRoom;
 
 use DateTime;
 
-class HotelRoomBooked
+class HotelRoomBookedEvent
 {
     /**
      * @var DateTime
@@ -53,12 +53,12 @@ class HotelRoomBooked
         $this->period = $period;
     }
 
-    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelRoomBooked
+    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelRoomBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new DateTime();
 
-        return new HotelRoomBooked( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period);
+        return new HotelRoomBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period);
     }
 
     /**

@@ -6,7 +6,7 @@ namespace App\Domain\Apartment;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ApartmentBooked extends Event
+class ApartmentBookedEvent extends Event
 {
     public const NAME = 'apartment.booked';
 
@@ -34,12 +34,12 @@ class ApartmentBooked extends Event
 
     }
 
-    public static function create(string $apartmentId, string $ownerId, string $tenantId, \App\Domain\Apartment\Period $period): ApartmentBooked
+    public static function create(string $apartmentId, string $ownerId, string $tenantId, \App\Domain\Apartment\Period $period): ApartmentBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new \DateTime();
 
-        return new ApartmentBooked($eventId, $creationDateTime, $apartmentId, $ownerId, $tenantId, $period);
+        return new ApartmentBookedEvent($eventId, $creationDateTime, $apartmentId, $ownerId, $tenantId, $period);
     }
 
     /**
