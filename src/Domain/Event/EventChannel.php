@@ -4,14 +4,14 @@
 namespace App\Domain\Event;
 
 
-use App\Domain\Apartment\ApartmentBooked;
-use App\Domain\HotelRoom\HotelRoomBooked;
+use App\Domain\Apartment\ApartmentBookedEvent;
+use App\Domain\HotelRoom\HotelRoomBookedEvent;
 use phpDocumentor\Reflection\Types\Integer;
 
 interface EventChannel
 {
-    public function publishApartmentBooked(ApartmentBooked $apartmentBooked);
+    public function publishApartmentBooked(ApartmentBookedEvent $apartmentBooked);
 
-    public function publishHotelRoomBooked(HotelRoomBooked $hotelRoomBooked);
+    public function publishHotelRoomBooked(HotelRoomBookedEvent $hotelRoomBooked);
 
 }
