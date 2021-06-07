@@ -1,13 +1,14 @@
 <?php
 
 
-namespace App\Infrastructure\Event\Dispatcher;
+namespace App\Infrastructure\EventChannel\Dispatcher;
 
 
 use App\Domain\Apartment\ApartmentBooked;
 use App\Domain\Event\EventChannel;
 use App\Domain\HotelRoom\HotelRoomBooked;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class StandardDispatcherEventChannel implements EventChannel
 {
@@ -20,6 +21,8 @@ class StandardDispatcherEventChannel implements EventChannel
      */
     public function __construct(EventDispatcher $eventDispatcher)
     {
+
+
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -29,8 +32,8 @@ class StandardDispatcherEventChannel implements EventChannel
        $this->eventDispatcher->dispatch($apartmentBooked);
     }
 
-    public function publishHotelRoomBooked(HotelRoomBooked $apartmentBooked)
+    public function publishHotelRoomBooked(HotelRoomBooked $hotelRoomBooked)
     {
-        // TODO: Implement publishHotelRoomBooked() method.
+        $this->eventDispatcher->dispatch($hotelRoomBooked);
     }
 }

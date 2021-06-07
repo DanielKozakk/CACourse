@@ -12,6 +12,6 @@ interface EventChannel
 {
     public function publishApartmentBooked(ApartmentBooked $apartmentBooked);
 
-    public function publishHotelRoomBooked(HotelRoomBooked $apartmentBooked);
+    public function publishHotelRoomBooked(HotelRoomBooked $hotelRoomBooked);
 
 }
