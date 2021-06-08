@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\HotelRoomBookingHistory;
 
-use App\Repository\HotelRoomBookingRepository;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**

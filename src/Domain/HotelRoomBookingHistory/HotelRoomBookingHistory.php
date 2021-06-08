@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\HotelRoomBookingHistory;
 
-use App\Repository\HotelRoomBookingHistoryRepository;
+
+use App\Domain\HotelRoom\HotelRoom;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,12 +21,12 @@ class HotelRoomBookingHistory
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=HotelRoomBooking::class, mappedBy="hotelRoomBookingHistory", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=HotelRoomBooking, mappedBy="hotelRoomBookingHistory", orphanRemoval=true)
      */
     private $bookings;
 
     /**
-     * @ORM\OneToOne(targetEntity=HotelRoomFake::class, inversedBy="hotelRoomBookingHistory", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=HotelRoom inversedBy="hotelRoomBookingHistory", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $hotelRoomId;
@@ -70,12 +71,12 @@ class HotelRoomBookingHistory
         return $this;
     }
 
-    public function getHotelRoomId(): ?HotelRoomFake
+    public function getHotelRoomId(): ?HotelRoom
     {
         return $this->hotelRoomId;
     }
 
-    public function setHotelRoomId(HotelRoomFake $hotelRoomId): self
+    public function setHotelRoomId(HotelRoom $hotelRoomId): self
     {
         $this->hotelRoomId = $hotelRoomId;
 

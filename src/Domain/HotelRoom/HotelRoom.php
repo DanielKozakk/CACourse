@@ -6,11 +6,13 @@ namespace App\Domain\HotelRoom;
 
 use App\Domain\Event\EventChannel;
 use App\Domain\Hotel\Hotel;
+
+use App\Domain\HotelRoomBookingHistory\HotelRoomBookingHistory;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
 /**
- *  @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\HotelRoom\DoctrineSqlHotelRoomRepository")
+ * @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\HotelRoom\DoctrineSqlHotelRoomRepository")
  */
 class HotelRoom
 {
@@ -44,6 +46,11 @@ class HotelRoom
     private $description;
 
     /**
+     * @ORM\OneToOne(targetEntity=HotelRoomBookingHistory, mappedBy="hotelRoomId", cascade={"persist", "remove"})
+     */
+    private $hotelRoomBookingHistory;
+
+    /**
      * @var Hotel
      * @ORM\ManyToOne(targetEntity=Hotel::class, inversedBy="rooms")
      * @ORM\JoinColumn(nullable=false)
@@ -56,7 +63,7 @@ class HotelRoom
      * @param Space[] $spacesDefinition
      * @param string $description
      */
-    public function __construct( int $number, array $spacesDefinition, string $description, Hotel $hotel)
+    public function __construct(int $number, array $spacesDefinition, string $description, Hotel $hotel)
     {
         $this->hotel = $hotel;
         $this->number = $number;
@@ -64,8 +71,25 @@ class HotelRoom
         $this->description = $description;
     }
 
-    public function book($tenantId, Period $period, EventChannel $eventChannel){
+    public function book($tenantId, Period $period, EventChannel $eventChannel)
+    {
         $eventChannel->publishHotelRoomBooked(HotelRoomBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $period));
     }
 
+    public function getHotelRoomBookingHistory(): ?HotelRoomBookingHistory
+    {
+        return $this->hotelRoomBookingHistory;
+    }
+
+    public function setHotelRoomBookingHistory(HotelRoomBookingHistory $hotelRoomBookingHistory): self
+    {
+        // set the owning side of the relation if necessary
+        if ($hotelRoomBookingHistory->getHotelRoomId() !== $this) {
+            $hotelRoomBookingHistory->setHotelRoomId($this);
+        }
+
+        $this->hotelRoomBookingHistory = $hotelRoomBookingHistory;
+
+        return $this;
+    }
 }
