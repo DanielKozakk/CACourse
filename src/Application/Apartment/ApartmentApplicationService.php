@@ -4,10 +4,10 @@
 namespace App\Application\Apartment;
 
 use App\Domain\Apartment\ApartamentFactory;
-use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentRepository;
-use App\Domain\Apartment\EventChannel;
 use App\Domain\Apartment\Period;
+use App\Domain\Event\EventChannel;
+use DateTime;
 
 
 class ApartmentApplicationService
@@ -48,7 +48,7 @@ class ApartmentApplicationService
         $this->apartmentRepository->save($apartment);
     }
 
-    public function book(string $id, string $tenantId, \DateTime $start, \DateTime $end)
+    public function book(string $id, string $tenantId, DateTime $start, DateTime $end)
     {
         $apartment = $this->apartmentRepository->findById($id);
 

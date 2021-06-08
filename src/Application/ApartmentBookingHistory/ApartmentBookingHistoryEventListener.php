@@ -30,7 +30,6 @@ class ApartmentBookingHistoryEventListener
 
     public function onApartmentBooked(ApartmentBookedEvent $apartmentBookedEvent)
     {
-
         /** @var ApartmentBookingHistory */
         $apartmentBookingHistory = $this->getApartmentBookingHistoryFor($apartmentBookedEvent->getApartmentId());
 
@@ -52,7 +51,6 @@ class ApartmentBookingHistoryEventListener
 
     private function getApartmentBookingHistoryFor(string $apartmentId): ApartmentBookingHistory
     {
-
         if ($this->apartmentBookingHistoryRepository->existFor($apartmentId)) {
             return $this->apartmentBookingHistoryRepository->findFor($apartmentId);
         } else {
