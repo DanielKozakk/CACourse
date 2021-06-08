@@ -42,7 +42,7 @@ class ApartmentBooking
      * @ORM\ManyToOne(targetEntity=ApartmentBookingHistory::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $apartmentBookingHistory;
+    private ?ApartmentBookingHistory $apartmentBookingHistory;
 
     private function __construct(BookingStep $bookingStep, DateTime $dateTime, string $getOwnerId, string $getTenantId, BookingPeriod $bookingPeriod){
 
