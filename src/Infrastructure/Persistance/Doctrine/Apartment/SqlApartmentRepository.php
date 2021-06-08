@@ -4,8 +4,9 @@
 namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
 use App\Domain\Apartment\Apartment;
+use App\Domain\Apartment\ApartmentRepository;
 
-class SqlApartmentRepository implements \App\Domain\Apartment\ApartmentRepository
+class SqlApartmentRepository implements ApartmentRepository
 {
     /**
      * @var DoctrineSqlApartmentRepository

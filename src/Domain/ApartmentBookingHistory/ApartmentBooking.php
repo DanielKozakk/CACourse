@@ -3,6 +3,7 @@
 
 namespace App\Domain\ApartmentBookingHistory;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
@@ -23,7 +24,7 @@ class ApartmentBooking
     /**
      * @ORM\Column(type="datetime", length=255)
      */
-    private \DateTime $dateTime;
+    private DateTime $dateTime;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -44,7 +45,7 @@ class ApartmentBooking
      */
     private $apartmentBookingHistory;
 
-    private function __construct(BookingStep $bookingStep,\DateTime $dateTime, string $getOwnerId, string $getTenantId, BookingPeriod $bookingPeriod){
+    private function __construct(BookingStep $bookingStep, DateTime $dateTime, string $getOwnerId, string $getTenantId, BookingPeriod $bookingPeriod){
 
         $this->bookingStep = $bookingStep;
         $this->getOwnerId = $getOwnerId;
@@ -53,7 +54,7 @@ class ApartmentBooking
         $this->dateTime = $dateTime;
     }
 
-    public static function start(\DateTime $bookingCreationDateTime, BookingStep $bookingStep, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod) : ApartmentBooking
+    public static function start(DateTime $bookingCreationDateTime, BookingStep $bookingStep, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod) : ApartmentBooking
     {
         return new ApartmentBooking($bookingStep, $bookingCreationDateTime, $ownerId, $tenantId, $bookingPeriod);
     }
