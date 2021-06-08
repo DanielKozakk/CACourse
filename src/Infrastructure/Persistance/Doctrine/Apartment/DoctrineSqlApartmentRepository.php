@@ -9,6 +9,7 @@ use App\Domain\Apartment\ApartmentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
 
 class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
 
@@ -19,14 +20,9 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
      */
     private $entityManager;
 
-    public function __construct()
+    public function __construct(ManagerRegistry $registry)
     {
-        /**
-         *  public function __construct(ManagerRegistry $registry)
-        {
-            parent::__construct($registry, HotelRoomBookingHistory::class);
-        }
-         */
+        parent::__construct($registry, Apartment::class);
 
         $this->entityManager = $this->getEntityManager();
     }
