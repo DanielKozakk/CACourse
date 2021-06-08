@@ -3,7 +3,8 @@
 
 namespace App\Domain\HotelRoom;
 
-use App\Domain\Apartment\EventChannel;
+
+use App\Domain\Event\EventChannel;
 use App\Domain\Hotel\Hotel;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
@@ -47,7 +48,7 @@ class HotelRoom
      * @ORM\ManyToOne(targetEntity=Hotel::class, inversedBy="rooms")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $hotel;
+    private Hotel $hotel;
 
     /**
      * HotelRoom constructor.
