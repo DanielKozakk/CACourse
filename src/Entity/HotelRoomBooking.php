@@ -6,7 +6,7 @@ use App\Repository\HotelRoomBookingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=HotelRoomBookingRepository::class)
+ * @ORM\Entity
  */
 class HotelRoomBooking
 {
@@ -29,9 +29,15 @@ class HotelRoomBooking
 
 
     /**
-     * @ORM\Embedded
+     * @ORM\Embedded(class = "HotelRoomBookingPeriod")
      */
     private HotelRoomBookingPeriod $hotelRoomBookingPeriod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=HotelRoomBookingHistory::class, inversedBy="bookings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hotelRoomBookingHistory;
 
     public function getId(): ?int
     {
@@ -58,6 +64,18 @@ class HotelRoomBooking
     public function setTenantId(string $tenantId): self
     {
         $this->tenantId = $tenantId;
+
+        return $this;
+    }
+
+    public function getHotelRoomBookingHistory(): ?HotelRoomBookingHistory
+    {
+        return $this->hotelRoomBookingHistory;
+    }
+
+    public function setHotelRoomBookingHistory(?HotelRoomBookingHistory $hotelRoomBookingHistory): self
+    {
+        $this->hotelRoomBookingHistory = $hotelRoomBookingHistory;
 
         return $this;
     }

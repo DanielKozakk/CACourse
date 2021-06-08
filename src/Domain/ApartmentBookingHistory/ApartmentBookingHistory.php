@@ -14,7 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ApartmentBookingHistory
 {
 
-    /** @ORM\Id
+    /**
+     * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
     private string $apartmentId;

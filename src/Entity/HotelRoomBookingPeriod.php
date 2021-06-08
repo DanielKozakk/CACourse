@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\HotelRoomBookingPeriodRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embeddable;
 
@@ -11,12 +10,6 @@ use Doctrine\ORM\Mapping\Embeddable;
  */
 class HotelRoomBookingPeriod
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="date")
@@ -27,11 +20,6 @@ class HotelRoomBookingPeriod
      * @ORM\Column(type="date")
      */
     private $endDate;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getStartDate(): ?\DateTimeInterface
     {
