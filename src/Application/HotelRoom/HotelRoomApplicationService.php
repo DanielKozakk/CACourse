@@ -3,7 +3,8 @@
 
 namespace App\Application\HotelRoom;
 
-use App\Domain\Apartment\EventChannel;
+
+use App\Domain\Event\EventChannel;
 use App\Domain\HotelRoom\HotelRoomFactory;
 use App\Domain\HotelRoom\HotelRoomRepository;
 use App\Domain\HotelRoom\Period;

@@ -11,14 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class ApartmentBookingHistory
+class HotelRoomBookingHistory
 {
 
     /**
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private string $apartmentId;
+    private string $hotelRoomId;
 
     /**
      * @ORM\OneToMany(targetEntity=ApartmentBooking::class, mappedBy="apartmentBookingHistory")
@@ -28,22 +28,22 @@ class ApartmentBookingHistory
     public function __construct(string $apartmentId)
     {
         $this->bookings = new ArrayCollection();
-        $this->apartmentId = $apartmentId;
+        $this->hotelRoomId = $apartmentId;
     }
 
     public function getId(): ?int
     {
-        return $this->apartmentId;
+        return $this->hotelRoomId;
     }
 
-    public function getApartmentId(): ?string
+    public function getHotelRoomId(): ?string
     {
-        return $this->apartmentId;
+        return $this->hotelRoomId;
     }
 
-    public function setApartmentId(string $apartmentId): self
+    public function setHotelRoomId(string $hotelRoomId): self
     {
-        $this->apartmentId = $apartmentId;
+        $this->hotelRoomId = $hotelRoomId;
 
         return $this;
     }

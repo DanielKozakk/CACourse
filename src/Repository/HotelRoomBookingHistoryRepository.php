@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\HotelRoomBookingHistory;
+use App\Domain\HotelRoomBookingHistory\HotelRoomBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +18,7 @@ class HotelRoomBookingHistoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, HotelRoomBookingHistory::class);
     }
+
 
     // /**
     //  * @return HotelRoomBookingHistory[] Returns an array of HotelRoomBookingHistory objects

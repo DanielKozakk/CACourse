@@ -1,17 +1,20 @@
 <?php
 
 
-namespace App\Infrastructure\Persistance\Doctrine\ApartmentBookingHistory;
+namespace App\Infrastructure\Persistance\Doctrine\HotelRoomBookingHistory;
 
-
-use App\Domain\Apartment\Apartment;
 use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
-class DoctrineSqlApartmentRepository extends ServiceEntityRepository
+/**
+ * @method HotelRoomBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HotelRoomBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HotelRoomBookingHistory[]    findAll()
+ * @method HotelRoomBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class DoctrineSqlHotelRoomBookingHistoryRepository extends ServiceEntityRepository
 {
 
     /**
@@ -30,12 +33,13 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param HotelRoomBookingHistory $apartmentBookingHistory
+     * @param HotelRoomBookingHistory $hotelRoomBookingHistory
      * @throws \Doctrine\ORM\ORMException
      */
-    public function save(HotelRoomBookingHistory $apartmentBookingHistory)
+    public function save(HotelRoomBookingHistory $hotelRoomBookingHistory)
     {
-        $this->entityManager->persist($apartmentBookingHistory);
+
+        $this->entityManager->persist($hotelRoomBookingHistory);
         $this->entityManager->flush();
     }
 }

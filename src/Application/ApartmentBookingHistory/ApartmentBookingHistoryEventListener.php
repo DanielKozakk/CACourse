@@ -6,7 +6,7 @@ namespace App\Application\ApartmentBookingHistory;
 
 use App\Domain\Apartment\ApartmentBookedEvent;
 use App\Domain\ApartmentBookingHistory\ApartmentBooking;
-use App\Domain\ApartmentBookingHistory\ApartmentBookingHistory;
+use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
 use App\Domain\ApartmentBookingHistory\BookingPeriod;
 use App\Domain\ApartmentBookingHistory\BookingStep;
@@ -29,7 +29,7 @@ class ApartmentBookingHistoryEventListener
 
     public function onApartmentBooked(ApartmentBookedEvent $apartmentBookedEvent)
     {
-        /** @var ApartmentBookingHistory */
+        /** @var HotelRoomBookingHistory */
         $apartmentBookingHistory = $this->getApartmentBookingHistoryFor($apartmentBookedEvent->getApartmentId());
 
         /** @var BookingPeriod */
@@ -48,12 +48,12 @@ class ApartmentBookingHistoryEventListener
         $this->apartmentBookingHistoryRepository->save($apartmentBookingHistory);
     }
 
-    private function getApartmentBookingHistoryFor(string $apartmentId): ApartmentBookingHistory
+    private function getApartmentBookingHistoryFor(string $apartmentId): HotelRoomBookingHistory
     {
         if ($this->apartmentBookingHistoryRepository->existFor($apartmentId)) {
             return $this->apartmentBookingHistoryRepository->findFor($apartmentId);
         } else {
-            return new ApartmentBookingHistory($apartmentId);
+            return new HotelRoomBookingHistory($apartmentId);
         }
     }
 }
