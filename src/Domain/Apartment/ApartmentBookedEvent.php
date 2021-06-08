@@ -5,23 +5,24 @@ namespace App\Domain\Apartment;
 
 
 use Symfony\Contracts\EventDispatcher\Event;
+use \DateTime;
 
 class ApartmentBookedEvent extends Event
 {
     public const NAME = 'apartment.booked';
 
     private string $eventId;
-    private \DateTime $creationDateTime;
+    private DateTime $creationDateTime;
     private string $apartmentId;
     private string $ownerId;
     private string $tenantId;
-    private \DateTime $periodStart;
-    private \DateTime $periodEnd;
+    private DateTime $periodStart;
+    private DateTime $periodEnd;
 
     /**
      * ApartmentBooked constructor.
      */
-    private function __construct(string $eventId,\DateTime $creationDateTime, string $apartmentId, string $ownerId, string $tenantId, Period $period )
+    private function __construct(string $eventId,DateTime $creationDateTime, string $apartmentId, string $ownerId, string $tenantId, Period $period )
     {
         $this->eventId = $eventId;
         $this->creationDateTime = $creationDateTime;
@@ -34,7 +35,7 @@ class ApartmentBookedEvent extends Event
 
     }
 
-    public static function create(string $apartmentId, string $ownerId, string $tenantId, \App\Domain\Apartment\Period $period): ApartmentBookedEvent
+    public static function create(string $apartmentId, string $ownerId, string $tenantId, Period $period): ApartmentBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new \DateTime();
