@@ -36,10 +36,10 @@ class HotelRoomBookingHistory
      * @param $bookings
      * @param $hotelRoomId
      */
-    public function __construct($bookings, $hotelRoomId)
+    public function __construct()
     {
-        $this->bookings = $bookings;
-        $this->hotelRoomId = $hotelRoomId;
+        $this->bookings = new ArrayCollection();
+
     }
 
 
