@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class BookingStep
 {
-
-    private  const STATES = [self::START];
+    private const STATES = [self::START];
 
     public const START = 'START';
 
