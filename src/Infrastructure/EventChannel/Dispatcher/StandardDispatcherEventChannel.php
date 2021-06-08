@@ -9,16 +9,17 @@ use App\Domain\Event\EventChannel;
 use App\Domain\HotelRoom\HotelRoomBookedEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class StandardDispatcherEventChannel implements EventChannel
 {
-    private EventDispatcher $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     /**
      * StandardDispatcherEventChannel constructor.
-     * @param EventDispatcher $eventDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(EventDispatcher $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
     }
