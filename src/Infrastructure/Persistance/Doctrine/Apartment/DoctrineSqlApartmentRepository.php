@@ -21,6 +21,13 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
 
     public function __construct()
     {
+        /**
+         *  public function __construct(ManagerRegistry $registry)
+        {
+            parent::__construct($registry, HotelRoomBookingHistory::class);
+        }
+         */
+
         $this->entityManager = $this->getEntityManager();
     }
 
