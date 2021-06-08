@@ -17,7 +17,7 @@ class ApartmentBookingHistory
     /** @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private $apartmentId;
+    private string $apartmentId;
 
     /**
      * @ORM\OneToMany(targetEntity=ApartmentBooking::class, mappedBy="apartmentBookingHistory")
