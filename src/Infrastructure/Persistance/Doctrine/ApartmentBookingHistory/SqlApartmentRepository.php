@@ -22,12 +22,13 @@ class SqlApartmentRepository implements ApartmentBookingHistoryRepository
         $this->serviceEntityRepository = $serviceEntityRepository;
     }
 
-
-    public function existFor(string $apartmentId) : bool
+    public function existFor(string $apartmentId): bool
     {
-        if($this->serviceEntityRepository->findBy(['apartment_id' => $apartmentId])){
+        if ($this->serviceEntityRepository->findBy(['apartment_id' => $apartmentId])) {
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
     }
 
     public function findFor(string $apartmentId)
