@@ -9,6 +9,9 @@ use DateTime;
 
 class HotelRoomBookedEvent
 {
+
+    public const NAME = 'hotelroom.booked';
+
     /**
      * @var DateTime
      */
