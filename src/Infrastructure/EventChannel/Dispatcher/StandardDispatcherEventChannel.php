@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class StandardDispatcherEventChannel implements EventChannel
 {
-
     private EventDispatcher $eventDispatcher;
 
     /**
@@ -21,11 +20,8 @@ class StandardDispatcherEventChannel implements EventChannel
      */
     public function __construct(EventDispatcher $eventDispatcher)
     {
-
-
         $this->eventDispatcher = $eventDispatcher;
     }
-
 
     public function publishApartmentBooked(ApartmentBookedEvent $apartmentBooked)
     {
