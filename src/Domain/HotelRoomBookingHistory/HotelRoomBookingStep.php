@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Domain\ApartmentBookingHistory;
+namespace App\Domain\HotelRoomBookingHistory;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Embeddable
  */
-class BookingStep
+class HotelRoomBookingStep
 {
     private const STATES = [self::START];
 

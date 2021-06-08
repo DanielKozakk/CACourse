@@ -3,6 +3,7 @@
 namespace App\Domain\HotelRoomBookingHistory;
 
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,7 +38,35 @@ class HotelRoomBooking
      * @ORM\ManyToOne(targetEntity=HotelRoomBookingHistory::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $hotelRoomBookingHistory;
+    private ?HotelRoomBookingHistory $hotelRoomBookingHistory;
+
+    /**
+     * @ORM\Embedded(class="HotelRoomBookingStep")
+     */
+    private $hotelRoomBookingStep;
+
+    /**
+     * HotelRoomBooking constructor.
+     * @param $hotelRoomBookingCreationDate
+     * @param $tenantId
+     * @param HotelRoomBookingPeriod $hotelRoomBookingPeriod
+     * @param $hotelRoomBookingHistory
+     * @param $hotelRoomBookingStep
+     */
+    private function __construct($hotelRoomBookingCreationDate, $tenantId, HotelRoomBookingPeriod $hotelRoomBookingPeriod, HotelRoomBookingStep $hotelRoomBookingStep)
+    {
+        $this->hotelRoomBookingCreationDate = $hotelRoomBookingCreationDate;
+        $this->tenantId = $tenantId;
+        $this->hotelRoomBookingPeriod = $hotelRoomBookingPeriod;
+        $this->hotelRoomBookingStep = $hotelRoomBookingStep;
+    }
+
+
+    public static function start(DateTime $bookingCreationDateTime, string $tenantId, HotelRoomBookingPeriod $bookingPeriod) : HotelRoomBooking
+    {
+        return new HotelRoomBooking($bookingCreationDateTime, $tenantId, $bookingPeriod, new HotelRoomBookingStep(HotelRoomBookingStep::START));
+    }
+
 
     public function getId(): ?int
     {

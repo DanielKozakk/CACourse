@@ -38,7 +38,6 @@ class ApartmentBookingHistoryEventListener
         $apartmentBookingHistory->add(
             ApartmentBooking::start(
                 $apartmentBookedEvent->getCreationDateTime(),
-                new BookingStep(BookingStep::START),
                 $apartmentBookedEvent->getOwnerId(),
                 $apartmentBookedEvent->getTenantId(),
                 $bookingPeriod

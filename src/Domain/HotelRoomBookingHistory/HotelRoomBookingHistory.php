@@ -31,10 +31,17 @@ class HotelRoomBookingHistory
      */
     private $hotelRoomId;
 
-    public function __construct()
+    /**
+     * HotelRoomBookingHistory constructor.
+     * @param $bookings
+     * @param $hotelRoomId
+     */
+    public function __construct($bookings, $hotelRoomId)
     {
-        $this->bookings = new ArrayCollection();
+        $this->bookings = $bookings;
+        $this->hotelRoomId = $hotelRoomId;
     }
+
 
     public function getId(): ?int
     {
@@ -49,7 +56,7 @@ class HotelRoomBookingHistory
         return $this->bookings;
     }
 
-    public function addBooking(HotelRoomBooking $booking): self
+    public function add(HotelRoomBooking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings[] = $booking;
@@ -71,15 +78,4 @@ class HotelRoomBookingHistory
         return $this;
     }
 
-    public function getHotelRoomId(): ?HotelRoom
-    {
-        return $this->hotelRoomId;
-    }
-
-    public function setHotelRoomId(HotelRoom $hotelRoomId): self
-    {
-        $this->hotelRoomId = $hotelRoomId;
-
-        return $this;
-    }
 }

@@ -21,6 +21,18 @@ class HotelRoomBookingPeriod
      */
     private $endDate;
 
+    /**
+     * HotelRoomBookingPeriod constructor.
+     * @param $startDate
+     * @param $endDate
+     */
+    public function __construct($startDate, $endDate)
+    {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;

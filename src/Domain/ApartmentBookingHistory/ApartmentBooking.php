@@ -53,9 +53,9 @@ class ApartmentBooking
         $this->dateTime = $dateTime;
     }
 
-    public static function start(DateTime $bookingCreationDateTime, BookingStep $bookingStep, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod) : ApartmentBooking
+    public static function start(DateTime $bookingCreationDateTime, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod) : ApartmentBooking
     {
-        return new ApartmentBooking($bookingStep, $bookingCreationDateTime, $ownerId, $tenantId, $bookingPeriod);
+        return new ApartmentBooking(new BookingStep(BookingStep::START), $bookingCreationDateTime, $ownerId, $tenantId, $bookingPeriod);
     }
 
     public function getApartmentBookingHistory(): ?HotelRoomBookingHistory

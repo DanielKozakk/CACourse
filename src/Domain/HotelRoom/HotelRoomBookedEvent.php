@@ -32,36 +32,45 @@ class HotelRoomBookedEvent
      * @var string
      */
     private string $tenantId;
-    /**
-     * @var Period
-     */
-    private Period $period;
 
     /**
-     * HotelRoomBooked constructor.
+     * @var DateTime
+     */
+    private DateTime $periodStart;
+
+    /**
+     * @var DateTime
+     */
+    private DateTime $periodEnd;
+
+    /**
+     * HotelRoomBookedEvent constructor.
      * @param DateTime $hotelRoomBookedCreationTime
      * @param string $eventId
-     * @param string $hotelRoomId
      * @param string $hotelId
+     * @param string $hotelRoomId
      * @param string $tenantId
-     * @param Period $period
+     * @param DateTime $periodStart
+     * @param DateTime $periodEnd
      */
-    private function __construct(DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelRoomId, string $hotelId, string $tenantId, Period $period)
+    public function __construct(DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelId, string $hotelRoomId, string $tenantId, DateTime $periodStart, DateTime $periodEnd)
     {
         $this->hotelRoomBookedCreationTime = $hotelRoomBookedCreationTime;
         $this->eventId = $eventId;
         $this->hotelId = $hotelId;
         $this->hotelRoomId = $hotelRoomId;
         $this->tenantId = $tenantId;
-        $this->period = $period;
+        $this->periodStart = $periodStart;
+        $this->periodEnd = $periodEnd;
     }
+
 
     public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelRoomBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new DateTime();
 
-        return new HotelRoomBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period);
+        return new HotelRoomBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period->getStart(), $period->getEnd());
     }
 
     /**
@@ -105,12 +114,22 @@ class HotelRoomBookedEvent
     }
 
     /**
-     * @return Period
+     * @return DateTime
      */
-    public function getPeriod(): Period
+    public function getPeriodStart(): DateTime
     {
-        return $this->period;
+        return $this->periodStart;
     }
+
+    /**
+     * @return DateTime
+     */
+    public function getPeriodEnd(): DateTime
+    {
+        return $this->periodEnd;
+    }
+
+
 
 
 }
