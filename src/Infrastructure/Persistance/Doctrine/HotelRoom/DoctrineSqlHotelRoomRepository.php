@@ -14,7 +14,7 @@ class DoctrineSqlHotelRoomRepository extends ServiceEntityRepository
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * DoctrineSqlHotelRoomRepository constructor.
