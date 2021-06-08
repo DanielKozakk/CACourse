@@ -19,6 +19,7 @@ class DoctrineSqlHotelRoomRepository extends ServiceEntityRepository
     /**
      * DoctrineSqlHotelRoomRepository constructor.
      * @param EntityManagerInterface $entityManager
+     * @param ManagerRegistry $registry
      */
     public function __construct(EntityManagerInterface $entityManager, ManagerRegistry $registry)
     {

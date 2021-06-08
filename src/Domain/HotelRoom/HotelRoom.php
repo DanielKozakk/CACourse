@@ -46,9 +46,9 @@ class HotelRoom
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity=HotelRoomBookingHistory, mappedBy="hotelRoomId", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="HotelRoomBookingHistory", mappedBy="hotelRoomId", cascade={"persist", "remove"})
      */
-    private $hotelRoomBookingHistory;
+    private ?HotelRoomBookingHistory $hotelRoomBookingHistory;
 
     /**
      * @var Hotel
