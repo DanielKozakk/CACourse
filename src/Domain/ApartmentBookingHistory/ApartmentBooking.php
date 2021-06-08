@@ -16,7 +16,6 @@ class ApartmentBooking
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Embedded
      */
@@ -70,6 +69,4 @@ class ApartmentBooking
 
         return $this;
     }
-
-
 }
