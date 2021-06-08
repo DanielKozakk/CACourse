@@ -27,7 +27,6 @@ class ApartmentBookingHistoryEventListener
         $this->apartmentBookingHistoryRepository = $apartmentBookingHistoryRepository;
     }
 
-
     public function onApartmentBooked(ApartmentBookedEvent $apartmentBookedEvent)
     {
         /** @var ApartmentBookingHistory */
