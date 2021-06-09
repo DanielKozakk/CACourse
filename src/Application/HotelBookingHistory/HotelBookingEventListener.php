@@ -18,6 +18,16 @@ class HotelBookingEventListener
      */
     private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
 
+    /**
+     * HotelBookingEventListener constructor.
+     * @param HotelBookingHistoryRepository $hotelBookingHistoryRepository
+     */
+    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository)
+    {
+        $this->hotelBookingHistoryRepository = $hotelBookingHistoryRepository;
+    }
+
+
     public function onHotelRoomBooked(HotelBookedEvent $hotelBookedEvent){
 
         $hotelBookingHistory = $this->getBookingHistoryFor($hotelBookedEvent->getHotelId());

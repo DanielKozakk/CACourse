@@ -3,16 +3,16 @@
 
 namespace App\Infrastructure\Persistance\Doctrine\HotelBookingHistory;
 
-use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
+use App\Domain\HotelBookingHistory\HotelBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method HotelRoomBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
- * @method HotelRoomBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
- * @method HotelRoomBookingHistory[]    findAll()
- * @method HotelRoomBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HotelBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HotelBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HotelBookingHistory[]    findAll()
+ * @method HotelBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class DoctrineSqlHotelBookingHistoryRepository extends ServiceEntityRepository
 {
@@ -28,18 +28,18 @@ class DoctrineSqlHotelBookingHistoryRepository extends ServiceEntityRepository
      */
     public function __construct(EntityManagerInterface $entityManager, ManagerRegistry $registry)
     {
-        parent::__construct($registry, HotelRoomBookingHistory::class);
+        parent::__construct($registry, HotelBookingHistory::class);
         $this->entityManager = $entityManager;
     }
 
     /**
-     * @param HotelRoomBookingHistory $hotelRoomBookingHistory
+     * @param HotelBookingHistory $hotelBookingHistory
      * @throws \Doctrine\ORM\ORMException
      */
-    public function save(HotelRoomBookingHistory $hotelRoomBookingHistory)
+    public function save(HotelBookingHistory $hotelBookingHistory)
     {
 
-        $this->entityManager->persist($hotelRoomBookingHistory);
+        $this->entityManager->persist($hotelBookingHistory);
         $this->entityManager->flush();
     }
 }

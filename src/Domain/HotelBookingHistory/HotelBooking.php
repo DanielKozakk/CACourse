@@ -42,69 +42,93 @@ class HotelBooking
     /**
      * @ORM\Embedded(class="HotelBookingStep")
      */
-    private $hotelRoomBookingStep;
+    private $hotelBookingStep;
 
     /**
-     * HotelRoomBooking constructor.
-     * @param $hotelRoomBookingCreationDate
-     * @param $tenantId
-     * @param HotelBookingPeriod $hotelRoomBookingPeriod
-     * @param $hotelRoomBookingHistory
-     * @param $hotelRoomBookingStep
+     * HotelBooking constructor.
+     * @param \DateTimeInterface|null $hotelBookingCreationDate
+     * @param string|null $tenantId
+     * @param HotelBookingPeriod $hotelBookingPeriod
+     * @param HotelBookingHistory|null $hotelBookingHistory
+     * @param $hotelBookingStep
      */
-    private function __construct($hotelRoomBookingCreationDate, $tenantId, HotelBookingPeriod $hotelRoomBookingPeriod, HotelBookingStep $hotelRoomBookingStep)
+    public function __construct(?\DateTimeInterface $hotelBookingCreationDate, ?string $tenantId, HotelBookingPeriod $hotelBookingPeriod, $hotelBookingStep)
     {
-        $this->hotelBookingCreationDate = $hotelRoomBookingCreationDate;
+        $this->hotelBookingCreationDate = $hotelBookingCreationDate;
         $this->tenantId = $tenantId;
-        $this->hotelBookingPeriod = $hotelRoomBookingPeriod;
-        $this->hotelRoomBookingStep = $hotelRoomBookingStep;
+        $this->hotelBookingPeriod = $hotelBookingPeriod;
+
+        $this->hotelBookingStep = $hotelBookingStep;
     }
 
 
+    /**
+     * @param DateTime $bookingCreationDateTime
+     * @param string $tenantId
+     * @param HotelBookingPeriod $bookingPeriod
+     * @return HotelBooking
+     */
     public static function start(DateTime $bookingCreationDateTime, string $tenantId, HotelBookingPeriod $bookingPeriod) : HotelBooking
     {
         return new HotelBooking($bookingCreationDateTime, $tenantId, $bookingPeriod, new HotelBookingStep(HotelBookingStep::START));
     }
 
-
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getHotelBookingCreationDate(): ?\DateTimeInterface
     {
         return $this->hotelBookingCreationDate;
     }
 
-    public function setHotelBookingCreationDate(\DateTimeInterface $hotelBookingCreationDate): self
-    {
-        $this->hotelBookingCreationDate = $hotelBookingCreationDate;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getTenantId(): ?string
     {
         return $this->tenantId;
     }
 
-    public function setTenantId(string $tenantId): self
+    /**
+     * @return HotelBookingPeriod
+     */
+    public function getHotelBookingPeriod(): HotelBookingPeriod
     {
-        $this->tenantId = $tenantId;
-
-        return $this;
+        return $this->hotelBookingPeriod;
     }
 
+    /**
+     * @return HotelBookingHistory|null
+     */
     public function getHotelBookingHistory(): ?HotelBookingHistory
     {
         return $this->hotelBookingHistory;
     }
 
-    public function setHotelBookingHistory(?HotelBookingHistory $hotelBookingHistory): self
+    /**
+     * @return mixed
+     */
+    public function getHotelBookingStep()
+    {
+        return $this->hotelBookingStep;
+    }
+
+    /**
+     * @param HotelBookingHistory|null $hotelBookingHistory
+     */
+    public function setHotelBookingHistory(?HotelBookingHistory $hotelBookingHistory): void
     {
         $this->hotelBookingHistory = $hotelBookingHistory;
-
-        return $this;
     }
+
+
+
 }

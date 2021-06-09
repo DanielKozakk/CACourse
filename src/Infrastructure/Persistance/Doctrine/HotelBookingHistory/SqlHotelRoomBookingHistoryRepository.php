@@ -4,16 +4,15 @@
 namespace App\Infrastructure\Persistance\Doctrine\HotelBookingHistory;
 
 
-use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
-use App\Domain\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Domain\HotelBookingHistory\HotelBookingHistory;
+use App\Domain\HotelBookingHistory\HotelBookingHistoryRepository;
 /**
- * @method HotelRoomBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
- * @method HotelRoomBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
- * @method HotelRoomBookingHistory[]    findAll()
- * @method HotelRoomBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HotelBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HotelBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HotelBookingHistory[]    findAll()
+ * @method HotelBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SqlHotelRoomBookingHistoryRepository implements ApartmentBookingHistoryRepository
+class SqlHotelRoomBookingHistoryRepository implements HotelBookingHistoryRepository
 {
 
     private DoctrineSqlHotelBookingHistoryRepository $serviceEntityRepository;
@@ -37,16 +36,16 @@ class SqlHotelRoomBookingHistoryRepository implements ApartmentBookingHistoryRep
     }
 
     /**
-     * @param string $apartmentId
-     * @return HotelRoomBookingHistory|null
+     * @param string $hotelId
+     * @return HotelBookingHistory|null
      */
-    public function findFor(string $apartmentId): HotelRoomBookingHistory|null
+    public function findFor(string $hotelId): HotelBookingHistory|null
     {
-        return $this->serviceEntityRepository->find($apartmentId);
+        return $this->serviceEntityRepository->find($hotelId);
     }
 
-    public function save(HotelRoomBookingHistory $apartmentBookingHistory)
+    public function save(HotelBookingHistory $hotelBookingHistory)
     {
-        $this->serviceEntityRepository->save($apartmentBookingHistory);
+        $this->serviceEntityRepository->save($hotelBookingHistory);
     }
 }
