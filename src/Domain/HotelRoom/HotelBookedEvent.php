@@ -7,7 +7,7 @@ namespace App\Domain\HotelRoom;
 
 use DateTime;
 
-class HotelRoomBookedEvent
+class HotelBookedEvent
 {
 
     public const NAME = 'hotelroom.booked';
@@ -65,12 +65,12 @@ class HotelRoomBookedEvent
     }
 
 
-    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelRoomBookedEvent
+    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new DateTime();
 
-        return new HotelRoomBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period->getStart(), $period->getEnd());
+        return new HotelBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period->getStart(), $period->getEnd());
     }
 
     /**

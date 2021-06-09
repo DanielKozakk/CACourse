@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Infrastructure\Persistance\Doctrine\HotelRoomBookingHistory;
+namespace App\Infrastructure\Persistance\Doctrine\HotelBookingHistory;
 
 use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method HotelRoomBookingHistory[]    findAll()
  * @method HotelRoomBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DoctrineSqlHotelRoomBookingHistoryRepository extends ServiceEntityRepository
+class DoctrineSqlHotelBookingHistoryRepository extends ServiceEntityRepository
 {
 
     /**

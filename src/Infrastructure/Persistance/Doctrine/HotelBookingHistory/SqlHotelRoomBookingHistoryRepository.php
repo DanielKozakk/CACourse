@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Infrastructure\Persistance\Doctrine\HotelRoomBookingHistory;
+namespace App\Infrastructure\Persistance\Doctrine\HotelBookingHistory;
 
 
 use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
@@ -16,13 +16,13 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class SqlHotelRoomBookingHistoryRepository implements ApartmentBookingHistoryRepository
 {
 
-    private DoctrineSqlHotelRoomBookingHistoryRepository $serviceEntityRepository;
+    private DoctrineSqlHotelBookingHistoryRepository $serviceEntityRepository;
 
     /**
      * SqlApartmentRepository constructor.
-     * @param DoctrineSqlHotelRoomBookingHistoryRepository $serviceEntityRepository
+     * @param DoctrineSqlHotelBookingHistoryRepository $serviceEntityRepository
      */
-    public function __construct(DoctrineSqlHotelRoomBookingHistoryRepository $serviceEntityRepository)
+    public function __construct(DoctrineSqlHotelBookingHistoryRepository $serviceEntityRepository)
     {
         $this->serviceEntityRepository = $serviceEntityRepository;
     }

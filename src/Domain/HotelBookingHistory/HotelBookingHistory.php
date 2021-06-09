@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\HotelRoomBookingHistory;
+namespace App\Domain\HotelBookingHistory;
 
 
 use App\Domain\HotelRoom\HotelRoom;
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class HotelRoomBookingHistory
+class HotelBookingHistory
 {
     /**
      * @ORM\Id
@@ -21,60 +21,75 @@ class HotelRoomBookingHistory
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=HotelRoomBooking, mappedBy="hotelRoomBookingHistory", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="HotelBooking", mappedBy="hotelRoomBookingHistory", orphanRemoval=true)
      */
-    private $bookings;
+    private ArrayCollection $bookings;
 
     /**
-     * @ORM\OneToOne(targetEntity=HotelRoom inversedBy="hotelRoomBookingHistory", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="HotelRoom" inversedBy="hotelBookingHistory", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $hotelRoomId;
+    private mixed $hotelRoomId;
 
     /**
      * HotelRoomBookingHistory constructor.
-     * @param $bookings
-     * @param $hotelRoomId
      */
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
 
     }
-
-
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return Collection|HotelRoomBooking[]
+     * @return Collection
      */
     public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
-    public function add(HotelRoomBooking $booking): self
+    public function add(HotelBooking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings[] = $booking;
-            $booking->setHotelRoomBookingHistory($this);
+            $booking->setHotelBookingHistory($this);
         }
 
         return $this;
     }
 
-    public function removeBooking(HotelRoomBooking $booking): self
+    public function removeBooking(HotelBooking $booking): self
     {
         if ($this->bookings->removeElement($booking)) {
             // set the owning side to null (unless already changed)
-            if ($booking->getHotelRoomBookingHistory() === $this) {
-                $booking->setHotelRoomBookingHistory(null);
+            if ($booking->getHotelBookingHistory() === $this) {
+                $booking->setHotelBookingHistory(null);
             }
         }
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHotelRoomId(): mixed
+    {
+        return $this->hotelRoomId;
+    }
+
+    /**
+     * @param mixed $hotelRoomId
+     */
+    public function setHotelRoomId($hotelRoomId): void
+    {
+        $this->hotelRoomId = $hotelRoomId;
+    }
+
+
 }

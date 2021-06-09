@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Domain\HotelRoomBookingHistory\HotelRoomBookingHistory;
+use App\Domain\HotelBookingHistory\HotelBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method HotelRoomBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
- * @method HotelRoomBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
- * @method HotelRoomBookingHistory[]    findAll()
- * @method HotelRoomBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HotelBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HotelBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HotelBookingHistory[]    findAll()
+ * @method HotelBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class HotelRoomBookingHistoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, HotelRoomBookingHistory::class);
+        parent::__construct($registry, HotelBookingHistory::class);
     }
 
 

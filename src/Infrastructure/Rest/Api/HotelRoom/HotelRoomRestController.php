@@ -25,7 +25,8 @@ class HotelRoomRestController extends AbstractController
         $this->hotelRoomApplicationService->add(
             $hotelRoomDto->getNumber(),
             $hotelRoomDto->getSpacesDefinition(),
-            $hotelRoomDto->getDescription()
+            $hotelRoomDto->getDescription(),
+            $hotelRoomDto->getHotelId(),
         );
     }
 

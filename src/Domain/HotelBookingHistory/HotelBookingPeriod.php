@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\HotelRoomBookingHistory;
+namespace App\Domain\HotelBookingHistory;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embeddable;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\Embeddable;
 /**
  * @Embeddable
  */
-class HotelRoomBookingPeriod
+class HotelBookingPeriod
 {
 
     /**

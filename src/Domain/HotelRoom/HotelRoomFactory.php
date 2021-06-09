@@ -4,13 +4,16 @@
 namespace App\Domain\HotelRoom;
 
 
+use App\Domain\Hotel\Hotel;
+
 class HotelRoomFactory
 {
 
     public function create(
         int $number,
         array $spacesDefinition,
-        string $description
+        string $description,
+        Hotel $hotel
     ) : HotelRoom{
 
         /**
@@ -22,7 +25,7 @@ class HotelRoomFactory
             $spaces[] = new Space($spaceName, new SquareMeter($spaceSize));
         }
 
-        $hotelRoom = new HotelRoom($number, $spacesDefinition, $description);
+        $hotelRoom = new HotelRoom($number, $spacesDefinition, $description, $hotel);
 
 
     }
