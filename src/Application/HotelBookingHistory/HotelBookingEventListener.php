@@ -27,7 +27,6 @@ class HotelBookingEventListener
         $this->hotelBookingHistoryRepository = $hotelBookingHistoryRepository;
     }
 
-
     public function onHotelRoomBooked(HotelBookedEvent $hotelBookedEvent){
 
         $hotelBookingHistory = $this->getBookingHistoryFor($hotelBookedEvent->getHotelId());
