@@ -44,10 +44,8 @@ class HotelBookingEventListener
 
     private function getBookingHistoryFor(string $hotelId): HotelBookingHistory
     {
-        $bookingHistory = $this->hotelBookingHistoryRepository->existFor($hotelId);
-
-        if($bookingHistory){
-            return $bookingHistory;
+        if($this->hotelBookingHistoryRepository->existFor($hotelId)){
+            return $this->hotelBookingHistoryRepository->findFor($hotelId);
         } else {
             return new HotelBookingHistory();
         }
