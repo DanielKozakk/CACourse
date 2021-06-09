@@ -11,5 +11,5 @@ interface ApartmentBookingHistoryRepository
 
     public function findFor(string $apartmentId);
 
-    public function save(HotelRoomBookingHistory $apartmentBookingHistory);
+    public function save(ApartmentBookingHistory $apartmentBookingHistory);
 }
