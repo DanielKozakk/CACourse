@@ -3,7 +3,6 @@
 namespace App\Domain\HotelBookingHistory;
 
 
-use App\Domain\HotelRoom\HotelRoom;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,7 +33,7 @@ class HotelBookingHistory
         $this->hotelRoomBookingHistories = new ArrayCollection();
 
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,19 +47,17 @@ class HotelBookingHistory
         return $this->hotelRoomBookingHistories;
     }
 
-    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, DateTime $startDate, DateTime $endDate )
+    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, DateTime $startDate, DateTime $endDate)
     {
         $hotelRoomBookingHistory = $this->findHotelRoomBookingHistoryFor($hotelRoomId);
 
         $hotelRoomBookingHistory->add($bookingDateTime, $tenantId, $startDate, $endDate);
     }
 
-    private function findHotelRoomBookingHistoryFor(string $hotelRoomId) : HotelRoomBookingHistory{
-
-        $hotelRoomBookingHistory = null ;
-        foreach($this->hotelRoomBookingHistories as $hotelRoomHistory){
-            if($hotelRoomHistory->getHotelRoomId() === $hotelRoomId){
-                $hotelRoomBookingHistory =  $hotelRoomHistory;
+    private function findHotelRoomBookingHistoryFor(string $hotelRoomId): HotelRoomBookingHistory{
+        foreach ($this->hotelRoomBookingHistories as $hotelRoomHistory) {
+            if ($hotelRoomHistory->getHotelRoomId() === $hotelRoomId) {
+                $hotelRoomBookingHistory = $hotelRoomHistory;
             }
         }
 
