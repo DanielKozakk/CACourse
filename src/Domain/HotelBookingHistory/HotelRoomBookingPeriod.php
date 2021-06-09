@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\Embeddable;
 /**
  * @Embeddable
  */
-class HotelBookingPeriod
+class HotelRoomBookingPeriod
 {
 
     /**

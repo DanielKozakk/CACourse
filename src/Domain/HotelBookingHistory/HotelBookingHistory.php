@@ -48,15 +48,14 @@ class HotelBookingHistory
         return $this->hotelRoomBookingHistories;
     }
 
-    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, DateTime $startDate, DateTime $endDate ): self
+    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, DateTime $startDate, DateTime $endDate )
     {
         $hotelRoomBookingHistory = $this->findHotelRoomBookingHistoryFor($hotelRoomId);
 
+        $hotelRoomBookingHistory->add($bookingDateTime, $tenantId, $startDate, $endDate);
     }
 
-
-
-    private function findHotelRoomBookingHistoryFor(string $hotelRoomId){
+    private function findHotelRoomBookingHistoryFor(string $hotelRoomId) : HotelRoomBookingHistory{
 
         $hotelRoomBookingHistory = null ;
         foreach($this->hotelRoomBookingHistories as $hotelRoomHistory){
@@ -65,11 +64,9 @@ class HotelBookingHistory
             }
         }
 
-        if(!$hotelRoomHistory){
-            $hotelRoomHistory = new HotelRoomBookingHistory($hotelRoomId);
-        }
+        $hotelRoomBookingHistory ??= new HotelRoomBookingHistory($hotelRoomId);
 
-        return $hotelRoomHistory;
+        return $hotelRoomBookingHistory;
     }
 
 }

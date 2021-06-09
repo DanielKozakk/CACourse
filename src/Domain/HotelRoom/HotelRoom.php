@@ -46,11 +46,6 @@ class HotelRoom
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="HotelBookingHistory", mappedBy="hotelRoomId", cascade={"persist", "remove"})
-     */
-    private ?HotelBookingHistory $hotelBookingHistory;
-
-    /**
      * @var Hotel
      * @ORM\ManyToOne(targetEntity=Hotel::class, inversedBy="rooms")
      * @ORM\JoinColumn(nullable=false)
@@ -75,22 +70,5 @@ class HotelRoom
     public function book($tenantId, Period $period, EventChannel $eventChannel)
     {
         $eventChannel->publishHotelRoomBooked(HotelBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $period));
-    }
-
-    public function getHotelBookingHistory(): ?HotelBookingHistory
-    {
-        return $this->hotelBookingHistory;
-    }
-
-    public function setHotelBookingHistory(HotelBookingHistory $hotelBookingHistory): self
-    {
-        // set the owning side of the relation if necessary
-        if ($hotelBookingHistory->getHotelRoomId() !== $this) {
-            $hotelBookingHistory->setHotelRoomId($this);
-        }
-
-        $this->hotelBookingHistory = $hotelBookingHistory;
-
-        return $this;
     }
 }

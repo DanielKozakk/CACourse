@@ -8,7 +8,7 @@ use App\Domain\HotelRoom\HotelBookedEvent;
 use App\Domain\HotelBookingHistory\HotelBooking;
 use App\Domain\HotelBookingHistory\HotelBookingHistory;
 use App\Domain\HotelBookingHistory\HotelBookingHistoryRepository;
-use App\Domain\HotelBookingHistory\HotelBookingPeriod;
+use App\Domain\HotelBookingHistory\HotelRoomBookingPeriod;
 
 class HotelBookingEventListener
 {
@@ -31,7 +31,7 @@ class HotelBookingEventListener
 
         $hotelBookingHistory = $this->getBookingHistoryForHotelBookedEvent($hotelBookedEvent);
 
-        $hotelBookingPeriod = new HotelBookingPeriod($hotelBookedEvent->getPeriodStart(), $hotelBookedEvent->getPeriodEnd());
+        $hotelBookingPeriod = new HotelRoomBookingPeriod($hotelBookedEvent->getPeriodStart(), $hotelBookedEvent->getPeriodEnd());
 
         $hotelBookingHistory->add(
             HotelBooking::start($hotelBookedEvent->getTenantId(), $hotelBookingPeriod)
