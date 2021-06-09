@@ -4,6 +4,7 @@ namespace App\Domain\HotelBookingHistory;
 
 
 use App\Domain\HotelRoom\HotelRoom;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,22 +22,16 @@ class HotelBookingHistory
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="HotelBooking", mappedBy="hotelRoomBookingHistory", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="HotelRoomBookingHistory")
      */
-    private ArrayCollection $bookings;
-
-    /**
-     * @ORM\OneToOne(targetEntity="HotelRoom" inversedBy="hotelBookingHistory", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private mixed $hotelRoomId;
+    private ArrayCollection $hotelRoomBookingHistories;
 
     /**
      * HotelRoomBookingHistory constructor.
      */
     public function __construct()
     {
-        $this->bookings = new ArrayCollection();
+        $this->hotelRoomBookingHistories = new ArrayCollection();
 
     }
     
@@ -48,49 +43,33 @@ class HotelBookingHistory
     /**
      * @return Collection
      */
-    public function getBookings(): Collection
+    public function getHotelRoomBookingHistories(): Collection
     {
-        return $this->bookings;
+        return $this->hotelRoomBookingHistories;
     }
 
-    public function add(HotelBooking $booking): self
+    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, DateTime $startDate, DateTime $endDate ): self
     {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings[] = $booking;
-            $booking->setHotelBookingHistory($this);
-        }
+        $hotelRoomBookingHistory = $this->findHotelRoomBookingHistoryFor($hotelRoomId);
 
-        return $this;
     }
 
-    public function removeBooking(HotelBooking $booking): self
-    {
-        if ($this->bookings->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getHotelBookingHistory() === $this) {
-                $booking->setHotelBookingHistory(null);
+
+
+    private function findHotelRoomBookingHistoryFor(string $hotelRoomId){
+
+        $hotelRoomBookingHistory = null ;
+        foreach($this->hotelRoomBookingHistories as $hotelRoomHistory){
+            if($hotelRoomHistory->getHotelRoomId() === $hotelRoomId){
+                $hotelRoomBookingHistory =  $hotelRoomHistory;
             }
         }
 
-        return $this;
-    }
+        if(!$hotelRoomHistory){
+            $hotelRoomHistory = new HotelRoomBookingHistory($hotelRoomId);
+        }
 
-    /**
-     * @return mixed
-     */
-    public function getHotelRoomId(): mixed
-    {
-        return $this->hotelRoomId;
+        return $hotelRoomHistory;
     }
-
-    /**
-     * @param mixed $hotelRoomId
-     */
-    public function setHotelRoomId($hotelRoomId): self
-    {
-        $this->hotelRoomId = $hotelRoomId;
-        return $this;
-    }
-
 
 }
