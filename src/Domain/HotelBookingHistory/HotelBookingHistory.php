@@ -86,9 +86,10 @@ class HotelBookingHistory
     /**
      * @param mixed $hotelRoomId
      */
-    public function setHotelRoomId($hotelRoomId): void
+    public function setHotelRoomId($hotelRoomId): self
     {
         $this->hotelRoomId = $hotelRoomId;
+        return $this;
     }
 
 

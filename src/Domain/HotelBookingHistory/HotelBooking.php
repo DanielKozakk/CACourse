@@ -68,9 +68,9 @@ class HotelBooking
      * @param HotelBookingPeriod $bookingPeriod
      * @return HotelBooking
      */
-    public static function start(DateTime $bookingCreationDateTime, string $tenantId, HotelBookingPeriod $bookingPeriod) : HotelBooking
+    public static function start(string $tenantId, HotelBookingPeriod $bookingPeriod) : HotelBooking
     {
-        return new HotelBooking($bookingCreationDateTime, $tenantId, $bookingPeriod, new HotelBookingStep(HotelBookingStep::START));
+        return new HotelBooking(new \DateTime(), $tenantId, $bookingPeriod, new HotelBookingStep(HotelBookingStep::START));
     }
 
     /**
