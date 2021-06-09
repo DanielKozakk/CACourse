@@ -16,7 +16,7 @@ class HotelBookingEventListener
     /**
      * @var HotelBookingHistoryRepository
      */
-    private HotelBookingHistoryRepository $hotelBookingRepository;
+    private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
 
     public function onHotelRoomBooked(HotelBookedEvent $hotelBookedEvent){
 
@@ -28,13 +28,13 @@ class HotelBookingEventListener
             HotelBooking::start(new \DateTime(),$hotelBookedEvent->getTenantId(), $hotelBookingPeriod)
         );
 
-        $this->hotelBookingRepository->save($hotelBookingHistory);
+        $this->hotelBookingHistoryRepository->save($hotelBookingHistory);
 
     }
 
     private function getBookingHistoryFor(string $hotelId): HotelBookingHistory
     {
-        $bookingHistory = $this->hotelBookingRepository->existFor($hotelId);
+        $bookingHistory = $this->hotelBookingHistoryRepository->existFor($hotelId);
 
         if($bookingHistory){
             return $bookingHistory;

@@ -36,6 +36,10 @@ class SqlHotelRoomBookingHistoryRepository implements ApartmentBookingHistoryRep
         }
     }
 
+    /**
+     * @param string $apartmentId
+     * @return HotelRoomBookingHistory|null
+     */
     public function findFor(string $apartmentId): HotelRoomBookingHistory|null
     {
         return $this->serviceEntityRepository->find($apartmentId);
