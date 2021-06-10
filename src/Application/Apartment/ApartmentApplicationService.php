@@ -72,8 +72,5 @@ class ApartmentApplicationService
          * @var Booking
          */
          $booking = $apartment->book($tenantId, $period, $this->eventChannel);
-
-
     }
-
 }

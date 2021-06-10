@@ -49,5 +49,4 @@ class Booking
         $this->period = $period;
     }
 
-
 }
