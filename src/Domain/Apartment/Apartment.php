@@ -54,7 +54,7 @@ class Apartment
      * @param Address $address
      * @param string $description
      */
-    public function __construct(string $ownerId, \App\Domain\Apartment\Address $address,array $rooms, string $description)
+    public function __construct(string $ownerId, Address $address, array $rooms, string $description)
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
@@ -62,10 +62,10 @@ class Apartment
         $this->rooms = $rooms;
     }
 
-    public function book(string $tenantId, Period $period, EventChannel $eventChannel)
+    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking
     {
         $apartmentBooked =  ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period);
         $eventChannel->publishApartmentBooked($apartmentBooked);
-
+        return new Booking($this->id, $tenantId, $period);
     }
 }

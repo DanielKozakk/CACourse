@@ -3,44 +3,53 @@
 
 namespace App\Domain\Apartment;
 
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class Period
+ * @package App\Domain\Apartment
+ * @ORM\Embeddable
+ */
 class Period
 {
 
     /**
-     * @var \DateTime
+     * @var DateTime
+     * @ORM\Column(type="datetime")
      */
-    private \DateTime $start;
+    private DateTime $start;
 
 
     /**
-     * @var \DateTime
+     * @var DateTime
+     * @ORM\Column(type="datetime")
      */
-    private \DateTime $end;
+    private DateTime $end;
 
     /**
      * Period constructor.
-     * @param \DateTime $start
-     * @param \DateTime $end
+     * @param DateTime $start
+     * @param DateTime $end
      */
-    public function __construct(\DateTime $start, \DateTime $end)
+    public function __construct(DateTime $start, DateTime $end)
     {
         $this->start = $start;
         $this->end = $end;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getStart(): \DateTime
+    public function getStart(): DateTime
     {
         return $this->start;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getEnd(): \DateTime
+    public function getEnd(): DateTime
     {
         return $this->end;
     }

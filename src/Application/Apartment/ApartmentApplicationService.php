@@ -5,6 +5,8 @@ namespace App\Application\Apartment;
 
 use App\Domain\Apartment\ApartamentFactory;
 use App\Domain\Apartment\ApartmentRepository;
+use App\Domain\Apartment\Booking;
+use App\Domain\Apartment\BookingRepository;
 use App\Domain\Apartment\Period;
 use App\Domain\Event\EventChannel;
 use DateTime;
@@ -23,14 +25,23 @@ class ApartmentApplicationService
     private EventChannel $eventChannel;
 
     /**
+     * @var BookingRepository
+     */
+    private BookingRepository $bookingRepository;
+
+    /**
      * ApartmentApplicationService constructor.
      * @param ApartmentRepository $apartmentRepository
+     * @param EventChannel $eventChannel
+     * @param BookingRepository $bookingRepository
      */
-    public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel)
+    public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel, BookingRepository $bookingRepository)
     {
         $this->apartmentRepository = $apartmentRepository;
         $this->eventChannel = $eventChannel;
+        $this->bookingRepository = $bookingRepository;
     }
+
 
     public function add(
         string $ownerId,
@@ -57,7 +68,12 @@ class ApartmentApplicationService
          */
         $period = new Period($start, $end);
 
-        $apartment->book($tenantId, $period, $this->eventChannel);
+        /**
+         * @var Booking
+         */
+         $booking = $apartment->book($tenantId, $period, $this->eventChannel);
+
+
     }
 
 }
