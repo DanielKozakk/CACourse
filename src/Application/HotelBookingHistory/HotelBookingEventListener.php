@@ -5,10 +5,8 @@ namespace App\Application\HotelBookingHistory;
 
 
 use App\Domain\HotelRoom\HotelBookedEvent;
-use App\Domain\HotelBookingHistory\HotelBooking;
 use App\Domain\HotelBookingHistory\HotelBookingHistory;
 use App\Domain\HotelBookingHistory\HotelBookingHistoryRepository;
-use App\Domain\HotelBookingHistory\HotelRoomBookingPeriod;
 
 class HotelBookingEventListener
 {
