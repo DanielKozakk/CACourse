@@ -5,14 +5,12 @@ namespace App\Infrastructure\Persistance\Doctrine\Apartment;
 
 
 use App\Domain\Apartment\Apartment;
-use App\Domain\Apartment\ApartmentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class DoctrineSqlApartmentRepository extends ServiceEntityRepository{
-
 
     /**
      * DoctrineApartmentRepository constructor.
