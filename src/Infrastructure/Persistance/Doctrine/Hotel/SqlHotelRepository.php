@@ -32,4 +32,13 @@ class SqlHotelRepository implements HotelRepository
     {
         $this->doctrineHotelRepository->saveHotel($hotel);
     }
+
+    /**
+     * @param string $id
+     * @ return Hotel|null
+     */
+    function findById(string $id): ?Hotel
+    {
+       return $this->doctrineHotelRepository->find($id);
+    }
 }

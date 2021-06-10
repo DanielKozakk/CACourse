@@ -4,10 +4,12 @@
 namespace App\Domain\HotelRoom;
 
 
+use App\Domain\Apartment\Booking;
 use App\Domain\Event\EventChannel;
 use App\Domain\Hotel\Hotel;
 
 use App\Domain\HotelBookingHistory\HotelBookingHistory;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -67,8 +69,17 @@ class HotelRoom
         $this->description = $description;
     }
 
-    public function book($tenantId, Period $period, EventChannel $eventChannel)
+    /**
+     * @param $tenantId
+     * @param DateTime[] $period
+     * @param EventChannel $eventChannel
+     * @return Booking
+     */
+    public function book($tenantId, array $period, EventChannel $eventChannel) : Booking
     {
         $eventChannel->publishHotelRoomBooked(HotelBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $period));
+        return Booking::hotelRoom($this->id, $tenantId, $period);
     }
+
+
 }

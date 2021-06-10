@@ -9,21 +9,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Period
  * @package App\Domain\Apartment
- * @ORM\Embeddable
+ *
  */
 class Period
 {
 
     /**
      * @var DateTime
-     * @ORM\Column(type="datetime")
+     *
      */
     private DateTime $start;
 
 
     /**
      * @var DateTime
-     * @ORM\Column(type="datetime")
+     *
      */
     private DateTime $end;
 
@@ -52,5 +52,10 @@ class Period
     public function getEnd(): DateTime
     {
         return $this->end;
+    }
+
+    public function asDays()
+    {
+        return [$]
     }
 }

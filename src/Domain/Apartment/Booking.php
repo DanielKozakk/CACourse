@@ -4,6 +4,7 @@
 namespace App\Domain\Apartment;
 
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,32 +22,54 @@ class Booking
     private string $id;
 
     /**
-     * @var string
-     * @ORM\Column(name="string")
+     * @ORM\Column(type="string")
      */
-    private string $apartmentId;
+    private $rentalType;
+
     /**
      * @var string
-     * @ORM\Column(name="string")
+     * @ORM\Column(type="string")
+     */
+    private string $rentalPlaceId;
+    /**
+     * @var string
+     * @ORM\Column(type="string")
      */
     private string $tenantId;
 
     /**
-     * @ORM\Embeddable(class="Period")
+     * @ORM\Column(type="array")
+     * @var DateTime[]
      */
-    private Period $period;
+    private array $days;
 
     /**
      * Booking constructor.
-     * @param string $id
+     * @param $rentalType
+     * @param string $rentalPlaceId
      * @param string $tenantId
-     * @param Period $period
+     * @param DateTime[] $days
      */
-    public function __construct(string $id, string $tenantId, Period $period)
+    private function __construct(RentalType $rentalType, string $rentalPlaceId, string $tenantId, array $days)
     {
-        $this->apartmentId = $id;
+        $this->rentalType = $rentalType->getState();
+        $this->rentalPlaceId = $rentalPlaceId;
         $this->tenantId = $tenantId;
-        $this->period = $period;
+        $this->days = $days;
     }
 
+
+    public static function apartment(string $rentalPlaceId, string $tenantId, Period $period):Booking{
+
+        /** @var DateTime[] */
+        $days = $period->asDays();
+
+        return new Booking(RentalType::apartment(), $rentalPlaceId, $tenantId, $days);
+    }
+
+    public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days) : Booking
+    {
+        return new Booking(RentalType::hotelRoom(),$rentalPlaceId, $tenantId, $days);
+
+    }
 }

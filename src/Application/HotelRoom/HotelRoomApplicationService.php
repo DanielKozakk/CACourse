@@ -4,6 +4,8 @@
 namespace App\Application\HotelRoom;
 
 
+use App\Domain\Apartment\Booking;
+use App\Domain\Apartment\BookingRepository;
 use App\Domain\Event\EventChannel;
 use App\Domain\Hotel\Hotel;
 use App\Domain\Hotel\HotelRepository;
@@ -26,17 +28,25 @@ class HotelRoomApplicationService
     private HotelRepository $hotelRepository;
 
     /**
+     * @var BookingRepository
+     */
+    private $bookingRepository;
+
+    /**
      * HotelRoomApplicationService constructor.
      * @param EventChannel $eventChannel
      * @param HotelRoomRepository $hotelRoomRepository
-     * @param HotelRepository|HotelRoomRepository $hotelRepository
+     * @param HotelRepository $hotelRepository
+     * @param BookingRepository $bookingRepository
      */
-    public function __construct(EventChannel $eventChannel, HotelRoomRepository $hotelRoomRepository, HotelRepository|HotelRoomRepository $hotelRepository)
+    public function __construct(EventChannel $eventChannel, HotelRoomRepository $hotelRoomRepository, HotelRepository $hotelRepository, BookingRepository $bookingRepository)
     {
         $this->eventChannel = $eventChannel;
         $this->hotelRoomRepository = $hotelRoomRepository;
         $this->hotelRepository = $hotelRepository;
+        $this->bookingRepository = $bookingRepository;
     }
+
 
     /**
      * @param int $number
@@ -56,6 +66,10 @@ class HotelRoomApplicationService
     public function book(int $id, string $tenantId, \DateTime $startDate, \DateTime $endDate){
         $period = new Period ($startDate, $endDate);
         $hotelRoom = $this->hotelRoomRepository->findById($id);
-        $hotelRoom->book($tenantId,$period, $this->eventChannel);
+
+        /** @var Booking $booking */
+        $booking = $hotelRoom->book($tenantId,$period, $this->eventChannel);
+
+        $this->bookingRepository->save($booking);
     }
 }
