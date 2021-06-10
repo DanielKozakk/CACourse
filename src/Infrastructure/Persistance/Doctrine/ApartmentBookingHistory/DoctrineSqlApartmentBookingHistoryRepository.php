@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
-class DoctrineSqlApartmentBookingHIstoryRepository extends ServiceEntityRepository
+class DoctrineSqlApartmentBookingHistoryRepository extends ServiceEntityRepository
 {
 
     /**

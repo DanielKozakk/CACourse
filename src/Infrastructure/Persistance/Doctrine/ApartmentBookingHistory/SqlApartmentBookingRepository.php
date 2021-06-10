@@ -11,13 +11,13 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class SqlApartmentBookingRepository implements ApartmentBookingHistoryRepository
 {
 
-    private DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository;
+    private DoctrineSqlApartmentBookingHistoryRepository $serviceEntityRepository;
 
     /**
      * SqlApartmentRepository constructor.
-     * @param DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository
+     * @param DoctrineSqlApartmentBookingHistoryRepository $serviceEntityRepository
      */
-    public function __construct(DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository)
+    public function __construct(DoctrineSqlApartmentBookingHistoryRepository $serviceEntityRepository)
     {
         $this->serviceEntityRepository = $serviceEntityRepository;
     }
