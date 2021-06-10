@@ -5,13 +5,13 @@ namespace App\Infrastructure\Persistance\Doctrine\ApartmentBookingHistory;
 
 
 use App\Domain\Apartment\Apartment;
-use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
+use App\Domain\ApartmentBookingHistory\ApartmentBookingHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
-class DoctrineSqlApartmentRepository extends ServiceEntityRepository
+class DoctrineSqlApartmentBookingHIstoryRepository extends ServiceEntityRepository
 {
 
     /**
@@ -25,15 +25,15 @@ class DoctrineSqlApartmentRepository extends ServiceEntityRepository
      */
     public function __construct(EntityManagerInterface $entityManager, ManagerRegistry $registry)
     {
-        parent::__construct($registry, HotelRoomBookingHistory::class);
+        parent::__construct($registry, ApartmentBookingHistory::class);
         $this->entityManager = $entityManager;
     }
 
     /**
-     * @param HotelRoomBookingHistory $apartmentBookingHistory
+     * @param ApartmentBookingHistory $apartmentBookingHistory
      * @throws \Doctrine\ORM\ORMException
      */
-    public function save(HotelRoomBookingHistory $apartmentBookingHistory)
+    public function save(ApartmentBookingHistory $apartmentBookingHistory)
     {
         $this->entityManager->persist($apartmentBookingHistory);
         $this->entityManager->flush();

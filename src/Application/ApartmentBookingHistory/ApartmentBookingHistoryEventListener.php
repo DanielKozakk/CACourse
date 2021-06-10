@@ -9,7 +9,6 @@ use App\Domain\ApartmentBookingHistory\ApartmentBooking;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistory;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
 use App\Domain\ApartmentBookingHistory\BookingPeriod;
-use App\Domain\ApartmentBookingHistory\BookingStep;
 
 class ApartmentBookingHistoryEventListener
 {

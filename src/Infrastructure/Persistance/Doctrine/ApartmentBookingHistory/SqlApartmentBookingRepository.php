@@ -4,20 +4,20 @@
 namespace App\Infrastructure\Persistance\Doctrine\ApartmentBookingHistory;
 
 
-use App\Domain\ApartmentBookingHistory\HotelRoomBookingHistory;
+use App\Domain\ApartmentBookingHistory\ApartmentBookingHistory;
 use App\Domain\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class SqlApartmentRepository implements ApartmentBookingHistoryRepository
+class SqlApartmentBookingRepository implements ApartmentBookingHistoryRepository
 {
 
-    private DoctrineSqlApartmentRepository $serviceEntityRepository;
+    private DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository;
 
     /**
      * SqlApartmentRepository constructor.
-     * @param DoctrineSqlApartmentRepository $serviceEntityRepository
+     * @param DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository
      */
-    public function __construct(DoctrineSqlApartmentRepository $serviceEntityRepository)
+    public function __construct(DoctrineSqlApartmentBookingHIstoryRepository $serviceEntityRepository)
     {
         $this->serviceEntityRepository = $serviceEntityRepository;
     }
@@ -36,7 +36,7 @@ class SqlApartmentRepository implements ApartmentBookingHistoryRepository
         return $this->serviceEntityRepository->find($apartmentId);
     }
 
-    public function save(HotelRoomBookingHistory $apartmentBookingHistory)
+    public function save(ApartmentBookingHistory $apartmentBookingHistory)
     {
         $this->serviceEntityRepository->save($apartmentBookingHistory);
     }
