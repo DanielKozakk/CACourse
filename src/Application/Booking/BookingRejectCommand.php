@@ -7,23 +7,23 @@ namespace App\Application\Booking;
 class BookingRejectCommand
 {
 
-    private string $id;
+    private string $bookingId;
 
     /**
      * BookingRejectCommand constructor.
-     * @param string $id
+     * @param string $bookingId
      */
-    public function __construct(string $id)
+    public function __construct(string $bookingId)
     {
-        $this->id = $id;
+        $this->bookingId = $bookingId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getBookingId(): string
     {
-        return $this->id;
+        return $this->bookingId;
     }
 
 
