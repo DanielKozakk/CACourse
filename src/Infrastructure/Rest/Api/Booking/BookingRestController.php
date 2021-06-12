@@ -4,6 +4,7 @@
 namespace App\Infrastructure\Rest\Api\Booking;
 
 
+use App\Application\Booking\BookingAcceptCommand;
 use App\Application\Booking\BookingRejectCommand;
 use App\Application\CommandRegistry\CommandRegistry;
 
@@ -33,7 +34,17 @@ class BookingRestController
      */
     public function reject(string $id): BookingRejectCommand
     {
-        return $this->commandRegistry->register(new BookingRejectCommand($id));
+        return $this->commandRegistry->registerRejectCommand(new BookingRejectCommand($id));
     }
-
+    /**
+     * put method, /accept/{id}
+     * TODO: uzupełnij config api
+     *
+     * @param string $id
+     * @return BookingRejectCommand
+     */
+    public function accept(string $id): BookingRejectCommand
+    {
+        return $this->commandRegistry->registerAcceptCommand(new BookingAcceptCommand($id));
+    }
 }

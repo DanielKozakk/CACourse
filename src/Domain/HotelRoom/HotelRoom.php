@@ -80,6 +80,4 @@ class HotelRoom
         $eventChannel->publishHotelRoomBooked(HotelBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $days));
         return Booking::hotelRoom($this->id, $tenantId, $days);
     }
-
-
 }

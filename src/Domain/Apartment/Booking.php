@@ -58,18 +58,16 @@ class Booking
         $this->tenantId = $tenantId;
         $this->days = $days;
     }
-
-
     public static function apartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
     {
         /** @var DatePeriod[] */
         $days = [$period->asDateTimeArray()];
 
-        return new Booking(RentalType::apartment(), $rentalPlaceId, $tenantId, $days);
+        return new Booking(RentalType::getApartmentRenatlType(), $rentalPlaceId, $tenantId, $days);
     }
 
     public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days): Booking
     {
-         return new Booking(RentalType::hotelRoom(), $rentalPlaceId, $tenantId, $days);
+         return new Booking(RentalType::getHotelRoomRentalType(), $rentalPlaceId, $tenantId, $days);
     }
 }

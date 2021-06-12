@@ -6,12 +6,11 @@ namespace App\Application\HotelRoom;
 
 use App\Domain\Apartment\Booking;
 use App\Domain\Apartment\BookingRepository;
+use App\Domain\Apartment\Period;
 use App\Domain\Event\EventChannel;
-use App\Domain\Hotel\Hotel;
 use App\Domain\Hotel\HotelRepository;
 use App\Domain\HotelRoom\HotelRoomFactory;
 use App\Domain\HotelRoom\HotelRoomRepository;
-use App\Domain\HotelRoom\Period;
 
 class HotelRoomApplicationService
 {
@@ -64,11 +63,11 @@ class HotelRoomApplicationService
     }
 
     public function book(int $id, string $tenantId, \DateTime $startDate, \DateTime $endDate){
-        $period = new Period ($startDate, $endDate);
+        $days = (new Period ($startDate, $endDate))->asDateTimeArray();
         $hotelRoom = $this->hotelRoomRepository->findById($id);
 
         /** @var Booking $booking */
-        $booking = $hotelRoom->book($tenantId,$period, $this->eventChannel);
+        $booking = $hotelRoom->book($tenantId,$days, $this->eventChannel);
 
         $this->bookingRepository->save($booking);
     }

@@ -32,12 +32,12 @@ class RentalType
         return $this->state;
     }
 
-    public static function apartment()
+    public static function getApartmentRenatlType()
     {
         return new RentalType(self::APARTMENT);
     }
 
-    public static function hotelRoom()
+    public static function getHotelRoomRentalType()
     {
         return new RentalType(self::HOTEL_ROOM);
     }
