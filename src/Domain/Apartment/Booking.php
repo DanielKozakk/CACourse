@@ -45,6 +45,12 @@ class Booking
     private array $days;
 
     /**
+     * @var BookingStatus
+     * @ORM\Embedded(class="BookingStatus")
+     */
+    private BookingStatus $bookingStatus;
+
+    /**
      * Booking constructor.
      * @param $rentalType
      * @param string $rentalPlaceId
@@ -69,5 +75,10 @@ class Booking
     public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days): Booking
     {
          return new Booking(RentalType::getHotelRoomRentalType(), $rentalPlaceId, $tenantId, $days);
+    }
+
+    public function reject()
+    {
+        $this->bookingStatus->setRejectedBookingStatus();
     }
 }
