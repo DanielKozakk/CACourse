@@ -3,6 +3,7 @@
 
 namespace App\Domain\Apartment;
 
+use DatePeriod;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -54,8 +55,16 @@ class Period
         return $this->end;
     }
 
-    public function asDays()
+    /**
+     * @return DateTime[]
+     */
+    public function asDatePeriods(): array
     {
-        return [$]
+        $period = new DatePeriod($this->getStart(), new \DateInterval('P1D'), $this->getEnd());
+        $arrayOfDateTimes = [];
+        foreach ($period as $date) {
+            $arrayOfDateTimes[] = $date;
+        }
+        return $arrayOfDateTimes;
     }
 }
