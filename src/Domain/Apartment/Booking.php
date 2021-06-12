@@ -4,6 +4,7 @@
 namespace App\Domain\Apartment;
 
 
+use DatePeriod;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,7 +40,7 @@ class Booking
 
     /**
      * @ORM\Column(type="array")
-     * @var DateTime[]
+     * @var DatePeriod[]
      */
     private array $days;
 
@@ -59,17 +60,16 @@ class Booking
     }
 
 
-    public static function apartment(string $rentalPlaceId, string $tenantId, Period $period):Booking{
-
-        /** @var DateTime[] */
-        $days = $period->asDays();
+    public static function apartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
+    {
+        /** @var DatePeriod[] */
+        $days = [$period->asDateTimeArray()];
 
         return new Booking(RentalType::apartment(), $rentalPlaceId, $tenantId, $days);
     }
 
-    public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days) : Booking
+    public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days): Booking
     {
-        return new Booking(RentalType::hotelRoom(),$rentalPlaceId, $tenantId, $days);
-
+         return new Booking(RentalType::hotelRoom(), $rentalPlaceId, $tenantId, $days);
     }
 }

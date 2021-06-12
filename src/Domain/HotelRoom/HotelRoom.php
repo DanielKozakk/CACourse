@@ -71,14 +71,14 @@ class HotelRoom
 
     /**
      * @param $tenantId
-     * @param DateTime[] $period
+     * @param DateTime[] $days
      * @param EventChannel $eventChannel
      * @return Booking
      */
-    public function book($tenantId, array $period, EventChannel $eventChannel) : Booking
+    public function book($tenantId, array $days, EventChannel $eventChannel) : Booking
     {
-        $eventChannel->publishHotelRoomBooked(HotelBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $period));
-        return Booking::hotelRoom($this->id, $tenantId, $period);
+        $eventChannel->publishHotelRoomBooked(HotelBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $days));
+        return Booking::hotelRoom($this->id, $tenantId, $days);
     }
 
 

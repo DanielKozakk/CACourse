@@ -58,7 +58,7 @@ class Period
     /**
      * @return DateTime[]
      */
-    public function asDatePeriods(): array
+    public function asDateTimeArray(): array
     {
         $period = new DatePeriod($this->getStart(), new \DateInterval('P1D'), $this->getEnd());
         $arrayOfDateTimes = [];

@@ -34,14 +34,10 @@ class HotelBookedEvent
     private string $tenantId;
 
     /**
-     * @var DateTime
+     * @var DateTime[]
      */
-    private DateTime $periodStart;
+    private array $days;
 
-    /**
-     * @var DateTime
-     */
-    private DateTime $periodEnd;
 
     /**
      * HotelRoomBookedEvent constructor.
@@ -50,27 +46,26 @@ class HotelBookedEvent
      * @param string $hotelId
      * @param string $hotelRoomId
      * @param string $tenantId
-     * @param DateTime $periodStart
-     * @param DateTime $periodEnd
+     * @param array $days
      */
-    public function __construct(DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelId, string $hotelRoomId, string $tenantId, DateTime $periodStart, DateTime $periodEnd)
+    public function __construct(DateTime $hotelRoomBookedCreationTime, string $eventId, string $hotelId, string $hotelRoomId, string $tenantId, array $days)
     {
         $this->hotelRoomBookedCreationTime = $hotelRoomBookedCreationTime;
         $this->eventId = $eventId;
         $this->hotelId = $hotelId;
         $this->hotelRoomId = $hotelRoomId;
         $this->tenantId = $tenantId;
-        $this->periodStart = $periodStart;
-        $this->periodEnd = $periodEnd;
+
+        $this->days = $days;
     }
 
 
-    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, Period $period): HotelBookedEvent
+    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, array $days): HotelBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new DateTime();
 
-        return new HotelBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $period->getStart(), $period->getEnd());
+        return new HotelBookedEvent( $creationDateTime, $eventId, $hotelRoomId, $hotelId, $tenantId, $days);
     }
 
     /**
@@ -114,22 +109,12 @@ class HotelBookedEvent
     }
 
     /**
-     * @return DateTime
+     * @return DateTime[]
      */
-    public function getPeriodStart(): DateTime
+    public function getDays(): array
     {
-        return $this->periodStart;
+        return $this->days;
     }
-
-    /**
-     * @return DateTime
-     */
-    public function getPeriodEnd(): DateTime
-    {
-        return $this->periodEnd;
-    }
-
-
 
 
 }
