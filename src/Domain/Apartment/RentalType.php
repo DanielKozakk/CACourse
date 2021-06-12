@@ -4,6 +4,8 @@
 namespace App\Domain\Apartment;
 
 
+use JetBrains\PhpStorm\Pure;
+
 class RentalType
 {
 
@@ -32,12 +34,12 @@ class RentalType
         return $this->state;
     }
 
-    public static function getApartmentRenatlType()
+    public static function getApartmentRenatlType(): RentalType
     {
         return new RentalType(self::APARTMENT);
     }
 
-    public static function getHotelRoomRentalType()
+    public static function getHotelRoomRentalType(): RentalType
     {
         return new RentalType(self::HOTEL_ROOM);
     }

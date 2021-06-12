@@ -14,7 +14,7 @@ class ApartmentRestController extends AbstractController
     /**
      * @var ApartmentApplicationService
      */
-    private $apartmentApplicationService;
+    private ApartmentApplicationService $apartmentApplicationService;
 
     /**
      * ApartmentRestController constructor.

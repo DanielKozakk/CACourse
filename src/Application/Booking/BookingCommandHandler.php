@@ -34,8 +34,10 @@ class BookingCommandHandler
     }
 
     public function onBookingAcceptCommand(BookingAcceptCommand $bookingAcceptCommand){
+        $booking = $this->bookingRepository->findById($bookingAcceptCommand->getBookingId());
+        $booking->accept();
 
+        $this->bookingRepository->save($booking);
     }
-
 
 }

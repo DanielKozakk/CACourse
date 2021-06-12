@@ -52,7 +52,7 @@ class Booking
 
     /**
      * Booking constructor.
-     * @param $rentalType
+     * @param RentalType $rentalType
      * @param string $rentalPlaceId
      * @param string $tenantId
      * @param DateTime[] $days
@@ -80,5 +80,9 @@ class Booking
     public function reject()
     {
         $this->bookingStatus->setRejectedBookingStatus();
+    }
+
+    public function accept(){
+        $this->bookingStatus->setAcceptedBookingStatus();
     }
 }

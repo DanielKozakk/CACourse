@@ -14,6 +14,7 @@ class BookingStatus
 {
     private const OPEN = 'OPEN';
     private const REJECTED = 'REJECTED';
+    const ACCEPTED = 'ACCEPTED';
 
     /**
      * @var string
@@ -44,6 +45,12 @@ class BookingStatus
 
     public function setRejectedBookingStatus(): self{
         $this->state = self::REJECTED;
+        return $this;
+    }
+
+    public function setAcceptedBookingStatus(): self
+    {
+        $this->state = self::ACCEPTED;
         return $this;
     }
 

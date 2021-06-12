@@ -30,7 +30,7 @@ class Apartment
      * @var string
      * @ORM\Column(type="string")
      */
-    private $ownerId;
+    private string $ownerId;
     /**
      * @var Address
      *

@@ -43,8 +43,8 @@ class BookingRestController
      * @param string $id
      * @return BookingRejectCommand
      */
-    public function accept(string $id): BookingRejectCommand
+    public function accept(BookingDto $bookingDto): BookingRejectCommand
     {
-        return $this->commandRegistry->registerAcceptCommand(new BookingAcceptCommand($id));
+        return $this->commandRegistry->registerAcceptCommand(new BookingAcceptCommand($bookingDto->getBookingId(), $bookingDto->getCreationDate(), $bookingDto->getRentalType(), $bookingDto->getObjectId(), $bookingDto->getTenantId(), $bookingDto->getDays()));
     }
 }

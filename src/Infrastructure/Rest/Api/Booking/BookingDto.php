@@ -1,12 +1,14 @@
 <?php
 
 
-namespace App\Application\Booking;
+namespace App\Infrastructure\Rest\Api\Booking;
+
 
 use App\Domain\Apartment\RentalType;
 use DateTime;
+use phpDocumentor\Reflection\Types\Array_;
 
-class BookingAcceptCommand
+class BookingDto
 {
     private string $bookingId;
 
@@ -20,17 +22,17 @@ class BookingAcceptCommand
 
     /**
      * @var DateTime[]
+     *
      */
     private array $days;
 
     /**
-     * BookingAcceptCommand constructor.
+     * BookingDto constructor.
      * @param string $bookingId
      * @param DateTime $creationDate
      * @param string $rentalType
      * @param int $objectId
      * @param string $tenantId
-     * @param DateTime[] $days
      */
     public function __construct(string $bookingId, DateTime $creationDate, string $rentalType, int $objectId, string $tenantId, array $days)
     {
@@ -89,8 +91,6 @@ class BookingAcceptCommand
     {
         return $this->days;
     }
-
-
 
 
 }
