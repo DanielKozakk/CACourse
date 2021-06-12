@@ -9,7 +9,7 @@ use App\Application\Booking\BookingRejectCommand;
 
 interface CommandRegistry
 {
-    function registerRejectCommand(BookingRejectCommand $command);
-    function registerAcceptCommand(BookingAcceptCommand $command);
+    function registerRejectCommand(BookingRejectCommand $bookingRejectCommand);
+    function registerAcceptCommand(BookingAcceptCommand $bookingAcceptCommand);
 
 }
