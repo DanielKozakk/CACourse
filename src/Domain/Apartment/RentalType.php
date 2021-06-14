@@ -3,9 +3,6 @@
 
 namespace App\Domain\Apartment;
 
-
-use JetBrains\PhpStorm\Pure;
-
 class RentalType
 {
 
@@ -29,7 +26,7 @@ class RentalType
     /**
      * @return string
      */
-    public function getState(): string
+    public function getType(): string
     {
         return $this->state;
     }
@@ -42,6 +39,17 @@ class RentalType
     public static function getHotelRoomRentalType(): RentalType
     {
         return new RentalType(self::HOTEL_ROOM);
+    }
+
+    public function isRentalTypeHotelRoom(): bool
+    {
+        return $this->getType() === self::HOTEL_ROOM;
+    }
+
+    public function isRentalTypeApartment(): bool
+    {
+        return $this->getType() === self::APARTMENT;
+
     }
 
 }

@@ -4,6 +4,7 @@
 namespace App\Domain\Apartment;
 
 
+use App\Domain\Event\EventChannel;
 use DatePeriod;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,7 +26,7 @@ class Booking
     /**
      * @ORM\Column(type="string")
      */
-    private $rentalType;
+    private RentalType $rentalType;
 
     /**
      * @var string
@@ -50,6 +51,8 @@ class Booking
      */
     private BookingStatus $bookingStatus;
 
+    private ApartmentRepository $apartmentRepository;
+
     /**
      * Booking constructor.
      * @param RentalType $rentalType
@@ -57,13 +60,14 @@ class Booking
      * @param string $tenantId
      * @param DateTime[] $days
      */
-    private function __construct(RentalType $rentalType, string $rentalPlaceId, string $tenantId, array $days)
+    private function __construct(RentalType $rentalType, string $rentalPlaceId, string $tenantId, array $days,)
     {
-        $this->rentalType = $rentalType->getState();
+        $this->rentalType = $rentalType;
         $this->rentalPlaceId = $rentalPlaceId;
         $this->tenantId = $tenantId;
         $this->days = $days;
     }
+
     public static function apartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
     {
         /** @var DatePeriod[] */
@@ -74,7 +78,7 @@ class Booking
 
     public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days): Booking
     {
-         return new Booking(RentalType::getHotelRoomRentalType(), $rentalPlaceId, $tenantId, $days);
+        return new Booking(RentalType::getHotelRoomRentalType(), $rentalPlaceId, $tenantId, $days);
     }
 
     public function reject()
@@ -82,7 +86,15 @@ class Booking
         $this->bookingStatus->setRejectedBookingStatus();
     }
 
-    public function accept(){
+    public function accept(EventChannel $eventChannel)
+    {
         $this->bookingStatus->setAcceptedBookingStatus();
+
+        $eventChannel->publishBookingAcceptedEvent(BookingAcceptedEvent::create(
+            $this->rentalType->getType(),
+            $this->rentalPlaceId,
+            $this->tenantId,
+            $this->days
+        ));
     }
 }
