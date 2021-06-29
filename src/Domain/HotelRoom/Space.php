@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
 /**
- *  @Entity()
+ *  @ORM\Entity
+ * TODO: powiąż z read modelem
  */
 class Space
 {

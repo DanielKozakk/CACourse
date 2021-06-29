@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\Entity;
 
 /**
  * @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\HotelRoom\DoctrineSqlHotelRoomRepository")
+ * TODO: Powiąż entity z query
  */
 class HotelRoom
 {

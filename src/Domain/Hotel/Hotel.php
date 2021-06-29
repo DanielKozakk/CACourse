@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
  * Class Hotel
  * @package App\Domain\Hotel
  *  @ORM\Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\Hotel\DoctrineSqlHotelRepository")
+ * TODO: Powiąż z query
  */
 class Hotel
 {
@@ -41,7 +42,7 @@ class Hotel
 
     /**
      * @var HotelRoom[]
-     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="hotel")
+     * @ORM\OneToMany(targetEntity=HotelRoom::class, mappedBy="hotel")
      */
     private $rooms = [];
 
