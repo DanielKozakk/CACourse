@@ -4,6 +4,8 @@
 namespace App\Domain\Apartment;
 
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
+
 interface ApartmentRepository
 {
     /**
