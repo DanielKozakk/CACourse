@@ -5,6 +5,8 @@ namespace App\Infrastructure\Rest\Api\Apartment;
 
 
 use App\Application\Apartment\ApartmentApplicationService;
+use App\Query\Apartment\ApartmentReadModel;
+use App\Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,13 +18,16 @@ class ApartmentRestController extends AbstractController
      */
     private ApartmentApplicationService $apartmentApplicationService;
 
+    private QueryApartmentRepository $queryApartmentRepository;
+
     /**
      * ApartmentRestController constructor.
      * @param ApartmentApplicationService $apartmentApplicationService
      */
-    public function __construct(ApartmentApplicationService $apartmentApplicationService)
+    public function __construct(ApartmentApplicationService $apartmentApplicationService, QueryApartmentRepository $queryApartmentRepository)
     {
         $this->apartmentApplicationService = $apartmentApplicationService;
+        $this->queryApartmentRepository = $queryApartmentRepository;
     }
 
     public function addApartment(ApartmentDto $apartmentDto):void{
@@ -42,4 +47,14 @@ class ApartmentRestController extends AbstractController
 
         $this->apartmentApplicationService->book($id, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
+
+    // TODO: getMethod, uzupełnij config do api
+
+    /**
+     * @return ApartmentReadModel[]
+     */
+    public function findAll() : array{
+        return $this->queryApartmentRepository->findAll();
+    }
+
 }
