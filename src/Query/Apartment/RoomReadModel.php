@@ -53,5 +53,37 @@ class RoomReadModel
         $this->apartment = $apartment;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSquareMeter(): float
+    {
+        return $this->squareMeter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApartment()
+    {
+        return $this->apartment;
+    }
+
 
 }
