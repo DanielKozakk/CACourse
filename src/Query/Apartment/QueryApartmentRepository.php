@@ -18,12 +18,19 @@ class QueryApartmentRepository
         $this->repository = $sqlQueryApartmentRepository;
     }
 
-
     /**
      * @return ApartmentReadModel[]
      */
     public function findAll(): array
     {
         return $this->repository->findAll();
+    }
+
+    /**
+     * @return ApartmentReadModel|null
+     */
+    public function findById(string $id): ?ApartmentReadModel
+    {
+        return $this->repository->findApartmentById($id);
     }
 }

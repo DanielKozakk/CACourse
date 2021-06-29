@@ -30,7 +30,8 @@ class ApartmentRestController extends AbstractController
         $this->queryApartmentRepository = $queryApartmentRepository;
     }
 
-    public function addApartment(ApartmentDto $apartmentDto):void{
+    public function addApartment(ApartmentDto $apartmentDto): void
+    {
 
         $this->apartmentApplicationService->add($apartmentDto->getOwnerId(),
             $apartmentDto->getStreet(),
@@ -43,7 +44,8 @@ class ApartmentRestController extends AbstractController
             $apartmentDto->getRoomsDefinition());
     }
 
-    public function book(string $id, ApartmentBookingDto $apartmentBookingDto){
+    public function book(string $id, ApartmentBookingDto $apartmentBookingDto)
+    {
 
         $this->apartmentApplicationService->book($id, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
@@ -53,8 +55,19 @@ class ApartmentRestController extends AbstractController
     /**
      * @return ApartmentReadModel[]
      */
-    public function findAll() : array{
+    public function findAll(): array
+    {
         return $this->queryApartmentRepository->findAll();
+    }
+
+    //TODO: tutaj zrób tak, żeby api przyjmowało id i szukało po IDIKU
+
+    /**
+     * @return ApartmentReadModel|null
+     * @var string $id
+     */
+    public function findById(string $id): ?ApartmentReadModel{
+        return $this->queryApartmentRepository->findById($id);
     }
 
 }
