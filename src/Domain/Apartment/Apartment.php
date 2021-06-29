@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\Entity;
  * @package App\Domain\Apartment
  *
  * @Entity(repositoryClass="App\Infrastructure\Persistance\Doctrine\Apartment\DoctrineSqlApartmentRepository")
+ * TODO: Połącz tą encję z encją Apartment z read modelu, przeczytaj w tym celu dokumentacje Doctrine
  */
 class Apartment
 {

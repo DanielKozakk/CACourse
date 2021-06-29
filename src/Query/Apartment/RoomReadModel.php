@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Class RoomReadModel
  *
  * @ORM\Entity
+ *  * TODO: Połącz tą encję z encją Room z domeny, przeczytaj w tym celu dokumentacje Doctrine
+
  */
 class RoomReadModel
 {

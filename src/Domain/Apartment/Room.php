@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Entity;
  * Class Room
  * @package App\Domain\Apartment
  * @Entity
+ * TODO: Połącz tą encję z encją RoomReadModel z read modelu, przeczytaj w tym celu dokumentacje Doctrine
  */
 class Room
 {

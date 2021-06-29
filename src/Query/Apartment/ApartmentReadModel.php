@@ -11,7 +11,10 @@ use Doctrine\ORM\Mapping\Entity;
  * @package App\Domain\Apartment
  *
  * TODO: zmień repository prawdopodobnie będzie to potrzebne
+ * TODO: Połącz tą encję z encją Apartment z domeny, przeczytaj w tym celu dokumentacje Doctrine
  * @ Entity(repositoryClass="AApp\Query\Apartment\QueryApartmentRepository")
+ *
+ *
  */
 class ApartmentReadModel{
 
