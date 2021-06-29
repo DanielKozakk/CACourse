@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
+ * TODO:Połącz z read modelem
  */
 class ApartmentBooking
 {

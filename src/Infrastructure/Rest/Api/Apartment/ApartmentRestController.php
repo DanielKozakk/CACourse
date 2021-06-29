@@ -5,6 +5,7 @@ namespace App\Infrastructure\Rest\Api\Apartment;
 
 
 use App\Application\Apartment\ApartmentApplicationService;
+use App\Query\Apartment\ApartmentDetails;
 use App\Query\Apartment\ApartmentReadModel;
 use App\Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,10 +64,10 @@ class ApartmentRestController extends AbstractController
     //TODO: tutaj zrób tak, żeby api przyjmowało id i szukało po IDIKU
 
     /**
-     * @return ApartmentReadModel|null
+     * @return  ApartmentDetails|null
      * @var string $id
      */
-    public function findById(string $id): ?ApartmentReadModel{
+    public function findById(string $id): ?ApartmentDetails{
         return $this->queryApartmentRepository->findById($id);
     }
 

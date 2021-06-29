@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * TODO: ApartmentBookingHistoryReadModel - połączyć
  */
 class ApartmentBookingHistory
 {
@@ -18,7 +19,7 @@ class ApartmentBookingHistory
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private string $hotelRoomId;
+    private string $apartmentBookingHistoryId;
 
     /**
      * @ORM\OneToMany(targetEntity=ApartmentBooking::class, mappedBy="apartmentBookingHistory")
@@ -28,22 +29,17 @@ class ApartmentBookingHistory
     public function __construct(string $apartmentId)
     {
         $this->bookings = new ArrayCollection();
-        $this->hotelRoomId = $apartmentId;
+        $this->apartmentBookingHistoryId = $apartmentId;
     }
 
     public function getId(): ?int
     {
-        return $this->hotelRoomId;
+        return $this->apartmentBookingHistoryId;
     }
 
-    public function getHotelRoomId(): ?string
+    public function setApartmentBookingHistoryId(string $hotelRoomId): self
     {
-        return $this->hotelRoomId;
-    }
-
-    public function setHotelRoomId(string $hotelRoomId): self
-    {
-        $this->hotelRoomId = $hotelRoomId;
+        $this->apartmentBookingHistoryId = $hotelRoomId;
 
         return $this;
     }

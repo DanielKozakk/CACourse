@@ -13,7 +13,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class DoctrineSqlQueryApartmentRepository extends ServiceEntityRepository
 {
-    public function findApartmentById(string $id){
+    /**
+     * @param string $id
+     * @return ApartmentDetails|null
+     */
+    public function findApartmentById(string $id): ?ApartmentDetails{
         $queryBuilder = $this->createQueryBuilder('a');
         return $queryBuilder->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
 
@@ -26,6 +30,5 @@ class DoctrineSqlQueryApartmentRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('a');
         return $queryBuilder->getQuery()->getResult();
-
     }
 }
