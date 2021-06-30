@@ -5,6 +5,7 @@ namespace App\Domain\Apartment;
 
 
 use App\Domain\Event\EventChannel;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
@@ -55,12 +56,12 @@ class Apartment
      * @param Address $address
      * @param string $description
      */
-    public function __construct(string $ownerId, Address $address, array $rooms, string $description)
+    public function __construct(string $ownerId, Address $address, string $description)
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
-        $this->rooms = $rooms;
+        $this->rooms = new ArrayCollection();
     }
 
     public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking
@@ -69,4 +70,10 @@ class Apartment
         $eventChannel->publishApartmentBooked($apartmentBooked);
         return Booking::apartment($this->id, $tenantId, $period);
     }
+
+    public function addRoom(Room $room): self{
+        $this->rooms->add($room);
+        return $this;
+    }
+
 }

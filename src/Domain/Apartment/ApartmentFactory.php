@@ -4,11 +4,11 @@
 namespace App\Domain\Apartment;
 
 
-class ApartamentFactory
+class ApartmentFactory
 {
 
     /**
-     * ApartamentFactory constructor.
+     * ApartmentFactory constructor.
      */
     public function __construct()
     {
@@ -39,16 +39,13 @@ class ApartamentFactory
     {
         $address = new Address($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
         /**
-         * @var Room[]
-         */
-        $rooms = [];
-        /**
          * @var $name string
          * @var $size float
          */
+        $newApartment = new Apartment($ownerId,$address,$description);
         foreach ($roomsDefinition as $name => $size) {
-            $rooms[] = new Room($name, new SquareMeter($size));
+            $newApartment->addRoom(new Room($name, new SquareMeter($size), $newApartment));
         }
-        return new Apartment($ownerId, $address,$rooms, $description);
+        return $newApartment;
     }
 }
