@@ -1,9 +1,9 @@
 <?php
-
+declare (strict_types=1);
 
 namespace App\Application\Apartment;
 
-use App\Domain\Apartment\ApartamentFactory;
+use App\Domain\Apartment\ApartmentFactory;
 use App\Domain\Apartment\ApartmentRepository;
 use App\Domain\Apartment\Booking;
 use App\Domain\Apartment\BookingRepository;
@@ -54,19 +54,23 @@ class ApartmentApplicationService
         string $description,
         array $roomsDefinition
     ) : void{
-        $apartment = (new ApartamentFactory())->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
+        $apartment = (new ApartmentFactory())->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
 
         $this->apartmentRepository->save($apartment);
     }
 
-    public function book(string $id, string $tenantId, DateTime $start, DateTime $end)
+    public function book(string $abc, string $id, string $tenantId, DateTime $start, DateTime $end)
     {
         $apartment = $this->apartmentRepository->findById($id);
+
+        $abc->format('asg');
 
         /**
          * @var Period
          */
         $period = new Period($start, $end);
+
+
 
         /**
          * @var Booking
