@@ -59,11 +59,10 @@ class ApartmentApplicationService
         $this->apartmentRepository->save($apartment);
     }
 
-    public function book(string $abc, string $id, string $tenantId, DateTime $start, DateTime $end)
+    public function book(string $id, string $tenantId, DateTime $start, DateTime $end)
     {
         $apartment = $this->apartmentRepository->findById($id);
 
-        $abc->format('asg');
 
         /**
          * @var Period
