@@ -46,9 +46,8 @@ class Room
      * @param SquareMeter $squareMeter
      * @param $apartment
      */
-    public function __construct($id, string $name, SquareMeter $squareMeter, $apartment)
+    public function __construct(string $name, SquareMeter $squareMeter, Apartment $apartment)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->squareMeter = $squareMeter;
         $this->apartment = $apartment;
