@@ -20,12 +20,19 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+    App\Application\:
+        resource: '../src/Application/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Infrastructure/Controller/'
+    App\Infractructure\Controller\:
+        resource: '../src/Infrastructure/Controller/MainController.php'
         tags: ['controller.service_arguments']
+    App\Infractructure\Controller\Secondary\:
+        resource: '../src/Infrastructure/Controller/SecondaryController.php'
+        tags: ['controller.service_arguments']
+
+
 
     app.infrastructure.event.dispatcher.standard:
         class: 'App\Infrastructure\Event\Dispatcher\StandardDispatcherEventChannel'
