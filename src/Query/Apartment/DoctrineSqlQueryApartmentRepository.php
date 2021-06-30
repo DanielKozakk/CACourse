@@ -5,6 +5,7 @@ namespace App\Query\Apartment;
 
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class DoctrineSqlQueryApartmentRepository
@@ -13,16 +14,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class DoctrineSqlQueryApartmentRepository extends ServiceEntityRepository
 {
-    /**
-     * @param string $id
-     * @return ApartmentDetails|null
-     */
-    public function findApartmentById(string $id): ?ApartmentDetails{
-        $queryBuilder = $this->createQueryBuilder('a');
-        return $queryBuilder->where(':id = id')->setParameter('id', $id)->getQuery()->getResult();
-
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, ApartmentReadModel::class);
     }
-
     /**
      * @return ApartmentReadModel[]
      */

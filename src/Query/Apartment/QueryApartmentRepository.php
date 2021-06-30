@@ -23,7 +23,6 @@ class QueryApartmentRepository
         $this->apartmentBookingHistoryRepository = $apartmentBookingHistoryRepository;
     }
 
-
     /**
      * @return ApartmentReadModel[]
      */
@@ -38,10 +37,15 @@ class QueryApartmentRepository
     public function findById(string $id): ?ApartmentDetails
     {
         /** @var ApartmentReadModel $apartmentReadModel */
-        $apartmentReadModel = $this->apartmentRepository->findBy(['id' => $id]);
+        $apartmentReadModel = $this->apartmentRepository->findOneBy(['id' => $id]);
         /** @var ApartmentBookingHistoryReadModel $apartmentReadModel */
-        $apartmentBookingHistoryReadModel = $this->apartmentBookingHistoryRepository->findBy(['id' => $id]);
+        $apartmentBookingHistoryReadModel = $this->apartmentBookingHistoryRepository->findOneBy(['id' => $id]);
 
-        return new ApartmentDetails($apartmentReadModel, $apartmentBookingHistoryReadModel);
+        if (isset($apartmentReadModel) && isset($apartmentBookingHistoryReadModel)) {
+            return new ApartmentDetails($apartmentReadModel, $apartmentBookingHistoryReadModel);
+        } else {
+            return null;
+        }
     }
+
 }
