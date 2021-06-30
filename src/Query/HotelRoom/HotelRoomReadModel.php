@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class HotelRoomReadModel
  * @package App\Query\HotelRoom
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DoctrineSqlQueryHotelRoomRepository")
  * TODO: Powiąż z domeną
  */
 class HotelRoomReadModel
