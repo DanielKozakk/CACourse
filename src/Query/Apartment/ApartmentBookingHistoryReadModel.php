@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class ApartmentBookingHistoryReadModel
  * @package App\Query\Apartment
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DoctrineSqlQueryApartmentBookingHistoryRepository")
  * TODO: POłącz z apartmentbooking history z domeny
  */
 class ApartmentBookingHistoryReadModel

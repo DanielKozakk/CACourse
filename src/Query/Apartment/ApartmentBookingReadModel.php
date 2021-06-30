@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class ApartmentBookingReadModel
  * @package App\Query\Apartment
- * @ORM\Entity
+ *
  * TODO:Połącz z domenowym
  */
 class ApartmentBookingReadModel
