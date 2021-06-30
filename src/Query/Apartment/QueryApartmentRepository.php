@@ -41,7 +41,7 @@ class QueryApartmentRepository
         /** @var ApartmentBookingHistoryReadModel $apartmentReadModel */
         $apartmentBookingHistoryReadModel = $this->apartmentBookingHistoryRepository->findOneBy(['id' => $id]);
 
-        if (isset($apartmentReadModel) && isset($apartmentBookingHistoryReadModel)) {
+        if ($apartmentReadModel !== null && $apartmentBookingHistoryReadModel !== null) {
             return new ApartmentDetails($apartmentReadModel, $apartmentBookingHistoryReadModel);
         } else {
             return null;
