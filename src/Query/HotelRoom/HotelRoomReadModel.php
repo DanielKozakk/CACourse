@@ -55,7 +55,7 @@ class HotelRoomReadModel
      * @param int $number
      * @param SpaceReadModel[] $spacesDefinition
      * @param string $description
-     * @param HotelReadModel $hotel
+     * @param string $hotelId
      */
     public function __construct(int $id, int $number, array $spacesDefinition, string $description, string $hotelId)
     {
@@ -105,7 +105,5 @@ class HotelRoomReadModel
     {
         return $this->hotelId;
     }
-
-
 
 }

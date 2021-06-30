@@ -16,7 +16,7 @@ class SpaceReadModel
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $id;
     /**
@@ -41,12 +41,12 @@ class SpaceReadModel
 
     /**
      * SpaceReadModel constructor.
-     * @param $id
+     * @param string $id
      * @param string $name
      * @param float $squareMeter
      * @param HotelRoomReadModel $hotelRoomReadModel
      */
-    public function __construct($id, string $name, float $squareMeter, HotelRoomReadModel $hotelRoomReadModel)
+    public function __construct(string $id, string $name, float $squareMeter, HotelRoomReadModel $hotelRoomReadModel)
     {
         $this->id = $id;
         $this->name = $name;
