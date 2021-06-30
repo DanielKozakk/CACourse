@@ -25,8 +25,6 @@ class HotelRoomFactory
             $spaces[] = new Space($spaceName, new SquareMeter($spaceSize));
         }
 
-        $hotelRoom = new HotelRoom($number, $spacesDefinition, $description, $hotel);
-
-
+        return new HotelRoom($number, $spacesDefinition, $description, $hotel);
     }
 }
