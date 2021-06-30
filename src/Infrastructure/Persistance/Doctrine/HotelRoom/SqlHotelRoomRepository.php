@@ -29,12 +29,7 @@ class SqlHotelRoomRepository implements HotelRoomRepository
         $this->doctrineSqlHotelRoomRepository->saveHotelRoom($hotelRoom);
     }
 
-    public function findHotelRoomById($id) : HotelRoom{
+    public function findById($id) : HotelRoom{
         return $this->doctrineSqlHotelRoomRepository->findHotelRoomById($id);
-    }
-
-    public function findById(string $id): HotelRoom
-    {
-
     }
 }
