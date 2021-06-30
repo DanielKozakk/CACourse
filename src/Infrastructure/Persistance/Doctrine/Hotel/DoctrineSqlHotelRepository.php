@@ -6,8 +6,11 @@ namespace App\Infrastructure\Persistance\Doctrine\Hotel;
 
 use App\Domain\Hotel\Hotel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
+
 /**
  * @method Hotel|null find($id, $lockMode = null, $lockVersion = null)
  * @method Hotel|null findOneBy(array $criteria, array $orderBy = null)
@@ -23,9 +26,10 @@ class DoctrineSqlHotelRepository extends ServiceEntityRepository{
      */
     private $entityManager;
 
-    public function __construct()
+    public function __construct(EntityManagerInterface $entityManager, ManagerRegistry $registry)
     {
-        $this->entityManager = $this->getEntityManager();
+        parent::__construct($registry, Hotel::class);
+        $this->entityManager = $entityManager;
     }
 
     /**
