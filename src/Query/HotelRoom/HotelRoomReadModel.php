@@ -57,13 +57,13 @@ class HotelRoomReadModel
      * @param string $description
      * @param HotelReadModel $hotel
      */
-    public function __construct(int $id, int $number, array $spacesDefinition, string $description, HotelReadModel $hotel)
+    public function __construct(int $id, int $number, array $spacesDefinition, string $description, string $hotelId)
     {
         $this->id = $id;
         $this->number = $number;
         $this->spacesDefinition = $spacesDefinition;
         $this->description = $description;
-        $this->hotel = $hotel;
+        $this->hotelId = $hotelId;
     }
 
     /**
@@ -99,11 +99,11 @@ class HotelRoomReadModel
     }
 
     /**
-     * @return HotelReadModel
+     * @return string
      */
-    public function getHotel(): HotelReadModel
+    public function getHotel(): string
     {
-        return $this->hotel;
+        return $this->hotelId;
     }
 
 
