@@ -7,6 +7,7 @@ use App\Domain\Apartment\Address;
 use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentFactory;
 use App\Domain\Apartment\Room;
+use App\Domain\Apartment\SquareMeter;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 use ReflectionProperty;
@@ -23,8 +24,8 @@ class ApartmentTest extends TestCase
         $city = 'Krakow';
         $country = 'Poland';
         $roomsDefinition = [
-            "name1" => 20,
-            "name2" => 16
+            "name1" => 20.0,
+            "name2" => 16.0
         ];
         $description = 'Nice place to stay';
 
@@ -92,15 +93,21 @@ class ApartmentTest extends TestCase
         $actualRooms = $reflectionProperty->getValue($actual);
 
         $nameReflectionProperty = new ReflectionProperty(Room::class, 'name');
-        $squareMeter = new ReflectionProperty(Room::class, 'squareMeter');
+        $squareMeterReflectionProperty = new ReflectionProperty(Room::class, 'squareMeter');
         $nameReflectionProperty->setAccessible(true);
-        $squareMeter->setAccessible(true);
+        $squareMeterReflectionProperty->setAccessible(true);
 
 
         $roomsDefinitionNames = array_keys($roomsDefinition);
         $this->assertSame($roomsDefinitionNames[0], $nameReflectionProperty->getValue($actualRooms[0]));
         $this->assertSame($roomsDefinitionNames[1], $nameReflectionProperty->getValue($actualRooms[1]));
 
+        $sizeReflectionProperty = new ReflectionProperty(SquareMeter::class, 'size');
+        $sizeReflectionProperty->setAccessible(true);
+
+
+        $this->assertSame($roomsDefinition['name1'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[0])));
+        $this->assertSame($roomsDefinition['name2'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[1])));
 
 
     }
