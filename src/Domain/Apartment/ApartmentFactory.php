@@ -44,6 +44,8 @@ class ApartmentFactory
          */
         $newApartment = new Apartment($ownerId,$address,$description);
         foreach ($roomsDefinition as $name => $size) {
+
+            //TODO: walidacja nazwy i rozmiaru
             $newApartment->addRoom(new Room($name, new SquareMeter($size), $newApartment));
         }
         return $newApartment;

@@ -3,9 +3,13 @@ declare(strict_types = 1);
 
 namespace App\Tests\Domain\Apartment;
 
+use App\Domain\Apartment\Address;
 use App\Domain\Apartment\Apartment;
 use App\Domain\Apartment\ApartmentFactory;
+use App\Domain\Apartment\Room;
 use PHPUnit\Framework\TestCase;
+use ReflectionObject;
+use ReflectionProperty;
 
 class ApartmentTest extends TestCase
 {
@@ -27,29 +31,78 @@ class ApartmentTest extends TestCase
         $actual = (new ApartmentFactory())
             ->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
 
-        $this->assertThatHasOwnerId($actual, $ownerId);
-        $this->assertThatHasDescription($actual, $description);
-        $this->assertThatHasAdress($actual, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
+//        $this->assertThatHasOwnerId($actual, $ownerId);
+//        $this->assertThatHasDescription($actual, $description);
+//        $this->assertThatHasAdress($actual, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
         $this->assertThatHasRooms($actual, $roomsDefinition);
 
     }
 
     private function assertThatHasOwnerId(Apartment $actual, string $ownerId)
     {
+        $reflectionProperty = new ReflectionProperty(Apartment::class, 'ownerId');
+        $reflectionProperty->setAccessible(true);
+        $actualOwnerId = $reflectionProperty->getValue($actual);
 
+        $this->assertSame($actualOwnerId, $ownerId);
     }
 
     private function assertThatHasDescription(Apartment $actual, string $description)
     {
+        $reflectionProperty = new ReflectionProperty(Apartment::class, 'description');
+        $reflectionProperty->setAccessible(true);
+        $actualDescription = $reflectionProperty->getValue($actual);
+
+        $this->assertSame($actualDescription, $description);
     }
 
-    private function assertThatHasAdress(Apartment $actual, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country)
+    private function assertThatHasAddress(Apartment $actual, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country)
     {
+        $addressOfApartmentProperty = new ReflectionProperty(Apartment::class, 'address');
+        $addressOfApartmentProperty->setAccessible(true);
+
+        $originalAddress = $addressOfApartmentProperty->getValue($actual);
+
+        $addressProperties = [
+            'street' => new ReflectionProperty(Address::class, 'street'),
+            'postalCode' => new ReflectionProperty(Address::class, 'postalCode'),
+            'houseNumber' => new ReflectionProperty(Address::class, 'houseNumber'),
+            'apartmentNumber' => new ReflectionProperty(Address::class, 'apartmentNumber'),
+            'city' => new ReflectionProperty(Address::class, 'city'),
+            'country' => new ReflectionProperty(Address::class, 'country'),
+        ];
+        foreach ($addressProperties as $property){
+            $property->setAccessible(true);
+        }
+
+
+        $this->assertSame($addressProperties['street']->getValue($originalAddress), $street);
+        $this->assertSame($addressProperties['postalCode']->getValue($originalAddress), $postalCode);
+        $this->assertSame($addressProperties['houseNumber']->getValue($originalAddress), $houseNumber);
+        $this->assertSame($addressProperties['apartmentNumber']->getValue($originalAddress), $apartmentNumber);
+        $this->assertSame($addressProperties['city']->getValue($originalAddress), $city);
+        $this->assertSame($addressProperties['country']->getValue($originalAddress), $country);
+
     }
 
     private function assertThatHasRooms(Apartment $actual, array $roomsDefinition)
     {
-    }
+        $reflectionProperty = new ReflectionProperty(Apartment::class, 'rooms');
+        $reflectionProperty->setAccessible(true);
+        $actualRooms = $reflectionProperty->getValue($actual);
 
+        $nameReflectionProperty = new ReflectionProperty(Room::class, 'name');
+        $squareMeter = new ReflectionProperty(Room::class, 'squareMeter');
+        $nameReflectionProperty->setAccessible(true);
+        $squareMeter->setAccessible(true);
+
+
+        $roomsDefinitionNames = array_keys($roomsDefinition);
+        $this->assertSame($roomsDefinitionNames[0], $nameReflectionProperty->getValue($actualRooms[0]));
+        $this->assertSame($roomsDefinitionNames[1], $nameReflectionProperty->getValue($actualRooms[1]));
+
+
+
+    }
 
 }
