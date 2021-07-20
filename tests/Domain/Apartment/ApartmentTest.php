@@ -32,9 +32,9 @@ class ApartmentTest extends TestCase
         $actual = (new ApartmentFactory())
             ->create($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $roomsDefinition, $ownerId, $description);
 
-//        $this->assertThatHasOwnerId($actual, $ownerId);
-//        $this->assertThatHasDescription($actual, $description);
-//        $this->assertThatHasAdress($actual, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
+        $this->assertThatHasOwnerId($actual, $ownerId);
+        $this->assertThatHasDescription($actual, $description);
+        $this->assertThatHasAddress($actual, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
         $this->assertThatHasRooms($actual, $roomsDefinition);
 
     }
@@ -109,6 +109,7 @@ class ApartmentTest extends TestCase
         $this->assertSame($roomsDefinition['name1'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[0])));
         $this->assertSame($roomsDefinition['name2'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[1])));
 
+        $this->assertSameSize($roomsDefinition, $actualRooms);
 
     }
 
