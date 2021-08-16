@@ -11,7 +11,7 @@ class ApartmentBookedEventTest extends TestCase
 {
 
     const POSIX_TIME_TOLERATED_DIFFERENCE = 10;
-    const UNIQID_LENGTH = 13;
+    const UNIQ_ID_LENGTH = 13;
 
 
     public function testShouldCreateEventWithAllInformation()
@@ -29,7 +29,7 @@ class ApartmentBookedEventTest extends TestCase
 
         $dateTimeDifferenceAbsoluteValue = abs($actual->getCreationDateTime()->getTimestamp() - (new DateTime())->getTimestamp());
 
-        $this->assertSame(mb_strlen($actual->getEventId()), self::UNIQID_LENGTH);
+        $this->assertSame(mb_strlen($actual->getEventId()), self::UNIQ_ID_LENGTH);
         $this->assertTrue($dateTimeDifferenceAbsoluteValue < self::POSIX_TIME_TOLERATED_DIFFERENCE);
         $this->assertSame($actual->getApartmentId(), $apartmentId);
         $this->assertSame($actual->getOwnerId(), $ownerId);
