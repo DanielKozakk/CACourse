@@ -23,4 +23,24 @@ class PeriodTest extends TestCase
         $this->assertEquals($end, $dateTimeArray[1]);
     }
 
+    public function testShouldPeriodContainsSevenDays():void{
+        $start = new DateTime('2021-08-08');
+        $end = new DateTime('2021-08-14');
+
+        $period = new Period(clone($start), clone($end));
+        $dateTimeArray = $period->asDateTimeArray();
+
+        $this->assertCount(7, $dateTimeArray);
+        $this->assertEqualsCanonicalizing(
+            [new DateTime('2021-08-08'),
+            new DateTime('2021-08-09'),
+            new DateTime('2021-08-10'),
+            new DateTime('2021-08-11'),
+            new DateTime('2021-08-12'),
+            new DateTime('2021-08-13'),
+            new DateTime('2021-08-14')],
+            $dateTimeArray
+        );
+    }
+
 }
