@@ -33,8 +33,16 @@ class PeriodTest extends TestCase
         );
     }
 
-    public function dataProvider()
+    public function dataProvider(): \Generator
     {
+        $expectedDate = '2000-01-01';
+        $expectedEnd = '2000-01-01';
+        $expectedCount = 1;
+        $expectedArray = [
+            new DateTime('2000-01-01')
+        ];
+        yield [$expectedDate, $expectedEnd, $expectedCount, $expectedArray];
+
         $expectedDate = '2000-01-01';
         $expectedEnd = '2000-01-02';
         $expectedCount = 2;
