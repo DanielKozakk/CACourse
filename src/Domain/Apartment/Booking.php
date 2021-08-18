@@ -73,7 +73,7 @@ class Booking
         /** @var DatePeriod[] */
         $days = [$period->asDateTimeArray()];
 
-        return new Booking(RentalType::getApartmentRenatlType(), $rentalPlaceId, $tenantId, $days);
+        return new Booking(RentalType::getApartmentRentalType(), $rentalPlaceId, $tenantId, $days);
     }
 
     public static function hotelRoom(int $rentalPlaceId, $tenantId, array $days): Booking
@@ -91,7 +91,7 @@ class Booking
         $this->bookingStatus->setAcceptedBookingStatus();
 
         $eventChannel->publishBookingAcceptedEvent(BookingAcceptedEvent::create(
-            $this->rentalType->getType(),
+            $this->rentalType,
             $this->rentalPlaceId,
             $this->tenantId,
             $this->days

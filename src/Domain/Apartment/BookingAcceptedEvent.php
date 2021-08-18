@@ -38,12 +38,61 @@ class BookingAcceptedEvent{
         $this->creationDateTime = $creationDateTime;
     }
 
-    public static function create(string $rentalType, string $rentalPlaceId, string  $tenantId, array $days): BookingAcceptedEvent
+    public static function create(RentalType $rentalType, string $rentalPlaceId, string  $tenantId, array $days): BookingAcceptedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new \DateTime();
 
-        return new BookingAcceptedEvent($eventId, $creationDateTime, $rentalType, $rentalPlaceId, $tenantId, $days);
+        return new BookingAcceptedEvent($eventId, $creationDateTime, $rentalType->getType(), $rentalPlaceId, $tenantId, $days);
     }
+
+    /**
+     * @return string
+     */
+    public function getEventId(): string
+    {
+        return $this->eventId;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreationDateTime(): DateTime
+    {
+        return $this->creationDateTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRentalType(): string
+    {
+        return $this->rentalType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRentalPlaceId(): string
+    {
+        return $this->rentalPlaceId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTenantId(): string
+    {
+        return $this->tenantId;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDays(): array
+    {
+        return $this->days;
+    }
+
 
 }
