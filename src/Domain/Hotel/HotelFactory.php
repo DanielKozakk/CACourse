@@ -4,9 +4,15 @@ namespace Domain\Hotel;
 
 class HotelFactory
 {
-    public function create(string $name, string $street, string $buildingNumber, string $postalCode, string $city, string $country){
+    public function create(string $name,
+                           string $street,
+                           string $postalCode,
+                           string $flatNumber,
+                           string $city,
+                           string $country) : Hotel
+    {
 
-        $hotelAddress = new HotelAddress($street, $buildingNumber, $postalCode, $city, $country);
+        $hotelAddress = new HotelAddress($street, $postalCode, $flatNumber, $city, $country);
 
         return new Hotel($name, $hotelAddress);
     }
