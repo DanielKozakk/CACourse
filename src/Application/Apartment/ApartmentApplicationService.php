@@ -2,10 +2,23 @@
 declare(strict_types=1);
 namespace Application\Apartment;
 
+use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentFactory;
+use Domain\Apartment\ApartmentRepository;
 
 class ApartmentApplicationService
 {
+
+    private ApartmentRepository $apartmentRepository;
+
+    /**
+     * @param ApartmentRepository $apartmentRepository
+     */
+    public function __construct(ApartmentRepository $apartmentRepository)
+    {
+        $this->apartmentRepository = $apartmentRepository;
+    }
+
 
     /**
      * @param string $ownerId
@@ -27,7 +40,7 @@ class ApartmentApplicationService
         string $city,
         string $country,
         string $description,
-        array  $roomsDefinition)
+        array  $roomsDefinition) : Apartment
     {
         return (new ApartmentFactory())->create(
         $ownerId,
@@ -39,6 +52,5 @@ class ApartmentApplicationService
         $country,
         $description,
         $roomsDefinition);
-
     }
 }
