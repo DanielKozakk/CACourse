@@ -2,6 +2,11 @@
 
 namespace Domain\Apartment;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository)
+ */
 class Apartment
 {
     /**

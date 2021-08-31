@@ -30,6 +30,7 @@ class ApartmentApplicationService
      * @param string $country
      * @param string $description
      * @param array<string, double> $roomsDefinition
+     * @return Apartment
      */
     public function addApartment(
         string $ownerId,
