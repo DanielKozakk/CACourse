@@ -1,3 +1,4 @@
+.docker/data/*
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -8,9 +9,3 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-/.docker
-/.env
-/.idea
-composer.lock
-symfony.lock
