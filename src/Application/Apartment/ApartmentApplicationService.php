@@ -2,10 +2,7 @@
 declare(strict_types=1);
 namespace Application\Apartment;
 
-use Domain\Apartment\Address;
-use Domain\Apartment\Apartment;
-use Domain\Apartment\Room;
-use Domain\Apartment\SquareMeter;
+use Domain\Apartment\ApartmentFactory;
 
 class ApartmentApplicationService
 {
@@ -32,23 +29,16 @@ class ApartmentApplicationService
         string $description,
         array  $roomsDefinition)
     {
-        /**
-         * @var Address $address
-         */
-        $address = new Address($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
+        return (new ApartmentFactory())->create(
+        $ownerId,
+        $street,
+        $postalCode,
+        $houseNumber,
+        $apartmentNumber,
+        $city,
+        $country,
+        $description,
+        $roomsDefinition);
 
-        /**
-         * @var array<Room> $rooms
-         */
-        $rooms = [];
-
-        foreach ($roomsDefinition as $name => $size){
-            $rooms[] = new Room($name, new SquareMeter($size));
-        }
-
-        /**
-         * @var Apartment $apartment
-         */
-        $apartment = new Apartment($ownerId,$address, $description);
     }
 }
