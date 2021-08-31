@@ -17,7 +17,7 @@ class ApartmentFactory
         array  $roomsDefinition
 
     ){
-        $address = new Address($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
+        $address = new ApartmentAddress($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
 
         /**
          * @var array<Room> $rooms

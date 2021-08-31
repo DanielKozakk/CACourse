@@ -9,7 +9,7 @@ class Apartment
      */
     private $ownerId;
     /**
-     * @var Address
+     * @var ApartmentAddress
      */
     private $address;
     /**
@@ -22,10 +22,10 @@ class Apartment
      */
     private $rooms;
 
-    public function __construct(string  $ownerId,
-                                Address $address,
-                                string  $description,
-                                array   $rooms)
+    public function __construct(string           $ownerId,
+                                ApartmentAddress $address,
+                                string           $description,
+                                array            $rooms)
     {
         $this->ownerId = $ownerId;
         $this->address = $address;

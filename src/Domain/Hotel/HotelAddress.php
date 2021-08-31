@@ -1,10 +1,9 @@
 <?php
 
-namespace Domain\Apartment;
+namespace Domain\Hotel;
 
-class Address
+class HotelAddress
 {
-
     /**
      * @var string
      */
@@ -12,15 +11,11 @@ class Address
     /**
      * @var string
      */
+    private $buildingNumber;
+    /**
+     * @var string
+     */
     private $postalCode;
-    /**
-     * @var string
-     */
-    private $houseNumber;
-    /**
-     * @var string
-     */
-    private $apartmentNumber;
     /**
      * @var string
      */
@@ -30,12 +25,11 @@ class Address
      */
     private $country;
 
-    public function __construct(string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country)
+    public function __construct(string $street, string $buildingNumber, string $postalCode, string $city, string $country)
     {
         $this->street = $street;
+        $this->buildingNumber = $buildingNumber;
         $this->postalCode = $postalCode;
-        $this->houseNumber = $houseNumber;
-        $this->apartmentNumber = $apartmentNumber;
         $this->city = $city;
         $this->country = $country;
     }
