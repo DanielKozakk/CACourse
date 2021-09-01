@@ -3,9 +3,9 @@
 namespace Infrastructure\Persistence\Doctrine\Apartment;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManager;
-use Domain\Apartment\Apartment;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Apartment\Apartment;
 
 // TODO: Przetestuj czy to repo działa.
 /**
@@ -17,11 +17,9 @@ use Doctrine\Persistence\ManagerRegistry;
 class SqlDoctrineApartmentRepository extends ServiceEntityRepository
 {
 
+    private EntityManagerInterface $entityManager;
 
-
-    private EntityManager $entityManager;
-
-    public function __construct(ManagerRegistry $registry, EntityManager $entityManager)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Apartment::class);
         $this->entityManager = $entityManager;

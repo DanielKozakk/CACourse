@@ -4,12 +4,20 @@ namespace Domain\Apartment;
 
 use Doctrine\ORM\Mapping as ORM;
 
-// TODO: jeśli Repo nie działa to prawdopodobnie dlatego
+// TODO: tutaj trzeba dodać pola
 /**
- * @ORM\Entity(repositoryClass=\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository)
+ * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
  */
 class Apartment
 {
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
     /**
      * @var string
      */
