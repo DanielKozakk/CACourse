@@ -21,7 +21,7 @@ class HotelRoomApplicationService
     /**
      * @param string $hotelId
      * @param int $hotelNumber
-     * @param array<string, double> $spacesDefinition
+     * @param array<string, float> $spacesDefinition
      * @param string $description
      */
     public function addRoomToHotel(
