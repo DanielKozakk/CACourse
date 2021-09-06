@@ -3,6 +3,7 @@
 namespace Domain\Apartment;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Embedded;
 
 // TODO: tutaj trzeba dodać pola
 /**
@@ -17,21 +18,24 @@ class Apartment
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $ownerId;
     /**
      * @var ApartmentAddress
+     *  @Embedded(class = "ApartmentAddress")
      */
     private $address;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
+     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
      * @var array<Room> $rooms
      */
     private $rooms;
