@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Apartment\Apartment;
 
-// TODO: Przetestuj czy to repo działa.
 /**
  * @method Apartment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Apartment|null findOneBy(array $criteria, array $orderBy = null)

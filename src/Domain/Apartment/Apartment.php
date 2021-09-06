@@ -5,7 +5,6 @@ namespace Domain\Apartment;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
 
-// TODO: tutaj trzeba dodać pola
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
  */
