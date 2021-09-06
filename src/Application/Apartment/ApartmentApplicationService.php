@@ -41,9 +41,9 @@ class ApartmentApplicationService
         string $city,
         string $country,
         string $description,
-        array  $roomsDefinition) : Apartment
+        array  $roomsDefinition) : void
     {
-        return (new ApartmentFactory())->create(
+        $newApartment= (new ApartmentFactory())->create(
         $ownerId,
         $street,
         $postalCode,
@@ -53,5 +53,7 @@ class ApartmentApplicationService
         $country,
         $description,
         $roomsDefinition);
+
+        $this->apartmentRepository->save($newApartment);
     }
 }
