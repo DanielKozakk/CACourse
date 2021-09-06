@@ -29,6 +29,7 @@ class HotelRoom
 
     /**
      * @var array<string, float> $spaces
+     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom")
      *
      */
     private array $spaces;

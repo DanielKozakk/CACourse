@@ -2,7 +2,6 @@
 
 namespace Infrastructure\Persistence\Doctrine\Hotel\HotelRoom;
 
-use Domain\Hotel\HotelRepository;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomRepository;
 

@@ -37,6 +37,7 @@ class HotelRoomApplicationService
          */
         $hotelRoom = (new HotelRoomFactory)->create($hotelId, $hotelNumber, $spacesDefinition, $description);
 
+        $this->hotelRoomRepository->save($hotelRoom);
     }
 
 }
