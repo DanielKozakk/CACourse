@@ -17,7 +17,7 @@ class HotelApplicationService
         $this->hotelRepository = $hotelRepository;
     }
 
-    public function addHotel(string $name,
+    public function createHotel(string $name,
                              string $street,
                              string $postalCode,
                              string $flatNumber,

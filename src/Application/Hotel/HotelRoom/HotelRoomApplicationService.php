@@ -4,9 +4,20 @@ namespace Application\Hotel\HotelRoom;
 
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
+use Domain\Hotel\HotelRoom\HotelRoomRepository;
 
 class HotelRoomApplicationService
 {
+    private HotelRoomRepository $hotelRoomRepository;
+
+    /**
+     * @param HotelRoomRepository $hotelRoomRepository
+     */
+    public function __construct(HotelRoomRepository $hotelRoomRepository)
+    {
+        $this->hotelRoomRepository = $hotelRoomRepository;
+    }
+
     /**
      * @param string $hotelId
      * @param int $hotelNumber
