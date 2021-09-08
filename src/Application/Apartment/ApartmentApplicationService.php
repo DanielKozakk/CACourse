@@ -6,6 +6,7 @@ use DateTime;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentFactory;
 use Domain\Apartment\ApartmentRepository;
+use Domain\Apartment\Period;
 
 class ApartmentApplicationService
 {
