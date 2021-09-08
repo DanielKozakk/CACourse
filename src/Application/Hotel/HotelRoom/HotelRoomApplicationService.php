@@ -31,10 +31,6 @@ class HotelRoomApplicationService
         string $description
     ): void
     {
-
-        /**
-         * @var HotelRoom $hotelRoom
-         */
         $hotelRoom = (new HotelRoomFactory)->create($hotelId, $hotelNumber, $spacesDefinition, $description);
 
         $this->hotelRoomRepository->save($hotelRoom);
