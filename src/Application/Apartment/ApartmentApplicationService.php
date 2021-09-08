@@ -60,5 +60,17 @@ class ApartmentApplicationService
 
     public function book(string $apartmentId, string $tenantId, DateTime $start, DateTime $end){
 
+        /**
+         * @var Apartment
+         */
+        $apartment = $this->apartmentRepository->findById($apartmentId);
+
+        /**
+         * @var Period
+         */
+        $period = new Period($start, $end);
+
+        $apartment->book($tenantId, $period);
+
     }
 }

@@ -24,4 +24,8 @@ class DoctrineApartmentRepository implements ApartmentRepository
         $this->sqlDoctrineApartmentRepository->save($apartment);
     }
 
+    public function findById(string $apartmentId) : Apartment|null
+    {
+        return $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
+    }
 }
