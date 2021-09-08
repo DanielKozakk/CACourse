@@ -52,6 +52,6 @@ class Apartment
 
     public function book(string $tenantId, Period $period){
         // publish event
-        $apartmentBooked = new ApartmentBooked($this->id, $this->ownerId, $tenantId, $period);
+        $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
     }
 }
