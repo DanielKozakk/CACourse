@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Application\Apartment;
 
+use DateTime;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentFactory;
 use Domain\Apartment\ApartmentRepository;
@@ -55,5 +56,9 @@ class ApartmentApplicationService
         $roomsDefinition);
 
         $this->apartmentRepository->save($newApartment);
+    }
+
+    public function book(string $apartmentId, string $tenantId, DateTime $start, DateTime $end){
+
     }
 }

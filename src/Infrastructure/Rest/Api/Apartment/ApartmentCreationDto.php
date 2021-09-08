@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Rest\Api\Apartment;
 
-class ApartmentDto
+class ApartmentCreationDto
 {
     private string $ownerId;
     private string $street;

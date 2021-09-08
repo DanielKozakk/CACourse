@@ -19,7 +19,7 @@ class ApartmentRestController
         $this->apartmentApplicationService = $apartmentApplicationService;
     }
 
-    public function add(ApartmentDto $apartmentDto): void{
+    public function add(ApartmentCreationDto $apartmentDto): void{
         $this->apartmentApplicationService->addApartment(
             $apartmentDto->getOwnerId(),
             $apartmentDto->getStreet(),
@@ -31,5 +31,11 @@ class ApartmentRestController
             $apartmentDto->getDescription(),
             $apartmentDto->getRoomsDefinition(),
         );
+    }
+
+    /// @Route /book/apartmentId
+    public function book(string $apartmentId, ApartmentBookingDto $apartmentBookingDto): void{
+
+        $this->apartmentApplicationService->book($apartmentId, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
 }
