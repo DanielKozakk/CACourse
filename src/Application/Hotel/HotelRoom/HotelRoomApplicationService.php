@@ -5,6 +5,7 @@ namespace Application\Hotel\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
 use Domain\Hotel\HotelRoom\HotelRoomRepository;
+use Infrastructure\Rest\Api\Hotel\HotelRoom\HotelBookingDto;
 
 class HotelRoomApplicationService
 {
@@ -34,6 +35,11 @@ class HotelRoomApplicationService
         $hotelRoom = (new HotelRoomFactory)->create($hotelId, $hotelNumber, $spacesDefinition, $description);
 
         $this->hotelRoomRepository->save($hotelRoom);
+    }
+
+    public function bookHotelRoom(string $id, HotelBookingDto $hotelBookingDto)
+    {
+
     }
 
 }

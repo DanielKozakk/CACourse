@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Rest\Api\Hotel\HotelRoom;
 
-class HotelRoomDto
+class HotelRoomCreationDto
 {
 
     private string $hotelId;

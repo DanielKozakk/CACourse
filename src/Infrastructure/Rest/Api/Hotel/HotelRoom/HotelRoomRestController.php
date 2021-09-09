@@ -16,13 +16,19 @@ class HotelRoomRestController
         $this->hotelRoomApplicationService = $hotelRoomApplicationService;
     }
 
-    public function add(HotelRoomDto $hotelRoomDto){
+
+    public function add(HotelRoomCreationDto $hotelRoomDto){
         $this->hotelRoomApplicationService->addRoomToHotel(
             $hotelRoomDto->getHotelId(),
             $hotelRoomDto->getHotelNumber(),
             $hotelRoomDto->getSpacesDefinition(),
             $hotelRoomDto->getDescription(),
         );
+    }
+
+    //book/id
+    public function book(string $id, HotelBookingDto $hotelBookingDto){
+        $this->hotelRoomApplicationService->bookHotelRoom($id, $hotelBookingDto);
     }
 
 }
