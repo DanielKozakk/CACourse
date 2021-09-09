@@ -11,19 +11,18 @@ use Domain\EventChannel\EventChannel;
 
 class ApartmentApplicationService
 {
-
     private ApartmentRepository $apartmentRepository;
     private EventChannel $eventChannel;
 
     /**
      * @param ApartmentRepository $apartmentRepository
+     * @param EventChannel $eventChannel
      */
     public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel)
     {
         $this->apartmentRepository = $apartmentRepository;
         $this->eventChannel = $eventChannel;
     }
-
 
     /**
      * @param string $ownerId
@@ -35,7 +34,7 @@ class ApartmentApplicationService
      * @param string $country
      * @param string $description
      * @param array<string, double> $roomsDefinition
-     * @return Apartment
+     * @return void
      */
     public function addApartment(
         string $ownerId,

@@ -17,28 +17,28 @@ class Apartment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $ownerId;
+    private string $ownerId;
     /**
      * @var ApartmentAddress
      *  @Embedded(class = "ApartmentAddress")
      */
-    private $address;
+    private ApartmentAddress $address;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
      * @var array<Room> $rooms
      */
-    private $rooms;
+    private array $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
@@ -54,7 +54,6 @@ class Apartment
     public function book(string $tenantId, Period $period, EventChannel $eventChannel){
         // publish event
         $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
-
-
+        $eventChannel->publishApartmentBookedEvent($apartmentBooked);
     }
 }
