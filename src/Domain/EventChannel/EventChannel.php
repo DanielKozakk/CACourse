@@ -8,7 +8,7 @@ use Domain\Hotel\HotelRoom\HotelRoomBookedEvent;
 interface EventChannel
 {
 
-    public function publishApartmentBookedEvent(ApartmentBookedEvent $bookedEvent);
+    public function publishApartmentBookedEvent(ApartmentBookedEvent $apartmentBookedEvent);
 
     public function publishHotelRoomBookedEvent(HotelRoomBookedEvent $hotelRoomBookedEvent);
 }
