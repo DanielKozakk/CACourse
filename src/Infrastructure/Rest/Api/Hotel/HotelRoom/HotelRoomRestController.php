@@ -27,8 +27,8 @@ class HotelRoomRestController
     }
 
     //book/id
-    public function book(string $id, HotelBookingDto $hotelBookingDto){
-        $this->hotelRoomApplicationService->bookHotelRoom($id, $hotelBookingDto);
+    public function book(string $hotelRoomId, HotelBookingDto $hotelBookingDto){
+        $this->hotelRoomApplicationService->bookHotelRoom($hotelRoomId, $hotelBookingDto->getTenantId(), $hotelBookingDto->getDays());
     }
 
 }

@@ -22,4 +22,9 @@ class DoctrineHotelRoomRepository implements HotelRoomRepository
     {
         $this->sqlDoctrineHotelRoomRepository->addRoomToHotel($hotelRoom);
     }
+
+    public function findById(string $id) : HotelRoom|null
+    {
+        return $this->sqlDoctrineHotelRoomRepository->findOneBy(['id' => $id]);
+    }
 }

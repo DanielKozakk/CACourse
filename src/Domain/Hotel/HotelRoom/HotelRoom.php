@@ -3,6 +3,7 @@
 namespace Domain\Hotel\HotelRoom;
 
 use Doctrine\ORM\Mapping as ORM;
+use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity(repositoryClass="Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository")
@@ -46,5 +47,9 @@ class HotelRoom
         $this->hotelRoomNumber = $hotelRoomNumber;
         $this->spaces = $spaces;
         $this->description = $description;
+    }
+
+    public function book(int $tenantId, array $days, EventChannel $eventChannel){
+
     }
 }
