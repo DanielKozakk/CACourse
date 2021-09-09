@@ -10,9 +10,9 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            Apartment:
+            Domain:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain/Apartment'
-                prefix: 'Domain\Apartment'
-                alias: Apartment
+                dir: '%kernel.project_dir%/src/Domain'
+                prefix: 'Domain\'
+                alias: Domain

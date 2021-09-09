@@ -1,6 +1,6 @@
 <?php
 
-namespace Infrastructure\Symfony\EventChannel;
+namespace Infrastructure\EventChannel\Symfony;
 
 use Domain\Apartment\ApartmentBookedEvent;
 use Domain\EventChannel\EventChannel;

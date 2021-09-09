@@ -13,6 +13,7 @@ use Domain\Apartment\Apartment;
  * @method Apartment[]    findAll()
  * @method Apartment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class SqlDoctrineApartmentRepository extends ServiceEntityRepository
 {
 
