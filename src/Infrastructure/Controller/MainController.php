@@ -27,19 +27,6 @@ private DoctrineApartmentRepository $doctrineApartmentRepository;
     public function index(): Response
     {
 
-        $apartment = (new ApartmentFactory())->create(
-            "abc",
-            "zachodnia",
-            "31-201",
-            "21",
-            "25",
-            "Kraków",
-            "Poland",
-            "dobre to",
-            ["jeden pokój" => 2.0]);
-
-//        $apartmentRepo = new DoctrineApartmentRepository($this->sqlDoctrineApartmentRepository);
-//        $apartmentRepo->save($apartment);
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/MainController.php',
