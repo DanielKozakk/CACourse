@@ -4,6 +4,7 @@ namespace Domain\Apartment;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
+use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
@@ -50,8 +51,10 @@ class Apartment
         $this->rooms = $rooms;
     }
 
-    public function book(string $tenantId, Period $period){
+    public function book(string $tenantId, Period $period, EventChannel $eventChannel){
         // publish event
         $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
+
+
     }
 }
