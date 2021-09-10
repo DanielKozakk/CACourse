@@ -12,13 +12,20 @@ use Doctrine\ORM\Mapping\ManyToOne;
 class Room
 {
     /**
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $id;
+    /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $name;
     /**
      * @var SquareMeter
-     * @Embedded(class = "Address")
+     * @Embedded(class = "SquareMeter")
      */
     private $squareMeter;
 

@@ -20,7 +20,7 @@ class ApartmentBookingHistory
      *
      * @var array<ApartmentBooking>|ArrayCollection
      */
-    private $apartmentBookingList;
+    private array|ArrayCollection $apartmentBookingList;
 
     /**
      * @param string $apartmentId
