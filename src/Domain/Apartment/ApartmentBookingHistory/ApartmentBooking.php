@@ -12,6 +12,7 @@ class ApartmentBooking
 
 
     public static function start(
+        DateTime $bookingCreation,
         string $ownerId,
         string $tenantId,
         BookingPeriod $bookingPeriod

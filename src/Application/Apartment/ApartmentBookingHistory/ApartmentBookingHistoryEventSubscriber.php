@@ -43,6 +43,7 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
 
         $apartmentBookingHistory->add(
             ApartmentBooking::start(
+                $apartmentBookedEvent->getCreationDateTime(),
                 $apartmentBookedEvent->getOwnerId(),
                 $apartmentBookedEvent->getTenantId(),
                 new BookingPeriod($apartmentBookedEvent->getStartDate(), $apartmentBookedEvent->getEndDate())

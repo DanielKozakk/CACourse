@@ -12,20 +12,21 @@ class ApartmentBookingHistory
     /**
      * @var array<ApartmentBooking>
      */
-    private array $apartmentBookingList;
+    private array $apartmentBookingList = [];
 
     /**
      * @param string $apartmentId
      * @param ApartmentBooking[] $apartmentBookingList
      */
-    public function __construct(string $apartmentId, array $apartmentBookingList)
+    public function __construct(string $apartmentId)
     {
         $this->apartmentId = $apartmentId;
-        $this->apartmentBookingList = $apartmentBookingList;
     }
 
 
     public function add(ApartmentBooking $apartmentBooking){
+
+        array_push($this->apartmentBookingList, $apartmentBooking);
 
     }
 
