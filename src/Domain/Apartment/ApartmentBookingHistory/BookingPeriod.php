@@ -3,11 +3,23 @@
 namespace Domain\Apartment\ApartmentBookingHistory;
 
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Embeddable
+ */
 class BookingPeriod
 {
-
+    /**
+     * @var DateTime
+     * @ORM\Column(type="datetime")
+     */
     private DateTime $startDate;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(type="datetime")
+     */
     private DateTime $endDate;
 
     /**

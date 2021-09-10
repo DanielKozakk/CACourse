@@ -10,15 +10,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ApartmentBookingHistory
 {
+
     /**
      * @ORM\Id
-     * @ORM\Column(type="string", length=255)
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="int)
+     */
+    private int $id;
+
+    /**
+     * @ORM\Id
+     * @ORM\OneToOne(targetEntity="Apartment")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *
      */
     private string $apartmentId;
 
     /**
      *
      * @var array<ApartmentBooking>|ArrayCollection
+     * @ORM\OneToMany(targetEntity="ApartmentBooking")
      */
     private array|ArrayCollection $apartmentBookingList;
 
