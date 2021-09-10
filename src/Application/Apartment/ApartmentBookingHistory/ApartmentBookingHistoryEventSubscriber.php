@@ -6,6 +6,7 @@ use Domain\Apartment\ApartmentBookedEvent;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBooking;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
+use Domain\Apartment\ApartmentBookingHistory\BookingPeriod;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
@@ -44,9 +45,7 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
             ApartmentBooking::start(
                 $apartmentBookedEvent->getOwnerId(),
                 $apartmentBookedEvent->getTenantId(),
-                $apartmentBookedEvent->getStartDate(),
-                $apartmentBookedEvent->getEndDate(),
-
+                new BookingPeriod($apartmentBookedEvent->getStartDate(), $apartmentBookedEvent->getEndDate())
             )
         );
     }

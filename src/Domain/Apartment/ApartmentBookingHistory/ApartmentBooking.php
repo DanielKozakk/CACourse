@@ -7,11 +7,15 @@ use DateTime;
 class ApartmentBooking
 {
 
+    public const START_STEP = "START";
+
+
+
     public static function start(
         string $ownerId,
         string $tenantId,
-        DateTime $startDate,
-        DateTime $endDate)
+        BookingPeriod $bookingPeriod
+    )
     : ApartmentBooking {
 
         return new ApartmentBooking();
