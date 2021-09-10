@@ -6,9 +6,9 @@ interface HotelBookingHistoryRepository
 {
 
 
-    public function existsFor(string $hotelRoomId): bool;
+    public function existsFor(string $hotelId): bool;
 
-    public function findFor(string $hotelRoomId): HotelBookingHistory;
+    public function findFor(string $hotelId): HotelBookingHistory;
 
-    public function save(HotelBookingHistory $hotelRoomBookingHistory): void;
+    public function save(HotelBookingHistory $hotelBookingHistory): void;
 }
