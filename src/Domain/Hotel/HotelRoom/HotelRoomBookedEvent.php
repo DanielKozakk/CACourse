@@ -13,7 +13,7 @@ class HotelRoomBookedEvent
     private string $tenantId;
     private array $days;
 
-    public function __construct(string $eventId, DateTime $eventCreationDateTime, string $hotelRoomId, string $hotelId, string $tenantId, array $days)
+    private function __construct(string $eventId, DateTime $eventCreationDateTime, string $hotelRoomId, string $hotelId, string $tenantId, array $days)
     {
         $this->eventId = $eventId;
         $this->eventCreationDateTime = $eventCreationDateTime;
