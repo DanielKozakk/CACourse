@@ -36,9 +36,6 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
     public function book(ApartmentBookedEvent $apartmentBookedEvent)
     {
 
-        /**
-         * @var ApartmentBookingHistory $apartmentBookingHistory
-         */
         $apartmentBookingHistory = $this->findApartmentBookingHistoryForId($apartmentBookedEvent->getApartmentId());
 
         $apartmentBookingHistory->add(
