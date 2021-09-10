@@ -2,27 +2,33 @@
 
 namespace Domain\Apartment\ApartmentBookingHistory;
 
-// TODO: dodaj adnotacje o repo
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\SqlDoctrineApartmentBookingHistory")
+ */
 class ApartmentBookingHistory
 {
     /**
-     * @var string
+     * @ORM\Id
+     * @ORM\Column(type="string", length=255)
      */
     private string $apartmentId;
 
     /**
-     * @var array<ApartmentBooking>
+     *
+     * @var array<ApartmentBooking>|ArrayCollection
      */
-    private array $apartmentBookingList = [];
+    private $apartmentBookingList;
 
     /**
      * @param string $apartmentId
-     * @param ApartmentBooking[] $apartmentBookingList
      */
     public function __construct(string $apartmentId)
     {
         $this->apartmentId = $apartmentId;
+        $this->apartmentBookingList = new ArrayCollection();
     }
 
 
