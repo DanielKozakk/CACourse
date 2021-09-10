@@ -40,14 +40,7 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
 
         $hotelRoomBookingHistory = $this->findHotelRoomBookingHistoryForId($hotelRoomBookedEvent->getHotelId(), $hotelRoomBookedEvent->getHotelRoomId());
 
-        $hotelRoomBookingHistory->add(
-            HotelRoomBooking::start(
-                $hotelRoomBookedEvent->getHotelRoomId(),
-                $hotelRoomBookedEvent->getEventCreationDateTime(),
-                $hotelRoomBookedEvent->getTenantId(),
-                $hotelRoomBookedEvent->getDays()
-            )
-        );
+        $hotelRoomBookingHistory->add($hotelRoomBookedEvent->getHotelRoomId(), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
 
         $this->hotelBookingHistoryRepository->save($hotelRoomBookingHistory);
     }
@@ -56,7 +49,7 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
         if ($this->hotelBookingHistoryRepository->existsFor($hotelRoomId)) {
             return $this->hotelBookingHistoryRepository->findFor($hotelRoomId);
         } else {
-            return new HotelBookingHistory($hotelId, $hotelRoomId);
+            return new HotelBookingHistory($hotelId);
         }
     }
 }

@@ -2,24 +2,40 @@
 
 namespace Domain\Hotel\HotelBookingHistory;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * //TODO: todo
+ * @ORM\Entity (repositoryClass="")
+ */
 class HotelBookingHistory
 {
 
+    /**
+     * @var string
+     * @ORM\Id
+     */
     private string $hotelId;
-    private string $hotelRoomId;
+
+    /**
+     * @var array<HotelRoomBookingHistory>|ArrayCollection
+     * one to many
+     */
+    private array|ArrayCollection $hotelRoomBookingHistories;
 
     /**
      * @param string $hotelId
-     * @param string $hotelRoomId
      */
-    public function __construct(string $hotelId, string $hotelRoomId)
+    public function __construct(string $hotelId )
     {
         $this->hotelId = $hotelId;
-        $this->hotelRoomId = $hotelRoomId;
+        $this->hotelRoomBookingHistories = new ArrayCollection();
     }
 
 
-    public function add (HotelRoomBooking $hotelRoomBooking){
+    public function add (string $hotelRoomId, DateTime $eventCreationDateTime, string $tenantId, array $days){
 
     }
 }
