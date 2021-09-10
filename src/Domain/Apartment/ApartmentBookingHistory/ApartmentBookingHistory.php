@@ -2,6 +2,8 @@
 
 namespace Domain\Apartment\ApartmentBookingHistory;
 
+// TODO: dodaj adnotacje o repo
+
 class ApartmentBookingHistory
 {
     /**
