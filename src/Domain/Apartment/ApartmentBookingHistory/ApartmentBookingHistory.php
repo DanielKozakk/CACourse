@@ -19,7 +19,6 @@ class ApartmentBookingHistory
     private int $id;
 
     /**
-     * @ORM\Id
      * @ORM\OneToOne(targetEntity="Apartment")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
      *
