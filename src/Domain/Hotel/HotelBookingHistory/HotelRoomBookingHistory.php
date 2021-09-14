@@ -21,12 +21,13 @@ class HotelRoomBookingHistory
 
     /**
      * @var array<HotelRoomBooking>|ArrayCollection
+     * TODO: OneToMany
      */
     private array|ArrayCollection $bookings;
 
     /**
      * @param string $hotelRoomId
-     * TODO: OneToMany
+     *
      */
     public function __construct(string $hotelRoomId)
     {
@@ -36,13 +37,13 @@ class HotelRoomBookingHistory
 
 
     /**
-     * @param DateTime $eventCreationDateTime
+     * @param DateTime $bookingDateTime
      * @param string $tenantId
      * @param array<DateTime> $days
      */
-    public function add(DateTime $eventCreationDateTime, string $tenantId, array $days)
+    public function add(DateTime $bookingDateTime, string $tenantId, array $days)
     {
-        $this->bookings->add(new HotelRoomBooking)
+        $this->bookings->add(new HotelRoomBooking($bookingDateTime, $tenantId, $days));
     }
 
     /**
