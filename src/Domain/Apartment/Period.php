@@ -3,7 +3,7 @@
 namespace Domain\Apartment;
 
 use DateTime;
-
+//TODO: Embedable
 class Period
 {
 private DateTime $startDate;
