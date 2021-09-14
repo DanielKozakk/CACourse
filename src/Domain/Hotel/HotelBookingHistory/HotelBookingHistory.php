@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class HotelBookingHistory
 {
-
     /**
      * @var string
      * @ORM\Id
@@ -21,21 +20,52 @@ class HotelBookingHistory
 
     /**
      * @var array<HotelRoomBookingHistory>|ArrayCollection
-     * one to many
+     * TODO: one to many
      */
     private array|ArrayCollection $hotelRoomBookingHistories;
 
     /**
      * @param string $hotelId
      */
-    public function __construct(string $hotelId )
+    public function __construct(string $hotelId)
     {
         $this->hotelId = $hotelId;
         $this->hotelRoomBookingHistories = new ArrayCollection();
     }
 
+    /**
+     * @param string $hotelRoomId
+     * @param DateTime $bookingDateTime
+     * @param string $tenantId
+     * @param array<DateTime> $days
+     */
+    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, array $days)
+    {
+        /**
+         * @var HotelRoomBookingHistory $hotelRoomBookingHistory;
+         */
+        $hotelRoomBookingHistory = $this->findFor($hotelRoomId);
 
-    public function add (string $hotelRoomId, DateTime $eventCreationDateTime, string $tenantId, array $days){
-
+        $hotelRoomBookingHistory->add($bookingDateTime, $tenantId, $days);
     }
+
+    private function findFor(string $hotelRoomId) : HotelRoomBookingHistory
+    {
+        /**
+         * @var array<HotelRoomBooking>
+         */
+        $history = array_filter($this->hotelRoomBookingHistories, function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoomId) {
+            return $hotelRoomBookingHistory->hasIdEqualTo($hotelRoomId);
+        });
+
+        if(empty($history)){
+
+            $hotelRoomBookingHistory = new HotelRoomBookingHistory($hotelRoomId);
+            $this->hotelRoomBookingHistories->add($hotelRoomBookingHistory);
+            return $hotelRoomBookingHistory;
+        } else {
+            return $history->first();
+        }
+    }
+
 }
