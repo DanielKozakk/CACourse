@@ -6,6 +6,8 @@ use DateTime;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentFactory;
 use Domain\Apartment\ApartmentRepository;
+use Domain\Apartment\Booking;
+use Domain\Apartment\BookingRepository;
 use Domain\Apartment\Period;
 use Domain\EventChannel\EventChannel;
 
@@ -13,16 +15,20 @@ class ApartmentApplicationService
 {
     private ApartmentRepository $apartmentRepository;
     private EventChannel $eventChannel;
+    private BookingRepository $bookingRepository;
 
     /**
      * @param ApartmentRepository $apartmentRepository
      * @param EventChannel $eventChannel
+     * @param BookingRepository $bookingRepository
      */
-    public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel)
+    public function __construct(ApartmentRepository $apartmentRepository, EventChannel $eventChannel, BookingRepository $bookingRepository)
     {
         $this->apartmentRepository = $apartmentRepository;
         $this->eventChannel = $eventChannel;
+        $this->bookingRepository = $bookingRepository;
     }
+
 
     /**
      * @param string $ownerId
@@ -73,7 +79,11 @@ class ApartmentApplicationService
          */
         $period = new Period($start, $end);
 
-        $apartment->book($tenantId, $period, $this->eventChannel);
+        /**
+         * @var Booking
+         */
+        $booking = $apartment->book($tenantId, $period, $this->eventChannel);
 
+        $this->bookingRepository->save($booking);
     }
 }
