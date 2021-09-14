@@ -56,6 +56,6 @@ class Apartment
         $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
         $eventChannel->publishApartmentBookedEvent($apartmentBooked);
 
-        return new Booking($this->id, $tenantId, $period);
+        return Booking::bookApartment($this->id, $tenantId, $period);
     }
 }

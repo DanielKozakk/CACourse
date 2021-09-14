@@ -2,8 +2,9 @@
 
 namespace Domain\Apartment;
 
+use DateInterval;
+use DatePeriod;
 use DateTime;
-//TODO: Embedable
 class Period
 {
 private DateTime $startDate;
@@ -35,4 +36,16 @@ private DateTime $endDate;
         return $this->endDate;
     }
 
+    /**
+     * @return DateTime[]
+     */
+    public function asDateTimeArray(): array
+    {
+        $period = new DatePeriod($this->getStartDate(), new DateInterval('P1D'), $this->getEndDate()->add(new DateInterval('P1D')));
+        $arrayOfDateTimes = [];
+        foreach ($period as $date) {
+            $arrayOfDateTimes[] = $date;
+        }
+        return $arrayOfDateTimes;
+    }
 }

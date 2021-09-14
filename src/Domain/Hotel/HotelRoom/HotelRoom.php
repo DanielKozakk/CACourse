@@ -3,6 +3,7 @@
 namespace Domain\Hotel\HotelRoom;
 
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Apartment\Booking;
 use Domain\EventChannel\EventChannel;
 
 /**
@@ -49,10 +50,11 @@ class HotelRoom
         $this->description = $description;
     }
 
-    public function book(int $tenantId, array $days, EventChannel $eventChannel){
+    public function book(int $tenantId, array $days, EventChannel $eventChannel): Booking{
 
         $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotelId, $tenantId, $days);
         $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
+
 
     }
 }
