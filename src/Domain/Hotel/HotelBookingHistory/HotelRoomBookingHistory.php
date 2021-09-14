@@ -44,6 +44,7 @@ class HotelRoomBookingHistory
     public function add(DateTime $bookingDateTime, string $tenantId, array $days)
     {
         $this->bookings->add(new HotelRoomBooking($bookingDateTime, $tenantId, $days));
+        //TODO : prawdopodobnie potrzebny jest zapis do bazy danych tutaj albo w HotelBookingHistory::add
     }
 
     /**

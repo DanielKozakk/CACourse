@@ -38,16 +38,16 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
     public function book(HotelRoomBookedEvent $hotelRoomBookedEvent)
     {
 
-        $hotelRoomBookingHistory = $this->findHotelRoomBookingHistoryForId($hotelRoomBookedEvent->getHotelId(), $hotelRoomBookedEvent->getHotelRoomId());
+        $hotelBookingHistory = $this->findHotelBookingHistoryForId($hotelRoomBookedEvent->getHotelId());
 
-        $hotelRoomBookingHistory->add($hotelRoomBookedEvent->getHotelRoomId(), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
+        $hotelBookingHistory->add($hotelRoomBookedEvent->getHotelRoomId(), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
 
-        $this->hotelBookingHistoryRepository->save($hotelRoomBookingHistory);
+        $this->hotelBookingHistoryRepository->save($hotelBookingHistory);
     }
-    private function findHotelRoomBookingHistoryForId(string $hotelId, string $hotelRoomId): HotelBookingHistory
+    private function findHotelBookingHistoryForId(string $hotelId): HotelBookingHistory
     {
-        if ($this->hotelBookingHistoryRepository->existsFor($hotelRoomId)) {
-            return $this->hotelBookingHistoryRepository->findFor($hotelRoomId);
+        if ($this->hotelBookingHistoryRepository->existsFor($hotelId)) {
+            return $this->hotelBookingHistoryRepository->findFor($hotelId);
         } else {
             return new HotelBookingHistory($hotelId);
         }
