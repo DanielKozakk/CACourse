@@ -31,7 +31,7 @@ class Booking
      * @param string $tenantId
      * @param array $days
      */
-    public function __construct(RentalType $rentalType, string $apartmentId, string $tenantId, array $days)
+    private function __construct(RentalType $rentalType, string $apartmentId, string $tenantId, array $days)
     {
         $this->rentalType = $rentalType;
         $this->apartmentId = $apartmentId;
