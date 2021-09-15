@@ -2,12 +2,12 @@
 
 namespace Application\CommandChannel;
 
-use Application\Booking\BookingAcceptedCommand;
-use Application\Booking\BookingRejectCommand;
+use Application\Booking\AcceptBookingCommand;
+use Application\Booking\RejectBookingCommand;
 
 interface CommandChannel
 {
 
-    public function registerBookingRejectCommand(BookingRejectCommand $bookingRejectCommand);
-    public function registerBookingAcceptedCommand(BookingAcceptedCommand $bookingRejectCommand);
+    public function registerBookingRejectCommand(RejectBookingCommand $bookingRejectCommand);
+    public function registerBookingAcceptedCommand(AcceptBookingCommand $bookingRejectCommand);
 }

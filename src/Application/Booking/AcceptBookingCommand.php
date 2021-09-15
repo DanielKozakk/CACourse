@@ -2,7 +2,7 @@
 
 namespace Application\Booking;
 
-class BookingAcceptedCommand
+class AcceptBookingCommand
 {
 
     private string $id;
