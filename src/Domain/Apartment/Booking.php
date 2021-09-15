@@ -7,6 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 //TODO: entity
+
+/**
+ * @ORM\Entity
+ */
 class Booking
 {
 
@@ -15,16 +19,16 @@ class Booking
      * @ORM\Id
      */
     private string $id;
+    private RentalType $rentalType;
     private string $apartmentId;
     private string $tenantId;
     private array $days;
-    private RentalType $rentalType;
 
     /**
      * @param RentalType $rentalType
      * @param string $apartmentId
      * @param string $tenantId
-     * @param array $days
+     * @param array<DateTime> $days
      *
      */
     public function __construct(RentalType $rentalType,string $apartmentId, string $tenantId, array $days)
