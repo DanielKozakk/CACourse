@@ -7,7 +7,6 @@ use Application\Booking\RejectBookingCommand;
 
 interface CommandChannel
 {
-
     public function registerBookingRejectCommand(RejectBookingCommand $rejectBookingCommand);
     public function registerBookingAcceptedCommand(AcceptBookingCommand $acceptBookingCommand);
 }

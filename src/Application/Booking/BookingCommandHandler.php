@@ -2,6 +2,7 @@
 
 namespace Application\Booking;
 
+use Application\CommandChannel\CommandChannel;
 use Domain\Apartment\Booking;
 use Domain\Apartment\BookingRepository;
 use Domain\EventChannel\EventChannel;
@@ -15,20 +16,15 @@ class BookingCommandHandler implements EventSubscriberInterface
      */
     private BookingRepository $bookingRepository;
 
-    /**
-     * @var EventChannel
-     */
-    private EventChannel $eventChannel;
 
     /**
      * BookingCommandHandler constructor.
      * @param BookingRepository $bookingRepository
      * @param EventChannel $eventChannel
      */
-    public function __construct(BookingRepository $bookingRepository, EventChannel $eventChannel)
+    public function __construct(BookingRepository $bookingRepository)
     {
         $this->bookingRepository = $bookingRepository;
-        $this->eventChannel = $eventChannel;
     }
 
     public static function getSubscribedEvents()
@@ -55,8 +51,8 @@ class BookingCommandHandler implements EventSubscriberInterface
 
     public function onBookingAcceptCommand(AcceptBookingCommand $bookingAcceptCommand)
     {
-        $booking = $this->bookingRepository->findById($bookingAcceptCommand->getBookingId());
-        $booking->accept($this->eventChannel);
+        $booking = $this->bookingRepository->findById($bookingAcceptCommand->getId());
+        $booking->accept();
 
         $this->bookingRepository->save($booking);
     }
