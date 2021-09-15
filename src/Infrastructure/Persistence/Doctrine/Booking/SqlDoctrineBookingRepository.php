@@ -28,4 +28,9 @@ class SqlDoctrineBookingRepository extends ServiceEntityRepository
         $this->entityManager->persist($booking);
         $this->entityManager->flush();
     }
+
+    public function findById(string $id) : Booking|null
+    {
+        return $this->findOneBy(['id' => $id]);
+    }
 }

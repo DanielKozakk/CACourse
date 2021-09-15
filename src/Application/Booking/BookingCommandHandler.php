@@ -5,9 +5,11 @@ namespace Application\Booking;
 use Domain\Apartment\Booking;
 use Domain\Apartment\BookingRepository;
 use Domain\EventChannel\EventChannel;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BookingCommandHandler
+class BookingCommandHandler implements EventSubscriberInterface
 {
+
     /**
      * @var BookingRepository
      */
@@ -29,9 +31,20 @@ class BookingCommandHandler
         $this->eventChannel = $eventChannel;
     }
 
+    public static function getSubscribedEvents()
+    {
+        return [
+            RejectBookingCommand::class => [
+                ['onBookingRejectCommand', 10]
+            ],
+            AcceptBookingCommand::class => [
+                ['onBookingAcceptCommand', 10]
+            ]
+        ];
+    }
 
-    public function onBookingRejectCommand(RejectBookingCommand $bookingRejectCommand){
-
+    public function onBookingRejectCommand(RejectBookingCommand $bookingRejectCommand)
+    {
         /** @var Booking */
         $booking = $this->bookingRepository->findById($bookingRejectCommand->getBookingId());
 
@@ -40,11 +53,11 @@ class BookingCommandHandler
         $this->bookingRepository->save($booking);
     }
 
-    public function onBookingAcceptCommand(AcceptBookingCommand $bookingAcceptCommand){
+    public function onBookingAcceptCommand(AcceptBookingCommand $bookingAcceptCommand)
+    {
         $booking = $this->bookingRepository->findById($bookingAcceptCommand->getBookingId());
         $booking->accept($this->eventChannel);
 
         $this->bookingRepository->save($booking);
     }
-
 }

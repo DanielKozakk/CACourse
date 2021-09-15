@@ -42,12 +42,12 @@ class Booking
 
     public static function bookApartment(string $rentalSpaceId, string $tenantId, Period $period): Booking
     {
-
         return new Booking(RentalType::apartmentRentalType(),$rentalSpaceId, $tenantId, $period->asDateTimeArray());
     }
     public static function bookHotelRoom(string $rentalSpaceId, string $tenantId, array $days): Booking
     {
-
         return new Booking(RentalType::hotelRoomRentalType(), $rentalSpaceId, $tenantId, $days);
     }
+
+
 }

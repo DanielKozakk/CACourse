@@ -22,4 +22,9 @@ class DoctrineBookingRepository implements BookingRepository
     {
         $this->sqlDoctrineBookingRepository->save($booking);
     }
+
+    public function findById(string $id): Booking
+    {
+        return $this->sqlDoctrineBookingRepository->findById($id);
+    }
 }
