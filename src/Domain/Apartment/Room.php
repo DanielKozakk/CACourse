@@ -35,10 +35,9 @@ class Room
      */
     private $apartment;
 
-    public function __construct(string $name, SquareMeter $squareMeter, Apartment $apartment)
+    public function __construct(string $name, SquareMeter $squareMeter)
     {
         $this->name = $name;
         $this->squareMeter = $squareMeter;
-        $this->apartment = $apartment;
     }
 }
