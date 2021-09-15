@@ -20,7 +20,6 @@ class BookingCommandHandler implements EventSubscriberInterface
     /**
      * BookingCommandHandler constructor.
      * @param BookingRepository $bookingRepository
-     * @param EventChannel $eventChannel
      */
     public function __construct(BookingRepository $bookingRepository)
     {
