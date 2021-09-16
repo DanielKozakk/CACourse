@@ -8,6 +8,7 @@ use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
+ * TODO: Połącz encje z command
  */
 class Apartment
 {

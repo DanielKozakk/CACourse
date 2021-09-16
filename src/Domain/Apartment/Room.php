@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @ORM\Entity
+ *  TODO: Połącz encje z command
  */
 class Room
 {

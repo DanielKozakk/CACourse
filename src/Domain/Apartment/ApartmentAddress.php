@@ -11,11 +11,11 @@ class ApartmentAddress
     /**
      * @var string
      */
-    private $street;
+    private string $street;
     /**
      * @var string
      */
-    private $postalCode;
+    private string $postalCode;
     /**
      * @var string
      */
@@ -41,5 +41,6 @@ class ApartmentAddress
         $this->apartmentNumber = $apartmentNumber;
         $this->city = $city;
         $this->country = $country;
+
     }
 }
