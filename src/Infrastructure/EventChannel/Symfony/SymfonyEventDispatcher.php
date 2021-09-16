@@ -3,6 +3,7 @@
 namespace Infrastructure\EventChannel\Symfony;
 
 use Domain\Apartment\ApartmentBookedEvent;
+use Domain\Apartment\BookingAcceptedEvent;
 use Domain\EventChannel\EventChannel;
 use Domain\Hotel\HotelRoom\HotelRoomBookedEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -27,5 +28,10 @@ class SymfonyEventDispatcher implements EventChannel
     public function publishHotelRoomBookedEvent(HotelRoomBookedEvent $hotelRoomBookedEvent)
     {
         $this->eventDispatcher->dispatch($hotelRoomBookedEvent);
+    }
+
+    public function publishBookingAcceptedEvent(BookingAcceptedEvent $bookingAcceptedEvent)
+    {
+        $this->eventDispatcher->dispatch($bookingAcceptedEvent);
     }
 }

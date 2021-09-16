@@ -6,7 +6,7 @@ class BookingStatus
 {
     public static string $OPEN = 'OPEN';
     public static string $REJECTED = 'REJECTED';
-    public static string $ACCEPT = 'ACCEPT';
+    public static string $ACCEPTED = 'ACCEPTED';
 
     /**
      * @var string
@@ -30,7 +30,7 @@ class BookingStatus
         return new BookingStatus(self::$REJECTED);
     }
     public static function accept() : BookingStatus{
-        return new BookingStatus(self::$ACCEPT);
+        return new BookingStatus(self::$ACCEPTED);
     }
     /**
      * @return string
