@@ -22,14 +22,21 @@ class BookingStep
      * BookingStep constructor.
      * @param string $state
      */
-    public function __construct(string $state)
+    private function __construct(string $state)
     {
-        if (in_array($state, self::STATES)){
             $this->state = $state;
-        }
-        else {
-            throw new \InvalidArgumentException();
-        }
-
     }
+
+    public static function start():BookingStep {
+        return new BookingStep(self::START);
+    }
+
+    /**
+     * @return string
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
 }

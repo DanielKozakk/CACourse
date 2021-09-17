@@ -43,17 +43,24 @@ class ApartmentBooking
     private BookingPeriod $bookingPeriod;
 
     /**
+     * @ORM\Embedded
+     */
+    private BookingStep $bookingStep;
+
+    /**
      * @param DateTime $bookingCreation
      * @param string $ownerId
      * @param string $tenantId
      * @param BookingPeriod $bookingPeriod
+     * @param BookingStep $bookingStep
      */
-    public function __construct(DateTime $bookingCreation, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod)
+    public function __construct(DateTime $bookingCreation, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod, BookingStep $bookingStep)
     {
         $this->bookingCreation = $bookingCreation;
         $this->ownerId = $ownerId;
         $this->tenantId = $tenantId;
         $this->bookingPeriod = $bookingPeriod;
+        $this->bookingStep = $bookingStep;
     }
 
 
@@ -65,6 +72,6 @@ class ApartmentBooking
     ): ApartmentBooking
     {
 
-        return new ApartmentBooking($bookingCreation, $ownerId, $tenantId, $bookingPeriod);
+        return new ApartmentBooking($bookingCreation, $ownerId, $tenantId, $bookingPeriod, BookingStep::start());
     }
 }
