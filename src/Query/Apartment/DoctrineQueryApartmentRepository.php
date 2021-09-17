@@ -23,4 +23,9 @@ class DoctrineQueryApartmentRepository
         return $this->sqlDoctrineQueryApartmentRepository->findAll();
     }
 
+    public function findById(string $id): ?ApartmentDetails{
+
+        return null;
+    }
+
 }

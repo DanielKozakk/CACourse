@@ -3,6 +3,7 @@
 namespace Infrastructure\Rest\Api\Apartment;
 
 use Application\Apartment\ApartmentApplicationService;
+use Query\Apartment\ApartmentDetails;
 use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\QueryApartmentRepository;
 
@@ -46,9 +47,17 @@ class ApartmentRestController
     }
 
     /**
+     * @route /find_all
      * @return array<ApartmentReadModel>
      */
     public function findAll(): array{
         return $this->queryApartmentRepository->findAll();
     }
+
+    // /{id}
+    public function findById(string $id): ?ApartmentDetails{
+        return $this->queryApartmentRepository->findById($id);
+    }
+
+
 }

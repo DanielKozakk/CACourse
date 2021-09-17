@@ -5,14 +5,14 @@ namespace Query\Apartment;
 class QueryApartmentRepository
 {
 
-    private DoctrineQueryApartmentRepository $springQueryApartmentRepository;
+    private DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository;
 
     /**
-     * @param DoctrineQueryApartmentRepository $springQueryApartmentRepository
+     * @param DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository
      */
-    public function __construct(DoctrineQueryApartmentRepository $springQueryApartmentRepository)
+    public function __construct(DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository)
     {
-        $this->springQueryApartmentRepository = $springQueryApartmentRepository;
+        $this->doctrineQueryApartmentRepository = $doctrineQueryApartmentRepository;
     }
 
 
@@ -20,6 +20,11 @@ class QueryApartmentRepository
      * @return array<ApartmentReadModel>
      */
     public function findAll() : array{
-        return $this->springQueryApartmentRepository->findAll();
+        return $this->doctrineQueryApartmentRepository->findAll();
+    }
+
+    public function findById(string $id) : ?ApartmentDetails
+    {
+        return $this->doctrineQueryApartmentRepository->findById($id);
     }
 }

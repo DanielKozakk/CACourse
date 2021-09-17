@@ -35,17 +35,14 @@ class ApartmentBookingHistory
     /**
      * @param string $apartmentId
      */
-    public function __construct(string $apartmentId)
-    {
+    public function __construct(string $apartmentId){
         $this->apartmentId = $apartmentId;
         $this->apartmentBookingList = new ArrayCollection();
     }
 
 
     public function add(ApartmentBooking $apartmentBooking){
-
         array_push($this->apartmentBookingList, $apartmentBooking);
-
     }
 
 }
