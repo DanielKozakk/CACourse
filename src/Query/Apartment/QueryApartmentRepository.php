@@ -6,13 +6,16 @@ class QueryApartmentRepository
 {
 
     private DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository;
+    private DoctrineQueryApartmentDetailsRepository $doctrineQueryApartmentDetailsRepository;
 
     /**
      * @param DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository
+     * @param DoctrineQueryApartmentDetailsRepository $doctrineQueryApartmentDetailsRepository
      */
-    public function __construct(DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository)
+    public function __construct(DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository, DoctrineQueryApartmentDetailsRepository $doctrineQueryApartmentDetailsRepository)
     {
         $this->doctrineQueryApartmentRepository = $doctrineQueryApartmentRepository;
+        $this->doctrineQueryApartmentDetailsRepository = $doctrineQueryApartmentDetailsRepository;
     }
 
 
@@ -25,6 +28,6 @@ class QueryApartmentRepository
 
     public function findById(string $id) : ?ApartmentDetails
     {
-        return $this->doctrineQueryApartmentRepository->findById($id);
+        return $this->doctrineQueryApartmentDetailsRepository->findById($id);
     }
 }
