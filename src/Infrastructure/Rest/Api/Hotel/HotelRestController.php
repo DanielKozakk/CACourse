@@ -37,10 +37,10 @@ class HotelRestController
     }
 
     /**
+     * route - /book/id
      * @return array<HotelReadModel>
      */
     public function findAll ():array{
         return $this->queryHotelRepository->findAll();
     }
-
 }
