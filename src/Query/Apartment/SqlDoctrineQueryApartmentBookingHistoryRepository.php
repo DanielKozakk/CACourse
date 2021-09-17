@@ -22,4 +22,8 @@ class SqlDoctrineQueryApartmentBookingHistoryRepository extends ServiceEntityRep
         $this->entityManager = $entityManager;
     }
 
+    public function findOneById(string $id): ?ApartmentBookingHistoryReadModel
+    {
+        return $this->findOneBy(['id'=>$id]);
+    }
 }

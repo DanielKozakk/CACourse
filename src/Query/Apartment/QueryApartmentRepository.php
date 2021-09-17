@@ -5,17 +5,17 @@ namespace Query\Apartment;
 class QueryApartmentRepository
 {
 
-    private DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository;
-    private DoctrineQueryApartmentBookingHistoryRepository $doctrineQueryApartmentBookingHistoryRepository;
+    private SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository;
+    private SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository;
 
     /**
-     * @param DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository
-     * @param DoctrineQueryApartmentBookingHistoryRepository $doctrineQueryApartmentBookingHistoryRepository
+     * @param SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository
+     * @param SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository
      */
-    public function __construct(DoctrineQueryApartmentRepository $doctrineQueryApartmentRepository, DoctrineQueryApartmentBookingHistoryRepository $doctrineQueryApartmentBookingHistoryRepository)
+    public function __construct(SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository, SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository)
     {
-        $this->doctrineQueryApartmentRepository = $doctrineQueryApartmentRepository;
-        $this->doctrineQueryApartmentBookingHistoryRepository = $doctrineQueryApartmentBookingHistoryRepository;
+        $this->sqlDoctrineQueryApartmentRepository = $sqlDoctrineQueryApartmentRepository;
+        $this->sqlDoctrineQueryApartmentBookingHistoryRepository = $sqlDoctrineQueryApartmentBookingHistoryRepository;
     }
 
 
@@ -23,11 +23,11 @@ class QueryApartmentRepository
      * @return array<ApartmentBookingHistoryReadModel>
      */
     public function findAll() : array{
-        return $this->doctrineQueryApartmentRepository->findAll();
+        return $this->sqlDoctrineQueryApartmentRepository->findAll();
     }
 
     public function findById(string $id) : ?ApartmentDetails
     {
-        return new ApartmentDetails($this->doctrineQueryApartmentRepository->findById($id), $this->doctrineQueryApartmentBookingHistoryRepository->findById($id));
+        return new ApartmentDetails($this->sqlDoctrineQueryApartmentRepository->findOneById($id), $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id));
     }
 }

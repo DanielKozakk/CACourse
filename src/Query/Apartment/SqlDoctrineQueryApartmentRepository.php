@@ -22,4 +22,9 @@ class SqlDoctrineQueryApartmentRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+    public function findOneById(string $id): ?ApartmentReadModel
+    {
+        return $this->findOneBy(['id'=>$id]);
+    }
+
 }
