@@ -22,4 +22,9 @@ class SqlDoctrineQueryHotelRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+    public function findOneById(string $id): ?HotelReadModel
+    {
+        return $this->findOneBy(['id'=>$id]);
+    }
+
 }

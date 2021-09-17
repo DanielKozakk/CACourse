@@ -2,6 +2,8 @@
 
 namespace Query\Hotel;
 
+use Domain\Hotel\Hotel;
+
 class QueryHotelRepository
 {
     private SqlDoctrineQueryHotelRepository $sqlDoctrineQueryHotelRepository;
@@ -15,8 +17,12 @@ class QueryHotelRepository
     }
 
 
-    public function findAll()
+    public function findAll() : array
     {
-        $this->sqlDoctrineQueryHotelRepository->fi
+         return $this->sqlDoctrineQueryHotelRepository->findAll();
+    }
+    public function findOneById(string $id): ?HotelReadModel
+    {
+        return $this->sqlDoctrineQueryHotelRepository->findOneById($id);
     }
 }
