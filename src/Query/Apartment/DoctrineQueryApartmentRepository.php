@@ -2,6 +2,9 @@
 
 namespace Query\Apartment;
 
+use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
+use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
+
 class DoctrineQueryApartmentRepository
 {
 
@@ -23,9 +26,8 @@ class DoctrineQueryApartmentRepository
         return $this->sqlDoctrineQueryApartmentRepository->findAll();
     }
 
-    public function findById(string $id): ?ApartmentDetails{
-
-        return null;
+    public function findById(string $id):ApartmentReadModel{
+        return $this->sqlDoctrineQueryApartmentRepository->findOneBy(['id'=>$id]);
     }
 
 }
