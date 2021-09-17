@@ -3,6 +3,7 @@
 namespace Infrastructure\Rest\Api\Apartment;
 
 use Application\Apartment\ApartmentApplicationService;
+use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\QueryApartmentRepository;
 
 //TODO: https://api-platform.com/ - tutaj jest dokumentacja do tworzenia ładnego api do symfony.
