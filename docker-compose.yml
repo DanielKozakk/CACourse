@@ -32,6 +32,7 @@ services:
           - .:/home/wwwroot/sf5
         environment:
           - maildev_host=sf5_maildev
+          - mysqlhost=sf5_mysql
         depends_on:
           - maildev
           - mysql
