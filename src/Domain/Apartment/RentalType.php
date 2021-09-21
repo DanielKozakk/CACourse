@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RentalType
 {
-    public static string $APARTMENT = 'APARTMENT';
-    public static string $HOTEL_ROOM = 'HOTEL_ROOM';
+    public const APARTMENT = 'APARTMENT';
+    public const HOTEL_ROOM = 'HOTEL_ROOM';
 
     /**
      * @var string
@@ -18,10 +18,10 @@ class RentalType
     private string $state;
 
     public static function apartmentRentalType() : RentalType{
-        return new RentalType(self::$APARTMENT);
+        return new RentalType(self::APARTMENT);
     }
     public static function hotelRoomRentalType() : RentalType{
-        return new RentalType(self::$HOTEL_ROOM);
+        return new RentalType(self::HOTEL_ROOM);
     }
 
     /**
