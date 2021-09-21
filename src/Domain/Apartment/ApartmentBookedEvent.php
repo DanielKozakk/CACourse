@@ -37,7 +37,11 @@ class ApartmentBookedEvent
     }
 
 
-    public static function create(string $apartmentId, string $ownerId, string $tenantId,  DateTime $startDate, DateTime $endDate)
+    public static function create(string   $apartmentId,
+                                  string   $ownerId,
+                                  string   $tenantId,
+                                  DateTime $startDate,
+                                  DateTime $endDate): ApartmentBookedEvent
     {
         $eventId = uniqid();
         $creationDateTime = new DateTime();
