@@ -82,7 +82,7 @@ class ApartmentBookingAssertion extends Assert
     {
         $actualBookingStep = $this->getReflectionValue(ApartmentBooking::class, 'bookingStep', $this->actual);
         $actualBookingStepState = $this->getReflectionValue(BookingStep::class, 'state', $actualBookingStep);
-        $this->assertEquals($actualBookingStepState, 'START');
+        $this->assertEquals($actualBookingStepState, BookingStep::START);
 
         return $this;
     }
