@@ -21,9 +21,7 @@ class ApartmentBookingTest extends TestCase
         $startDate = DateTime::createFromFormat('d-m-Y', '20-06-2021');
         $endDate = DateTime::createFromFormat('d-m-Y', '21-06-2021');
 
-
         $actual = ApartmentBooking::start($bookingCreationDateTime,$ownerId,$tenantId,new BookingPeriod($startDate, $endDate));
-
 
         ApartmentBookingAssertion::assert($actual)
             ->isStart()
