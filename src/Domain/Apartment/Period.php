@@ -41,7 +41,10 @@ private DateTime $endDate;
      */
     public function asDateTimeArray(): array
     {
-        $period = new DatePeriod($this->getStartDate(), new DateInterval('P1D'), $this->getEndDate()->add(new DateInterval('P1D')));
+        $startDate = clone $this->getStartDate();
+        $endDate = clone $this->getEndDate();
+
+        $period = new DatePeriod($startDate, new DateInterval('P1D'), $endDate->add(new DateInterval('P1D')));
         $arrayOfDateTimes = [];
         foreach ($period as $date) {
             $arrayOfDateTimes[] = $date;
