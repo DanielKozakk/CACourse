@@ -42,9 +42,9 @@ class Booking
     }
 
 
-    public static function bookApartment(string $rentalSpaceId, string $tenantId, Period $period): Booking
+    public static function bookApartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
     {
-        return new Booking(RentalType::apartmentRentalType(),$rentalSpaceId, $tenantId, $period->asDateTimeArray());
+        return new Booking(RentalType::apartmentRentalType(),$rentalPlaceId, $tenantId, $period->asDateTimeArray());
     }
     public static function bookHotelRoom(string $rentalSpaceId, string $tenantId, array $days): Booking
     {

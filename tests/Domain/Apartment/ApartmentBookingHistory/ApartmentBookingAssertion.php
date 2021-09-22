@@ -1,8 +1,10 @@
 <?php
 
 namespace Domain\Apartment\ApartmentBookingHistory;
+require_once('tests/Helpers/PropertiesUnwrapper.php');
 
 use DateTime;
+use Helpers\PropertiesUnwrapper;
 use PHPUnit\Framework\Assert;
 use ReflectionException;
 use ReflectionProperty;
@@ -10,6 +12,8 @@ use ReflectionProperty;
 
 class ApartmentBookingAssertion extends Assert
 {
+    use PropertiesUnwrapper;
+
     private ApartmentBooking $actual;
 
     /**
@@ -87,12 +91,5 @@ class ApartmentBookingAssertion extends Assert
         return $this;
     }
 
-    /**
-     * @throws ReflectionException
-     */
-    private function getReflectionValue(string $classFqn, string $propertyName, object $actualObject){
-        $reflectionProperty = new ReflectionProperty($classFqn, $propertyName);
-        $reflectionProperty->setAccessible(true);
-        return $reflectionProperty->getValue($actualObject);
-    }
+
 }
