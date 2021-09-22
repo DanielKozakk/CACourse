@@ -28,37 +28,60 @@ class ApartmentBookingAssertion extends Assert
 
     public function hasBookingDateTimeEqualTo(DateTime $bookingCreationDateTime) :ApartmentBookingAssertion
     {
+
         $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'bookingCreation');
         $reflectionProperty->setAccessible(true);
 
-        $actualBookingCreationDateTime = $reflectionProperty->getValue($bookingCreationDateTime);
+        $actualBookingCreationDateTime = $reflectionProperty->getValue($this->actual);
         $this->assertEquals($actualBookingCreationDateTime, $bookingCreationDateTime);
         return $this;
     }
+
+    public function hasOwnerIdEqualTo(string $ownerId): ApartmentBookingAssertion
+    {
+        $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'ownerId');
+        $reflectionProperty->setAccessible(true);
+
+        $actualOwnerId = $reflectionProperty->getValue($this->actual);
+        $this->assertEquals($actualOwnerId, $ownerId);
+
+        return $this;
+
+    }
+
+    public function hasTenantIdEqualTo(string $tenantId): ApartmentBookingAssertion
+    {
+        $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'tenantId');
+        $reflectionProperty->setAccessible(true);
+
+        $actualTenantId = $reflectionProperty->getValue($this->actual);
+        $this->assertEquals($actualTenantId, $tenantId);
+
+        return $this;
+    }
+
+    public function hasBookingPeriodThatHas(DateTime $startDate, DateTime $endDate): ApartmentBookingAssertion
+    {
+        $reflectionBookingPeriodProperty = new ReflectionProperty(ApartmentBooking::class, 'bookingPeriod');
+        $reflectionBookingPeriodProperty->setAccessible(true);
+
+        $bookingPeriodValue = $reflectionBookingPeriodProperty->getValue($this->actual);
+
+        $reflectionStartDateProperty = new ReflectionProperty(BookingPeriod::class, 'startDate');
+        $reflectionStartDateProperty->setAccessible(true);
+        $reflectionEndDateProperty = new ReflectionProperty(BookingPeriod::class, 'endDate');
+        $reflectionEndDateProperty->setAccessible(true);
+
+
+        $actualStartDateProperty = $reflectionStartDateProperty->getValue($bookingPeriodValue);
+        $actualEndDateProperty = $reflectionEndDateProperty->getValue($bookingPeriodValue);
+
+        var_dump($actualStartDateProperty);
+        var_dump($startDate);
+
+        $this->assertEquals($startDate, $actualStartDateProperty);
+        $this->assertEquals($endDate, $actualEndDateProperty);
+
+        return $this;
+    }
 }
-
-
-//$addressOfApartmentProperty = new ReflectionProperty(Apartment::class, 'address');
-//$addressOfApartmentProperty->setAccessible(true);
-//
-//$originalAddress = $addressOfApartmentProperty->getValue($actual);
-//
-//$addressProperties = [
-//    'street' => new ReflectionProperty(ApartmentAddress::class, 'street'),
-//    'postalCode' => new ReflectionProperty(ApartmentAddress::class, 'postalCode'),
-//    'houseNumber' => new ReflectionProperty(ApartmentAddress::class, 'houseNumber'),
-//    'apartmentNumber' => new ReflectionProperty(ApartmentAddress::class, 'apartmentNumber'),
-//    'city' => new ReflectionProperty(ApartmentAddress::class, 'city'),
-//    'country' => new ReflectionProperty(ApartmentAddress::class, 'country'),
-//];
-//foreach ($addressProperties as $property){
-//    $property->setAccessible(true);
-//}
-//
-//
-//$this->assertSame($addressProperties['street']->getValue($originalAddress), $street);
-//$this->assertSame($addressProperties['postalCode']->getValue($originalAddress), $postalCode);
-//$this->assertSame($addressProperties['houseNumber']->getValue($originalAddress), $houseNumber);
-//$this->assertSame($addressProperties['apartmentNumber']->getValue($originalAddress), $apartmentNumber);
-//$this->assertSame($addressProperties['city']->getValue($originalAddress), $city);
-//$this->assertSame($addressProperties['country']->getValue($originalAddress), $country);
