@@ -35,4 +35,31 @@ class BookingTest extends TestCase
             ->hasDaysEqualsTo($expectedDays);
 
     }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testShouldCreateBookingHotelRoomWithAllRequiredFields (){
+
+        $rentalPlaceId = '5122';
+        $tenantId = '4734';
+
+        $expectedDays = [
+            DateTime::createFromFormat('d-m-Y', '09-05-1995'),
+            DateTime::createFromFormat('d-m-Y', '10-05-1995'),
+            DateTime::createFromFormat('d-m-Y', '11-05-1995'),
+            DateTime::createFromFormat('d-m-Y', '12-05-1995'),
+        ];
+
+        $actual = Booking::bookHotelRoom($rentalPlaceId, $tenantId, $expectedDays);
+
+
+        BookingAssertion::assert($actual)
+            ->isOpen()
+            ->hasRentalTypeEqualsTo(RentalType::HOTEL_ROOM)
+            ->hasRentalPlaceIdEqualsTo($rentalPlaceId)
+            ->hasTenantIdEqualsTo($tenantId)
+            ->hasDaysEqualsTo($expectedDays);
+
+    }
 }
