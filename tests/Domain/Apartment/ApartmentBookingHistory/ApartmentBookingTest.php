@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class ApartmentBookingTest extends TestCase
 {
+    /**
+     * @throws \ReflectionException
+     */
     public function testShouldCreateApartmentBookingWithAllRequiredFields(){
 
         $bookingCreationDateTime = DateTime::createFromFormat('d-m-Y H:i', '01-06-2021 13:35');
@@ -23,6 +26,7 @@ class ApartmentBookingTest extends TestCase
 
 
         ApartmentBookingAssertion::assert($actual)
+            ->isStart()
             ->hasBookingDateTimeEqualTo($bookingCreationDateTime)
             ->hasOwnerIdEqualTo($ownerId)
             ->hasTenantIdEqualTo($tenantId)

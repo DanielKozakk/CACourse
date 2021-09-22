@@ -4,12 +4,12 @@ namespace Domain\Apartment\ApartmentBookingHistory;
 
 use DateTime;
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use ReflectionProperty;
+
 
 class ApartmentBookingAssertion extends Assert
 {
-
     private ApartmentBooking $actual;
 
     /**
@@ -20,68 +20,79 @@ class ApartmentBookingAssertion extends Assert
         $this->actual = $actual;
     }
 
-
     public static function assert(ApartmentBooking $actual): ApartmentBookingAssertion
     {
         return new ApartmentBookingAssertion($actual);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function hasBookingDateTimeEqualTo(DateTime $bookingCreationDateTime) :ApartmentBookingAssertion
     {
+        $actualBookingDateCreation = $this->getReflectionValue(ApartmentBooking::class, 'bookingCreation', $this->actual);
 
-        $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'bookingCreation');
-        $reflectionProperty->setAccessible(true);
-
-        $actualBookingCreationDateTime = $reflectionProperty->getValue($this->actual);
-        $this->assertEquals($actualBookingCreationDateTime, $bookingCreationDateTime);
+        $this->assertEquals($actualBookingDateCreation, $bookingCreationDateTime);
         return $this;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function hasOwnerIdEqualTo(string $ownerId): ApartmentBookingAssertion
     {
-        $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'ownerId');
-        $reflectionProperty->setAccessible(true);
-
-        $actualOwnerId = $reflectionProperty->getValue($this->actual);
+        $actualOwnerId = $this->getReflectionValue(ApartmentBooking::class, 'ownerId', $this->actual);
         $this->assertEquals($actualOwnerId, $ownerId);
 
         return $this;
 
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function hasTenantIdEqualTo(string $tenantId): ApartmentBookingAssertion
     {
-        $reflectionProperty = new ReflectionProperty(ApartmentBooking::class, 'tenantId');
-        $reflectionProperty->setAccessible(true);
-
-        $actualTenantId = $reflectionProperty->getValue($this->actual);
+        $actualTenantId = $this->getReflectionValue(ApartmentBooking::class, 'tenantId', $this->actual);
         $this->assertEquals($actualTenantId, $tenantId);
 
         return $this;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function hasBookingPeriodThatHas(DateTime $startDate, DateTime $endDate): ApartmentBookingAssertion
     {
-        $reflectionBookingPeriodProperty = new ReflectionProperty(ApartmentBooking::class, 'bookingPeriod');
-        $reflectionBookingPeriodProperty->setAccessible(true);
+        $actualBookingPeriod = $this->getReflectionValue(ApartmentBooking::class, 'bookingPeriod', $this->actual);
 
-        $bookingPeriodValue = $reflectionBookingPeriodProperty->getValue($this->actual);
+        $actualBookingPeriodStartDate = $this->getReflectionValue(BookingPeriod::class, 'startDate', $actualBookingPeriod);
+        $actualBookingPeriodEndDate = $this->getReflectionValue(BookingPeriod::class, 'endDate', $actualBookingPeriod);
 
-        $reflectionStartDateProperty = new ReflectionProperty(BookingPeriod::class, 'startDate');
-        $reflectionStartDateProperty->setAccessible(true);
-        $reflectionEndDateProperty = new ReflectionProperty(BookingPeriod::class, 'endDate');
-        $reflectionEndDateProperty->setAccessible(true);
-
-
-        $actualStartDateProperty = $reflectionStartDateProperty->getValue($bookingPeriodValue);
-        $actualEndDateProperty = $reflectionEndDateProperty->getValue($bookingPeriodValue);
-
-        var_dump($actualStartDateProperty);
-        var_dump($startDate);
-
-        $this->assertEquals($startDate, $actualStartDateProperty);
-        $this->assertEquals($endDate, $actualEndDateProperty);
+        $this->assertEquals($startDate, $actualBookingPeriodStartDate);
+        $this->assertEquals($endDate, $actualBookingPeriodEndDate);
 
         return $this;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function isStart(): ApartmentBookingAssertion
+    {
+        $actualBookingStep = $this->getReflectionValue(ApartmentBooking::class, 'bookingStep', $this->actual);
+        $actualBookingStepState = $this->getReflectionValue(BookingStep::class, 'state', $actualBookingStep);
+        $this->assertEquals($actualBookingStepState, 'START');
+
+        return $this;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function getReflectionValue(string $classFqn, string $propertyName, object $actualObject){
+        $reflectionProperty = new ReflectionProperty($classFqn, $propertyName);
+        $reflectionProperty->setAccessible(true);
+        return $reflectionProperty->getValue($actualObject);
     }
 }
