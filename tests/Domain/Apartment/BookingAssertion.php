@@ -53,4 +53,37 @@ class BookingAssertion extends Assert
         return $this;
     }
 
+    /**
+     * @throws ReflectionException
+     */
+    public function hasRentalPlaceIdEqualsTo($expected) : self{
+
+        $actual = $this->getReflectionValue(Booking::class, 'rentalPlaceId', $this->actual);
+
+        $this->assertEquals($expected, $actual);
+
+        return $this;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function hasTenantIdEqualsTo($expected) : self{
+
+        $actual = $this->getReflectionValue(Booking::class, 'tenantId', $this->actual);
+        $this->assertEquals($expected, $actual);
+
+        return $this;
+    }
+    /**
+     * @throws ReflectionException
+     */
+    public function hasDaysEqualsTo($expected) : self{
+
+        $actual = $this->getReflectionValue(Booking::class, 'days', $this->actual);
+        $this->assertEquals($expected, $actual);
+
+        return $this;
+    }
+
 }

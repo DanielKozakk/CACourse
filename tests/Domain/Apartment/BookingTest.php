@@ -29,11 +29,10 @@ class BookingTest extends TestCase
 
         BookingAssertion::assert($actual)
             ->isOpen()
-            ->hasRentalTypeEqualsTo(RentalType::APARTMENT);
-
-//            ->hasRentalPlaceIdEqualsTo($rentalPlaceId)
-//            ->hasTenantIdEqualsTo($tenantId)
-//            ->hasDaysEqualsTo($expectedDays);
+            ->hasRentalTypeEqualsTo(RentalType::APARTMENT)
+            ->hasRentalPlaceIdEqualsTo($rentalPlaceId)
+            ->hasTenantIdEqualsTo($tenantId)
+            ->hasDaysEqualsTo($expectedDays);
 
     }
 }
