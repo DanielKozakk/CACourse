@@ -4,6 +4,7 @@ namespace Domain\Apartment;
 
 use DatePeriod;
 use DateTime;
+use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class PeriodTest extends TestCase
      * @param string $expectedEndDate
      * @param int $expectedCount
      * @param array $expectedArrayOfDays
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider dataProvider
      */
     public function testShouldPeriodContains(string $expectedStartDate, string $expectedEndDate, int $expectedCount, array $expectedArrayOfDays): void
@@ -22,7 +23,7 @@ class PeriodTest extends TestCase
         $start = new DateTime($expectedStartDate);
         $end = new DateTime($expectedEndDate);
 
-        $period = new Period(clone($start), clone($end));
+        $period = new Period($start, $end);
         $dateTimeArray = $period->asDateTimeArray();
 
         $this->assertCount($expectedCount, $dateTimeArray);
@@ -30,6 +31,28 @@ class PeriodTest extends TestCase
             $expectedArrayOfDays,
             $dateTimeArray
         );
+    }
+
+    /**
+     * @param string $expectedStartDate
+     * @param string $expectedEndDate
+     * @param int $expectedCount
+     * @param array $expectedArrayOfDays
+     * @throws Exception
+     * @dataProvider dataProvider
+     */
+    public function testShouldContainsTheSameDataAfterCallingAsDateTimeArrayFunctionTwice(string $startDate, string $endDate){
+
+        $start = new DateTime($startDate);
+        $end = new DateTime($endDate);
+
+        $period = new Period($start, $end);
+
+        $firstCalling = $period->asDateTimeArray();
+        $secondCalling = $period->asDateTimeArray();
+
+        $this->assertEqualsCanonicalizing($firstCalling, $secondCalling);
+
     }
 
     public function dataProvider(): Generator
