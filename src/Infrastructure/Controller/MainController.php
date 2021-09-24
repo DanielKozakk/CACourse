@@ -10,17 +10,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-private DoctrineApartmentRepository $doctrineApartmentRepository;
-
-    /**
-     * @param DoctrineApartmentRepository $doctrineApartmentRepository
-     */
-    public function __construct(
-        DoctrineApartmentRepository $doctrineApartmentRepository
-    )
-    {
-        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
-    }
+//private DoctrineApartmentRepository $doctrineApartmentRepository;
+//
+//    /**
+//     * @param DoctrineApartmentRepository $doctrineApartmentRepository
+//     */
+//    public function __construct(
+//        DoctrineApartmentRepository $doctrineApartmentRepository
+//    )
+//    {
+//        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
+//    }
 
 
     #[Route('/main', name: 'main')]

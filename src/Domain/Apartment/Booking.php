@@ -10,7 +10,7 @@ use Domain\EventChannel\EventChannel;
 //TODO: entity
 
 /**
- * @ORM\Entity
+ * @ ORM\Entity
  */
 class Booking
 {

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
 
 /**
- * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository")
+ * @ ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository")
  */
 class Hotel
 {

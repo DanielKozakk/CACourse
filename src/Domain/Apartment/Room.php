@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @ORM\Entity
+ * @ ORM\Entity
  *  TODO: Połącz encje z command
  */
 class Room

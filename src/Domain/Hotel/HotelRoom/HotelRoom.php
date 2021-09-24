@@ -7,7 +7,7 @@ use Domain\Apartment\Booking;
 use Domain\EventChannel\EventChannel;
 
 /**
- * @ORM\Entity(repositoryClass="Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository")
+ * @ ORM\Entity(repositoryClass="Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository")
  */
 class HotelRoom
 {

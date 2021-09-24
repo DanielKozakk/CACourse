@@ -8,7 +8,7 @@ use Domain\Apartment\Room;
 /**
  * //TODO: Entity
  * //TODO: Połącz encje z command
- * @ORM\Entity(repositoryClass="")
+ * @ ORM\Entity(repositoryClass="")
  */
 class ApartmentReadModel
 {

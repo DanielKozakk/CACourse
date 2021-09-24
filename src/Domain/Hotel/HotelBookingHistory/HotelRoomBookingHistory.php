@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 // TODO: todo
 /**
- * @ORM\Entity
+ * @ ORM\Entity
  */
 class HotelRoomBookingHistory
 {
