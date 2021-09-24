@@ -27,6 +27,11 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+
+        <report>
+            <html outputDirectory="build/coverage"/>
+            <text outputFile="build/coverage.txt"/>
+        </report>
     </coverage>
 
     <listeners>

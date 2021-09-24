@@ -25,7 +25,7 @@ class BookingTest extends TestCase
 
         $actual = Booking::bookApartment($rentalPlaceId, $tenantId, $period);
 
-        $expectedDays = $period->asDateTimeArray();
+        $expectedDays = [DateTime::createFromFormat('d-m-Y', '09-05-1995')];
 
         BookingAssertion::assert($actual)
             ->isOpen()
