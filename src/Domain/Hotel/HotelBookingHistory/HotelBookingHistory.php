@@ -41,9 +41,6 @@ class HotelBookingHistory
      */
     public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, array $days)
     {
-        /**
-         * @var HotelRoomBookingHistory $hotelRoomBookingHistory;
-         */
         $hotelRoomBookingHistory = $this->findFor($hotelRoomId);
 
         $hotelRoomBookingHistory->add($bookingDateTime, $tenantId, $days);
