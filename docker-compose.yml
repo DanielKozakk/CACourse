@@ -30,9 +30,6 @@ services:
         container_name: sf5_php
         volumes:
           - .:/home/wwwroot/sf5
-        environment:
-          - maildev_host=sf5_maildev
-          - mysqlhost=sf5_mysql
         depends_on:
           - maildev
           - mysql
