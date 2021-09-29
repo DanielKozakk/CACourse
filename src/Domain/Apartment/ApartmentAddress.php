@@ -22,21 +22,21 @@ class ApartmentAddress
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $houseNumber;
+    private string $houseNumber;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $apartmentNumber;
+    private string $apartmentNumber;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
+    private string $city;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $country;
+    private string $country;
 
 }
