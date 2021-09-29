@@ -3,12 +3,10 @@
 namespace Query\Apartment;
 
 use Doctrine\ORM\Mapping as ORM;
-use Domain\Apartment\Room;
 
 /**
- * //TODO: Entity
- * //TODO: Połącz encje z command
- * @ ORM\Entity(repositoryClass="")
+ * @ORM\Entity(repositoryClass=\Query\Apartment\SqlDoctrineQueryApartmentRepository")
+ * @ORM\Table(name="apartment")
  */
 class ApartmentReadModel
 {
@@ -25,26 +23,32 @@ class ApartmentReadModel
     private string $ownerId;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $street;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $postalCode;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $houseNumber;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $apartmentNumber;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $city;
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private string $country;
 
@@ -54,11 +58,11 @@ class ApartmentReadModel
      */
     private string $description;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-     * @var array<RoomReadModel> $rooms
-     */
-    private array $rooms;
+//    /**
+//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
+//     * @var array<RoomReadModel> $rooms
+//     */
+//    private array $rooms;
 
     /**
      * @param string $ownerId
@@ -70,7 +74,14 @@ class ApartmentReadModel
      * @param string $country
      * @param string $description
      */
-    public function __construct(string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description)
+    public function __construct(string $ownerId,
+                                string $street,
+                                string $postalCode,
+                                string $houseNumber,
+                                string $apartmentNumber,
+                                string $city,
+                                string $country,
+                                string $description)
     {
         $this->ownerId = $ownerId;
         $this->street = $street;
