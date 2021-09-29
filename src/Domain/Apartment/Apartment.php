@@ -26,7 +26,7 @@ class Apartment
     private string $ownerId;
     /**
      * @var ApartmentAddress
-     *  @Embedded(class = "ApartmentAddress")
+     *  @Embedded(class="ApartmentAddress")
      */
     private ApartmentAddress $address;
     /**
@@ -35,28 +35,29 @@ class Apartment
      */
     private string $description;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-     * @var array<Room> $rooms
-     */
-    private array $rooms;
+//    /**
+//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
+//     * @var array<Room> $rooms
+//     */
+//    private array $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
                                 string           $description,
-                                array            $rooms)
+//                                array            $rooms
+    )
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
-        $this->rooms = $rooms;
+//        $this->rooms = $rooms;
     }
 
-    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{
-        // publish event
-        $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
-        $eventChannel->publishApartmentBookedEvent($apartmentBooked);
-
-        return Booking::bookApartment($this->id, $tenantId, $period);
-    }
+//    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{
+//        // publish event
+//        $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
+//        $eventChannel->publishApartmentBookedEvent($apartmentBooked);
+//
+//        return Booking::bookApartment($this->id, $tenantId, $period);
+//    }
 }
