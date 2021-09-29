@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping\Embedded;
 use Domain\EventChannel\EventChannel;
 
 /**
- * @ ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
- * TODO: Połącz encje z command
+ * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
+ * @ORM\Table(name="apartment")
  */
 class Apartment
 {
