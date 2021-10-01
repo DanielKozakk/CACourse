@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="\Query\Apartment\SqlDoctrineQueryApartmentRepository")
+ * TODO: use Single Table Inheritance to connect with apartment table instead of apartment_read_model
  * @ORM\Table(name="apartment_read_model")
  */
 class ApartmentReadModel
