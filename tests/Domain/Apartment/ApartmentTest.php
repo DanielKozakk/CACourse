@@ -29,7 +29,7 @@ class ApartmentTest extends TestCase
         $this->assertThatHasOwnerId($actualApartment, $ownerId);
         $this->assertThatHasDescription($actualApartment, $description);
         $this->assertThatHasAddress($actualApartment, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
-//        $this->assertThatHasRooms($actualApartment, $roomsDefinition);
+        $this->assertThatHasRooms($actualApartment, $roomsDefinition);
 
     }
 
