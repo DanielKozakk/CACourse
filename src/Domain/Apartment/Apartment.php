@@ -2,8 +2,10 @@
 
 namespace Domain\Apartment;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
+use Doctrine\ORM\PersistentCollection;
 use Domain\EventChannel\EventChannel;
 
 /**
@@ -35,22 +37,22 @@ class Apartment
      */
     private string $description;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-//     * @var array<Room> $rooms
-//     */
-//    private array $rooms;
+    /**
+     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
+     * @var ArrayCollection|array<Room>|PersistentCollection $rooms
+     */
+    private $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
                                 string           $description,
-//                                array            $rooms
+                                array $rooms
     )
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
-//        $this->rooms = $rooms;
+        $this->rooms = $rooms;
     }
 
 //    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{

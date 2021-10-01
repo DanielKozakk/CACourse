@@ -16,7 +16,8 @@ class ApartmentFactory
         string $description,
         array  $roomsDefinition
 
-    ){
+    ): Apartment
+    {
         $address = new ApartmentAddress($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
 
         /**
