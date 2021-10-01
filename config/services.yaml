@@ -16,6 +16,9 @@ services:
     Infrastructure\Controller\:
         resource: '../src/Infrastructure/Controller'
 
+    Query\Apartment\:
+        resource: '../src/Query/Apartment'
+
 #    App\:
 #        resource: '../src/'
 #        exclude:

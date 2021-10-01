@@ -39,7 +39,8 @@
         "psr-4": {
             "Domain\\" : "src/Domain",
             "Infrastructure\\" : "src/Infrastructure",
-            "Application\\" : "src/Application"
+            "Application\\" : "src/Application",
+            "Query\\" : "src/Query"
         }
     },
     "autoload-dev": {
