@@ -11,7 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method ApartmentReadModel[]    findAll()
  * @method ApartmentReadModel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SqlDoctrineQueryApartmentRepository extends ServiceEntityRepository
+class SqlDoctrineQueryApartmentReadModelRepository extends ServiceEntityRepository
 {
 
     private EntityManagerInterface $entityManager;

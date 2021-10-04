@@ -3,61 +3,62 @@
 namespace Query\Apartment;
 
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Apartment\Apartment;
 
 /**
- * @ORM\Entity(repositoryClass="\Query\Apartment\SqlDoctrineQueryApartmentRepository")
+ * @ORM\Entity(repositoryClass="\Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository")
  * TODO: use Single Table Inheritance to connect with apartment table instead of apartment_read_model
- * @ORM\Table(name="apartment_read_model")
+ *
  */
-class ApartmentReadModel
+class ApartmentReadModel extends Apartment
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    protected int $id;
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private string $ownerId;
+    protected string $ownerId;
+    /**
+     * @var string
+     * @ORM\Column(type="string", name="address_street", length=255)
+     */
+    protected string $street;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $street;
+    protected string $postalCode;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $postalCode;
+    protected string $houseNumber;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $houseNumber;
+    protected string $apartmentNumber;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $apartmentNumber;
+    protected string $city;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $city;
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $country;
+    protected string $country;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $description;
+    protected string $description;
 
 //    /**
 //     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
@@ -85,7 +86,7 @@ class ApartmentReadModel
                                 string $description)
     {
         $this->ownerId = $ownerId;
-        $this->street = $street;
+        $this->address_street = $street;
         $this->postalCode = $postalCode;
         $this->houseNumber = $houseNumber;
         $this->apartmentNumber = $apartmentNumber;

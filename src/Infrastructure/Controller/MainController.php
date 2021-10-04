@@ -2,8 +2,12 @@
 
 namespace Infrastructure\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Domain\Apartment\ApartmentFactory;
 use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
+use Query\Apartment\ApartmentReadModel;
+use Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository;
 use Query\Apartment\SqlDoctrineQueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,21 +27,28 @@ class MainController extends AbstractController
 //        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
 //    }
 
-    private SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository;
+    private SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository;
+    private EntityManagerInterface $em;
 
     /**
-     * @param SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository
+     * @param SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository
+     * @param EntityManagerInterface $em
      */
-    public function __construct(SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository)
+    public function __construct(SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository, EntityManagerInterface $em)
     {
-        $this->sqlDoctrineQueryApartmentRepository = $sqlDoctrineQueryApartmentRepository;
+        $this->sqlDoctrineQueryApartmentReadModelRepository = $sqlDoctrineQueryApartmentReadModelRepository;
+        $this->em = $em;
     }
 
 
     #[Route('/main', name: 'main')]
     public function index(): Response
     {
+        
+        $apartmentReadModel = new ApartmentReadModel('abc','abc','abc','abc','abc','abc','abc','abc');
 
+        $this->em->persist($apartmentReadModel);
+        $this->em->flush();
 
         return $this->json([
             'message' => 'Welcome to your new controller!',

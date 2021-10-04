@@ -6,10 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\PersistentCollection;
-use Domain\EventChannel\EventChannel;
+//use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorMap({"apartment" = "Apartment", "apartment_read_model" = "\Query\Apartment\ApartmentReadModel"})
  * @ORM\Table(name="apartment")
  */
 class Apartment
@@ -20,28 +22,28 @@ class Apartment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    protected int $id;
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private string $ownerId;
+    protected string $ownerId;
     /**
      * @var ApartmentAddress
      *  @Embedded(class="ApartmentAddress")
      */
-    private ApartmentAddress $address;
+    protected ApartmentAddress $address;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private string $description;
+    protected string $description;
 
     /**
      * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
      * @var ArrayCollection|array<Room>|PersistentCollection $rooms
      */
-    private $rooms;
+    protected $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
