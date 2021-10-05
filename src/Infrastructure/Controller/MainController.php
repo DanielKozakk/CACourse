@@ -21,15 +21,18 @@ class MainController extends AbstractController
 
     private SqlDoctrineHotelRepository $sqlDoctrineHotelRepository;
     private SqlDoctrineHotelRoomRepository $sqlDoctrineHotelRoomRepository;
+    private HotelRoomFactory $hotelRoomFactory;
 
     /**
      * @param SqlDoctrineHotelRepository $sqlDoctrineHotelRepository
      * @param SqlDoctrineHotelRoomRepository $sqlDoctrineHotelRoomRepository
+     * @param HotelRoomFactory $hotelRoomFactory
      */
-    public function __construct(SqlDoctrineHotelRepository $sqlDoctrineHotelRepository, SqlDoctrineHotelRoomRepository $sqlDoctrineHotelRoomRepository)
+    public function __construct(SqlDoctrineHotelRepository $sqlDoctrineHotelRepository, SqlDoctrineHotelRoomRepository $sqlDoctrineHotelRoomRepository, HotelRoomFactory $hotelRoomFactory)
     {
         $this->sqlDoctrineHotelRepository = $sqlDoctrineHotelRepository;
         $this->sqlDoctrineHotelRoomRepository = $sqlDoctrineHotelRoomRepository;
+        $this->hotelRoomFactory = $hotelRoomFactory;
     }
 
 
@@ -40,9 +43,9 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-        $hotelRoomFactory = new HotelRoomFactory();
 
-        $hr = $hotelRoomFactory->create(1,2,"dobry jest");
+
+        $hr = $this->hotelRoomFactory->create(1,35,"dobry jest");
 
         $this->sqlDoctrineHotelRoomRepository->addRoomToHotel($hr);
 

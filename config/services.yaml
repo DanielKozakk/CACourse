@@ -21,7 +21,9 @@ services:
   Infrastructure\Persistence\Helper\:
     resource: '../src/Infrastructure/Persistence/Helper'
   Infrastructure\Persistence\Doctrine\Hotel\:
-    resource: '../src/Infrastructure/Persistence/Doctrine/Hotel'
+    resource: '../src/Infrastructure/Persistence/Doctrine/Hotel/'
+  Domain\Hotel\HotelRoom\:
+    resource: '../src/Domain/Hotel/HotelRoom'
   Query\Apartment\:
     resource: '../src/Query/Apartment'
 

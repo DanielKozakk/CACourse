@@ -22,10 +22,10 @@ class HotelRoom
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="\Domain\Hotel\Hotel", orphanRemoval=true)
-     * @ORM\JoinColumn(name="hotel_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="\Domain\Hotel\Hotel")
+     *
      */
-    private int $hotelId;
+    private $hotel;
     /**
      * @var int
      * @ORM\Column(type="integer")
@@ -45,11 +45,11 @@ class HotelRoom
      */
     private string $description;
 
-    public function __construct(int $hotelId, int $hotelRoomNumber,
+    public function __construct(Hotel $hotel, int $hotelRoomNumber,
 //                                array $spaces,
                                 string $description)
     {
-        $this->hotelId = $hotelId;
+        $this->hotel = $hotel;
         $this->hotelRoomNumber = $hotelRoomNumber;
 //        $this->spaces = $spaces;
         $this->description = $description;

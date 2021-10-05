@@ -2,8 +2,22 @@
 
 namespace Domain\Hotel\HotelRoom;
 
+use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
+
 class HotelRoomFactory
 {
+
+    private SqlDoctrineHotelRepository $sqlDoctrineHotelRepository;
+
+    /**
+     * @param SqlDoctrineHotelRepository $sqlDoctrineHotelRepository
+     */
+    public function __construct(SqlDoctrineHotelRepository $sqlDoctrineHotelRepository)
+    {
+        $this->sqlDoctrineHotelRepository = $sqlDoctrineHotelRepository;
+    }
+
+
     /**
      * @param int $hotelId
      * @param int $hotelRoomNumber
@@ -25,7 +39,11 @@ class HotelRoomFactory
 //            $squareMeter = new SquareMeter($size);
 //            $spaces[] = new Space($name, $squareMeter);
 //        }
-        return new HotelRoom($hotelId, $hotelRoomNumber,
+
+        dump($this->sqlDoctrineHotelRepository->find($hotelId));
+
+
+        return new HotelRoom($this->sqlDoctrineHotelRepository->find($hotelId), $hotelRoomNumber,
 //            $spaces,
             $description );
     }
