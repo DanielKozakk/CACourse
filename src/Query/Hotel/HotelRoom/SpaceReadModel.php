@@ -4,6 +4,10 @@ namespace Query\Hotel\HotelRoom;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ *
+ */
 class SpaceReadModel
 {
     /**
@@ -36,7 +40,7 @@ class SpaceReadModel
      * @param float $squareMeter
      * @param HotelRoomReadModel $hotelRoomReadModel
      */
-    public function __construct($id, string $name, float $squareMeter, HotelRoomReadModel $hotelRoomReadModel)
+    public function __construct(int $id, string $name, float $squareMeter, HotelRoomReadModel $hotelRoomReadModel)
     {
         $this->id = $id;
         $this->name = $name;
