@@ -1,20 +1,21 @@
 <?php
-//
-//namespace Domain\Hotel\HotelRoom;
-//
-//class HotelRoomFactory
-//{
-//    /**
-//     * @param string $hotelId
-//     * @param int $hotelRoomNumber
-//     * @param array<string, float> $spacesDefinition
-//     * @param string $description
-//     * @return HotelRoom
-//     */
-//    public function create(string $hotelId,
-//                           int    $hotelRoomNumber,
+
+namespace Domain\Hotel\HotelRoom;
+
+class HotelRoomFactory
+{
+    /**
+     * @param int $hotelId
+     * @param int $hotelRoomNumber
+     * @param array<string, float> $spacesDefinition
+     * @param string $description
+     * @return HotelRoom
+     */
+    public function create(int $hotelId,
+                           int    $hotelRoomNumber,
 //                           array  $spacesDefinition,
-//                           string $description): HotelRoom {
+                           string $description
+    ): HotelRoom {
 //        $spaces = [];
 //        foreach ($spacesDefinition as $name => $size){
 //
@@ -24,6 +25,8 @@
 //            $squareMeter = new SquareMeter($size);
 //            $spaces[] = new Space($name, $squareMeter);
 //        }
-//        return new HotelRoom($hotelId, $hotelRoomNumber, $spaces, $description );
-//    }
-//}
+        return new HotelRoom($hotelId, $hotelRoomNumber,
+//            $spaces,
+            $description );
+    }
+}
