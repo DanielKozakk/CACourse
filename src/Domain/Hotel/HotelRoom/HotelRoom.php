@@ -2,7 +2,10 @@
 
 namespace Domain\Hotel\HotelRoom;
 
+use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Domain\Hotel\Hotel;
 
 //use Domain\Apartment\Booking;
@@ -32,12 +35,12 @@ class HotelRoom
      */
     private int $hotelRoomNumber;
 
-//    /**
-//     * @var array<string, float> $spaces
-//     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom")
-//     *
-//     */
-//    private array $spaces;
+    /**
+     * @var array<string, float>|ArrayCollection|PersistentCollection $spaces
+     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom")
+     *
+     */
+    private $spaces;
 
     /**
      * @var string
@@ -46,13 +49,16 @@ class HotelRoom
     private string $description;
 
     public function __construct(Hotel $hotel, int $hotelRoomNumber,
-//                                array $spaces,
                                 string $description)
     {
         $this->hotel = $hotel;
         $this->hotelRoomNumber = $hotelRoomNumber;
-//        $this->spaces = $spaces;
+        $this->spaces = new ArrayCollection();
         $this->description = $description;
+    }
+
+    public function addSpacesToHotelRoom(Space $space){
+        $this->spaces[] = $space;
     }
 
 //    public function book(int $tenantId, array $days, EventChannel $eventChannel): Booking{
