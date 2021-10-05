@@ -20,22 +20,22 @@ class Apartment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected int $id;
+    private int $id;
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    protected string $ownerId;
+    private string $ownerId;
     /**
      * @var ApartmentAddress
      *  @Embedded(class="ApartmentAddress")
      */
-    protected ApartmentAddress $address;
+    private ApartmentAddress $address;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    protected string $description;
+    private string $description;
 
 //    /**
 //     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")

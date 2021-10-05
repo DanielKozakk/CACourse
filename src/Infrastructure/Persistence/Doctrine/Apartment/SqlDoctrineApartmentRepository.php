@@ -25,6 +25,8 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
     }
     public function save(Apartment $apartment){
 
+        
+
         $this->entityManager->persist($apartment);
         $this->entityManager->flush();
     }
