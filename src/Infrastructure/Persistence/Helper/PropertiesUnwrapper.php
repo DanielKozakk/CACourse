@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers;
+namespace Infrastructure\Persistence\Helper;
 use ReflectionProperty;
 use ReflectionException;
 

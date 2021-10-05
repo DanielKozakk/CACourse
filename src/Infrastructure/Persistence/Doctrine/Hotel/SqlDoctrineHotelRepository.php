@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Domain\Hotel\Hotel;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Hotel\HotelAddress;
-use Helpers\PropertiesUnwrapper;
+
+use Infrastructure\Persistence\Helper\PropertiesUnwrapper;
 use Query\Hotel\HotelReadModel;
 use ReflectionException;
 

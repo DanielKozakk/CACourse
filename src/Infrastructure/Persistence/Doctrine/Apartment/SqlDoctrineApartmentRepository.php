@@ -9,7 +9,9 @@ use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentAddress;
 use Domain\Apartment\Room;
 use Domain\Apartment\SquareMeter;
-use Helpers\PropertiesUnwrapper;
+
+
+use Infrastructure\Persistence\Helper\PropertiesUnwrapper;
 use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\RoomReadModel;
 use ReflectionException;

@@ -5,35 +5,40 @@ namespace Infrastructure\Controller;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Domain\Apartment\ApartmentFactory;
+use Domain\Hotel\Hotel;
+use Domain\Hotel\HotelFactory;
 use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
-use Query\Apartment\ApartmentReadModel;
-use Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository;
-use Query\Apartment\SqlDoctrineQueryApartmentRepository;
+use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    private DoctrineApartmentRepository $doctrineApartmentRepository;
+
+    private SqlDoctrineHotelRepository $sqlDoctrineHotelRepository;
 
     /**
-     * @param DoctrineApartmentRepository $doctrineApartmentRepository
+     * @param SqlDoctrineHotelRepository $sqlDoctrineHotelRepository
      */
-    public function __construct(DoctrineApartmentRepository $doctrineApartmentRepository)
+    public function __construct(SqlDoctrineHotelRepository $sqlDoctrineHotelRepository)
     {
-        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
+        $this->sqlDoctrineHotelRepository = $sqlDoctrineHotelRepository;
     }
 
 
+    /**
+     * @throws \ReflectionException
+     */
     #[Route('/main', name: 'main')]
     public function index(): Response
     {
 
 
-        $apartment = (new ApartmentFactory())->create('twoja_srara', 'sraDio_mara', 'abc', 'abc', 'abc', 'abc', 'abc', 'abc', ['first_room' => 1.4, 'second_room' => 242]);
+        $hotel = (new HotelFactory())->create('name', 'street', '12-512', '124', 'Warszawa', 'Gównopospolita Hujska');
 
-        $this->doctrineApartmentRepository->save($apartment);
+        $this->sqlDoctrineHotelRepository->save($hotel);
 
         return $this->json([
             'message' => 'Welcome to your new controller!',
