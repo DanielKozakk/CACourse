@@ -45,14 +45,15 @@ class Apartment
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
-                                string           $description,
-                                array $rooms
+                                string           $description
+//        , array $rooms
+
     )
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
-        $this->rooms = $rooms;
+//        $this->rooms = $rooms;
     }
 
 //    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{

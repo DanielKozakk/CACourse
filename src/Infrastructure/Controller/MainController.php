@@ -15,40 +15,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-//private DoctrineApartmentRepository $doctrineApartmentRepository;
-//
-//    /**
-//     * @param DoctrineApartmentRepository $doctrineApartmentRepository
-//     */
-//    public function __construct(
-//        DoctrineApartmentRepository $doctrineApartmentRepository
-//    )
-//    {
-//        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
-//    }
-
-    private SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository;
-    private EntityManagerInterface $em;
+    private DoctrineApartmentRepository $doctrineApartmentRepository;
 
     /**
-     * @param SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository
-     * @param EntityManagerInterface $em
+     * @param DoctrineApartmentRepository $doctrineApartmentRepository
      */
-    public function __construct(SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentReadModelRepository, EntityManagerInterface $em)
+    public function __construct(DoctrineApartmentRepository $doctrineApartmentRepository)
     {
-        $this->sqlDoctrineQueryApartmentReadModelRepository = $sqlDoctrineQueryApartmentReadModelRepository;
-        $this->em = $em;
+        $this->doctrineApartmentRepository = $doctrineApartmentRepository;
     }
 
 
     #[Route('/main', name: 'main')]
     public function index(): Response
     {
-        
-        $apartmentReadModel = new ApartmentReadModel('abc','abc','abc','abc','abc','abc','abc','abc');
 
-        $this->em->persist($apartmentReadModel);
-        $this->em->flush();
+
+        $apartment = (new ApartmentFactory())->create('twoja_srara', 'sraDio_mara', 'abc', 'abc', 'abc', 'abc', 'abc', 'abc', ['abc' => 1.4]);
+
+        $this->doctrineApartmentRepository->save($apartment);
 
         return $this->json([
             'message' => 'Welcome to your new controller!',
