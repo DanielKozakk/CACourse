@@ -23,13 +23,13 @@ class Hotel
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-//    /**
-//     * @var HotelAddress
-//     * @Embedded(class = "HotelAddress")
-//     *
-//     */
-//    private $address;
-//
+    /**
+     * @var HotelAddress
+     * @Embedded(class = "HotelAddress")
+     *
+     */
+    private $address;
+
     public function __construct(string $name, HotelAddress $address)
     {
         $this->name = $name;

@@ -11,13 +11,6 @@ class HotelAddress
 {
 
     /**
-     * @var int
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-    /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */

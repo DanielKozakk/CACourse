@@ -9,6 +9,7 @@ use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentAddress;
 use Domain\Apartment\Room;
 use Domain\Apartment\SquareMeter;
+use Helpers\PropertiesUnwrapper;
 use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\RoomReadModel;
 use ReflectionException;
@@ -22,6 +23,8 @@ use ReflectionProperty;
  */
 class SqlDoctrineApartmentRepository extends ServiceEntityRepository
 {
+
+    use PropertiesUnwrapper;
 
     private EntityManagerInterface $entityManager;
 
@@ -85,15 +88,4 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
 
         return $apartmentReadModel;
     }
-
-    /**
-     * @throws ReflectionException
-     */
-    private function getReflectionValue(string $classFqn, string $propertyName, object $actualObject){
-        $reflectionProperty = new ReflectionProperty($classFqn, $propertyName);
-        $reflectionProperty->setAccessible(true);
-        return $reflectionProperty->getValue($actualObject);
-    }
-
-
 }
