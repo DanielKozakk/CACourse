@@ -12,7 +12,6 @@ class ApartmentReadModel
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -65,6 +64,7 @@ class ApartmentReadModel
 //    private array $rooms;
 
     /**
+     * @param int $id
      * @param string $ownerId
      * @param string $street
      * @param string $postalCode
@@ -74,15 +74,9 @@ class ApartmentReadModel
      * @param string $country
      * @param string $description
      */
-    public function __construct(string $ownerId,
-                                string $street,
-                                string $postalCode,
-                                string $houseNumber,
-                                string $apartmentNumber,
-                                string $city,
-                                string $country,
-                                string $description)
+    public function __construct(int $id, string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description)
     {
+        $this->id = $id;
         $this->ownerId = $ownerId;
         $this->street = $street;
         $this->postalCode = $postalCode;
@@ -91,6 +85,79 @@ class ApartmentReadModel
         $this->city = $city;
         $this->country = $country;
         $this->description = $description;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnerId(): string
+    {
+        return $this->ownerId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHouseNumber(): string
+    {
+        return $this->houseNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApartmentNumber(): string
+    {
+        return $this->apartmentNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
 
