@@ -37,23 +37,24 @@ class Apartment
      */
     private string $description;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-//     * @var ArrayCollection|array<Room>|PersistentCollection $rooms
-//     */
-//    protected $rooms;
+    /**
+     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @var ArrayCollection|array<Room>|PersistentCollection $rooms
+     */
+    protected array|PersistentCollection|ArrayCollection $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
                                 string           $description
-//        , array $rooms
-
     )
     {
         $this->ownerId = $ownerId;
         $this->address = $address;
         $this->description = $description;
-//        $this->rooms = $rooms;
+        $this->rooms = new ArrayCollection();
+    }
+    public function addRoom(Room $room){
+        $this->rooms[] = $room;
     }
 
 //    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{

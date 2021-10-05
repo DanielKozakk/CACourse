@@ -57,11 +57,11 @@ class ApartmentReadModel
      */
     private string $description;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-//     * @var array<RoomReadModel> $rooms
-//     */
-//    private array $rooms;
+    /**
+     * @ORM\OneToMany(targetEntity="RoomReadModel", mappedBy="apartmentReadModel")
+     * @var array<RoomReadModel> $rooms
+     */
+    private array $rooms;
 
     /**
      * @param int $id
@@ -73,16 +73,9 @@ class ApartmentReadModel
      * @param string $city
      * @param string $country
      * @param string $description
+     * @param RoomReadModel[] $rooms
      */
-    public function __construct(int    $id,
-                                 string $ownerId,
-                                 string $street,
-                                 string $postalCode,
-                                 string $houseNumber,
-                                 string $apartmentNumber,
-                                 string $city,
-                                 string $country,
-                                 string $description)
+    public function __construct(int $id, string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description, array $rooms)
     {
         $this->id = $id;
         $this->ownerId = $ownerId;
@@ -93,6 +86,7 @@ class ApartmentReadModel
         $this->city = $city;
         $this->country = $country;
         $this->description = $description;
+        $this->rooms = $rooms;
     }
 
 

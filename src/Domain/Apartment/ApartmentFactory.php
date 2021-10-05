@@ -20,18 +20,16 @@ class ApartmentFactory
     {
         $address = new ApartmentAddress($street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
 
-//        /**
-//         * @var array<Room> $rooms
-//         */
-//        $rooms = [];
-//
-//        foreach ($roomsDefinition as $name => $size){
-//            $rooms[] = new Room($name, new SquareMeter($size));
-//        }
+        $apartment = new Apartment($ownerId, $address, $description);
+        /**
+         * @var array<Room> $rooms
+         */
+        $rooms = [];
 
-        return (new Apartment($ownerId,$address, $description
-//            , $rooms
+        foreach ($roomsDefinition as $name => $size){
+            $rooms[] = new Room($name, new SquareMeter($size), $apartment);
+        }
 
-        ));
+        return $apartment;
     }
 }

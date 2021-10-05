@@ -36,8 +36,8 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
         $this->entityManager->persist($apartment);
         $this->entityManager->flush();
 
-        $this->entityManager->persist($this->createApartmentReadModelObjectFromApartment($apartment));
-        $this->entityManager->flush();
+//        $this->entityManager->persist($this->createApartmentReadModelObjectFromApartment($apartment));
+//        $this->entityManager->flush();
 
     }
 
@@ -57,6 +57,12 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
         $readModelApartmentAddressCity = $this->getReflectionValue(ApartmentAddress::class, 'city', $readModelApartmentAddress);
         $readModelApartmentAddressCountry = $this->getReflectionValue(ApartmentAddress::class, 'country', $readModelApartmentAddress);
 
+        $readModelRooms = $this->getReflectionValue(Apartment::class, 'rooms', $apartment);
+
+        foreach ($readModelRooms as $room){
+            var_dump($room);
+        }
+
         return new ApartmentReadModel($readModelId,
             $readModelOwnerId,
             $readModelApartmentAddressStreet,
@@ -65,7 +71,7 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
             $readModelApartmentAddressApartmentNumber,
             $readModelApartmentAddressCity,
             $readModelApartmentAddressCountry,
-            $readModelDescription);
+            $readModelDescription, []);
     }
 
     /**
