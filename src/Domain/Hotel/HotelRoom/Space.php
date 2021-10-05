@@ -33,13 +33,17 @@ class Space
      */
     private HotelRoom $hotelRoom;
 
-    public function __construct(string $name, SquareMeter $squareMeter, HotelRoom $hotelRoom)
+    private function __construct(string $name, SquareMeter $squareMeter, HotelRoom $hotelRoom)
     {
         $this->name = $name;
         $this->squareMeter = $squareMeter;
         $this->hotelRoom = $hotelRoom;
-        $hotelRoom->addSpacesToHotelRoom($this);
     }
 
+    public static function assignNewSpaceToHotelRoom(string $name, float $squareMeter, HotelRoom $hotelRoom)
+    {
+        $newSpace= new Space($name, new SquareMeter($squareMeter), $hotelRoom);
+        $hotelRoom->addSpacesToHotelRoom($newSpace);
+    }
 
 }

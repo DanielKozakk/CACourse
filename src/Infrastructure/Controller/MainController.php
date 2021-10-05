@@ -8,6 +8,8 @@ use Domain\Apartment\ApartmentFactory;
 use Domain\Hotel\Hotel;
 use Domain\Hotel\HotelFactory;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
+use Domain\Hotel\HotelRoom\Space;
+use Domain\Hotel\HotelRoom\SquareMeter;
 use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
@@ -44,11 +46,12 @@ class MainController extends AbstractController
     {
 
 
+        $hr = $this->hotelRoomFactory->create(1, 35, "dobry jest");
 
-        $hr = $this->hotelRoomFactory->create(1,35,"dobry jest");
+        Space::assignNewSpaceToHotelRoom('nazwa', 2.4, $hr);
+        Space::assignNewSpaceToHotelRoom('kible', 25.224, $hr);
 
         $this->sqlDoctrineHotelRoomRepository->addRoomToHotel($hr);
-
 
 
         return $this->json([

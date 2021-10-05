@@ -37,7 +37,7 @@ class HotelRoom
 
     /**
      * @var array<string, float>|ArrayCollection|PersistentCollection $spaces
-     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom")
+     * @ORM\OneToMany(targetEntity="Space", mappedBy="hotelRoom", cascade={"persist", "remove"})
      *
      */
     private $spaces;
