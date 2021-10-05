@@ -10,8 +10,6 @@ use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorMap({"apartment" = "Apartment", "apartment_read_model" = "\Query\Apartment\ApartmentReadModel"})
  * @ORM\Table(name="apartment")
  */
 class Apartment
