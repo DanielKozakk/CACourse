@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class HotelReadModel
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -48,6 +46,7 @@ class HotelReadModel
     private string $country;
 
     /**
+     * @param $id
      * @param string $name
      * @param string $street
      * @param string $buildingNumber
@@ -55,8 +54,9 @@ class HotelReadModel
      * @param string $city
      * @param string $country
      */
-    public function __construct(string $name, string $street, string $buildingNumber, string $postalCode, string $city, string $country)
+    public function __construct($id, string $name, string $street, string $buildingNumber, string $postalCode, string $city, string $country)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->street = $street;
         $this->buildingNumber = $buildingNumber;
@@ -64,6 +64,7 @@ class HotelReadModel
         $this->city = $city;
         $this->country = $country;
     }
+
 
     /**
      * @return mixed
