@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
      *
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
-    private string $id;
+    private int $id;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
@@ -30,7 +30,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * @var ApartmentReadModel
      * @ORM\ManyToOne(targetEntity="ApartmentReadModel", inversedBy="rooms")
-     * @ORM\Column(type="string")
+     *
      */
     private $apartmentReadModel;
 
@@ -38,10 +38,12 @@ use Doctrine\ORM\Mapping as ORM;
      * @param string $name
      * @param mixed $size
      */
-    public function __construct(string $name, mixed $size)
+    public function __construct(string $name, mixed $size, ApartmentReadModel $apartmentReadModel)
     {
         $this->name = $name;
         $this->size = $size;
+        $this->apartmentReadModel = $apartmentReadModel;
+        $this->apartmentReadModel->addRoomReadModel($this);
     }
 
     /**

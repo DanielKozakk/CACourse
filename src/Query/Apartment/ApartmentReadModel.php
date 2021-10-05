@@ -2,7 +2,9 @@
 
 namespace Query\Apartment;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="\Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository")
@@ -58,10 +60,10 @@ class ApartmentReadModel
     private string $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="RoomReadModel", mappedBy="apartmentReadModel")
+     * @ORM\OneToMany(targetEntity="RoomReadModel", mappedBy="apartmentReadModel",  cascade={"persist", "remove"}, orphanRemoval=true)
      * @var array<RoomReadModel> $rooms
      */
-    private array $rooms;
+    private array|PersistentCollection|ArrayCollection $rooms;
 
     /**
      * @param int $id
@@ -86,8 +88,22 @@ class ApartmentReadModel
         $this->city = $city;
         $this->country = $country;
         $this->description = $description;
-        $this->rooms = $rooms;
+        $this->rooms = new ArrayCollection();
     }
+
+    public function addRoomReadModel(RoomReadModel $roomReadModel){
+            $this->rooms[] = $roomReadModel;
+    }
+
+    /**
+     * @return RoomReadModel[]
+     */
+    public function getRooms(): array
+    {
+        return $this->rooms;
+    }
+
+
 
 
     /**

@@ -31,7 +31,7 @@ class MainController extends AbstractController
     {
 
 
-        $apartment = (new ApartmentFactory())->create('twoja_srara', 'sraDio_mara', 'abc', 'abc', 'abc', 'abc', 'abc', 'abc', ['abc' => 1.4]);
+        $apartment = (new ApartmentFactory())->create('twoja_srara', 'sraDio_mara', 'abc', 'abc', 'abc', 'abc', 'abc', 'abc', ['first_room' => 1.4, 'second_room' => 242]);
 
         $this->doctrineApartmentRepository->save($apartment);
 

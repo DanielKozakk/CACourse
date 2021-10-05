@@ -7,7 +7,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentAddress;
+use Domain\Apartment\Room;
+use Domain\Apartment\SquareMeter;
 use Query\Apartment\ApartmentReadModel;
+use Query\Apartment\RoomReadModel;
 use ReflectionException;
 use ReflectionProperty;
 
@@ -36,8 +39,9 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
         $this->entityManager->persist($apartment);
         $this->entityManager->flush();
 
-//        $this->entityManager->persist($this->createApartmentReadModelObjectFromApartment($apartment));
-//        $this->entityManager->flush();
+
+        $this->entityManager->persist($this->createApartmentReadModelObjectFromApartment($apartment));
+        $this->entityManager->flush();
 
     }
 
@@ -59,11 +63,9 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
 
         $readModelRooms = $this->getReflectionValue(Apartment::class, 'rooms', $apartment);
 
-        foreach ($readModelRooms as $room){
-            var_dump($room);
-        }
 
-        return new ApartmentReadModel($readModelId,
+
+        $apartmentReadModel = new ApartmentReadModel($readModelId,
             $readModelOwnerId,
             $readModelApartmentAddressStreet,
             $readModelApartmentAddressPostalCode,
@@ -72,6 +74,16 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
             $readModelApartmentAddressCity,
             $readModelApartmentAddressCountry,
             $readModelDescription, []);
+
+        foreach ($readModelRooms as $room){
+            $nameRoomReadModel = $this->getReflectionValue(Room::class, 'name', $room);
+            $squareMeterRoomReadModel = $this->getReflectionValue(Room::class, 'squareMeter', $room);
+            $sizeRoomReadModel = $this->getReflectionValue(SquareMeter::class, 'size', $squareMeterRoomReadModel);
+
+            new RoomReadModel($nameRoomReadModel, $sizeRoomReadModel, $apartmentReadModel);
+        }
+
+        return $apartmentReadModel;
     }
 
     /**
