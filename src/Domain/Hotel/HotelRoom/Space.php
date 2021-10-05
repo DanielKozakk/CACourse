@@ -4,7 +4,7 @@ namespace Domain\Hotel\HotelRoom;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ ORM\Entity
+ * @ORM\Entity
  */
 class Space
 {
@@ -33,9 +33,13 @@ class Space
      */
     private HotelRoom $hotelRoom;
 
-    public function __construct(string $name, SquareMeter $squareMeter)
+    public function __construct(string $name, SquareMeter $squareMeter, HotelRoom $hotelRoom)
     {
         $this->name = $name;
         $this->squareMeter = $squareMeter;
+        $this->hotelRoom = $hotelRoom;
+        $hotelRoom->addSpacesToHotelRoom($this);
     }
+
+
 }
