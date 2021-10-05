@@ -5,7 +5,7 @@ namespace Query\Apartment;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=\Query\Apartment\SqlDoctrineQueryApartmentRepository")
+ * @ORM\Entity(repositoryClass="\Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository")
  * @ORM\Table(name="apartment_read_model")
  */
 class ApartmentReadModel

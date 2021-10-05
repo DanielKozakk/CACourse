@@ -37,11 +37,11 @@ class Apartment
      */
     protected string $description;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
-     * @var ArrayCollection|array<Room>|PersistentCollection $rooms
-     */
-    protected $rooms;
+//    /**
+//     * @ORM\OneToMany(targetEntity="Room", mappedBy="apartment")
+//     * @var ArrayCollection|array<Room>|PersistentCollection $rooms
+//     */
+//    protected $rooms;
 
     public function __construct(string           $ownerId,
                                 ApartmentAddress $address,
