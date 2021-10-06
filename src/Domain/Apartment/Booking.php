@@ -4,14 +4,13 @@ namespace Domain\Apartment;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-//use Domain\EventChannel\EventChannel;
+use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity
  */
 class Booking
 {
-
     /**
      * @var string
      * @ORM\Id
@@ -63,7 +62,6 @@ class Booking
         $this->bookingStatus = BookingStatus::open();
     }
 
-
     public static function bookApartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
     {
         return new Booking(RentalType::apartmentRentalType(),$rentalPlaceId, $tenantId, $period->asDateTimeArray());
@@ -76,15 +74,13 @@ class Booking
     public function reject(){
         $this->bookingStatus = BookingStatus::rejected();
     }
-//    public function accept(EventChannel $eventChannel){
-//        $this->bookingStatus = BookingStatus::accept();
-//        /**
-//         * @var BookingAcceptedEvent
-//         */
-//        $bookingAcceptedEvent = BookingAcceptedEvent::create($this->rentalType, $this->rentalPlaceId, $this->tenantId, $this->days);
-//
-//        $eventChannel->publishBookingAcceptedEvent($bookingAcceptedEvent);
-//
-//    }
+    public function accept(EventChannel $eventChannel){
+        $this->bookingStatus = BookingStatus::accept();
+        /**
+         * @var BookingAcceptedEvent
+         */
+        $bookingAcceptedEvent = BookingAcceptedEvent::create($this->rentalType, $this->rentalPlaceId, $this->tenantId, $this->days);
 
+        $eventChannel->publishBookingAcceptedEvent($bookingAcceptedEvent);
+    }
 }

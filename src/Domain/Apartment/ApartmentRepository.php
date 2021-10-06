@@ -6,6 +6,6 @@ interface ApartmentRepository
 {
     public function save(Apartment $apartment);
 
-    public function findById(string $apartmentId);
+    public function findById(string $apartmentId): ?Apartment;
 
 }

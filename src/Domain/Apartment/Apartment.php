@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\PersistentCollection;
+use Domain\EventChannel\EventChannel;
+
 //use Domain\EventChannel\EventChannel;
 
 /**
@@ -57,11 +59,11 @@ class Apartment
         $this->rooms[] = $room;
     }
 
-//    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{
-//        // publish event
-//        $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
-//        $eventChannel->publishApartmentBookedEvent($apartmentBooked);
-//
-//        return Booking::bookApartment($this->id, $tenantId, $period);
-//    }
+    public function book(string $tenantId, Period $period, EventChannel $eventChannel) : Booking{
+        // publish event
+        $apartmentBooked = ApartmentBookedEvent::create($this->id, $this->ownerId, $tenantId, $period->getStartDate(), $period->getEndDate());
+        $eventChannel->publishApartmentBookedEvent($apartmentBooked);
+
+        return Booking::bookApartment($this->id, $tenantId, $period);
+    }
 }
