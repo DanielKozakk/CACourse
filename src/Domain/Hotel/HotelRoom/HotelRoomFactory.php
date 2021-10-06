@@ -27,22 +27,16 @@ class HotelRoomFactory
      */
     public function create(int $hotelId,
                            int    $hotelRoomNumber,
-//                           array  $spacesDefinition,
+                           array  $spacesDefinition,
                            string $description
     ): HotelRoom {
-//        $spaces = [];
-//        foreach ($spacesDefinition as $name => $size){
-//
-//            /**
-//             * @var SquareMeter $squareMeter
-//             */
-//            $squareMeter = new SquareMeter($size);
-//            $spaces[] = new Space($name, $squareMeter);
-//        }
+        $newHotelRoom = new HotelRoom($this->sqlDoctrineHotelRepository->find($hotelId), $hotelRoomNumber,
+            $description
+        );
 
-
-        return new HotelRoom($this->sqlDoctrineHotelRepository->find($hotelId), $hotelRoomNumber,
-//            $spaces,
-            $description );
+        foreach ($spacesDefinition as $name => $size){
+            Space::assignNewSpaceToHotelRoom($name, $size, $newHotelRoom);
+        }
+        return $newHotelRoom;
     }
 }

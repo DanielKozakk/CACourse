@@ -43,6 +43,7 @@ class Space
     public static function assignNewSpaceToHotelRoom(string $name, float $squareMeter, HotelRoom $hotelRoom)
     {
         $newSpace= new Space($name, new SquareMeter($squareMeter), $hotelRoom);
+        $newSpace->hotelRoom = $hotelRoom;
         $hotelRoom->addSpacesToHotelRoom($newSpace);
     }
 
