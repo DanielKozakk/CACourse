@@ -46,9 +46,9 @@ class MainController extends AbstractController
     {
 
 
-        $hr = $this->hotelRoomFactory->create(1, 35, ['kuchnia' => 2.5, 'przedpokuj' => 24], 'niewielka szopa w pobliżu śmietniska');
+        $hr = $this->hotelRoomFactory->create(1, 36, ['schowek na buty' => 2235, 'salon' => 0.5], 'karton na ulicy');
 
-        $this->sqlDoctrineHotelRoomRepository->addRoomToHotel($hr);
+        $this->sqlDoctrineHotelRoomRepository->addHotelRoomToHotel($hr);
 
         return $this->json([
             'message' => 'Welcome to your new controller!',

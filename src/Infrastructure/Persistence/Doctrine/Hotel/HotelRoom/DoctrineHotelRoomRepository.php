@@ -20,7 +20,7 @@ class DoctrineHotelRoomRepository implements HotelRoomRepository
 
     public function save(HotelRoom $hotelRoom): void
     {
-        $this->sqlDoctrineHotelRoomRepository->addRoomToHotel($hotelRoom);
+        $this->sqlDoctrineHotelRoomRepository->addHotelRoomToHotel($hotelRoom);
     }
 
     public function findById(string $id) : HotelRoom|null

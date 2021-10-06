@@ -30,11 +30,11 @@ class HotelRoomReadModel
     private int $hotelRoomNumber;
 
     /**
-     * @var array<SpaceReadModel> $spaces
-     * @ORM\OneToMany(targetEntity="SpaceReadModel", mappedBy="hotelRoomReadModel")
+     *
+     * @ORM\OneToMany(targetEntity="SpaceReadModel", mappedBy="hotelRoomReadModel" , cascade={"persist", "remove"})
      *
      */
-    private array|ArrayCollection $spacesReadModel;
+    private $spacesReadModel;
 
     /**
      * @var string
@@ -55,6 +55,10 @@ class HotelRoomReadModel
         $this->hotelRoomNumber = $hotelRoomNumber;
         $this->spacesReadModel = new ArrayCollection();
         $this->description = $description;
+    }
+
+    public function addSpaceToHotelRoom(SpaceReadModel $spaceReadModel){
+        $this->spacesReadModel[] = $spaceReadModel;
     }
 
     /**

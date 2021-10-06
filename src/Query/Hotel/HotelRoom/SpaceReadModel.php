@@ -48,6 +48,13 @@ class SpaceReadModel
         $this->hotelRoomReadModel = $hotelRoomReadModel;
     }
 
+    public static function assignNewSpaceReadModelToHotelRoomReadModel(int $spaceReadModelId, string $name, float $squareMeter, HotelRoomReadModel $hotelRoomReadModel)
+    {
+        $newSpaceReadModel = new SpaceReadModel($spaceReadModelId, $name, $squareMeter, $hotelRoomReadModel);
+        $hotelRoomReadModel->addSpaceToHotelRoom($newSpaceReadModel);
+    }
+
+
     /**
      * @return mixed
      */
