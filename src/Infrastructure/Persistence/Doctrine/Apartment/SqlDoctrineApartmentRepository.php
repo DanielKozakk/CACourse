@@ -78,7 +78,7 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
             $readModelApartmentAddressApartmentNumber,
             $readModelApartmentAddressCity,
             $readModelApartmentAddressCountry,
-            $readModelDescription, []);
+            $readModelDescription);
 
         foreach ($readModelRooms as $room){
             $nameRoomReadModel = $this->getReflectionValue(Room::class, 'name', $room);

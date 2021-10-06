@@ -77,7 +77,7 @@ class ApartmentReadModel
      * @param string $description
      * @param RoomReadModel[] $rooms
      */
-    public function __construct(int $id, string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description, array $rooms)
+    public function __construct(int $id, string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description )
     {
         $this->id = $id;
         $this->ownerId = $ownerId;
