@@ -70,4 +70,6 @@ class HotelRoom
 
         return Booking::bookHotelRoom($this->id, $tenantId, $days);
     }
+
+
 }

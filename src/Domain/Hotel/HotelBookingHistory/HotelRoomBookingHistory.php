@@ -40,12 +40,12 @@ class HotelRoomBookingHistory
     private array|ArrayCollection $bookings;
 
 
-    public function __construct(HotelRoom $hotelRoom)
+    public function __construct(HotelRoom $hotelRoom, HotelBookingHistory $hotelBookingHistory)
     {
         $this->hotelRoom = $hotelRoom;
+        $this->hotelBookingHistory = $hotelBookingHistory;
         $this->bookings = new ArrayCollection();
     }
-
 
     /**
      * @param DateTime $bookingDateTime
@@ -59,12 +59,12 @@ class HotelRoomBookingHistory
     }
 
     /**
-     * @param string $comparisonId
+     * @param HotelRoom $hotelRoom
      * @return bool
      */
-    public function hasIdEqualTo(string $comparisonId): bool
+    public function hasHotelRoomEqualTo(HotelRoom $hotelRoom): bool
     {
-        return $comparisonId === $this->hotelRoomId;
+        return $hotelRoom == $this->hotelRoom;
     }
 
 }

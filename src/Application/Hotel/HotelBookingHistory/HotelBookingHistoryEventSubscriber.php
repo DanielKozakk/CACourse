@@ -10,6 +10,9 @@ use Domain\Hotel\HotelBookingHistory\HotelBookingHistoryRepository;
 use Domain\Hotel\HotelBookingHistory\HotelRoomBooking;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistory;
 use Domain\Hotel\HotelRoom\HotelRoomBookedEvent;
+use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
+use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
+use Infrastructure\Persistence\Doctrine\Hotel\HotelRoomBookingHistory\DoctrineHotelRoomBookingHistoryRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
@@ -17,14 +20,18 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
 {
 
     private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
+    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
 
     /**
      * @param HotelBookingHistoryRepository $hotelBookingHistoryRepository
+     * @param DoctrineHotelRoomRepository $doctrineHotelRoomRepository
      */
-    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository)
+    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository, DoctrineHotelRoomRepository $doctrineHotelRoomRepository)
     {
         $this->hotelBookingHistoryRepository = $hotelBookingHistoryRepository;
+        $this->doctrineHotelRoomRepository = $doctrineHotelRoomRepository;
     }
+
 
     public static function getSubscribedEvents()
     {
@@ -40,7 +47,7 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
 
         $hotelBookingHistory = $this->findHotelBookingHistoryForId($hotelRoomBookedEvent->getHotelId());
 
-        $hotelBookingHistory->add($hotelRoomBookedEvent->getHotelRoomId(), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
+        $hotelBookingHistory->add($this->doctrineHotelRoomRepository->findById($hotelRoomBookedEvent->getHotelRoomId()), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
 
         $this->hotelBookingHistoryRepository->save($hotelBookingHistory);
     }

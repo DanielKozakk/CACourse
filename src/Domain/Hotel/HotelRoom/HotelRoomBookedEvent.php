@@ -8,12 +8,12 @@ class HotelRoomBookedEvent
 {
     private string $eventId;
     private DateTime $eventCreationDateTime;
-    private string $hotelRoomId;
-    private string $hotelId;
+    private int $hotelRoomId;
+    private int $hotelId;
     private string $tenantId;
     private array $days;
 
-    private function __construct(string $eventId, DateTime $eventCreationDateTime, string $hotelRoomId, string $hotelId, string $tenantId, array $days)
+    private function __construct(string $eventId, DateTime $eventCreationDateTime, int $hotelRoomId, string $hotelId, string $tenantId, array $days)
     {
         $this->eventId = $eventId;
         $this->eventCreationDateTime = $eventCreationDateTime;
@@ -54,17 +54,17 @@ class HotelRoomBookedEvent
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getHotelRoomId(): string
+    public function getHotelRoomId(): int
     {
         return $this->hotelRoomId;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getHotelId(): string
+    public function getHotelId(): int
     {
         return $this->hotelId;
     }

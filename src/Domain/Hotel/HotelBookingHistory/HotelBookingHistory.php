@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Domain\Hotel\Hotel;
+use Domain\Hotel\HotelRoom\HotelRoom;
 
 /**
  *
@@ -45,30 +46,30 @@ class HotelBookingHistory
     }
 
     /**
-     * @param string $hotelRoomId
+     * @param HotelRoom $hotelRoom
      * @param DateTime $bookingDateTime
      * @param string $tenantId
      * @param array<DateTime> $days
      */
-    public function add(string $hotelRoomId, DateTime $bookingDateTime, string $tenantId, array $days)
+    public function add(HotelRoom $hotelRoom, DateTime $bookingDateTime, string $tenantId, array $days)
     {
-        $hotelRoomBookingHistory = $this->findFor($hotelRoomId);
+        $hotelRoomBookingHistory = $this->findFor($hotelRoom);
 
         $hotelRoomBookingHistory->add($bookingDateTime, $tenantId, $days);
     }
 
-    private function findFor(string $hotelRoomId): HotelRoomBookingHistory
+    private function findFor(HotelRoom $hotelRoom): HotelRoomBookingHistory
     {
         /**
          * @var array<HotelRoomBooking>
          */
-        $history = array_filter($this->hotelRoomBookingHistories, function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoomId) {
-            return $hotelRoomBookingHistory->hasIdEqualTo($hotelRoomId);
+        $history = array_filter($this->hotelRoomBookingHistories, function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoom) {
+            return $hotelRoomBookingHistory->hasHotelRoomEqualTo($hotelRoom);
         });
 
         if (empty($history)) {
 
-            $hotelRoomBookingHistory = new HotelRoomBookingHistory($hotelRoomId);
+            $hotelRoomBookingHistory = new HotelRoomBookingHistory($hotelRoom, $this);
             $this->hotelRoomBookingHistories->add($hotelRoomBookingHistory);
             return $hotelRoomBookingHistory;
         } else {
