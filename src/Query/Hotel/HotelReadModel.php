@@ -66,7 +66,6 @@ class HotelReadModel
         $this->country = $country;
     }
 
-
     /**
      * @return int
      */
@@ -122,8 +121,5 @@ class HotelReadModel
     {
         return $this->country;
     }
-
-
-
 
 }

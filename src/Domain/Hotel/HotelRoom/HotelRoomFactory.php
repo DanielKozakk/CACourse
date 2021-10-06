@@ -40,8 +40,6 @@ class HotelRoomFactory
 //            $spaces[] = new Space($name, $squareMeter);
 //        }
 
-        dump($this->sqlDoctrineHotelRepository->find($hotelId));
-
 
         return new HotelRoom($this->sqlDoctrineHotelRepository->find($hotelId), $hotelRoomNumber,
 //            $spaces,
