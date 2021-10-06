@@ -4,5 +4,5 @@ tests:
 	cd ~/programming-projects/php-projects/CACourse && php bin/console doctrine:database:create
 	cd ~/programming-projects/php-projects/CACourse && php bin/console doctrine:migrations:migrate -n
 	cd ~/programming-projects/php-projects/CACourse && php bin/console doctrine:fixtures:load -n
-	cd ~/programming-projects/php-projects/CACourse && php bin/phpunit $@
+	cd ~/programming-projects/php-projects/CACourse && php bin/phpunit $@ --coverage-text
 .PHONY: tests
