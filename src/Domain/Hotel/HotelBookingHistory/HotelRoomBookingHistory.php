@@ -5,33 +5,44 @@ namespace Domain\Hotel\HotelBookingHistory;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Hotel\HotelRoom\HotelRoom;
 
-// TODO: todo
+
 /**
- * @ ORM\Entity
+ * @ORM\Entity
  */
 class HotelRoomBookingHistory
 {
 
     /**
-     * @var string
+     * @var int
      * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column (type="integer")
      */
-    private string $hotelRoomId;
+    private int $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Domain\Hotel\HotelRoom\HotelRoom")
+     */
+    private $hotelRoom;
+
+    /**
+     * @var HotelBookingHistory
+     * @ORM\ManyToOne(targetEntity="HotelBookingHistory", inversedBy="hotelRoomBookingHistories")
+     */
+    private HotelBookingHistory $hotelBookingHistory;
 
     /**
      * @var array<HotelRoomBooking>|ArrayCollection
-     * TODO: OneToMany
+     * @ORM\OneToMany(targetEntity="HotelRoomBooking", mappedBy="hotelRoomBookingHistory", cascade={"persist", "remove"})
      */
     private array|ArrayCollection $bookings;
 
-    /**
-     * @param string $hotelRoomId
-     *
-     */
-    public function __construct(string $hotelRoomId)
+
+    public function __construct(HotelRoom $hotelRoom)
     {
-        $this->hotelRoomId = $hotelRoomId;
+        $this->hotelRoom = $hotelRoom;
         $this->bookings = new ArrayCollection();
     }
 
