@@ -6,6 +6,8 @@ use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use Domain\Apartment\Booking;
+use Domain\EventChannel\EventChannel;
 use Domain\Hotel\Hotel;
 
 //use Domain\Apartment\Booking;
@@ -61,11 +63,11 @@ class HotelRoom
         $this->spaces[] = $space;
     }
 
-//    public function book(int $tenantId, array $days, EventChannel $eventChannel): Booking{
-//
-//        $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotelId, $tenantId, $days);
-//        $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
-//
-//        return Booking::bookHotelRoom($this->id, $tenantId, $days);
-//    }
+    public function book(int $tenantId, array $days, EventChannel $eventChannel): Booking{
+
+        $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotelId, $tenantId, $days);
+        $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
+
+        return Booking::bookHotelRoom($this->id, $tenantId, $days);
+    }
 }
