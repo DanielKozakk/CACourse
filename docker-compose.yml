@@ -24,6 +24,19 @@ services:
             MYSQL_DATABASE: sf5
             MYSQL_USER: sf5
             MYSQL_PASSWORD: sf5
+    mysql_test:
+      image: mysql:8
+      container_name: sf5_mysql_test
+      volumes:
+        - .docker/data/db_test:/var/lib/mysql
+      command:
+        - "--default-authentication-plugin=mysql_native_password"
+        - "--lower_case_table_names=1"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: sf5_test
+        MYSQL_USER: sf5_test
+        MYSQL_PASSWORD: sf5_test
 
     php:
         build: .docker/php
