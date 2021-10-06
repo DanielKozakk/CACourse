@@ -5,6 +5,7 @@ namespace Domain\Hotel\HotelBookingHistory;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Hotel\Hotel;
 
 /**
  *
@@ -14,24 +15,24 @@ use Doctrine\ORM\Mapping as ORM;
 class HotelBookingHistory
 {
     /**
-     * @var int
+     *
      * @ORM\Id
-     * @ORM\Column (type="integer")
+     * @ORM\ManyToOne(targetEntity="Domain\Hotel\Hotel")
      */
-    private int $hotelId;
+    private $hotel;
 
     /**
      * @var array<HotelRoomBookingHistory>|ArrayCollection
-     * @ORM\OneToMany(targetEntity="HotelRoomBookingHistory")
+     * @ ORM\OneToMany(targetEntity="HotelRoomBookingHistory")
      */
     private array|ArrayCollection $hotelRoomBookingHistories;
 
     /**
-     * @param int $hotelId
+     * @param $hotel
      */
-    public function __construct(int $hotelId)
+    public function __construct($hotel)
     {
-        $this->hotelId = $hotelId;
+        $this->hotel = $hotel;
         $this->hotelRoomBookingHistories = new ArrayCollection();
     }
 
