@@ -5,6 +5,7 @@ namespace Domain\Hotel\HotelBookingHistory;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Domain\Hotel\Hotel;
 use Domain\Hotel\HotelRoom\HotelRoom;
 
@@ -34,7 +35,7 @@ class HotelBookingHistory
      * @var array<HotelRoomBookingHistory>|ArrayCollection
      * @ORM\OneToMany(targetEntity="HotelRoomBookingHistory", mappedBy="hotelBookingHistory", cascade={"persist", "remove"})
      */
-    private array|ArrayCollection $hotelRoomBookingHistories;
+    private array|ArrayCollection|PersistentCollection $hotelRoomBookingHistories;
 
     /**
      * @param Hotel $hotel
@@ -63,7 +64,7 @@ class HotelBookingHistory
         /**
          * @var array<HotelRoomBooking>
          */
-        $history = array_filter($this->hotelRoomBookingHistories, function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoom) {
+        $history = array_filter($this->hotelRoomBookingHistories->getValues(), function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoom) {
             return $hotelRoomBookingHistory->hasHotelRoomEqualTo($hotelRoom);
         });
 
@@ -73,7 +74,7 @@ class HotelBookingHistory
             $this->hotelRoomBookingHistories->add($hotelRoomBookingHistory);
             return $hotelRoomBookingHistory;
         } else {
-            return $history->first();
+            return $history[0];
         }
     }
 

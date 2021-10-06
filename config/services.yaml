@@ -16,12 +16,8 @@ services:
   Infrastructure\Controller\:
     resource: '../src/Infrastructure/Controller'
 
-  Infrastructure\Persistence\Doctrine\Apartment\:
-    resource: '../src/Infrastructure/Persistence/Doctrine/Apartment'
-  Infrastructure\Persistence\Helper\:
-    resource: '../src/Infrastructure/Persistence/Helper'
-  Infrastructure\Persistence\Doctrine\Hotel\:
-    resource: '../src/Infrastructure/Persistence/Doctrine/Hotel/'
+  Infrastructure\Persistence\:
+    resource: '../src/Infrastructure/Persistence'
   Domain\Hotel\HotelRoom\:
     resource: '../src/Domain/Hotel/HotelRoom'
   Query\Apartment\:

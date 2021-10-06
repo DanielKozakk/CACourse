@@ -37,7 +37,7 @@ class HotelRoomBookingHistory
      * @var array<HotelRoomBooking>|ArrayCollection
      * @ORM\OneToMany(targetEntity="HotelRoomBooking", mappedBy="hotelRoomBookingHistory", cascade={"persist", "remove"})
      */
-    private array|ArrayCollection $bookings;
+    private $bookings;
 
 
     public function __construct(HotelRoom $hotelRoom, HotelBookingHistory $hotelBookingHistory)
