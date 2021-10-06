@@ -23,4 +23,9 @@ class DoctrineHotelRepository implements HotelRepository
     {
         $this->sqlDoctrineHotelRepository->save($hotel);
     }
+
+    public function findById(int $id): ?Hotel
+    {
+        return $this->sqlDoctrineHotelRepository->find($id);
+    }
 }

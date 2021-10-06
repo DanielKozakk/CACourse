@@ -21,15 +21,18 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
 
     private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
     private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
+    private DoctrineHotelRepository $doctrineHotelRepository;
 
     /**
      * @param HotelBookingHistoryRepository $hotelBookingHistoryRepository
      * @param DoctrineHotelRoomRepository $doctrineHotelRoomRepository
+     * @param DoctrineHotelRepository $doctrineHotelRepository
      */
-    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository, DoctrineHotelRoomRepository $doctrineHotelRoomRepository)
+    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository, DoctrineHotelRoomRepository $doctrineHotelRoomRepository, DoctrineHotelRepository $doctrineHotelRepository)
     {
         $this->hotelBookingHistoryRepository = $hotelBookingHistoryRepository;
         $this->doctrineHotelRoomRepository = $doctrineHotelRoomRepository;
+        $this->doctrineHotelRepository = $doctrineHotelRepository;
     }
 
 
@@ -45,9 +48,10 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
     public function book(HotelRoomBookedEvent $hotelRoomBookedEvent)
     {
 
+        $hotelRoom = $this->doctrineHotelRoomRepository->findById($hotelRoomBookedEvent->getHotelRoomId());
         $hotelBookingHistory = $this->findHotelBookingHistoryForId($hotelRoomBookedEvent->getHotelId());
 
-        $hotelBookingHistory->add($this->doctrineHotelRoomRepository->findById($hotelRoomBookedEvent->getHotelRoomId()), $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
+        $hotelBookingHistory->add( $hotelRoom, $hotelRoomBookedEvent->getEventCreationDateTime(), $hotelRoomBookedEvent->getTenantId(), $hotelRoomBookedEvent->getDays() );
 
         $this->hotelBookingHistoryRepository->save($hotelBookingHistory);
     }
@@ -56,7 +60,7 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
         if ($this->hotelBookingHistoryRepository->existsFor($hotelId)) {
             return $this->hotelBookingHistoryRepository->findFor($hotelId);
         } else {
-            return new HotelBookingHistory($hotelId);
+            return new HotelBookingHistory($this->doctrineHotelRepository->findById($hotelId));
         }
     }
 }
