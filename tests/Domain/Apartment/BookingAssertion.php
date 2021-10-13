@@ -6,7 +6,7 @@
 //use PHPUnit\Framework\Assert;
 //use ReflectionException;
 //
-//require_once ('tests/Helpers/PropertiesUnwrapper.php');
+//require_once (__DIR__ . "/../../Helpers/PropertiesUnwrapper.php");
 //
 //class BookingAssertion extends Assert
 //{

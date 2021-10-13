@@ -1,0 +1,158 @@
+
+
+Code Coverage Report:    
+  2021-10-07 10:40:28    
+                         
+ Summary:                
+  Classes:  0.00% (0/74) 
+  Methods:  0.00% (0/256)
+  Lines:    0.00% (0/645)
+
+App\Entity\Test
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  4)
+App\Repository\TestRepository
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Application\Apartment\ApartmentApplicationService
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 13)
+Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 15)
+Application\Booking\AcceptBookingCommand
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  3)
+Application\Booking\BookingCommandHandler
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 12)
+Application\Booking\RejectBookingCommand
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  3)
+Application\Hotel\HotelApplicationService
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  5)
+Application\Hotel\HotelBookingHistory\HotelBookingHistoryEventSubscriber
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 13)
+Application\Hotel\HotelRoom\HotelRoomApplicationService
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 11)
+Domain\Apartment\Apartment
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 10)
+Domain\Apartment\ApartmentAddress
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  7)
+Domain\Apartment\ApartmentBookedEvent
+  Methods:   0.00% ( 0/ 9)   Lines:   0.00% (  0/ 18)
+Domain\Apartment\ApartmentBookingHistory\ApartmentBooking
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  7)
+Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)
+Domain\Apartment\ApartmentBookingHistory\BookingPeriod
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  3)
+Domain\Apartment\ApartmentBookingHistory\BookingStep
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  4)
+Domain\Apartment\ApartmentFactory
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  6)
+Domain\Apartment\Booking
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/ 14)
+Domain\Apartment\BookingAcceptedEvent
+  Methods:   0.00% ( 0/ 8)   Lines:   0.00% (  0/ 16)
+Domain\Apartment\BookingStatus
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/  6)
+Domain\Apartment\Period
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 12)
+Domain\Apartment\RentalType
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  5)
+Domain\Apartment\Room
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  5)
+Domain\Apartment\SquareMeter
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Domain\Entity\FakeEntity
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  1)
+Domain\Entity\OrangeElep
+  Methods:   0.00% ( 0/ 9)   Lines:   0.00% (  0/ 18)
+Domain\Hotel\Hotel
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  3)
+Domain\Hotel\HotelAddress
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  6)
+Domain\Hotel\HotelBookingHistory\HotelBookingHistory
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 14)
+Domain\Hotel\HotelBookingHistory\HotelRoomBooking
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  4)
+Domain\Hotel\HotelBookingHistory\HotelRoomBookingHistory
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  7)
+Domain\Hotel\HotelFactory
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Domain\Hotel\HotelRoom\HotelRoom
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 10)
+Domain\Hotel\HotelRoom\HotelRoomBookedEvent
+  Methods:   0.00% ( 0/ 8)   Lines:   0.00% (  0/ 16)
+Domain\Hotel\HotelRoom\HotelRoomFactory
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  6)
+Domain\Hotel\HotelRoom\Space
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  7)
+Domain\Hotel\HotelRoom\SquareMeter
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Domain\Repository\FakeEntityRepository
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Domain\Repository\OrangeElepRepository
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  2)
+Infrastructure\CommandChannel\Symfony\SymfonyCommandDispatcher
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  6)
+Infrastructure\Controller\MainController
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/ 12)
+Infrastructure\EventChannel\Symfony\SymfonyEventDispatcher
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  8)
+Infrastructure\Kernel
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/ 13)
+Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\DoctrineApartmentBookingHistory
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  6)
+Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\SqlDoctrineApartmentBookingHistory
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  8)
+Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  5)
+Infrastructure\Persistence\Doctrine\Apartment\SqlDoctrineApartmentRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 26)
+Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  5)
+Infrastructure\Persistence\Doctrine\Hotel\HotelRoomBookingHistory\DoctrineHotelRoomBookingHistoryRepository
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  6)
+Infrastructure\Persistence\Doctrine\Hotel\HotelRoomBookingHistory\SqlDoctrineHotelBookingHistoryRepository
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  8)
+Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  5)
+Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 25)
+Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 17)
+Infrastructure\Persistence\Helper\PropertiesUnwrapper
+  Methods:   0.00% ( 0/ 1)   Lines:   0.00% (  0/  3)
+Infrastructure\Rest\Api\Apartment\ApartmentBookingDto
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/  7)
+Infrastructure\Rest\Api\Apartment\ApartmentCreationDto
+  Methods:   0.00% ( 0/10)   Lines:   0.00% (  0/ 19)
+Infrastructure\Rest\Api\Apartment\ApartmentRestController
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/ 18)
+Infrastructure\Rest\Api\Booking\BookingRestController
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  6)
+Infrastructure\Rest\Api\Hotel\HotelDto
+  Methods:   0.00% ( 0/ 7)   Lines:   0.00% (  0/ 13)
+Infrastructure\Rest\Api\Hotel\HotelRestController
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/ 12)
+Infrastructure\Rest\Api\Hotel\HotelRoom\HotelBookingDto
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  5)
+Infrastructure\Rest\Api\Hotel\HotelRoom\HotelRoomCreationDto
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/  9)
+Infrastructure\Rest\Api\Hotel\HotelRoom\HotelRoomRestController
+  Methods:   0.00% ( 0/ 4)   Lines:   0.00% (  0/ 12)
+Query\Apartment\ApartmentReadModel
+  Methods:   0.00% ( 0/12)   Lines:   0.00% (  0/ 23)
+Query\Apartment\RoomReadModel
+  Methods:   0.00% ( 0/ 5)   Lines:   0.00% (  0/  9)
+Query\Apartment\SqlDoctrineQueryApartmentReadModelRepository
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)
+Query\Hotel\HotelReadModel
+  Methods:   0.00% ( 0/ 8)   Lines:   0.00% (  0/ 15)
+Query\Hotel\HotelRoom\HotelRoomReadModel
+  Methods:   0.00% ( 0/ 7)   Lines:   0.00% (  0/ 13)
+Query\Hotel\HotelRoom\QueryHotelRoomRepository
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  3)
+Query\Hotel\HotelRoom\SpaceReadModel
+  Methods:   0.00% ( 0/ 6)   Lines:   0.00% (  0/ 12)
+Query\Hotel\HotelRoom\SqlDoctrineQueryHotelRoomRepository
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)
+Query\Hotel\QueryHotelRepository
+  Methods:   0.00% ( 0/ 3)   Lines:   0.00% (  0/  4)
+Query\Hotel\SqlDoctrineQueryHotelRepository
+  Methods:   0.00% ( 0/ 2)   Lines:   0.00% (  0/  4)
