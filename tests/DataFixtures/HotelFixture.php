@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\DataFixtures;
+namespace DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\ORMFixtureInterface;

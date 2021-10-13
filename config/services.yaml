@@ -22,8 +22,8 @@ services:
     resource: '../src/Domain/Hotel/HotelRoom'
   Query\Apartment\:
     resource: '../src/Query/Apartment'
-  Domain\DataFixtures\:
-    resource: '../tests/Domain/DataFixtures'
+  DataFixtures\:
+    resource: '../tests/DataFixtures'
     tags: ['doctrine.fixture.orm']
 
   #    App\:

@@ -46,7 +46,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Domain\\": "tests/Domain"
+            "Domain\\": "tests/Domain",
+            "DataFixtures\\": "tests/DataFixtures"
         }
     },
     "replace": {
