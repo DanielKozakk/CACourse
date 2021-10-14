@@ -3,6 +3,7 @@
 namespace Domain\Apartment;
 
 use DateTime;
+use Helpers\PropertiesUnwrapper;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -11,6 +12,7 @@ require_once ('BookingAssertion.php');
 class BookingTest extends TestCase
 {
 
+    use PropertiesUnwrapper;
     /**
      * @throws ReflectionException
      */
@@ -61,5 +63,18 @@ class BookingTest extends TestCase
             ->hasTenantIdEqualsTo($tenantId)
             ->hasDaysEqualsTo($expectedDays);
 
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testShouldChangeBookingStatusIntoReject(){
+        $booking = Booking::bookHotelRoom('123', '456', [new DateTime()]);
+        $booking->reject();
+
+        $bookingStatus = $this->getReflectionValue(Booking::class, 'bookingStatus',$booking);
+        $bookingStatusState = $this->getReflectionValue(BookingStatus::class, 'state', $bookingStatus);
+
+        $this->assertEquals('REJECTED', $bookingStatusState);
     }
 }
