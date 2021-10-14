@@ -62,7 +62,7 @@ class HotelBookingHistory
     private function findFor(HotelRoom $hotelRoom): HotelRoomBookingHistory
     {
         /**
-         * @var array<HotelRoomBooking>
+         * @var array<HotelRoomBookingHistory>
          */
         $history = array_filter($this->hotelRoomBookingHistories->getValues(), function (HotelRoomBookingHistory $hotelRoomBookingHistory) use ($hotelRoom) {
             return $hotelRoomBookingHistory->hasHotelRoomEqualTo($hotelRoom);
