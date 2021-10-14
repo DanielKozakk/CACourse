@@ -1,7 +1,7 @@
 <?php
 
 namespace Domain\Apartment\ApartmentBookingHistory;
-require_once('../../../Helpers/PropertiesUnwrapper.php');
+
 
 use DateTime;
 use Helpers\PropertiesUnwrapper;

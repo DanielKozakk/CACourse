@@ -1,7 +1,7 @@
 <?php
 
 namespace Domain\Apartment\ApartmentBookingHistory;
-require_once ('ApartmentBookingAssertion.php');
+
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
