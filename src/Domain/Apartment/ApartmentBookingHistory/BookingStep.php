@@ -25,7 +25,7 @@ class BookingStep
      */
     private function __construct(string $state)
     {
-            $this->state = $state;
+        $this->state = $state;
     }
 
     public static function start():BookingStep {

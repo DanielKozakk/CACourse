@@ -37,6 +37,12 @@ class ApartmentBookingHistoryTest extends KernelTestCase
 
         $this->assertEquals($apartmentBooking, $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $apartmentBookingHistory)->first());
 
+        $this->assertSame($bookingCreation,$this->getReflectionValue(ApartmentBooking::class, 'bookingCreation', $apartmentBooking) );
+        $this->assertSame($ownerId,$this->getReflectionValue(ApartmentBooking::class, 'ownerId', $apartmentBooking) );
+        $this->assertSame($tenantId,$this->getReflectionValue(ApartmentBooking::class, 'tenantId', $apartmentBooking) );
+        $this->assertSame($bookingPeriod,$this->getReflectionValue(ApartmentBooking::class, 'bookingPeriod', $apartmentBooking) );
+        $bookingStep = $this->getReflectionValue(ApartmentBooking::class, 'bookingStep', $apartmentBooking);
+        $this->assertSame('START', $this->getReflectionValue(BookingStep::class, 'state', $bookingStep));
     }
 
     private function getRelatedApartment(): Apartment
