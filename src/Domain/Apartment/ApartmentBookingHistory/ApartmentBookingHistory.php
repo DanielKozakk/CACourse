@@ -4,6 +4,7 @@ namespace Domain\Apartment\ApartmentBookingHistory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Apartment\Apartment;
 
 /**
  * @ORM\Entity(repositoryClass="\Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\SqlDoctrineApartmentBookingHistory")
@@ -20,9 +21,8 @@ class ApartmentBookingHistory
 
     /**
      * @ORM\OneToOne(targetEntity="\Domain\Apartment\Apartment")
-     *
      */
-    private string $apartment;
+    private Apartment $apartment;
     /**
      *
      * @var array<ApartmentBooking>|ArrayCollection
@@ -31,17 +31,15 @@ class ApartmentBookingHistory
     private array|ArrayCollection $apartmentBookingList;
 
     /**
-     * @param string $apartment
+     * @param Apartment $apartment
      */
-    public function __construct(string $apartment)
+    public function __construct(Apartment $apartment)
     {
         $this->apartment = $apartment;
-
+        $this->apartmentBookingList = new ArrayCollection();
     }
-
 
     public function add(ApartmentBooking $apartmentBooking){
-        array_push($this->apartmentBookingList, $apartmentBooking);
+        $this->apartmentBookingList->add($apartmentBooking);
     }
-
 }

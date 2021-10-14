@@ -18,6 +18,8 @@ services:
 
   Infrastructure\Persistence\:
     resource: '../src/Infrastructure/Persistence'
+    public: true
+
   Domain\Hotel\HotelRoom\:
     resource: '../src/Domain/Hotel/HotelRoom'
   Query\Apartment\:
