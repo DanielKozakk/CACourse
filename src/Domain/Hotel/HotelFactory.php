@@ -12,7 +12,7 @@ class HotelFactory
                            string $country) : Hotel
     {
 
-        $hotelAddress = new HotelAddress($street, $postalCode, $flatNumber, $city, $country);
+        $hotelAddress = new HotelAddress($street,$flatNumber,  $postalCode, $city, $country);
 
         return new Hotel($name, $hotelAddress);
     }
