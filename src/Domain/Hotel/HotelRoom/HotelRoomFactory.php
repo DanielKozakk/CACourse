@@ -6,7 +6,6 @@ use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
 
 class HotelRoomFactory
 {
-
     private SqlDoctrineHotelRepository $sqlDoctrineHotelRepository;
 
     /**
@@ -16,7 +15,6 @@ class HotelRoomFactory
     {
         $this->sqlDoctrineHotelRepository = $sqlDoctrineHotelRepository;
     }
-
 
     /**
      * @param int $hotelId
