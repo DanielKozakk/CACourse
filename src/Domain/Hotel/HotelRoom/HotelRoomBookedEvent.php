@@ -13,7 +13,7 @@ class HotelRoomBookedEvent
     private string $tenantId;
     private array $days;
 
-    private function __construct(string $eventId, DateTime $eventCreationDateTime, int $hotelRoomId, string $hotelId, string $tenantId, array $days)
+    private function __construct(string $eventId, DateTime $eventCreationDateTime, int $hotelRoomId, int $hotelId, string $tenantId, array $days)
     {
         $this->eventId = $eventId;
         $this->eventCreationDateTime = $eventCreationDateTime;
@@ -24,13 +24,13 @@ class HotelRoomBookedEvent
     }
 
     /**
-     * @param string $hotelRoomId
-     * @param string $hotelId
+     * @param int $hotelRoomId
+     * @param int $hotelId
      * @param string $tenantId
      * @param array $days
      * @return HotelRoomBookedEvent
      */
-    public static function create(string $hotelRoomId, string $hotelId, string $tenantId, array $days) : HotelRoomBookedEvent{
+    public static function create(int $hotelRoomId, int $hotelId, string $tenantId, array $days) : HotelRoomBookedEvent{
         $eventId = uniqid();
         $creationDateTime = new DateTime();
 
