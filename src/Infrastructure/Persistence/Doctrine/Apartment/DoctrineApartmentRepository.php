@@ -6,6 +6,7 @@ namespace Infrastructure\Persistence\Doctrine\Apartment;
 use Doctrine\ORM\EntityManager;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentRepository;
+use ReflectionException;
 
 class DoctrineApartmentRepository implements ApartmentRepository
 {
@@ -19,13 +20,17 @@ class DoctrineApartmentRepository implements ApartmentRepository
         $this->sqlDoctrineApartmentRepository = $sqlDoctrineApartmentRepository;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function save(Apartment $apartment) : void
     {
         $this->sqlDoctrineApartmentRepository->save($apartment);
     }
 
-    public function findById(string $apartmentId) : Apartment|null
+    public function findById(int $apartmentId) : Apartment|null
     {
         return $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
     }
+
 }
