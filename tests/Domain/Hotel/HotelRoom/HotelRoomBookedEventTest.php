@@ -29,7 +29,7 @@ class HotelRoomBookedEventTest extends TestCase
         $this->assertSame($actualHotelRoomBookedEvent->getHotelId(), $hotelId);
         $this->assertSame($actualHotelRoomBookedEvent->getTenantId(), $tenantId);
         $this->assertEqualsCanonicalizing($actualHotelRoomBookedEvent->getDays(), $days);
- 
+
 
     }
 }

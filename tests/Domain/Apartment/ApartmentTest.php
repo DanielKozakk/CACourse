@@ -8,28 +8,28 @@ use ReflectionProperty;
 class ApartmentTest extends TestCase
 {
 
+    const ownerId = '1234';
+    const street = 'Florianska';
+    const postalCode = '12-201';
+    const houseNumber = '12';
+    const apartmentNumber = '13';
+    const city = 'Krakow';
+    const country = 'Poland';
+    const description = 'Nice place to stay';
+    const roomsDefinition = [
+        "name1" => 20.0,
+        "name2" => 16.0
+    ];
+
     public function testShouldCreateApartmentWithAllInformation()
     {
 
-        $ownerId = '1234';
-        $street = 'Florianska';
-        $postalCode = '12-201';
-        $houseNumber = '12';
-        $apartmentNumber = '13';
-        $city = 'Krakow';
-        $country = 'Poland';
-        $description = 'Nice place to stay';
-        $roomsDefinition = [
-            "name1" => 20.0,
-            "name2" => 16.0
-        ];
+        $actualApartment = (new ApartmentFactory())->create(self::ownerId, self::street, self::postalCode, self::houseNumber, self::apartmentNumber, self::city, self::country, self::description, self::roomsDefinition);
 
-        $actualApartment = (new ApartmentFactory())->create($ownerId, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country, $description, $roomsDefinition);
-
-        $this->assertThatHasOwnerId($actualApartment, $ownerId);
-        $this->assertThatHasDescription($actualApartment, $description);
-        $this->assertThatHasAddress($actualApartment, $street, $postalCode, $houseNumber, $apartmentNumber, $city, $country);
-        $this->assertThatHasRooms($actualApartment, $roomsDefinition);
+        $this->assertThatHasOwnerId($actualApartment, self::ownerId);
+        $this->assertThatHasDescription($actualApartment, self::description);
+        $this->assertThatHasAddress($actualApartment, self::street, self::postalCode, self::houseNumber, self::apartmentNumber, self::city, self::country);
+        $this->assertThatHasRooms($actualApartment, self::roomsDefinition);
 
     }
 
@@ -39,7 +39,7 @@ class ApartmentTest extends TestCase
         $reflectionProperty->setAccessible(true);
         $actualOwnerId = $reflectionProperty->getValue($actual);
 
-        $this->assertSame($actualOwnerId, $ownerId);
+        $this->assertSame($actualOwnerId, self::ownerId);
     }
 
     private function assertThatHasDescription(Apartment $actual, string $description)
