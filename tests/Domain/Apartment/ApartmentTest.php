@@ -7,6 +7,7 @@ use DateTime;
 use Domain\EventChannel\EventChannel;
 use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use ReflectionProperty;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -44,21 +45,24 @@ class ApartmentTest extends WebTestCase
     }
 
 
+    /**
+     * @throws ReflectionException
+     */
     public function shouldCreateBookingOnceBooked()
     {
-//        $apartment = $this->getApartment();
-//        /**
-//         * @var EventChannel
-//         */
-//        $eventChannel = '';
-//        $actual = $apartment->book(self::TENANT_ID, $this->period, $eventChannel);
-//
-//        BookingAssertion::assert($actual)
-//            ->isOpen()
-//            ->hasRentalTypeEqualsTo(RentalType::APARTMENT)
-//            ->hasRentalPlaceIdEqualsTo(self::APARTMENT_ID)
-//            ->hasTenantIdEqualsTo(self::TENANT_ID)
-//            ->hasDaysEqualsTo([$this->periodStart, $this->periodEnd]);
+        $apartment = $this->getApartment();
+        /**
+         * @var EventChannel
+         */
+        $eventChannel = '';
+        $actual = $apartment->book(self::TENANT_ID, $this->period, $eventChannel);
+
+        BookingAssertion::assert($actual)
+            ->isOpen()
+            ->hasRentalTypeEqualsTo(RentalType::APARTMENT)
+            ->hasRentalPlaceIdEqualsTo(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'])
+            ->hasTenantIdEqualsTo(self::TENANT_ID)
+            ->hasDaysEqualsTo([$this->periodStart, $this->periodEnd]);
 
         $this->assertTrue(true);
     }
