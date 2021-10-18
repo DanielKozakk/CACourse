@@ -2,43 +2,75 @@
 
 namespace Domain\Apartment;
 
+use DataFixtures\ApartmentFixture;
+use DateTime;
+use Domain\EventChannel\EventChannel;
+use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ApartmentTest extends TestCase
+class ApartmentTest extends WebTestCase
 {
+    const TENANT_ID = '9876';
 
-    const ownerId = '1234';
-    const street = 'Florianska';
-    const postalCode = '12-201';
-    const houseNumber = '12';
-    const apartmentNumber = '13';
-    const city = 'Krakow';
-    const country = 'Poland';
-    const description = 'Nice place to stay';
-    const roomsDefinition = [
-        "name1" => 20.0,
-        "name2" => 16.0
-    ];
+    private DateTime $periodStart;
+    private DateTime $periodEnd;
 
-    private ApartmentFactory $apartmentFactory;
+    private Period $period;
 
     public function __construct()
     {
         parent::__construct();
-        $this->apartmentFactory = new ApartmentFactory();
+        $this->periodStart = new DateTime('2021-01-01');
+        $this->periodEnd = new DateTime('2021-01-02');
+        $this->period = new Period($this->periodStart, $this->periodEnd);
     }
-    
+
     public function testShouldCreateApartmentWithAllInformation()
     {
+        ApartmentAssertion::assert($this->getApartment())
+            ->hasOwnerIdEqualsTo(ApartmentFixture::FIRST_TEST_APARTMENT['ownerId'])
+            ->hasDescriptionEqualsTo(ApartmentFixture::FIRST_TEST_APARTMENT['description'])
+            ->hasRoomsEqualsTo(ApartmentFixture::FIRST_TEST_APARTMENT['roomsDefinition'])
+            ->hasAddressEqualsTo(
+                ApartmentFixture::FIRST_TEST_APARTMENT['street'],
+                ApartmentFixture::FIRST_TEST_APARTMENT['postalCode'],
+                ApartmentFixture::FIRST_TEST_APARTMENT['houseNumber'],
+                ApartmentFixture::FIRST_TEST_APARTMENT['apartmentNumber'],
+                ApartmentFixture::FIRST_TEST_APARTMENT['city'],
+                ApartmentFixture::FIRST_TEST_APARTMENT['country'],
+            );
+    }
 
-        $actualApartment = $this->apartmentFactory->create(self::ownerId, self::street, self::postalCode, self::houseNumber, self::apartmentNumber, self::city, self::country, self::description, self::roomsDefinition);
 
-        ApartmentAssertion::assert($actualApartment)
-        ->hasOwnerIdEqualsTo( self::ownerId)
-        ->hasDescriptionEqualsTo( self::description)
-        ->hasAddressEqualsTo( self::street, self::postalCode, self::houseNumber, self::apartmentNumber, self::city, self::country)
-        ->hasRoomsEqualsTo( self::roomsDefinition);
+    public function shouldCreateBookingOnceBooked()
+    {
+//        $apartment = $this->getApartment();
+//        /**
+//         * @var EventChannel
+//         */
+//        $eventChannel = '';
+//        $actual = $apartment->book(self::TENANT_ID, $this->period, $eventChannel);
+//
+//        BookingAssertion::assert($actual)
+//            ->isOpen()
+//            ->hasRentalTypeEqualsTo(RentalType::APARTMENT)
+//            ->hasRentalPlaceIdEqualsTo(self::APARTMENT_ID)
+//            ->hasTenantIdEqualsTo(self::TENANT_ID)
+//            ->hasDaysEqualsTo([$this->periodStart, $this->periodEnd]);
 
+        $this->assertTrue(true);
+    }
+
+    private function getApartment(): Apartment
+    {
+        self::bootKernel();
+        $container = self::getContainer();
+        /**
+         * @var DoctrineApartmentRepository $hotelRepository
+         */
+        $hotelRepository = $container->get(DoctrineApartmentRepository::class);
+        return $hotelRepository->findById(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId']);
     }
 }

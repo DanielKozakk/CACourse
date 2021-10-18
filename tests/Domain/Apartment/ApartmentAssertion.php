@@ -2,6 +2,7 @@
 
 namespace Domain\Apartment;
 
+use DataFixtures\ApartmentFixture;
 use Helpers\PropertiesUnwrapper;
 use PHPUnit\Framework\Assert;
 use ReflectionProperty;
@@ -95,9 +96,8 @@ class ApartmentAssertion extends Assert
         $sizeReflectionProperty = new ReflectionProperty(SquareMeter::class, 'size');
         $sizeReflectionProperty->setAccessible(true);
 
-
-        $this->assertSame($roomsDefinition['name1'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[0])));
-        $this->assertSame($roomsDefinition['name2'], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[1])));
+        $this->assertSame($roomsDefinition[ApartmentFixture::FIRST_TEST_APARTMENT_FIST_SPACE_NAME], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[0])));
+        $this->assertSame($roomsDefinition[ApartmentFixture::FIRST_TEST_APARTMENT_SECOND_SPACE_NAME], $sizeReflectionProperty->getValue($squareMeterReflectionProperty->getValue($actualRooms[1])));
 
         $this->assertSameSize($roomsDefinition, $actualRooms);
         return $this;

@@ -75,7 +75,6 @@ class ApartmentReadModel
      * @param string $city
      * @param string $country
      * @param string $description
-     * @param RoomReadModel[] $rooms
      */
     public function __construct(int $id, string $ownerId, string $street, string $postalCode, string $houseNumber, string $apartmentNumber, string $city, string $country, string $description )
     {

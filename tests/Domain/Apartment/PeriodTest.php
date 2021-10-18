@@ -85,7 +85,5 @@ class PeriodTest extends TestCase
             new DateTime('2021-08-14'),
         ];
         yield [$expectedDate, $expectedEnd, $expectedCount, $expectedArrayOfDays];
-
     }
-
 }
