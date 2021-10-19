@@ -25,12 +25,12 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
     {
         return [
             ApartmentBookedEvent::class => [
-                ['book', 10]
+                ['consume', 10]
             ],
         ];
     }
 
-    public function book(ApartmentBookedEvent $apartmentBookedEvent)
+    public function consume(ApartmentBookedEvent $apartmentBookedEvent)
     {
 
         $apartmentBookingHistory = $this->findApartmentBookingHistoryForId($apartmentBookedEvent->getApartmentId());
