@@ -20,6 +20,24 @@ services:
     resource: '../src/Infrastructure/Persistence'
     public: true
 
+
+  infrastructure.apartment.doctrine_apartment_booking_history:
+    class: Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\DoctrineApartmentBookingHistory
+#    resource: '../src/Infrastructure/Persistence/Doctrine/Apartment/ApartmentBookingHistory/DoctrineApartmentBookingHistory.php'
+#              ../src/Infrastructure/Persistence/Doctrine/Apartment/ApartmentBookingHistory/DoctrineApartmentBookingHistory.php
+
+  Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
+
+  Application\Apartment\:
+    resource: '../src/Application/Apartment/*'
+
+ # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
+  #  class:
+# tutaj jest zdefiniowany event subscriber
+ # apartment.booking_history_event_subscriber:
+  #  class: Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber
+
+
   Domain\Hotel\HotelRoom\:
     resource: '../src/Domain/Hotel/HotelRoom'
   Query\Apartment\:

@@ -11,7 +11,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
 {
-
     private ApartmentBookingHistoryRepository $apartmentBookingHistoryRepository;
 
     /**
@@ -21,7 +20,6 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
     {
         $this->apartmentBookingHistoryRepository = $apartmentBookingHistoryRepository;
     }
-
 
     public static function getSubscribedEvents()
     {
@@ -57,5 +55,4 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
             return  new ApartmentBookingHistory($apartmentId);
         }
     }
-
 }
