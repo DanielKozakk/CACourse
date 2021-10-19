@@ -9,7 +9,7 @@ class ApartmentBookedEvent
 
     private string $eventId;
     private DateTime $creationDateTime;
-    private string $apartmentId;
+    private int $apartmentId;
     private string $ownerId;
     private string $tenantId;
     private DateTime $startDate;
@@ -18,13 +18,13 @@ class ApartmentBookedEvent
     /**
      * @param string $eventId
      * @param DateTime $creationDateTime
-     * @param string $apartmentId
+     * @param int $apartmentId
      * @param string $ownerId
      * @param string $tenantId
      * @param DateTime $startDate
      * @param DateTime $endDate
      */
-    public function __construct(string $eventId, DateTime $creationDateTime, string $apartmentId, string $ownerId, string $tenantId, DateTime $startDate, DateTime $endDate)
+    public function __construct(string $eventId, DateTime $creationDateTime, int $apartmentId, string $ownerId, string $tenantId, DateTime $startDate, DateTime $endDate)
     {
         $this->eventId = $eventId;
         $this->creationDateTime = $creationDateTime;
@@ -66,9 +66,9 @@ class ApartmentBookedEvent
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getApartmentId(): string
+    public function getApartmentId(): int
     {
         return $this->apartmentId;
     }
