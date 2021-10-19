@@ -54,12 +54,12 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-        $hotel = $this->doctrineHotelRepository->findById(1);
-        $hotelBookingHistory  = new HotelBookingHistory($hotel);
-        $hotelRoom = $this->doctrineHotelRoomRepository->findById(1);
-
-        $hotelBookingHistory->add($hotelRoom, new DateTime(), '21', [new DateTime()]);
-        $this->doctrineHotelRoomBookingHistoryRepository->save($hotelBookingHistory);
+//        $hotel = $this->doctrineHotelRepository->findById(1);
+//        $hotelBookingHistory  = new HotelBookingHistory($hotel);
+//        $hotelRoom = $this->doctrineHotelRoomRepository->findById(1);
+//
+//        $hotelBookingHistory->add($hotelRoom, new DateTime(), '21', [new DateTime()]);
+//        $this->doctrineHotelRoomBookingHistoryRepository->save($hotelBookingHistory);
 
         return $this->json([
             'message' => 'Welcome to your new controller!',
