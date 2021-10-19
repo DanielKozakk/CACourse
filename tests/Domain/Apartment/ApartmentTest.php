@@ -5,6 +5,8 @@ namespace Domain\Apartment;
 use DataFixtures\ApartmentFixture;
 use DateTime;
 use Domain\EventChannel\EventChannel;
+
+use Infrastructure\EventChannel\Symfony\SymfonyEventDispatcher;
 use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -20,12 +22,19 @@ class ApartmentTest extends WebTestCase
 
     private Period $period;
 
+    private EventChannel $eventChannel;
+
+    private Apartment $apartment;
+
     public function __construct()
     {
         parent::__construct();
         $this->periodStart = new DateTime('2021-01-01');
         $this->periodEnd = new DateTime('2021-01-02');
         $this->period = new Period($this->periodStart, $this->periodEnd);
+
+        $this->eventChannel = $this->createMock(EventChannel::class);
+
     }
 
     public function testShouldCreateApartmentWithAllInformation()
@@ -44,18 +53,14 @@ class ApartmentTest extends WebTestCase
             );
     }
 
-
     /**
      * @throws ReflectionException
      */
-    public function shouldCreateBookingOnceBooked()
+    public function testShouldCreateBookingOnceBooked()
     {
         $apartment = $this->getApartment();
-        /**
-         * @var EventChannel
-         */
-        $eventChannel = '';
-        $actual = $apartment->book(self::TENANT_ID, $this->period, $eventChannel);
+
+        $actual = $apartment->book(self::TENANT_ID, $this->period, $this->eventChannel);
 
         BookingAssertion::assert($actual)
             ->isOpen()
@@ -64,17 +69,37 @@ class ApartmentTest extends WebTestCase
             ->hasTenantIdEqualsTo(self::TENANT_ID)
             ->hasDaysEqualsTo([$this->periodStart, $this->periodEnd]);
 
-        $this->assertTrue(true);
+    }
+
+    public function testShouldPublishApartmentBooked()
+    {
+        $apartment = $this->getApartment();
+        $this->eventChannel->expects($this->once())->method('publishApartmentBookedEvent')->with(
+            $this->callback(function (ApartmentBookedEvent $apartmentBookedEvent) {
+                return
+                    $apartmentBookedEvent->getApartmentId() === ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'] &&
+                    $apartmentBookedEvent->getOwnerId() === ApartmentFixture::FIRST_TEST_APARTMENT['ownerId'] &&
+                    $apartmentBookedEvent->getTenantId() === self::TENANT_ID &&
+                    $apartmentBookedEvent->getStartDate() === $this->periodStart &&
+                    $apartmentBookedEvent->getEndDate() === $this->periodEnd;
+            })
+        );
+        $apartment->book(self::TENANT_ID, $this->period, $this->eventChannel);
     }
 
     private function getApartment(): Apartment
     {
-        self::bootKernel();
-        $container = self::getContainer();
-        /**
-         * @var DoctrineApartmentRepository $hotelRepository
-         */
-        $hotelRepository = $container->get(DoctrineApartmentRepository::class);
-        return $hotelRepository->findById(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId']);
+        if (!isset($this->apartment)) {
+            self::bootKernel();
+            $container = self::getContainer();
+            /**
+             * @var DoctrineApartmentRepository $hotelRepository
+             */
+            $hotelRepository = $container->get(DoctrineApartmentRepository::class);
+
+            $apartment = $hotelRepository->findById(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId']);
+            $this->apartment = $apartment;
+        }
+        return $this->apartment;
     }
 }
