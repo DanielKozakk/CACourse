@@ -13,7 +13,7 @@ class ApartmentBookedEventTest extends TestCase
     public function testShouldCreateEventWithAllInformation()
     {
 
-        $apartmentId = '1234';
+        $apartmentId = 1234;
         $ownerId = '5678';
         $tenantId = '3456';
         $periodStart = new DateTime('2020-01-01');
