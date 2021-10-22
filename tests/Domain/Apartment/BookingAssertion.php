@@ -38,6 +38,31 @@ class BookingAssertion extends Assert
         return $this;
     }
 
+    /**
+     * @throws ReflectionException
+     */
+    public function isAccepted() : self{
+
+        $actualBookingStatus = $this->getReflectionValue(Booking::class, 'bookingStatus', $this->actual);
+        $actualBookingStatusState = $this->getReflectionValue(BookingStatus::class, 'state', $actualBookingStatus);
+
+        $this->assertEquals(BookingStatus::$ACCEPTED, $actualBookingStatusState);
+
+        return $this;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function isRejected() : self{
+
+        $actualBookingStatus = $this->getReflectionValue(Booking::class, 'bookingStatus', $this->actual);
+        $actualBookingStatusState = $this->getReflectionValue(BookingStatus::class, 'state', $actualBookingStatus);
+
+        $this->assertEquals(BookingStatus::$REJECTED, $actualBookingStatusState);
+
+        return $this;
+    }
 
     /**
      * @throws ReflectionException
