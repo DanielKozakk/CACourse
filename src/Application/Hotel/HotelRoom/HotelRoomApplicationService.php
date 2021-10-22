@@ -43,17 +43,20 @@ class HotelRoomApplicationService
         string $description
     ): void
     {
-        $hotelRoom = (new HotelRoomFactory)->create($hotelId, $hotelNumber, $spacesDefinition, $description);
+        $hotelRoom = (new HotelRoomFactory)->create($hotelId,
+            $hotelNumber,
+            $spacesDefinition,
+            $description);
 
         $this->hotelRoomRepository->save($hotelRoom);
     }
 
     /**
-     * @param string $hotelRoomId
+     * @param int $hotelRoomId
      * @param string $tenantId
      * @param array<DateTime> $days
      */
-    public function bookHotelRoom(string $hotelRoomId, string $tenantId, array $days)
+    public function bookHotelRoom(int $hotelRoomId, string $tenantId, array $days)
     {
         /**
          * @var HotelRoom

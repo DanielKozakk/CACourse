@@ -65,7 +65,7 @@ class HotelRoom
 
     public function book(int $tenantId, array $days, EventChannel $eventChannel): Booking{
 
-        $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotelId, $tenantId, $days);
+        $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $days);
         $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
 
         return Booking::bookHotelRoom($this->id, $tenantId, $days);

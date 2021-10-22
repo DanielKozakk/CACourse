@@ -16,7 +16,7 @@ class Hotel
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
@@ -35,4 +35,12 @@ class Hotel
         $this->name = $name;
         $this->address = $address;
     }
+    /**
+     * @return integer
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }

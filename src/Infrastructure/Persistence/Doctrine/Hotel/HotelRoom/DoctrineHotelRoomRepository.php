@@ -4,6 +4,7 @@ namespace Infrastructure\Persistence\Doctrine\Hotel\HotelRoom;
 
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomRepository;
+use ReflectionException;
 
 class DoctrineHotelRoomRepository implements HotelRoomRepository
 {
@@ -18,6 +19,9 @@ class DoctrineHotelRoomRepository implements HotelRoomRepository
     }
 
 
+    /**
+     * @throws ReflectionException
+     */
     public function save(HotelRoom $hotelRoom): void
     {
         $this->sqlDoctrineHotelRoomRepository->addHotelRoomToHotel($hotelRoom);
