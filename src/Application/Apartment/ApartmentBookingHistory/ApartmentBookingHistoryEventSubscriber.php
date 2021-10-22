@@ -7,19 +7,24 @@ use Domain\Apartment\ApartmentBookingHistory\ApartmentBooking;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
 use Domain\Apartment\ApartmentBookingHistory\BookingPeriod;
+use Domain\Apartment\ApartmentRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
 {
     private ApartmentBookingHistoryRepository $apartmentBookingHistoryRepository;
+    private ApartmentRepository $apartmentRepository;
 
     /**
      * @param ApartmentBookingHistoryRepository $apartmentBookingHistoryRepository
+     * @param ApartmentRepository $apartmentRepository
      */
-    public function __construct(ApartmentBookingHistoryRepository $apartmentBookingHistoryRepository)
-    {
-        $this->apartmentBookingHistoryRepository = $apartmentBookingHistoryRepository;
-    }
+    public function __construct(ApartmentBookingHistoryRepository $apartmentBookingHistoryRepository, ApartmentRepository $apartmentRepository)
+{
+    $this->apartmentBookingHistoryRepository = $apartmentBookingHistoryRepository;
+    $this->apartmentRepository = $apartmentRepository;
+}
+
 
     public static function getSubscribedEvents()
     {
@@ -47,12 +52,14 @@ class ApartmentBookingHistoryEventSubscriber implements EventSubscriberInterface
         $this->apartmentBookingHistoryRepository->save($apartmentBookingHistory);
     }
 
-    private function findApartmentBookingHistoryForId(string $apartmentId) : ApartmentBookingHistory{
+    private function findApartmentBookingHistoryForId(int $apartmentId): ApartmentBookingHistory
+    {
 
-        if($this->apartmentBookingHistoryRepository->existsFor($apartmentId)){
+        if ($this->apartmentBookingHistoryRepository->existsFor($apartmentId)) {
             return $this->apartmentBookingHistoryRepository->findFor($apartmentId);
         } else {
-            return  new ApartmentBookingHistory($apartmentId);
+            $apartment = $this->apartmentRepository->findById($apartmentId);
+            return new ApartmentBookingHistory($apartment);
         }
     }
 }

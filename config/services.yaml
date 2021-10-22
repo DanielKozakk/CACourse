@@ -26,7 +26,12 @@ services:
 #    resource: '../src/Infrastructure/Persistence/Doctrine/Apartment/ApartmentBookingHistory/DoctrineApartmentBookingHistory.php'
 #              ../src/Infrastructure/Persistence/Doctrine/Apartment/ApartmentBookingHistory/DoctrineApartmentBookingHistory.php
 
-  Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
+  infrastructure.apartment.doctrine_apartment:
+    class: Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository
+
+  Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment'
+
+  Domain\Apartment\ApartmentRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
 
   Application\Apartment\:
     resource: '../src/Application/Apartment/*'
