@@ -56,7 +56,7 @@ class ApartmentBookingHistoryEventSubscriberTest extends WebTestCase
         $this->apartmentBookingHistoryRepository->expects($this->once())->method('save')->with(
             $this->callback(function (ApartmentBookingHistory $apartmentBookingHistory) use ($actualApartmentBookingIndex, $expectedAddedBookingCount) {
 
-                $this->thenApartmentBookingShouldHave($apartmentBookingHistory, self::ownerId, self::tenantId, $this->startDate, $this->endDate, $expectedAddedBookingCount,$actualApartmentBookingIndex);
+                $this->thenApartmentBookingShouldHave($apartmentBookingHistory,  $expectedAddedBookingCount,$actualApartmentBookingIndex);
                 $this->actualApartmentBookingHistory = $apartmentBookingHistory;
 
                 return true;
@@ -77,7 +77,7 @@ class ApartmentBookingHistoryEventSubscriberTest extends WebTestCase
         $this->apartmentBookingHistoryRepository->expects($this->once())->method('save')->with(
             $this->callback(function (ApartmentBookingHistory $apartmentBookingHistory) use ($actualApartmentBookingIndex, $expectedAddedBookingCount) {
 
-                $this->thenApartmentBookingShouldHave($apartmentBookingHistory, self::ownerId, self::tenantId, $this->startDate, $this->endDate, $expectedAddedBookingCount,$actualApartmentBookingIndex);
+                $this->thenApartmentBookingShouldHave($apartmentBookingHistory, $expectedAddedBookingCount,$actualApartmentBookingIndex);
                 $this->actualApartmentBookingHistory = $apartmentBookingHistory;
 
                 return true;
@@ -106,7 +106,7 @@ class ApartmentBookingHistoryEventSubscriberTest extends WebTestCase
      * @throws ReflectionException
      *
      */
-    private function thenApartmentBookingShouldHave(ApartmentBookingHistory $actual, string $ownerId, string $tenantId, DateTime $start, DateTime $end, int $expectedCount, int $actualApartmentBookingIndex)
+    private function thenApartmentBookingShouldHave(ApartmentBookingHistory $actual, int $expectedCount, int $actualApartmentBookingIndex)
     {
 
         $apartmentBookingList = $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $actual);
@@ -119,9 +119,9 @@ class ApartmentBookingHistoryEventSubscriberTest extends WebTestCase
         $apartmentBooking = $apartmentBookingList[$actualApartmentBookingIndex];
 
         ApartmentBookingAssertion::assert($apartmentBooking)
-            ->hasOwnerIdEqualTo($ownerId)
-            ->hasTenantIdEqualTo($tenantId)
-            ->hasBookingPeriodThatHas($start, $end);
+            ->hasOwnerIdEqualTo(self::ownerId)
+            ->hasTenantIdEqualTo(self::tenantId)
+            ->hasBookingPeriodThatHas($this->startDate, $this->endDate);
 
     }
 
