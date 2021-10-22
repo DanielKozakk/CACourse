@@ -4,6 +4,7 @@ namespace Domain\Apartment;
 
 use DateTime;
 use Helpers\PropertiesUnwrapper;
+use Infrastructure\EventChannel\Symfony\SymfonyEventDispatcher;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -77,4 +78,37 @@ class BookingTest extends TestCase
 
         $this->assertEquals('REJECTED', $bookingStatusState);
     }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testShouldChangeBookingStatusIntoAccept(){
+        $rentalSpaceId = '1';
+        $tenantId = '2';
+        $days = [new DateTime('2024-01-01'), new DateTime('2024-01-02')];
+
+        $booking = Booking::bookHotelRoom($rentalSpaceId, $tenantId,$days);
+
+        $eventChannel = $this->createMock(SymfonyEventDispatcher::class);
+
+        $eventChannel->expects($this->once())->method('publishBookingAcceptedEvent')->with(
+            $this->callback(function(BookingAcceptedEvent $bookingAcceptedEvent) use ($days, $tenantId, $rentalSpaceId) {
+
+                $this->assertEquals(RentalType::hotelRoomRentalType()->getState(), $bookingAcceptedEvent->getRentalType());
+                $this->assertEquals($rentalSpaceId, $bookingAcceptedEvent->getRentalPlaceId());
+                $this->assertEquals($tenantId, $bookingAcceptedEvent->getTenantId());
+                $this->assertEqualsCanonicalizing($days, $bookingAcceptedEvent->getDays());
+                return true;
+            })
+        );
+
+        $booking->accept($eventChannel);
+
+        /**
+         * @var BookingStatus $actualBookingStatus
+         */
+        $actualBookingStatus = $this->getReflectionValue(Booking::class, 'bookingStatus', $booking);
+        $this->assertEquals(BookingStatus::$ACCEPTED, $actualBookingStatus->getState());
+    }
+
 }
