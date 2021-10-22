@@ -5,6 +5,7 @@ namespace Domain\Apartment;
 use DataFixtures\ApartmentFixture;
 use Helpers\PropertiesUnwrapper;
 use PHPUnit\Framework\Assert;
+use ReflectionException;
 use ReflectionProperty;
 
 class ApartmentAssertion extends Assert
@@ -77,11 +78,12 @@ class ApartmentAssertion extends Assert
         return $this;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function hasRoomsEqualsTo(array $roomsDefinition): ApartmentAssertion
     {
-        $reflectionProperty = new ReflectionProperty(Apartment::class, 'rooms');
-        $reflectionProperty->setAccessible(true);
-        $actualRooms = $reflectionProperty->getValue($this->actual);
+        $actualRooms = $this->getReflectionValue(Apartment::class, 'rooms', $this->actual);
 
         $nameReflectionProperty = new ReflectionProperty(Room::class, 'name');
         $squareMeterReflectionProperty = new ReflectionProperty(Room::class, 'squareMeter');

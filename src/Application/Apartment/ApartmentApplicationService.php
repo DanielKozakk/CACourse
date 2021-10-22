@@ -67,7 +67,7 @@ class ApartmentApplicationService
         $this->apartmentRepository->save($newApartment);
     }
 
-    public function book(string $apartmentId, string $tenantId, DateTime $start, DateTime $end){
+    public function book(int $apartmentId, string $tenantId, DateTime $start, DateTime $end){
 
         /**
          * @var Apartment
