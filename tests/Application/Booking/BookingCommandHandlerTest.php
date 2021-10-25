@@ -19,7 +19,6 @@ class BookingCommandHandlerTest extends WebTestCase
     private DateTime $startDate;
     private DateTime $endDate;
 
-
     private BookingRepository $bookingRepository;
     private EventChannel $eventChannel;
 
@@ -27,6 +26,7 @@ class BookingCommandHandlerTest extends WebTestCase
 
     public function __construct()
     {
+        parent::__construct();
         self::bootKernel();
 
         $this->startDate = new DateTime('2021-02-02');
@@ -37,9 +37,9 @@ class BookingCommandHandlerTest extends WebTestCase
         $this->bookingCommandHandler = new BookingCommandHandler($this->bookingRepository, $this->eventChannel);
     }
 
+    public function testShouldHandleRejectCommand(){
 
-    public function testShould(){
-
+        $this->assertTrue(true);
         $this->givenBookingHotelRoom();
 
         $this->bookingRepository->expects($this->once())->method('save')->with($this->callback(
@@ -55,8 +55,6 @@ class BookingCommandHandlerTest extends WebTestCase
         ));
 
         $this->bookingCommandHandler->onBookingRejectCommand(new RejectBookingCommand('dummyValue'));
-
-
     }
 
     private function givenBookingHotelRoom(){
