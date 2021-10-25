@@ -9,6 +9,7 @@ use Domain\EventChannel\EventChannel;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
 use Domain\Hotel\HotelRoom\HotelRoomRepository;
+use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
 use Infrastructure\Rest\Api\Hotel\HotelRoom\HotelBookingDto;
 
 class HotelRoomApplicationService
@@ -16,17 +17,20 @@ class HotelRoomApplicationService
     private HotelRoomRepository $hotelRoomRepository;
     private EventChannel $eventChannel;
     private BookingRepository $bookingRepository;
+    private DoctrineHotelRepository $doctrineHotelRepository;
 
     /**
      * @param HotelRoomRepository $hotelRoomRepository
      * @param EventChannel $eventChannel
      * @param BookingRepository $bookingRepository
+     * @param DoctrineHotelRepository $doctrineHotelRepository
      */
-    public function __construct(HotelRoomRepository $hotelRoomRepository, EventChannel $eventChannel, BookingRepository $bookingRepository)
+    public function __construct(HotelRoomRepository $hotelRoomRepository, EventChannel $eventChannel, BookingRepository $bookingRepository, DoctrineHotelRepository $doctrineHotelRepository)
     {
         $this->hotelRoomRepository = $hotelRoomRepository;
         $this->eventChannel = $eventChannel;
         $this->bookingRepository = $bookingRepository;
+        $this->doctrineHotelRepository = $doctrineHotelRepository;
     }
 
 
@@ -36,14 +40,15 @@ class HotelRoomApplicationService
      * @param array<string, float> $spacesDefinition
      * @param string $description
      */
-    public function addRoomToHotel(
+    public function addHotelRoom(
         string $hotelId,
         int    $hotelNumber,
         array  $spacesDefinition,
         string $description
     ): void
     {
-        $hotelRoom = (new HotelRoomFactory)->create($hotelId,
+        $hotelRoom = (new HotelRoomFactory( $this->doctrineHotelRepository))->create(
+            $hotelId,
             $hotelNumber,
             $spacesDefinition,
             $description);
@@ -70,7 +75,4 @@ class HotelRoomApplicationService
 
         $this->bookingRepository->save($booking);
     }
-
-
-
 }

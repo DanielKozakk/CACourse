@@ -2,18 +2,19 @@
 
 namespace Domain\Hotel\HotelRoom;
 
+use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
 
 class HotelRoomFactory
 {
-    private SqlDoctrineHotelRepository $sqlDoctrineHotelRepository;
+    private DoctrineHotelRepository $doctrineHotelRepository;
 
     /**
-     * @param SqlDoctrineHotelRepository $sqlDoctrineHotelRepository
+     * @param DoctrineHotelRepository $doctrineHotelRepository
      */
-    public function __construct(SqlDoctrineHotelRepository $sqlDoctrineHotelRepository)
+    public function __construct(DoctrineHotelRepository $doctrineHotelRepository)
     {
-        $this->sqlDoctrineHotelRepository = $sqlDoctrineHotelRepository;
+        $this->doctrineHotelRepository = $doctrineHotelRepository;
     }
 
     /**
@@ -28,7 +29,7 @@ class HotelRoomFactory
                            array  $spacesDefinition,
                            string $description
     ): HotelRoom {
-        $newHotelRoom = new HotelRoom($this->sqlDoctrineHotelRepository->find($hotelId), $hotelRoomNumber,
+        $newHotelRoom = new HotelRoom($this->doctrineHotelRepository->findById($hotelId), $hotelRoomNumber,
             $description
         );
 

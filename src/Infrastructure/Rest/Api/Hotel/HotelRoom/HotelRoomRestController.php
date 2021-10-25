@@ -23,7 +23,7 @@ class HotelRoomRestController
 
 
     public function add(HotelRoomCreationDto $hotelRoomDto){
-        $this->hotelRoomApplicationService->addRoomToHotel(
+        $this->hotelRoomApplicationService->addHotelRoom(
             $hotelRoomDto->getHotelId(),
             $hotelRoomDto->getHotelNumber(),
             $hotelRoomDto->getSpacesDefinition(),
