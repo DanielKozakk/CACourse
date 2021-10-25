@@ -2,16 +2,12 @@
 
 namespace Domain\Hotel\HotelRoom;
 
-use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Apartment\Booking;
 use Domain\EventChannel\EventChannel;
 use Domain\Hotel\Hotel;
-
-//use Domain\Apartment\Booking;
-//use Domain\EventChannel\EventChannel;
 
 /**
  * @ORM\Entity(repositoryClass="Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository")
@@ -67,9 +63,6 @@ class HotelRoom
 
         $hotelRoomBookedEvent = HotelRoomBookedEvent::create($this->id, $this->hotel->getId(), $tenantId, $days);
         $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
-
         return Booking::bookHotelRoom($this->id, $tenantId, $days);
     }
-
-
 }

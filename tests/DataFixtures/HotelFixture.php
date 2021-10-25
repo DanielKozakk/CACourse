@@ -16,6 +16,9 @@ use Query\Hotel\HotelRoom\SpaceReadModel;
 
 class HotelFixture extends Fixture implements ORMFixtureInterface
 {
+    public const HOTEL_ID = 1;
+    public const HOTEL_ROOM_ID = 1;
+
     public function load(ObjectManager $manager)
     {
 
