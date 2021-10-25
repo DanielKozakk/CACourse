@@ -39,7 +39,6 @@ class BookingCommandHandlerTest extends WebTestCase
 
     public function testShouldHandleRejectCommand(){
 
-        $this->assertTrue(true);
         $this->givenBookingHotelRoom();
 
         $this->bookingRepository->expects($this->once())->method('save')->with($this->callback(
@@ -57,8 +56,26 @@ class BookingCommandHandlerTest extends WebTestCase
         $this->bookingCommandHandler->onBookingRejectCommand(new RejectBookingCommand('dummyValue'));
     }
 
+    public function testShouldHandleAcceptCommand(){
+        $this->givenBookingHotelRoom();
+        $this->bookingRepository->expects($this->once())->method('save')->with($this->callback(
+            function (Booking $booking){
+                BookingAssertion::assert($booking)
+                    ->isAccepted()
+                    ->hasDaysEqualsTo([$this->startDate, $this->endDate])
+                    ->hasTenantIdEqualsTo(self::TENANT_ID)
+                    ->hasRentalPlaceIdEqualsTo(self::RENTAL_SPACE_ID)
+                    ->hasRentalTypeEqualsTo(RentalType::hotelRoomRentalType()->getState());
+                return true;
+            }
+        ));
+
+        $this->bookingCommandHandler->onBookingAcceptCommand(new AcceptBookingCommand('dummy id'));
+    }
+
     private function givenBookingHotelRoom(){
         $booking = Booking::bookHotelRoom(self::RENTAL_SPACE_ID, self::TENANT_ID, [$this->startDate, $this->endDate]);
         $this->bookingRepository->method('findById')->willReturn($booking);
     }
+
 }
