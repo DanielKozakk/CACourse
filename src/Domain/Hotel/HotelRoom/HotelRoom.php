@@ -22,11 +22,10 @@ class HotelRoom
     private int $id;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity="\Domain\Hotel\Hotel")
-     *
      */
-    private $hotel;
+    private Hotel $hotel;
+
     /**
      * @var int
      * @ORM\Column(type="integer")
