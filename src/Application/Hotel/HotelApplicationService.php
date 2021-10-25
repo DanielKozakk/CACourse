@@ -18,12 +18,12 @@ class HotelApplicationService
     }
 
     public function createHotel(string $name,
-                             string $street,
-                             string $postalCode,
-                             string $flatNumber,
-                             string $city,
-                             string $country): void{
-        $hotel = (new HotelFactory)->create($name, $street, $postalCode, $flatNumber, $city, $country);
+                             string    $street,
+                             string    $postalCode,
+                             string    $buildingNumber,
+                             string    $city,
+                             string    $country): void{
+        $hotel = (new HotelFactory)->create($name, $street, $postalCode, $buildingNumber, $city, $country);
         $this->hotelRepository->save($hotel);
     }
 }
