@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Persistence\Doctrine\Apartment;
 
+use _PHPStan_76800bfb5\Nette\Neon\Exception;
 use Doctrine\ORM\EntityManager;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentRepository;
@@ -28,9 +29,11 @@ class DoctrineApartmentRepository implements ApartmentRepository
         $this->sqlDoctrineApartmentRepository->save($apartment);
     }
 
-    public function findById(int $apartmentId) : Apartment|null
+    public function findById(int $apartmentId) : Apartment
     {
-        return $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
+         $apartment = $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
+
+             return $apartment ?? (throw new ApartmentNotFoundException('Apartment with id' . " $apartmentId " . 'does not exist'));
     }
 
 }

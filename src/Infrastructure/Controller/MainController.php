@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Domain\Apartment\ApartmentFactory;
+use Domain\Apartment\ApartmentRepository;
 use Domain\Hotel\Hotel;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistory;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistoryRepository;
@@ -27,39 +28,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
 
-    private DoctrineHotelRepository $doctrineHotelRepository;
-    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
-    private HotelRoomFactory $hotelRoomFactory;
-    private DoctrineHotelRoomBookingHistoryRepository $doctrineHotelRoomBookingHistoryRepository;
-
-    /**
-     * @param DoctrineHotelRepository $doctrineHotelRepository
-     * @param DoctrineHotelRoomRepository $doctrineHotelRoomRepository
-     * @param HotelRoomFactory $hotelRoomFactory
-     * @param DoctrineHotelRoomBookingHistoryRepository $hotelBookingHistoryRepository
-     */
-    public function __construct(DoctrineHotelRepository $doctrineHotelRepository, DoctrineHotelRoomRepository $doctrineHotelRoomRepository, HotelRoomFactory $hotelRoomFactory, DoctrineHotelRoomBookingHistoryRepository $hotelBookingHistoryRepository)
+//    private DoctrineApartmentRepository $apartmentRepository;
+    
+    public function __construct(ApartmentRepository $apartmentRepository)
     {
-        $this->doctrineHotelRepository = $doctrineHotelRepository;
-        $this->doctrineHotelRoomRepository = $doctrineHotelRoomRepository;
-        $this->hotelRoomFactory = $hotelRoomFactory;
-        $this->doctrineHotelRoomBookingHistoryRepository = $hotelBookingHistoryRepository;
+//        $this->apartmentRepository = $apartmentRepository;
     }
 
 
     /**
-     * @throws \ReflectionException
      */
     #[Route('/main', name: 'main')]
     public function index(): Response
     {
 
-//        $hotel = $this->doctrineHotelRepository->findById(1);
-//        $hotelBookingHistory  = new HotelBookingHistory($hotel);
-//        $hotelRoom = $this->doctrineHotelRoomRepository->findById(1);
-//
-//        $hotelBookingHistory->add($hotelRoom, new DateTime(), '21', [new DateTime()]);
-//        $this->doctrineHotelRoomBookingHistoryRepository->save($hotelBookingHistory);
+//        $this->apartmentRepository->findById("124123");
 
         return $this->json([
             'message' => 'Welcome to your new controller!',
