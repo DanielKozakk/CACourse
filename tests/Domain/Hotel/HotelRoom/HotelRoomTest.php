@@ -112,17 +112,15 @@ class HotelRoomTest extends WebTestCase
         return $spacesDefinition;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     private function createNewHotelRoom(): HotelRoom
     {
         $container = self::getContainer();
 
-        /**
-         * @var HotelRoomFactory $hotelRoomFactory
-         */
-        $hotelRoomFactory = $container->get(HotelRoomFactory::class);
-        /**
-         * Hotel $hotel
-         */
+        $hotelRoomFactory = new HotelRoomFactory($container->get(DoctrineHotelRepository::class));
+
         $hotel = $this->getRelatedHotel();
         $hotelId = $this->getReflectionValue(Hotel::class, 'id', $hotel);
 

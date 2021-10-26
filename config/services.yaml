@@ -24,20 +24,25 @@ services:
   infrastructure.apartment.doctrine_apartment_booking_history:
     class: Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\DoctrineApartmentBookingHistory
 
+  Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
+
   infrastructure.apartment.doctrine_apartment:
     class: Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository
 
-  Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
-
   Domain\Apartment\ApartmentRepository: '@infrastructure.apartment.doctrine_apartment'
+
+  infrastructure.hotel.doctrine_hotel:
+    class: Infrastructure\Persistence\Doctrine\Hotel
+
+  Domain\Hotel: '@infrastructure.hotel.doctrine_hotel'
 
   Application\Apartment\:
     resource: '../src/Application/Apartment/*'
 
- # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
+  # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
   #  class:
-# tutaj jest zdefiniowany event subscriber
- # apartment.booking_history_event_subscriber:
+  # tutaj jest zdefiniowany event subscriber
+  # apartment.booking_history_event_subscriber:
   #  class: Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber
 
 
@@ -47,7 +52,7 @@ services:
     resource: '../src/Query/Apartment'
   DataFixtures\:
     resource: '../tests/DataFixtures'
-    tags: ['doctrine.fixture.orm']
+    tags: [ 'doctrine.fixture.orm' ]
 
   #    App\:
   #        resource: '../src/'
