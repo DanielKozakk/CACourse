@@ -46,9 +46,7 @@ class BookingCommandHandler implements EventSubscriberInterface
     {
         /** @var Booking */
         $booking = $this->bookingRepository->findById($bookingRejectCommand->getBookingId());
-
         $booking->reject();
-
         $this->bookingRepository->save($booking);
     }
 
