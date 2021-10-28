@@ -3,6 +3,7 @@
 namespace Domain\Apartment\ApartmentBookingHistory;
 
 use DateTime;
+use Domain\Apartment\Apartment;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -21,7 +22,8 @@ class ApartmentBookingTest extends TestCase
         $startDate = DateTime::createFromFormat('d-m-Y', '20-06-2021');
         $endDate = DateTime::createFromFormat('d-m-Y', '21-06-2021');
 
-        $actual = ApartmentBooking::start($bookingCreationDateTime,$ownerId,$tenantId,new BookingPeriod($startDate, $endDate));
+        $apartmentBookingHistory = new ApartmentBookingHistory($this->createStub(Apartment::class));
+        $actual = ApartmentBooking::start($bookingCreationDateTime,$ownerId,$tenantId,new BookingPeriod($startDate, $endDate), $apartmentBookingHistory);
 
         ApartmentBookingAssertion::assert($actual)
             ->isStart()

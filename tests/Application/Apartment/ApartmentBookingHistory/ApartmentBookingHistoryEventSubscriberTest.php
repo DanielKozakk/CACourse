@@ -98,7 +98,7 @@ class ApartmentBookingHistoryEventSubscriberTest extends WebTestCase
         $this->apartmentBookingHistoryRepository->method('existsFor')->willReturn(true);
 
         $apartmentBookingHistory = new ApartmentBookingHistory($this->apartmentRepository->findById(self::apartmentId));
-        $apartmentBookingHistory->add(ApartmentBooking::start(new DateTime(), self::ownerId,'888', new BookingPeriod(new DateTime('2022-02-02'), new DateTime('2022-02-04'))));
+        $apartmentBookingHistory->add(ApartmentBooking::start(new DateTime(), self::ownerId,'888', new BookingPeriod(new DateTime('2022-02-02'), new DateTime('2022-02-04')), $apartmentBookingHistory));
         $this->apartmentBookingHistoryRepository->method('findFor')->willReturn($apartmentBookingHistory);
 
     }

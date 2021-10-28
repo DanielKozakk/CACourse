@@ -31,7 +31,7 @@ class ApartmentBookingHistoryTest extends KernelTestCase
         $bookingPeriod = new BookingPeriod($bookingStart, $bookingEnd);
 
         $apartmentBookingHistory = new ApartmentBookingHistory($this->getRelatedApartment());
-        $apartmentBooking = ApartmentBooking::start($bookingCreation,$ownerId, $tenantId, $bookingPeriod);
+        $apartmentBooking = ApartmentBooking::start($bookingCreation,$ownerId, $tenantId, $bookingPeriod, $apartmentBookingHistory);
 
         $apartmentBookingHistory->add($apartmentBooking);
 
