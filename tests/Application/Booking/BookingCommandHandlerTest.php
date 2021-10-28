@@ -53,7 +53,7 @@ class BookingCommandHandlerTest extends WebTestCase
             }
         ));
 
-        $this->bookingCommandHandler->onBookingRejectCommand(new RejectBookingCommand('dummyValue'));
+        $this->bookingCommandHandler->onBookingRejectCommand(new RejectBookingCommand(0000000000000000000000));
     }
 
     public function testShouldHandleAcceptCommand(){
