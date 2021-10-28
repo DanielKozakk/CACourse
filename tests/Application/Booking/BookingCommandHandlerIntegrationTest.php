@@ -37,6 +37,8 @@ use PropertiesUnwrapper;
 
     private DoctrineBookingRepository $bookingRepository;
 
+    private HotelRoom $hotelRoom;
+
     const TENANT_ID = 215121;
     /**
      * @var array<DateTime>
@@ -46,6 +48,9 @@ use PropertiesUnwrapper;
     private DateTime $startDate;
     private DateTime $endDate;
 
+    /**
+     * @throws ReflectionException
+     */
     public function __construct()
     {
         parent::__construct();
@@ -62,6 +67,7 @@ use PropertiesUnwrapper;
         $this->startDate = new DateTime('2021-02-02');
         $this->endDate = new DateTime('2021-02-03');
         $this->days = [$this->startDate, $this->endDate];
+        $this->hotelRoom = $this->givenHotelRoom();
     }
 
 
@@ -83,9 +89,21 @@ use PropertiesUnwrapper;
     /**
      * @throws ReflectionException
      */
+    public function testShouldAcceptBooking(){
+        $booking = $this->givenBooking();
+        $bookingId = $this->getReflectionValue(Booking::class, 'id', $booking);
+        $this->bookingRestController->accept($bookingId);
+
+        $this->bookingRepository->refreshEntity($booking);
+        $fetchedBookingStatus = $this->getReflectionValue(Booking::class, 'bookingStatus', $booking);
+        $this->assertEquals(BookingStatus::$ACCEPTED, $fetchedBookingStatus->getState());
+
+    }
+
+
     private function givenBooking(): Booking
     {
-        $hotelRoom = $this->givenHotelRoom();
+        $hotelRoom = $this->hotelRoom;
         $booking = $hotelRoom->book(self::TENANT_ID, $this->days, $this->eventChannel);
         $this->bookingRepository->save($booking);
 
@@ -110,7 +128,4 @@ use PropertiesUnwrapper;
         $this->doctrineHotelRepository->save($hotel);
         return $hotel;
     }
-
-
-
 }
