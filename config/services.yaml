@@ -57,6 +57,9 @@ services:
     resource: '../src/Application/Apartment/*'
     public: true
 
+  Application\Booking\BookingCommandHandler:
+    autowire: true
+
 
 
   # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
