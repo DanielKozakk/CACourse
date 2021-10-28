@@ -6,6 +6,8 @@ use Application\Apartment\ApartmentApplicationService;
 use DataFixtures\ApartmentFixture;
 use DateTime;
 use Doctrine\ORM\PersistentCollection;
+use Domain\Apartment\ApartmentBookingHistory\ApartmentBooking;
+use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingAssertion;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
 use Domain\Apartment\BookingRepository;
@@ -17,7 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApartmentBookingHistoryEventSubscriberIntegrationTest extends WebTestCase
 {
-use PropertiesUnwrapper;
+    use PropertiesUnwrapper;
+
     private EventChannel $eventChannel;
 
     private ApartmentApplicationService $apartmentApplicationService;
@@ -39,25 +42,34 @@ use PropertiesUnwrapper;
     /**
      * @throws ReflectionException
      */
-    public function testShouldUpdateApartmentBookingHistory(){
+    public function testShouldUpdateApartmentBookingHistory()
+    {
         $tenantId = '2312';
         $startDate = new DateTime('2021-01-01');
         $endDate = new DateTime('2021-01-02');
 
         $initialNumberOfBookings = 0;
 
-        if($this->apartmentBookingHistoryRepository->existsFor(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'])){
+        if ($this->apartmentBookingHistoryRepository->existsFor(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'])) {
             $initialApartmentBookingHistory = $this->apartmentBookingHistoryRepository->existsFor(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId']);
             $initialNumberOfBookings = $this->countBookingsInApartmentBookingHistory($initialApartmentBookingHistory);
         }
 
-       $this->apartmentApplicationService->book(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'], $tenantId, $startDate, $endDate);
+        $this->apartmentApplicationService->book(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'], $tenantId, $startDate, $endDate);
 
         $apartmentBookingHistory = $this->apartmentBookingHistoryRepository->findFor(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId']);
         $finalNumberOfBookings = $this->countBookingsInApartmentBookingHistory($apartmentBookingHistory);
 
+        $this->assertNotEquals($initialNumberOfBookings, $finalNumberOfBookings);
+        $this->assertTrue(($initialNumberOfBookings + 1) === ($finalNumberOfBookings));
 
-        $this->assertTrue(($initialNumberOfBookings + 1 ) === ($finalNumberOfBookings));
+        $apartmentBooking = $this->getLastApartmentBookingFromApartmentBookingHistory($apartmentBookingHistory);
+
+        ApartmentBookingAssertion::assert($apartmentBooking)
+            ->isStart()
+            ->hasOwnerIdEqualTo(ApartmentFixture::FIRST_TEST_APARTMENT['ownerId'])
+            ->hasBookingPeriodThatHas($startDate, $endDate)
+            ->hasTenantIdEqualTo($tenantId);
     }
 
     /**
@@ -71,5 +83,17 @@ use PropertiesUnwrapper;
         $apartmentBookingList = $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $apartmentBookingHistory);
 
         return $apartmentBookingList->count();
+    }
+
+
+    /**
+     * @throws ReflectionException
+     */
+    private function getLastApartmentBookingFromApartmentBookingHistory(ApartmentBookingHistory $apartmentBookingHistory): ApartmentBooking
+    {
+        /** @var PersistentCollection $persistentCollection */
+        $persistentCollection = $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $apartmentBookingHistory);
+        $array = $persistentCollection->toArray();
+        return end($array);
     }
 }
