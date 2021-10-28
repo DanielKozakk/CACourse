@@ -20,24 +20,37 @@ services:
     resource: '../src/Infrastructure/Persistence'
     public: true
 
-
   infrastructure.apartment.doctrine_apartment_booking_history:
     class: Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory\DoctrineApartmentBookingHistory
 
   Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository: '@infrastructure.apartment.doctrine_apartment_booking_history'
 
-  infrastructure.apartment.doctrine_apartment:
+  infrastructure.apartment.doctrine_apartment_repository:
     class: Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository
 
-  Domain\Apartment\ApartmentRepository: '@infrastructure.apartment.doctrine_apartment'
+  Domain\Apartment\ApartmentRepository: '@infrastructure.apartment.doctrine_apartment_repository'
+
+  infrastructure.booking.doctrine_booking_repository:
+    class: Infrastructure\Persistence\Doctrine\Booking\DoctrineBookingRepository
+
+  Domain\Apartment\BookingRepository: '@infrastructure.booking.doctrine_booking_repository'
 
   infrastructure.hotel.doctrine_hotel:
-    class: Infrastructure\Persistence\Doctrine\Hotel
+    class: Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository
 
-  Domain\Hotel: '@infrastructure.hotel.doctrine_hotel'
+  Domain\Hotel\HotelRepository: '@infrastructure.hotel.doctrine_hotel'
+
+  infrastructure.event_channel.symfony_event_dispatcher:
+    class: Infrastructure\EventChannel\Symfony\SymfonyEventDispatcher
+    public: true
+
+  Domain\EventChannel\EventChannel: '@infrastructure.event_channel.symfony_event_dispatcher'
 
   Application\Apartment\:
     resource: '../src/Application/Apartment/*'
+    public: true
+
+
 
   # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
   #  class:
