@@ -7,15 +7,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
-use http\Exception\InvalidArgumentException;
-use http\Exception\RuntimeException;
+use RuntimeException;
 
-///**
-// * @method ApartmentBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
-// * @method ApartmentBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
-// * @method ApartmentBookingHistory[]    findAll()
-// * @method ApartmentBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-// */
+
+/**
+ * @method ApartmentBookingHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ApartmentBookingHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ApartmentBookingHistory[]    findAll()
+ * @method ApartmentBookingHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
 {
 
@@ -37,7 +37,7 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
     }
 
     public function findById($id) : ApartmentBookingHistory {
-        return $this->find($id) ?? throw new InvalidArgumentException();
+        return $this->find($id) ?? throw new RuntimeException();
     }
 
 }

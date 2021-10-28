@@ -48,10 +48,9 @@ class ApartmentBooking
     private BookingStep $bookingStep;
     /**
      *
-     * @var array<ApartmentBooking>|ArrayCollection
      * @ORM\ManyToOne(targetEntity="ApartmentBookingHistory", inversedBy="apartmentBookingList")
      */
-    private array|ArrayCollection $apartmentBookingHistory;
+    private ApartmentBookingHistory $apartmentBookingHistory;
 
     /**
      * @param DateTime $bookingCreation
@@ -60,13 +59,14 @@ class ApartmentBooking
      * @param BookingPeriod $bookingPeriod
      * @param BookingStep $bookingStep
      */
-    public function __construct(DateTime $bookingCreation, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod, BookingStep $bookingStep)
+    public function __construct(DateTime $bookingCreation, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod, BookingStep $bookingStep, ApartmentBookingHistory $apartmentBookingHistory)
     {
         $this->bookingCreation = $bookingCreation;
         $this->ownerId = $ownerId;
         $this->tenantId = $tenantId;
         $this->bookingPeriod = $bookingPeriod;
         $this->bookingStep = $bookingStep;
+        $this->apartmentBookingHistory = $apartmentBookingHistory;
     }
 
 
@@ -74,10 +74,11 @@ class ApartmentBooking
         DateTime      $bookingCreation,
         string        $ownerId,
         string        $tenantId,
-        BookingPeriod $bookingPeriod
+        BookingPeriod $bookingPeriod,
+        ApartmentBookingHistory $apartmentBookingHistory
     ): ApartmentBooking
     {
 
-        return new ApartmentBooking($bookingCreation, $ownerId, $tenantId, $bookingPeriod, BookingStep::start());
+        return new ApartmentBooking($bookingCreation, $ownerId, $tenantId, $bookingPeriod, BookingStep::start(), $apartmentBookingHistory);
     }
 }

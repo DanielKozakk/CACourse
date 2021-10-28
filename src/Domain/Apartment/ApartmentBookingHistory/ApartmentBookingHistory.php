@@ -4,6 +4,7 @@ namespace Domain\Apartment\ApartmentBookingHistory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Domain\Apartment\Apartment;
 
 /**
@@ -25,10 +26,10 @@ class ApartmentBookingHistory
     private Apartment $apartment;
     /**
      *
-     * @var array<ApartmentBooking>|ArrayCollection
-     * @ORM\OneToMany(targetEntity="ApartmentBooking", mappedBy="apartmentBookingHistory")
+     * @var array<ApartmentBooking>|ArrayCollection|PersistentCollection
+     * @ORM\OneToMany(targetEntity="ApartmentBooking", mappedBy="apartmentBookingHistory", cascade={"persist", "remove"})
      */
-    private array|ArrayCollection $apartmentBookingList;
+    private array|ArrayCollection|PersistentCollection $apartmentBookingList;
 
     /**
      * @param Apartment $apartment
@@ -39,7 +40,8 @@ class ApartmentBookingHistory
         $this->apartmentBookingList = new ArrayCollection();
     }
 
-    public function add(ApartmentBooking $apartmentBooking){
+    public function add(ApartmentBooking $apartmentBooking)
+    {
         $this->apartmentBookingList->add($apartmentBooking);
     }
 }

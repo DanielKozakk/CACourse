@@ -18,12 +18,12 @@ class DoctrineApartmentBookingHistory implements ApartmentBookingHistoryReposito
     }
 
 
-    public function existsFor(string $apartmentId): bool
+    public function existsFor(int $apartmentId): bool
     {
         return $this->sqlDoctrineApartmentBookingHistory->existsById($apartmentId);
     }
 
-    public function findFor(string $apartmentId): ApartmentBookingHistory
+    public function findFor(int $apartmentId): ApartmentBookingHistory
     {
         return $this->sqlDoctrineApartmentBookingHistory->findById($apartmentId);
     }
