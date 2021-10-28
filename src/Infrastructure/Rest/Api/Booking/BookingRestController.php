@@ -24,11 +24,11 @@ class BookingRestController
         $this->commandChannel = $commandChannel;
     }
 
-    public function reject(string $id){
+    public function reject(int $id){
         $this->commandChannel->registerBookingRejectCommand(new RejectBookingCommand($id));
     }
 
-    public function accept(string $id){
+    public function accept(int $id){
         $this->commandChannel->registerBookingAcceptedCommand(new AcceptBookingCommand($id));
     }
 }

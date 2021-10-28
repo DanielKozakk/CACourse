@@ -70,7 +70,7 @@ class BookingCommandHandlerTest extends WebTestCase
             }
         ));
 
-        $this->bookingCommandHandler->onBookingAcceptCommand(new AcceptBookingCommand('dummy id'));
+        $this->bookingCommandHandler->onBookingAcceptCommand(new AcceptBookingCommand(1211111111111));
     }
 
     private function givenBookingHotelRoom(){
