@@ -37,6 +37,7 @@ services:
 
   infrastructure.hotel.doctrine_hotel:
     class: Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository
+    public: true
 
   Domain\Hotel\HotelRepository: '@infrastructure.hotel.doctrine_hotel'
 
@@ -45,6 +46,12 @@ services:
     public: true
 
   Domain\EventChannel\EventChannel: '@infrastructure.event_channel.symfony_event_dispatcher'
+
+  application.command_channel.symfony_command_dispatcher:
+    class: Infrastructure\CommandChannel\Symfony\SymfonyCommandDispatcher
+    public: true
+
+  Application\CommandChannel\CommandChannel: '@application.command_channel.symfony_command_dispatcher'
 
   Application\Apartment\:
     resource: '../src/Application/Apartment/*'
