@@ -33,4 +33,8 @@ class SqlDoctrineBookingRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['id' => $id]);
     }
+
+    public function refreshEntity (Booking $booking){
+        $this->entityManager->refresh($booking);
+    }
 }

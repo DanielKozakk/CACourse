@@ -27,4 +27,8 @@ class DoctrineBookingRepository implements BookingRepository
     {
         return $this->sqlDoctrineBookingRepository->findById($id);
     }
+
+    public function refreshEntity(Booking $booking):void {
+        $this->sqlDoctrineBookingRepository->refreshEntity($booking);
+    }
 }

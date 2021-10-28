@@ -16,6 +16,7 @@ class BookingStatus
     /**
      * @var string
      * @ORM\Column(type="string")
+     *
      */
     private string $state;
 
