@@ -53,7 +53,7 @@ class Booking
      * @param string $tenantId
      * @param array $days
      */
-    private function __construct(RentalType $rentalType, string $rentalPlaceId, string $tenantId, array $days)
+    public function __construct(RentalType $rentalType, string $rentalPlaceId, string $tenantId, array $days )
     {
         $this->rentalType = $rentalType;
         $this->rentalPlaceId = $rentalPlaceId;
@@ -62,13 +62,14 @@ class Booking
         $this->bookingStatus = BookingStatus::open();
     }
 
+
     public static function bookApartment(string $rentalPlaceId, string $tenantId, Period $period): Booking
     {
         return new Booking(RentalType::apartmentRentalType(),$rentalPlaceId, $tenantId, $period->asDateTimeArray());
     }
     public static function bookHotelRoom(string $rentalSpaceId, string $tenantId, array $days): Booking
     {
-        return new Booking(RentalType::hotelRoomRentalType(), $rentalSpaceId, $tenantId, $days);
+        return new Booking (RentalType::hotelRoomRentalType(), $rentalSpaceId, $tenantId, $days);
     }
 
     public function reject(){
