@@ -24,16 +24,16 @@ class DoctrineApartmentRepository implements ApartmentRepository
     /**
      * @throws ReflectionException
      */
-    public function save(Apartment $apartment) : void
+    public function save(Apartment $apartment): void
     {
         $this->sqlDoctrineApartmentRepository->save($apartment);
     }
 
-    public function findById(int $apartmentId) : Apartment
+    public function findById(int $apartmentId): Apartment
     {
-         $apartment = $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
+        $apartment = $this->sqlDoctrineApartmentRepository->findOneBy(['id' => $apartmentId]);
 
-             return $apartment ?? (throw new ApartmentNotFoundException('Apartment with id' . " $apartmentId " . 'does not exist'));
+        return $apartment ?? (throw new ApartmentNotFoundException('Apartment with id' . " $apartmentId " . 'does not exist'));
     }
 
 }
