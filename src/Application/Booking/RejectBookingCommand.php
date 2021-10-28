@@ -5,20 +5,20 @@ namespace Application\Booking;
 class RejectBookingCommand
 {
 
-    private string $bookingId;
+    private int $bookingId;
 
     /**
-     * @param string $bookingId
+     * @param int $bookingId
      */
-    public function __construct(string $bookingId)
+    public function __construct(int $bookingId)
     {
         $this->bookingId = $bookingId;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getBookingId(): string
+    public function getBookingId(): int
     {
         return $this->bookingId;
     }
