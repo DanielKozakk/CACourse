@@ -3,6 +3,7 @@
 namespace Domain\Hotel\HotelRoom;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use Domain\Hotel\Hotel;
 use Helpers\PropertiesUnwrapper;
 use PHPUnit\Framework\Assert;
@@ -67,7 +68,7 @@ class HotelRoomAssertion extends Assert
      /**
       * @throws ReflectionException
       */
-    private function changeSpacesToArrayOfSpaces(ArrayCollection $spacesCollection): array{
+    private function changeSpacesToArrayOfSpaces(ArrayCollection|PersistentCollection $spacesCollection): array{
 
         $spacesDefinition = [];
         foreach($spacesCollection->toArray() as $spaceEntity){
