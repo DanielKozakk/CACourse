@@ -4,27 +4,27 @@ namespace Infrastructure\Rest\Api\Apartment;
 use Application\Apartment\ApartmentApplicationService;
 //use Query\Apartment\ApartmentDetails;
 use Query\Apartment\ApartmentReadModel;
+use Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-//use Query\Apartment\QueryApartmentRepository;
 
 class ApartmentRestController extends AbstractController
 {
 
-//    private ApartmentApplicationService $apartmentApplicationService;
-//    private QueryApartmentRepository $queryApartmentRepository;
+    private ApartmentApplicationService $apartmentApplicationService;
+    private QueryApartmentRepository $queryApartmentRepository;
 
-//    /**
-//     * @param ApartmentApplicationService $apartmentApplicationService
-//     * @param QueryApartmentRepository $queryApartmentRepository
-//     */
-//    public function __construct(ApartmentApplicationService $apartmentApplicationService, QueryApartmentRepository $queryApartmentRepository)
-//    {
-//        $this->apartmentApplicationService = $apartmentApplicationService;
-//        $this->queryApartmentRepository = $queryApartmentRepository;
-//    }
+    /**
+     * @param ApartmentApplicationService $apartmentApplicationService
+     * @param QueryApartmentRepository $queryApartmentRepository
+     */
+    public function __construct(ApartmentApplicationService $apartmentApplicationService, QueryApartmentRepository $queryApartmentRepository)
+    {
+        $this->apartmentApplicationService = $apartmentApplicationService;
+        $this->queryApartmentRepository = $queryApartmentRepository;
+    }
 
     #[Route('/apartment-rest', name: 'apartment-rest')]
     public function index(): Response

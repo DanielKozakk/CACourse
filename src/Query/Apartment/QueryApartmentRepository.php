@@ -1,23 +1,23 @@
 <?php
 //
-//namespace Query\Apartment;
-//
-//class QueryApartmentRepository
-//{
-//
-//    private SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository;
-//    private SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository;
-//
-//    /**
-//     * @param SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository
-//     * @param SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository
-//     */
-//    public function __construct(SqlDoctrineQueryApartmentRepository $sqlDoctrineQueryApartmentRepository, SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository)
-//    {
-//        $this->sqlDoctrineQueryApartmentRepository = $sqlDoctrineQueryApartmentRepository;
-//        $this->sqlDoctrineQueryApartmentBookingHistoryRepository = $sqlDoctrineQueryApartmentBookingHistoryRepository;
-//    }
-//
+namespace Query\Apartment;
+
+class QueryApartmentRepository
+{
+
+    private SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentRepository;
+    private SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository;
+
+    /**
+     * @param SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentRepository
+     * @param SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository
+     */
+    public function __construct(SqlDoctrineQueryApartmentReadModelRepository $sqlDoctrineQueryApartmentRepository, SqlDoctrineQueryApartmentBookingHistoryRepository $sqlDoctrineQueryApartmentBookingHistoryRepository)
+    {
+        $this->sqlDoctrineQueryApartmentRepository = $sqlDoctrineQueryApartmentRepository;
+        $this->sqlDoctrineQueryApartmentBookingHistoryRepository = $sqlDoctrineQueryApartmentBookingHistoryRepository;
+    }
+
 //
 //    /**
 //     * @return array<ApartmentBookingHistoryReadModel>
@@ -30,4 +30,4 @@
 //    {
 //        return new ApartmentDetails($this->sqlDoctrineQueryApartmentRepository->findOneById($id), $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id));
 //    }
-//}
+}
