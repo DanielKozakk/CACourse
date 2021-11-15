@@ -2,6 +2,10 @@ controllers:
     resource: ../../src/Infrastructure/Controller/
     type: annotation
 
+apartment_rest_controller:
+    resource: ../../src/Infrastructure/Rest/Api/Apartment/
+    type: annotation
+
 kernel:
     resource: ../../src/Infrastructure/Kernel.php
     type: annotation

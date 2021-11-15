@@ -60,6 +60,9 @@ services:
   Application\Booking\BookingCommandHandler:
     autowire: true
 
+  Infrastructure\Rest\Api\Apartment\ApartmentRestController:
+    autowire: true
+
 
 
   # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
