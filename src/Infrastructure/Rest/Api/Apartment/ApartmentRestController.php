@@ -8,7 +8,7 @@ use Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Request;
 
 class ApartmentRestController extends AbstractController
 {
@@ -38,25 +38,29 @@ class ApartmentRestController extends AbstractController
         ]);
     }
 
-//    public function add(ApartmentCreationDto $apartmentDto): void{
-//        $this->apartmentApplicationService->addApartment(
-//            $apartmentDto->getOwnerId(),
-//            $apartmentDto->getStreet(),
-//            $apartmentDto->getPostalCode(),
-//            $apartmentDto->getHouseNumber(),
-//            $apartmentDto->getApartmentNumber(),
-//            $apartmentDto->getCity(),
-//            $apartmentDto->getCountry(),
-//            $apartmentDto->getDescription(),
-//            $apartmentDto->getRoomsDefinition(),
-//        );
-//    }
+    public function add(ApartmentCreationDto $apartmentDto): void{
+        $this->apartmentApplicationService->addApartment(
+            $apartmentDto->getOwnerId(),
+            $apartmentDto->getStreet(),
+            $apartmentDto->getPostalCode(),
+            $apartmentDto->getHouseNumber(),
+            $apartmentDto->getApartmentNumber(),
+            $apartmentDto->getCity(),
+            $apartmentDto->getCountry(),
+            $apartmentDto->getDescription(),
+            $apartmentDto->getRoomsDefinition(),
+        );
+    }
 
-    /// @Route /book/apartmentId
-//    #[Route('/apartment-booking', name: 'apartment-booking')]
-    public function book(string $apartmentId, ApartmentBookingDto $apartmentBookingDto): void{
+    #[Route('/api/book-apartment/{apartmentId}', methods: ['PUT'])]
+    public function book(string $apartmentId, Request $request): Response{
 
-        $this->apartmentApplicationService->book($apartmentId, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
+        return new Response('test completed');
+
+//        /** @var ApartmentBookingDto $apartmentBookingDto */
+//        $apartmentBookingDto = $request->request->get('apartmentBookingDto');
+//
+//        $this->apartmentApplicationService->book($apartmentId, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
 //
 //    /**

@@ -131,7 +131,6 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
                 $apartmentBookingHistoryReadModel
             );
 
-
             if(!in_array($apartmentBookingReadModel, $apartmentBookingHistoryReadModel->getApartmentBookingReadModelList()->getValues())){
                 $apartmentBookingListReadModel[] = $apartmentBookingReadModel;
             }
