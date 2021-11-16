@@ -57,19 +57,19 @@ class ApartmentRestController extends AbstractController
 
         $this->apartmentApplicationService->book($apartmentId, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
     }
-
-    /**
-     * @route /find_all
-     * @return array<ApartmentReadModel>
-     */
-    public function findAll(): array{
-        return $this->queryApartmentRepository->findAll();
-    }
+//
+//    /**
+//     * @route /find_all
+//     * @return array<ApartmentReadModel>
+//     */
+//    public function findAll(): array{
+//        return $this->queryApartmentRepository->findAll();
+//    }
 
     // /{id}
-    public function findById(string $id): ?ApartmentDetails{
-        return $this->queryApartmentRepository->findById($id);
-    }
+//    public function findById(string $id): ?ApartmentDetails{
+//        return $this->queryApartmentRepository->findById($id);
+//    }
 
 
 }
