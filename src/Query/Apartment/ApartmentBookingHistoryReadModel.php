@@ -29,7 +29,7 @@ class ApartmentBookingHistoryReadModel
     /**
      *
      * @var array<ApartmentBookingReadModel>|ArrayCollection|PersistentCollection
-     * @ORM\OneToMany(targetEntity="ApartmentBookingReadModel", mappedBy="apartmentReadBookingHistory", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ApartmentBookingReadModel", mappedBy="apartmentBookingHistoryReadModel", cascade={"persist", "remove"})
      */
     private array|ArrayCollection|PersistentCollection $apartmentBookingReadModelList;
 
@@ -40,6 +40,7 @@ class ApartmentBookingHistoryReadModel
     {
         $this->id = $id;
         $this->apartment = $apartment;
+        $this->apartmentBookingReadModelList = new ArrayCollection();
     }
 
     /**
@@ -47,5 +48,10 @@ class ApartmentBookingHistoryReadModel
      */
     public function setApartmentBookingReadModelList(array $apartmentBookingReadModelList){
         $this->apartmentBookingReadModelList = $apartmentBookingReadModelList;
+    }
+
+    public function getApartmentBookingReadModelList (): ArrayCollection|PersistentCollection|array
+    {
+        return $this->apartmentBookingReadModelList;
     }
 }

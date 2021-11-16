@@ -46,7 +46,7 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-        $this->apartmentApplicationService->book(4, '161361236234623', new DateTime('2030-01-01'), new DateTime('2030-01-02'));
+        $this->apartmentApplicationService->book(1, '161361236234623', new DateTime('2030-01-01'), new DateTime('2030-01-02'));
 
 //        $this->apartmentApplicationService->addApartment('090909090090909',
 //            'Zwycięska',

@@ -4,6 +4,7 @@ namespace Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory;
 
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryRepository;
+use ReflectionException;
 
 class DoctrineApartmentBookingHistory implements ApartmentBookingHistoryRepository
 {
@@ -28,6 +29,9 @@ class DoctrineApartmentBookingHistory implements ApartmentBookingHistoryReposito
         return $this->sqlDoctrineApartmentBookingHistory->findById($apartmentId);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function save(ApartmentBookingHistory $apartmentBookingHistory): void
     {
         $this->sqlDoctrineApartmentBookingHistory->save($apartmentBookingHistory);

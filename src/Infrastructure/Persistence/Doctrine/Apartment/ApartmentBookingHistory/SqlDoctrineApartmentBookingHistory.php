@@ -80,14 +80,17 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
         $apartmentBookingHistoryReadModel = $this->queryApartmentBookingHistoryRepository->findOneById($apartmentBookingHistoryId);
 
 
+
         if(!isset($apartmentBookingHistoryReadModel)){
             $apartmentReadModel = $this->apartmentReadModelRepository->findOneById($apartmentId);
 
             $apartmentBookingHistoryReadModel = new ApartmentBookingHistoryReadModel($apartmentBookingHistoryId,$apartmentReadModel);
         }
+
         $apartmentBookingReadModelList = $this->createApartmentBookingReadModelListFromApartmentBookingList($apartmentBookingList->getValues(), $apartmentBookingHistoryReadModel);
 
         $apartmentBookingHistoryReadModel->setApartmentBookingReadModelList($apartmentBookingReadModelList);
+
         $this->queryApartmentBookingHistoryRepository->save($apartmentBookingHistoryReadModel);
     }
 
@@ -117,7 +120,7 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
 
             $apartmentBookingStepState = $this->getReflectionValue(BookingStep::class, 'state', $apartmentBookingStep);
 
-            $apartmentBookingListReadModel[] = new ApartmentBookingReadModel(
+            $apartmentBookingReadModel = new ApartmentBookingReadModel(
                 $apartmentBookingId,
                 $apartmentBookingCreation,
                 $apartmentBookingOwnerId,
@@ -127,6 +130,12 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
                 $apartmentBookingStepState,
                 $apartmentBookingHistoryReadModel
             );
+
+
+            if(!in_array($apartmentBookingReadModel, $apartmentBookingHistoryReadModel->getApartmentBookingReadModelList()->getValues())){
+                $apartmentBookingListReadModel[] = $apartmentBookingReadModel;
+            }
+
         }
         return $apartmentBookingListReadModel;
     }
