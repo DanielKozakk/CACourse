@@ -6,6 +6,9 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 
+/**
+ * @ORM\Entity()
+ */
 class ApartmentBookingReadModel
 {
 
