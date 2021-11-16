@@ -50,7 +50,7 @@ class ApartmentBookingReadModel
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity=Query\Apartment\ApartmentBookingHistoryReadModel", inversedBy="apartmentBookingHistoryReadModelBookingList")
+     * @ORM\ManyToOne(targetEntity=Query\Apartment\ApartmentBookingHistoryReadModel", inversedBy="apartmentBookingReadModelList")
      */
     private ApartmentBookingHistory $apartmentReadBookingHistory;
 

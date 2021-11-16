@@ -11,6 +11,7 @@ use Domain\Apartment\ApartmentBookingHistory\ApartmentBooking;
 
 /**
  * @ORM\Entity(repositoryClass="SqlDoctrineQueryApartmentBookingHistoryRepository")
+ * @ORM\Table(name="apartment_booking_history_read_model")
  */
 class ApartmentBookingHistoryReadModel
 {
@@ -21,13 +22,14 @@ class ApartmentBookingHistoryReadModel
     private int $id;
     /**
      * @var ApartmentReadModel
+     * @ORM\OneToOne(targetEntity="ApartmentReadModel")
      */
     private ApartmentReadModel $apartment;
 
     /**
      *
      * @var array<ApartmentBookingReadModel>|ArrayCollection|PersistentCollection
-     * @ORM\OneToMany(targetEntity="ApartmentBooking", mappedBy="apartmentBookingHistory", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ApartmentBooking", mappedBy="apartmentReadBookingHistory", cascade={"persist", "remove"})
      */
     private array|ArrayCollection|PersistentCollection $apartmentBookingReadModelList;
 
@@ -48,6 +50,4 @@ class ApartmentBookingHistoryReadModel
     public function setApartmentBookingReadModelList(array $apartmentBookingReadModelList){
         $this->apartmentBookingReadModelList = $apartmentBookingReadModelList;
     }
-
-
 }
