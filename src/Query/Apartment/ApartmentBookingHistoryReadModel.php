@@ -29,7 +29,7 @@ class ApartmentBookingHistoryReadModel
     /**
      *
      * @var array<ApartmentBookingReadModel>|ArrayCollection|PersistentCollection
-     * @ORM\OneToMany(targetEntity="ApartmentBooking", mappedBy="apartmentReadBookingHistory", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ApartmentBookingReadModel", mappedBy="apartmentReadBookingHistory", cascade={"persist", "remove"})
      */
     private array|ArrayCollection|PersistentCollection $apartmentBookingReadModelList;
 
