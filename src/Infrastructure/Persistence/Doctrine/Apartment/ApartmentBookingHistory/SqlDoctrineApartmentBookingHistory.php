@@ -4,6 +4,7 @@ namespace Infrastructure\Persistence\Doctrine\Apartment\ApartmentBookingHistory;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBooking;
@@ -72,14 +73,17 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
         $apartmentBookingHistoryId = $this->getReflectionValue(ApartmentBookingHistory::class, 'id', $apartmentBookingHistory);
         $apartment = $this->getReflectionValue(ApartmentBookingHistory::class, 'apartment', $apartmentBookingHistory);
         $apartmentId = $this->getReflectionValue(Apartment::class, 'id', $apartment);
+
+        /** @var PersistentCollection $apartmentBookingList */
         $apartmentBookingList = $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $apartmentBookingHistory);
 
         $apartmentBookingHistoryReadModel = $this->queryApartmentBookingHistoryRepository->findOneById($apartmentBookingHistoryId);
 
-        $apartmentBookingReadModelList = $this->createApartmentBookingReadModelListFromApartmentBookingList($apartmentBookingList);
+        $apartmentBookingReadModelList = $this->createApartmentBookingReadModelListFromApartmentBookingList($apartmentBookingList->getValues());
 
         if(!isset($apartmentBookingHistoryReadModel)){
             $apartmentReadModel = $this->apartmentReadModelRepository->findOneById($apartmentId);
+
             $apartmentBookingHistoryReadModel = new ApartmentBookingHistoryReadModel($apartmentBookingHistoryId,$apartmentReadModel, $apartmentBookingReadModelList );
         }
 

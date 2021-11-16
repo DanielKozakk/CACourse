@@ -2,6 +2,7 @@
 
 namespace Infrastructure\Controller;
 
+use Application\Apartment\ApartmentApplicationService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,11 +29,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
 
-//    private DoctrineApartmentRepository $apartmentRepository;
-    
-    public function __construct(ApartmentRepository $apartmentRepository)
+    private ApartmentApplicationService $apartmentApplicationService;
+
+    /**
+     * @param ApartmentApplicationService $apartmentApplicationService
+     */
+    public function __construct(ApartmentApplicationService $apartmentApplicationService)
     {
-//        $this->apartmentRepository = $apartmentRepository;
+        $this->apartmentApplicationService = $apartmentApplicationService;
     }
 
 
@@ -42,7 +46,7 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-//        $this->apartmentRepository->findById("124123");
+        $this->apartmentApplicationService->book(1, '21', new DateTime('2021-01-01'), new DateTime('2021-01-02'));
 
         return $this->json([
             'message' => 'Welcome to your new controller!',

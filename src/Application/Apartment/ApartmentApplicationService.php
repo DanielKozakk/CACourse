@@ -29,7 +29,6 @@ class ApartmentApplicationService
         $this->bookingRepository = $bookingRepository;
     }
 
-
     /**
      * @param string $ownerId
      * @param string $street

@@ -53,6 +53,7 @@ class ApartmentRestController extends AbstractController
 //    }
 
     /// @Route /book/apartmentId
+//    #[Route('/apartment-booking', name: 'apartment-booking')]
     public function book(string $apartmentId, ApartmentBookingDto $apartmentBookingDto): void{
 
         $this->apartmentApplicationService->book($apartmentId, $apartmentBookingDto->getTenantId(), $apartmentBookingDto->getStart(), $apartmentBookingDto->getEnd());
