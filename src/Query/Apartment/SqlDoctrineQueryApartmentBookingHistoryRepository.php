@@ -26,4 +26,8 @@ class SqlDoctrineQueryApartmentBookingHistoryRepository extends ServiceEntityRep
     {
         return $this->findOneBy(['id'=>$id]);
     }
+    public function save(ApartmentBookingHistoryReadModel $apartmentBookingHistoryReadModel){
+        $this->entityManager->persist($apartmentBookingHistoryReadModel);
+        $this->entityManager->flush();
+    }
 }
