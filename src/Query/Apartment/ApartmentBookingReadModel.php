@@ -72,7 +72,9 @@ class ApartmentBookingReadModel
                                 string   $tenantId,
                                 DateTime $startDate,
                                 DateTime $endDate,
-                                string   $bookingStep)
+                                string   $bookingStep,
+                                ApartmentBookingHistoryReadModel $apartmentBookingHistoryReadModel
+    )
     {
         $this->id = $id;
         $this->bookingCreation = $bookingCreation;
@@ -81,6 +83,7 @@ class ApartmentBookingReadModel
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->bookingStep = $bookingStep;
+        $this->apartmentBookingHistoryReadModel = $apartmentBookingHistoryReadModel;
     }
 
     /**

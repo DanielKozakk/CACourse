@@ -35,13 +35,11 @@ class ApartmentBookingHistoryReadModel
 
     /**
      * @param ApartmentReadModel $apartment
-     * @param ArrayCollection|array $apartmentBookingReadModelList
      */
-    public function __construct(int $id, ApartmentReadModel $apartment, ArrayCollection|array $apartmentBookingReadModelList)
+    public function __construct(int $id, ApartmentReadModel $apartment)
     {
         $this->id = $id;
         $this->apartment = $apartment;
-        $this->apartmentBookingReadModelList = $apartmentBookingReadModelList;
     }
 
     /**

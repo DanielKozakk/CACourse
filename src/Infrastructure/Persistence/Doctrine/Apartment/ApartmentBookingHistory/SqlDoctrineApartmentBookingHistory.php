@@ -79,13 +79,13 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
 
         $apartmentBookingHistoryReadModel = $this->queryApartmentBookingHistoryRepository->findOneById($apartmentBookingHistoryId);
 
-        $apartmentBookingReadModelList = $this->createApartmentBookingReadModelListFromApartmentBookingList($apartmentBookingList->getValues());
 
         if(!isset($apartmentBookingHistoryReadModel)){
             $apartmentReadModel = $this->apartmentReadModelRepository->findOneById($apartmentId);
 
-            $apartmentBookingHistoryReadModel = new ApartmentBookingHistoryReadModel($apartmentBookingHistoryId,$apartmentReadModel, $apartmentBookingReadModelList );
+            $apartmentBookingHistoryReadModel = new ApartmentBookingHistoryReadModel($apartmentBookingHistoryId,$apartmentReadModel);
         }
+        $apartmentBookingReadModelList = $this->createApartmentBookingReadModelListFromApartmentBookingList($apartmentBookingList->getValues(), $apartmentBookingHistoryReadModel);
 
         $apartmentBookingHistoryReadModel->setApartmentBookingReadModelList($apartmentBookingReadModelList);
         $this->queryApartmentBookingHistoryRepository->save($apartmentBookingHistoryReadModel);
@@ -96,7 +96,7 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
      * @return array<ApartmentBookingReadModel>
      * @throws ReflectionException
      */
-    private function createApartmentBookingReadModelListFromApartmentBookingList(array $apartmentBookingList):array{
+    private function createApartmentBookingReadModelListFromApartmentBookingList(array $apartmentBookingList, ApartmentBookingHistoryReadModel $apartmentBookingHistoryReadModel):array{
 
         /** @var array<ApartmentBookingReadModel> $apartmentBookingListReadModel */
         $apartmentBookingListReadModel = [];
@@ -124,7 +124,8 @@ class SqlDoctrineApartmentBookingHistory extends ServiceEntityRepository
                 $apartmentBookingTenantId,
                 $apartmentBookingStartDate,
                 $apartmentBookingEndDate,
-                $apartmentBookingStepState
+                $apartmentBookingStepState,
+                $apartmentBookingHistoryReadModel
             );
         }
         return $apartmentBookingListReadModel;

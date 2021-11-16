@@ -46,7 +46,17 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-        $this->apartmentApplicationService->book(1, '21', new DateTime('2021-01-01'), new DateTime('2021-01-02'));
+        $this->apartmentApplicationService->book(4, '161361236234623', new DateTime('2030-01-01'), new DateTime('2030-01-02'));
+
+//        $this->apartmentApplicationService->addApartment('090909090090909',
+//            'Zwycięska',
+//            '20112112-12',
+//            '1251221',
+//            '3333333333333333333333',
+//            "Cityyyyyy",
+//            "Republika republiczna",
+//            "Opis",
+//            ['kuchnia' => 666]);
 
         return $this->json([
             'message' => 'Welcome to your new controller!',
