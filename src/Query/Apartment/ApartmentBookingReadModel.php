@@ -2,7 +2,6 @@
 
 namespace Query\Apartment;
 
-//TODO ta sama tabela co apartmentBooking
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
@@ -13,7 +12,6 @@ class ApartmentBookingReadModel
     /**
      * @var int $id
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -65,8 +63,15 @@ class ApartmentBookingReadModel
      * @param DateTime $endDate
      * @param string $bookingStep
      */
-    public function __construct(DateTime $bookingCreation, string $ownerId, string $tenantId, DateTime $startDate, DateTime $endDate, string $bookingStep)
+    public function __construct(int      $id,
+                                DateTime $bookingCreation,
+                                string   $ownerId,
+                                string   $tenantId,
+                                DateTime $startDate,
+                                DateTime $endDate,
+                                string   $bookingStep)
     {
+        $this->id = $id;
         $this->bookingCreation = $bookingCreation;
         $this->ownerId = $ownerId;
         $this->tenantId = $tenantId;
