@@ -24,9 +24,9 @@ class DoctrineApartmentRepository implements ApartmentRepository
     /**
      * @throws ReflectionException
      */
-    public function save(Apartment $apartment): void
+    public function save(Apartment $apartment): int
     {
-        $this->sqlDoctrineApartmentRepository->save($apartment);
+     return   $this->sqlDoctrineApartmentRepository->save($apartment);
     }
 
     public function findById(int $apartmentId): Apartment

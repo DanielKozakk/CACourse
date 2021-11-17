@@ -50,7 +50,7 @@ class ApartmentApplicationService
         string $city,
         string $country,
         string $description,
-        array  $roomsDefinition) : void
+        array  $roomsDefinition) : int
     {
         $newApartment= (new ApartmentFactory())->create(
         $ownerId,
@@ -63,7 +63,7 @@ class ApartmentApplicationService
         $description,
         $roomsDefinition);
 
-        $this->apartmentRepository->save($newApartment);
+       return $this->apartmentRepository->save($newApartment);
     }
 
     public function book(int $apartmentId, string $tenantId, DateTime $start, DateTime $end){

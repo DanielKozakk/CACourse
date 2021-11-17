@@ -7,6 +7,7 @@ use Query\Apartment\ApartmentDetails;
 use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,19 +40,25 @@ class ApartmentRestController extends AbstractController
         ]);
     }
 
-    public function add(ApartmentCreationDto $apartmentDto): void
+    #[Route('/api/apartment/add', methods: ['POST'])]
+
+    public function add(Request $request): Response
     {
-        $this->apartmentApplicationService->addApartment(
-            $apartmentDto->getOwnerId(),
-            $apartmentDto->getStreet(),
-            $apartmentDto->getPostalCode(),
-            $apartmentDto->getHouseNumber(),
-            $apartmentDto->getApartmentNumber(),
-            $apartmentDto->getCity(),
-            $apartmentDto->getCountry(),
-            $apartmentDto->getDescription(),
-            $apartmentDto->getRoomsDefinition(),
+        $apartmentDto = $request->request->all()['ApartmentCreationDto'];
+
+        $id = $this->apartmentApplicationService->addApartment(
+            $apartmentDto['ownerId'],
+            $apartmentDto['street'],
+            $apartmentDto['postalCode'],
+            $apartmentDto['houseNumber'],
+            $apartmentDto['apartmentNumber'],
+            $apartmentDto['city'],
+            $apartmentDto['country'],
+            $apartmentDto['description'],
+            $apartmentDto['roomsDefinition'],
         );
+
+        return new Response($id, 201);
     }
 
     #[Route('/api/apartment/book/{apartmentId}', methods: ['PUT'])]
@@ -77,7 +84,6 @@ class ApartmentRestController extends AbstractController
     #[Route('/api/apartment/find/{apartmentId}', methods: ['GET'])]
     public function findById(string $apartmentId): Response
     {
-        
         return $this->json($this->queryApartmentRepository->findById($apartmentId));
     }
 

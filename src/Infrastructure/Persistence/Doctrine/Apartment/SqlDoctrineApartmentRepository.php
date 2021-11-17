@@ -39,7 +39,7 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
     /**
      * @throws ReflectionException
      */
-    public function save(Apartment $apartment){
+    public function save(Apartment $apartment):int{
 
         $this->entityManager->persist($apartment);
         $this->entityManager->flush();
@@ -48,6 +48,7 @@ class SqlDoctrineApartmentRepository extends ServiceEntityRepository
         $this->entityManager->persist($this->createApartmentReadModelObjectFromApartment($apartment));
         $this->entityManager->flush();
 
+        return $this->getReflectionValue(Apartment::class, 'id', $apartment);
     }
 
     /**

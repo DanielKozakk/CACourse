@@ -27,8 +27,13 @@ class QueryApartmentRepository
 //    }
 //
 
-    public function findById(string $id) : ?ApartmentDetails
+    public function findById(string $id): ?ApartmentDetails
     {
-        return new ApartmentDetails($this->sqlDoctrineQueryApartmentRepository->findOneById($id), $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id));
+        $apartmentReadModel = $this->sqlDoctrineQueryApartmentRepository->findOneById($id);
+        $apartmentBookingHistoryReadModel = $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id);
+        if (isset($apartmentReadModel) && isset($apartmentBookingHistoryReadModel)) {
+            return new ApartmentDetails($apartmentReadModel, $apartmentBookingHistoryReadModel);
+        }
+        return null;
     }
 }
