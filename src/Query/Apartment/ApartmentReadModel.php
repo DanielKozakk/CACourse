@@ -99,7 +99,7 @@ class ApartmentReadModel
      */
     public function getRooms(): array
     {
-        return $this->rooms;
+        return $this->rooms->toArray();
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-//
+
 namespace Query\Apartment;
 
 class QueryApartmentRepository
@@ -26,8 +26,9 @@ class QueryApartmentRepository
 //        return $this->sqlDoctrineQueryApartmentRepository->findAll();
 //    }
 //
-//    public function findById(string $id) : ?ApartmentDetails
-//    {
-//        return new ApartmentDetails($this->sqlDoctrineQueryApartmentRepository->findOneById($id), $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id));
-//    }
+
+    public function findById(string $id) : ?ApartmentDetails
+    {
+        return new ApartmentDetails($this->sqlDoctrineQueryApartmentRepository->findOneById($id), $this->sqlDoctrineQueryApartmentBookingHistoryRepository->findOneById($id));
+    }
 }

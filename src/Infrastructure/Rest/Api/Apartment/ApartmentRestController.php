@@ -1,8 +1,9 @@
 <?php
 
 namespace Infrastructure\Rest\Api\Apartment;
+
 use Application\Apartment\ApartmentApplicationService;
-//use Query\Apartment\ApartmentDetails;
+use Query\Apartment\ApartmentDetails;
 use Query\Apartment\ApartmentReadModel;
 use Query\Apartment\QueryApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,8 @@ class ApartmentRestController extends AbstractController
         ]);
     }
 
-    public function add(ApartmentCreationDto $apartmentDto): void{
+    public function add(ApartmentCreationDto $apartmentDto): void
+    {
         $this->apartmentApplicationService->addApartment(
             $apartmentDto->getOwnerId(),
             $apartmentDto->getStreet(),
@@ -52,8 +54,9 @@ class ApartmentRestController extends AbstractController
         );
     }
 
-    #[Route('/api/book-apartment/{apartmentId}', methods: ['PUT'])]
-    public function book(string $apartmentId, Request $request): Response{
+    #[Route('/api/apartment/book/{apartmentId}', methods: ['PUT'])]
+    public function book(string $apartmentId, Request $request): Response
+    {
 
         return new Response('test completed');
 
@@ -71,10 +74,12 @@ class ApartmentRestController extends AbstractController
 //        return $this->queryApartmentRepository->findAll();
 //    }
 
-    // /{id}
-//    public function findById(string $id): ?ApartmentDetails{
-//        return $this->queryApartmentRepository->findById($id);
-//    }
+    #[Route('/api/apartment/find/{apartmentId}', methods: ['GET'])]
+    public function findById(string $apartmentId): Response
+    {
+        
+        return $this->json($this->queryApartmentRepository->findById($apartmentId));
+    }
 
 
 }
