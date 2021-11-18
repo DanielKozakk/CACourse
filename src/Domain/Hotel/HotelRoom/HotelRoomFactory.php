@@ -2,17 +2,18 @@
 
 namespace Domain\Hotel\HotelRoom;
 
+use Domain\Hotel\HotelRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
 
 class HotelRoomFactory
 {
-    private DoctrineHotelRepository $doctrineHotelRepository;
+    private HotelRepository $doctrineHotelRepository;
 
     /**
-     * @param DoctrineHotelRepository $doctrineHotelRepository
+     * @param HotelRepository $doctrineHotelRepository
      */
-    public function __construct(DoctrineHotelRepository $doctrineHotelRepository)
+    public function __construct(HotelRepository $doctrineHotelRepository)
     {
         $this->doctrineHotelRepository = $doctrineHotelRepository;
     }

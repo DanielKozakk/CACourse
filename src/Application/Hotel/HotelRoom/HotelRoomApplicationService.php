@@ -6,6 +6,7 @@ use DateTime;
 use Domain\Apartment\Booking;
 use Domain\Apartment\BookingRepository;
 use Domain\EventChannel\EventChannel;
+use Domain\Hotel\HotelRepository;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
 use Domain\Hotel\HotelRoom\HotelRoomRepository;
@@ -17,15 +18,15 @@ class HotelRoomApplicationService
     private HotelRoomRepository $hotelRoomRepository;
     private EventChannel $eventChannel;
     private BookingRepository $bookingRepository;
-    private DoctrineHotelRepository $doctrineHotelRepository;
+    private HotelRepository $doctrineHotelRepository;
 
     /**
      * @param HotelRoomRepository $hotelRoomRepository
      * @param EventChannel $eventChannel
      * @param BookingRepository $bookingRepository
-     * @param DoctrineHotelRepository $doctrineHotelRepository
+     * @param HotelRepository $doctrineHotelRepository
      */
-    public function __construct(HotelRoomRepository $hotelRoomRepository, EventChannel $eventChannel, BookingRepository $bookingRepository, DoctrineHotelRepository $doctrineHotelRepository)
+    public function __construct(HotelRoomRepository $hotelRoomRepository, EventChannel $eventChannel, BookingRepository $bookingRepository, HotelRepository $doctrineHotelRepository)
     {
         $this->hotelRoomRepository = $hotelRoomRepository;
         $this->eventChannel = $eventChannel;

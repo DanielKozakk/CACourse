@@ -9,7 +9,9 @@ use Domain\Apartment\ApartmentBookingHistory\BookingPeriod;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistoryRepository;
 use Domain\Hotel\HotelBookingHistory\HotelRoomBooking;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistory;
+use Domain\Hotel\HotelRepository;
 use Domain\Hotel\HotelRoom\HotelRoomBookedEvent;
+use Domain\Hotel\HotelRoom\HotelRoomRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\HotelRoomBookingHistory\DoctrineHotelRoomBookingHistoryRepository;
@@ -20,15 +22,15 @@ class HotelBookingHistoryEventSubscriber implements EventSubscriberInterface
 {
 
     private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
-    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
-    private DoctrineHotelRepository $doctrineHotelRepository;
+    private HotelRoomRepository $doctrineHotelRoomRepository;
+    private HotelRepository $doctrineHotelRepository;
 
     /**
      * @param HotelBookingHistoryRepository $hotelBookingHistoryRepository
-     * @param DoctrineHotelRoomRepository $doctrineHotelRoomRepository
-     * @param DoctrineHotelRepository $doctrineHotelRepository
+     * @param HotelRoomRepository $doctrineHotelRoomRepository
+     * @param HotelRepository $doctrineHotelRepository
      */
-    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository, DoctrineHotelRoomRepository $doctrineHotelRoomRepository, DoctrineHotelRepository $doctrineHotelRepository)
+    public function __construct(HotelBookingHistoryRepository $hotelBookingHistoryRepository, HotelRoomRepository $doctrineHotelRoomRepository, HotelRepository $doctrineHotelRepository)
     {
         $this->hotelBookingHistoryRepository = $hotelBookingHistoryRepository;
         $this->doctrineHotelRoomRepository = $doctrineHotelRoomRepository;
