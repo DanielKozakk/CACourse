@@ -58,15 +58,15 @@ class ApartmentRestControllerSystemTest extends WebTestCase
         $client = self::createClient();
 
         $parameters = [
-        'ownerId' => '1234',
-        'street' => 'Miałczewska',
-        'postalCode' => '21-211',
-        'houseNumber' => '2119999',
-        'apartmentNumber' => '2112',
-        'city' => '5123',
-        'country' => 'Polska',
-        'description' => 'Opis',
-        'roomsDefinition' => ['przykladowy_pokoj' => 20]
+            'ownerId' => '1234',
+            'street' => 'Miałczewska',
+            'postalCode' => '21-211',
+            'houseNumber' => '2119999',
+            'apartmentNumber' => '2112',
+            'city' => '5123',
+            'country' => 'Polska',
+            'description' => 'Opis',
+            'roomsDefinition' => ['przykladowy_pokoj' => 20]
         ];
 
         $client->request('POST', self::CREATE_APARTMENT_URL, ['ApartmentCreationDto' => $parameters]);
