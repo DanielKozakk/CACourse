@@ -51,6 +51,12 @@ services:
     class: Infrastructure\CommandChannel\Symfony\SymfonyCommandDispatcher
     public: true
 
+  infrastructure.apartment_offer.doctrine_apartment_offer_repository:
+    class: Infrastructure\Persistence\Doctrine\ApartmentOffer\DoctrineApartmentOfferRepository
+    public: true
+
+  Domain\ApartmentOffer\ApartmentOfferRepository: '@infrastructure.apartment_offer.doctrine_apartment_offer_repository'
+
   Application\CommandChannel\CommandChannel: '@application.command_channel.symfony_command_dispatcher'
 
   Application\Apartment\:
