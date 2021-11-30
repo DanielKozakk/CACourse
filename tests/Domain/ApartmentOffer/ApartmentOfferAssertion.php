@@ -37,12 +37,14 @@ class ApartmentOfferAssertion extends Assert
     }
 
     /**
+     * @param Money $price
+     * @return ApartmentOfferAssertion
      * @throws ReflectionException
      */
-    public function hasPriceEqualTo(int $price) : ApartmentOfferAssertion
+    public function hasPriceEqualTo(Money $price) : ApartmentOfferAssertion
     {
         $actual = $this->getReflectionValue(ApartmentOffer::class, 'price', $this->apartmentOffer);
-        $this->assertSame($actual, $price);
+        $this->assertEquals($actual, $price);
 
         return $this;
 
@@ -53,7 +55,9 @@ class ApartmentOfferAssertion extends Assert
      */
     public function hasStartDateEqualTo(DateTime $start) : ApartmentOfferAssertion
     {
-        $actual = $this->getReflectionValue(ApartmentOffer::class, 'startDate', $this->apartmentOffer);
+        $availability = $this->getReflectionValue(ApartmentOffer::class, 'availability', $this->apartmentOffer);
+        $actual = $this->getReflectionValue(ApartmentAvailability::class, 'start', $availability);
+
         $this->assertSame($actual, $start);
         return $this;
 
@@ -64,7 +68,8 @@ class ApartmentOfferAssertion extends Assert
      */
     public function hasEndDateEqualTo(DateTime $end) : ApartmentOfferAssertion
     {
-        $actual = $this->getReflectionValue(ApartmentOffer::class, 'endDate', $this->apartmentOffer);
+        $availability = $this->getReflectionValue(ApartmentOffer::class, 'availability', $this->apartmentOffer);
+        $actual = $this->getReflectionValue(ApartmentAvailability::class, 'end', $availability);
         $this->assertSame($actual, $end);
         return $this;
     }

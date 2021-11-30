@@ -9,6 +9,7 @@ use Domain\Apartment\ApartmentAssertion;
 use Domain\ApartmentOffer\ApartmentOffer;
 use Domain\ApartmentOffer\ApartmentOfferAssertion;
 use Domain\ApartmentOffer\ApartmentOfferRepository;
+use Domain\ApartmentOffer\Money;
 use PHPUnit\Framework\TestCase;
 
 
@@ -42,7 +43,7 @@ class ApartmentOfferServiceTest extends TestCase
 
                 ApartmentOfferAssertion::assert($apartmentOffer)
                     ->hasApartmentIdEqualTo(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'])
-                    ->hasPriceEqualTo($price)
+                    ->hasPriceEqualTo(new Money($price))
                     ->hasStartDateEqualTo($start)
                     ->hasEndDateEqualTo($end);
                 return true;

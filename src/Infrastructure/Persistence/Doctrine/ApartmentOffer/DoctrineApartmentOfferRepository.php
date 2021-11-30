@@ -2,7 +2,15 @@
 
 namespace Infrastructure\Persistence\Doctrine\ApartmentOffer;
 
-class DoctrineApartmentOfferRepository
+use Domain\ApartmentOffer\ApartmentOffer;
+use Domain\ApartmentOffer\ApartmentOfferRepository;
+
+class DoctrineApartmentOfferRepository implements ApartmentOfferRepository
 {
+    public function save(ApartmentOffer $apartmentOffer)
+    {
+        // TODO: Implement save() method.
+    }
+
 
 }
