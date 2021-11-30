@@ -11,6 +11,7 @@ use Domain\ApartmentOffer\ApartmentOffer;
 use Domain\ApartmentOffer\ApartmentOfferAssertion;
 use Domain\ApartmentOffer\ApartmentOfferRepository;
 use Domain\ApartmentOffer\Money;
+use Domain\ApartmentOffer\NotAllowedMoneyValueException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -40,11 +41,25 @@ class ApartmentOfferServiceTest extends WebTestCase
         $this->service = new ApartmentOfferService($this->apartmentOfferRepository, $this->apartmentRepository );
     }
 
+    /**
+     * @throws NotAllowedMoneyValueException
+     */
+    public function testShouldRecognizePriceLowerThanAcceptable(){
+        $this->givenExistingApartment();
+
+        $price = -1;
+        $this->expectErrorMessage("Price -1 is lower than zero.");
+        $this->service->addOffer(ApartmentFixture::FIRST_TEST_APARTMENT['apartmentId'], $price, $this->startDate, $this->endDate);
+    }
+
     public function testShouldCreateApartmentOfferForExistingApartment(){
         $this->givenExistingApartment();
         $this->thenOfferShouldBeCreated($this->startDate, $this->endDate);
     }
 
+    /**
+     * @throws NotAllowedMoneyValueException
+     */
     public function testShouldRecognizeApartmentDoesNotExist(){
         $this->givenNonExistingApartment();
 
