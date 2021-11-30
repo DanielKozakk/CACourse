@@ -1,6 +1,6 @@
 <?php
 
-namespace Infrastructure\Persistence\Doctrine\Apartment;
+namespace Application\Apartment;
 
 use RuntimeException;
 use Throwable;

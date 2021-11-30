@@ -8,4 +8,6 @@ interface ApartmentRepository
 
     public function findById(int $apartmentId): Apartment;
 
+    public function existById(int $apartmentId): bool;
+
 }

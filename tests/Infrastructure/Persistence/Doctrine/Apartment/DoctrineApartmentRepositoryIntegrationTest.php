@@ -2,6 +2,7 @@
 
 namespace Infrastructure\Persistence\Doctrine\Apartment;
 
+use Application\Apartment\ApartmentNotFoundException;
 use Domain\Apartment\Apartment;
 use Domain\Apartment\ApartmentAssertion;
 use Domain\Apartment\ApartmentFactory;
