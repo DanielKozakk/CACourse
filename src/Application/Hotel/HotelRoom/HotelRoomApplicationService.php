@@ -7,11 +7,7 @@ use Domain\Apartment\Booking;
 use Domain\Apartment\BookingRepository;
 use Domain\EventChannel\EventChannel;
 use Domain\Hotel\HotelRepository;
-use Domain\Hotel\HotelRoom\HotelRoom;
-use Domain\Hotel\HotelRoom\HotelRoomFactory;
-use Domain\Hotel\HotelRoom\HotelRoomRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
-use Infrastructure\Rest\Api\Hotel\HotelRoom\HotelBookingDto;
+use Domain\Hotel\HotelRoom;
 
 class HotelRoomApplicationService
 {
@@ -51,13 +47,16 @@ class HotelRoomApplicationService
         string $description
     ): void
     {
-        $hotelRoom = (new HotelRoomFactory( $this->doctrineHotelRepository))->create(
-            $hotelId,
-            $hotelNumber,
-            $spacesDefinition,
-            $description);
+        $hotel = $this->doctrineHotelRepository->findHotelById($hotelId);
+        $hotel->addRoom($hotelNumber, $spacesDefinition, $description);
+//        $hotelRoom = (new HotelRoomFactory( $this->doctrineHotelRepository))->create(
+//            $hotelId,
+//            $hotelNumber,
+//            $spacesDefinition,
+//            $description);
 
-        $this->hotelRepository->saveHotelRoom($hotelRoom);
+
+//        $this->hotelRepository->saveHotelRoom($hotelRoom);
     }
 
     /**
