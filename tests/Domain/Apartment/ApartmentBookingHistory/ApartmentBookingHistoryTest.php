@@ -33,7 +33,7 @@ class ApartmentBookingHistoryTest extends KernelTestCase
         $apartmentBookingHistory = new ApartmentBookingHistory($this->getRelatedApartment());
         $apartmentBooking = ApartmentBooking::start($bookingCreation,$ownerId, $tenantId, $bookingPeriod, $apartmentBookingHistory);
 
-        $apartmentBookingHistory->add($apartmentBooking);
+        $apartmentBookingHistory->addBookingStart($bookingCreation, $ownerId, $tenantId, $bookingPeriod, $apartmentBookingHistory);
 
         $this->assertEquals($apartmentBooking, $this->getReflectionValue(ApartmentBookingHistory::class, 'apartmentBookingList', $apartmentBookingHistory)->first());
 

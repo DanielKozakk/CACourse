@@ -2,6 +2,7 @@
 
 namespace Domain\Apartment\ApartmentBookingHistory;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
@@ -40,8 +41,20 @@ class ApartmentBookingHistory
         $this->apartmentBookingList = new ArrayCollection();
     }
 
-    public function add(ApartmentBooking $apartmentBooking)
+    private function add(ApartmentBooking $apartmentBooking)
     {
         $this->apartmentBookingList->add($apartmentBooking);
+    }
+
+    public function addBookingStart(DateTime $CreationDateTime, string $ownerId, string $tenantId, BookingPeriod $bookingPeriod, ApartmentBookingHistory $apartmentBookingHistory)
+    {
+        $this->apartmentBookingList->add(
+            ApartmentBooking::start(
+                $CreationDateTime,
+                $ownerId,
+                $tenantId,
+                $bookingPeriod,
+                $apartmentBookingHistory
+            ));
     }
 }
