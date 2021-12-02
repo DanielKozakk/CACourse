@@ -8,9 +8,9 @@ use Domain\Apartment\BookingAssertion;
 use Domain\Apartment\BookingRepository;
 use Domain\Apartment\RentalType;
 use Domain\EventChannel\EventChannel;
+use Domain\Hotel\HotelRepository;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomAssertion;
-use Domain\Hotel\HotelRoom\HotelRoomRepository;
 use Helpers\PropertiesUnwrapper;
 use Infrastructure\EventChannel\Symfony\SymfonyEventDispatcher;
 use Infrastructure\Persistence\Doctrine\Booking\DoctrineBookingRepository;
@@ -31,7 +31,6 @@ class HotelRoomApplicationServiceTest extends WebTestCase
      */
     private array $expectedDays;
 
-    private HotelRoomRepository $hotelRoomRepository;
     private EventChannel $eventChannel;
     private BookingRepository $bookingRepository;
     private HotelRoomApplicationService $hotelRoomApplicationService;
@@ -49,13 +48,10 @@ class HotelRoomApplicationServiceTest extends WebTestCase
          */
         $this->doctrineHotelRepository = $this->getContainer()->get(DoctrineHotelRepository::class);
 
-        /**
-         * @var DoctrineHotelRoomRepository
-         */
-        $this->hotelRoomRepository = $this->getContainer()->get(DoctrineHotelRoomRepository::class);
+
         $this->eventChannel = $this->createStub(SymfonyEventDispatcher::class);
         $this->bookingRepository = $this->createMock(DoctrineBookingRepository::class);
-        $this->hotelRoomApplicationService = new HotelRoomApplicationService($this->hotelRoomRepository, $this->eventChannel, $this->bookingRepository, $this->doctrineHotelRepository);
+        $this->hotelRoomApplicationService = new HotelRoomApplicationService($this->doctrineHotelRepository, $this->eventChannel, $this->bookingRepository, $this->doctrineHotelRepository);
 
     }
 
@@ -85,11 +81,11 @@ class HotelRoomApplicationServiceTest extends WebTestCase
         $spacesDefinition = ['Pokoj1' => 24.2, 'Pokoj2' => 31];
         $description = 'Description';
 
-        $hotelRoomRepository = $this->createMock(HotelRoomRepository::class);
-        $this->hotelRoomApplicationService = new HotelRoomApplicationService($hotelRoomRepository, $this->eventChannel, $this->bookingRepository, $this->doctrineHotelRepository);
+        $hotelRepository = $this->createMock(HotelRepository::class);
+        $this->hotelRoomApplicationService = new HotelRoomApplicationService($hotelRepository, $this->eventChannel, $this->bookingRepository, $this->doctrineHotelRepository);
 
 
-        $hotelRoomRepository->expects($this->once())->method('save')->with($this->callback(
+        $hotelRepository->expects($this->once())->method('saveHotelRoom')->with($this->callback(
             function (HotelRoom $hotelRoom) use ($description, $spacesDefinition, $hotelId, $hotelNumber) {
                 HotelRoomAssertion::assert($hotelRoom)
                     ->hasHotelIdEqualTo($hotelId)

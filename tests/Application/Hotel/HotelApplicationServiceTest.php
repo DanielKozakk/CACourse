@@ -24,7 +24,7 @@ class HotelApplicationServiceTest extends TestCase
 
         $hotelApplicationService = new HotelApplicationService($hotelRepository);
 
-        $hotelRepository->expects($this->once())->method('save')->with($this->callback(
+        $hotelRepository->expects($this->once())->method('saveHotel')->with($this->callback(
             function (Hotel $hotel){
                 HotelAssertion::assert($hotel)
                     ->hasNameEqualTo(self::NAME)

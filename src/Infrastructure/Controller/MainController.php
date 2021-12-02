@@ -4,24 +4,7 @@ namespace Infrastructure\Controller;
 
 use Application\Apartment\ApartmentApplicationService;
 use DateTime;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Domain\Apartment\ApartmentFactory;
-use Domain\Apartment\ApartmentRepository;
-use Domain\Hotel\Hotel;
-use Domain\Hotel\HotelBookingHistory\HotelBookingHistory;
-use Domain\Hotel\HotelBookingHistory\HotelBookingHistoryRepository;
-use Domain\Hotel\HotelFactory;
-use Domain\Hotel\HotelRoom\HotelRoomFactory;
-use Domain\Hotel\HotelRoom\Space;
-use Domain\Hotel\HotelRoom\SquareMeter;
-use Infrastructure\Persistence\Doctrine\Apartment\DoctrineApartmentRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoomBookingHistory\DoctrineHotelRoomBookingHistoryRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\SqlDoctrineHotelRepository;
-
+use Domain\Hotel\HotelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,14 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
 
-    private ApartmentApplicationService $apartmentApplicationService;
+    private HotelRepository $hotelRepository;
 
     /**
-     * @param ApartmentApplicationService $apartmentApplicationService
+     * @param HotelRepository $hotelRepository
      */
-    public function __construct(ApartmentApplicationService $apartmentApplicationService)
+    public function __construct(HotelRepository $hotelRepository)
     {
-        $this->apartmentApplicationService = $apartmentApplicationService;
+        $this->hotelRepository = $hotelRepository;
     }
 
 
@@ -46,7 +29,7 @@ class MainController extends AbstractController
     public function index(): Response
     {
 
-        $this->apartmentApplicationService->book(1, '161361236234623', new DateTime('2030-01-01'), new DateTime('2030-01-02'));
+        dump($this->hotelRepository->findHotelRoomById(1));
 
 //        $this->apartmentApplicationService->addApartment('090909090090909',
 //            'Zwycięska',

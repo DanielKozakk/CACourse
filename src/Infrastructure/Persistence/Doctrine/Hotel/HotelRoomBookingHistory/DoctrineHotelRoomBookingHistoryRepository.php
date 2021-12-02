@@ -6,7 +6,7 @@ use Domain\Apartment\ApartmentBookingHistory\ApartmentBookingHistory;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistory;
 use Domain\Hotel\HotelBookingHistory\HotelBookingHistoryRepository;
 use Domain\Hotel\HotelRoom\HotelRoom;
-use Domain\Hotel\HotelRoom\HotelRoomRepository;
+
 
 class DoctrineHotelRoomBookingHistoryRepository implements HotelBookingHistoryRepository
 {

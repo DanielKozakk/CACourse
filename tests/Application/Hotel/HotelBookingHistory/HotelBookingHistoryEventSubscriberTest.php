@@ -11,14 +11,13 @@ use Domain\Hotel\HotelBookingHistory\HotelRoomBookingHistory;
 use Domain\Hotel\HotelRoom\HotelRoomBookedEvent;
 use Helpers\PropertiesUnwrapper;
 use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\SqlDoctrineHotelRoomRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HotelBookingHistoryEventSubscriberTest extends WebTestCase
 {
-use PropertiesUnwrapper;
+    use PropertiesUnwrapper;
+
     const TENANT_ID = '120312';
 
     private DateTime $startDate;
@@ -31,9 +30,7 @@ use PropertiesUnwrapper;
     private HotelBookingHistoryEventSubscriber $hotelBookingHistoryEventSubscriber;
 
     private HotelBookingHistoryRepository $hotelBookingHistoryRepository;
-    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
     private DoctrineHotelRepository $doctrineHotelRepository;
-
 
 
     public function __construct()
@@ -41,7 +38,6 @@ use PropertiesUnwrapper;
         parent::__construct();
         self::bootKernel();
 
-        $this->doctrineHotelRoomRepository = $this->getContainer()->get(DoctrineHotelRoomRepository::class);
         $this->hotelBookingHistoryRepository = $this->createMock(HotelBookingHistoryRepository::class);
         $this->doctrineHotelRepository = $this->createMock(DoctrineHotelRepository::class);
 
@@ -49,24 +45,23 @@ use PropertiesUnwrapper;
         $this->endDate = new DateTime('2021-01-02');
         $this->days = [$this->startDate, $this->endDate];
 
-        $this->hotelBookingHistoryEventSubscriber = new HotelBookingHistoryEventSubscriber($this->hotelBookingHistoryRepository, $this->doctrineHotelRoomRepository, $this->doctrineHotelRepository);
+        $this->hotelBookingHistoryEventSubscriber = new HotelBookingHistoryEventSubscriber($this->hotelBookingHistoryRepository, $this->doctrineHotelRepository);
     }
 
     /**
-     * @throws \ReflectionException
      */
     public function testShouldUpdateHotelRoomBookingHistory()
     {
         $this->givenExistingHotelBookingHistory();
 
         $this->hotelBookingHistoryRepository->expects($this->once())->method('save')->with(
-            $this->callback(function (HotelBookingHistory $hotelBookingHistory){
+            $this->callback(function (HotelBookingHistory $hotelBookingHistory) {
                 $hotelRoomBookingHistories = $this->getReflectionValue(HotelBookingHistory::class, 'hotelRoomBookingHistories', $hotelBookingHistory);
                 /**
                  * @var HotelRoomBookingHistory
                  */
                 $hotelRoomBookingHistory = $hotelRoomBookingHistories[0];
-                $hotelRoomBookings = $this->getReflectionValue(HotelRoomBookingHistory::class,'bookings', $hotelRoomBookingHistory );
+                $hotelRoomBookings = $this->getReflectionValue(HotelRoomBookingHistory::class, 'bookings', $hotelRoomBookingHistory);
                 $hotelRoomBooking = $hotelRoomBookings[0];
 
                 $actualTenantId = $this->getReflectionValue(HotelRoomBooking::class, 'tenantId', $hotelRoomBooking);
@@ -82,10 +77,11 @@ use PropertiesUnwrapper;
 
     }
 
-    private function givenExistingHotelBookingHistory(){
+    private function givenExistingHotelBookingHistory()
+    {
         $this->hotelBookingHistoryRepository->method('existsFor')->willReturn(true);
 
-        $hotel = $this->getContainer()->get(DoctrineHotelRepository::class)->findById(HotelFixture::HOTEL_ID);
+        $hotel = $this->getContainer()->get(DoctrineHotelRepository::class)->findHotelById(HotelFixture::HOTEL_ID);
         $hotelBookingHistory = new HotelBookingHistory($hotel);
         $this->hotelBookingHistoryRepository->method('findFor')->willReturn($hotelBookingHistory);
     }

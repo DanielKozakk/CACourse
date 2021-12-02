@@ -15,7 +15,6 @@ use Domain\Hotel\HotelRoom\HotelRoomFactory;
 use Helpers\PropertiesUnwrapper;
 use Infrastructure\Persistence\Doctrine\Booking\DoctrineBookingRepository;
 use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
 use Infrastructure\Rest\Api\Booking\BookingRestController;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -30,8 +29,6 @@ use PropertiesUnwrapper;
     private BookingRestController $bookingRestController;
 
     private DoctrineHotelRepository $doctrineHotelRepository;
-
-    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
 
     private EventChannel $eventChannel;
 
@@ -60,7 +57,6 @@ use PropertiesUnwrapper;
         $this->commandChannel = $container->get(CommandChannel::class);
         $this->bookingRestController = new BookingRestController($this->commandChannel );
         $this->doctrineHotelRepository = $container->get(DoctrineHotelRepository::class);
-        $this->doctrineHotelRoomRepository = $container->get(DoctrineHotelRoomRepository::class);
         $this->eventChannel = $container->get(EventChannel::class);
         $this->bookingRepository = $container->get(BookingRepository::class);
 
@@ -118,14 +114,14 @@ use PropertiesUnwrapper;
         $hotelId=  $this->getReflectionValue(Hotel::class, 'id', $this->givenHotel());
         $hotelRoom = $hotelRoomFactory->create($hotelId, 90909090, ['dummyRoom' => 0.1], 'Dummy Description');
 
-        $this->doctrineHotelRoomRepository->save($hotelRoom);
+        $this->doctrineHotelRepository->saveHotelRoom($hotelRoom);
         return $hotelRoom;
     }
     private function givenHotel(): Hotel{
         $dummyValue = 'dummyValue';
         $hotelFactory = new HotelFactory();
         $hotel = $hotelFactory->create($dummyValue,$dummyValue,$dummyValue,$dummyValue,$dummyValue,$dummyValue);
-        $this->doctrineHotelRepository->save($hotel);
+        $this->doctrineHotelRepository->saveHotel($hotel);
         return $hotel;
     }
 }

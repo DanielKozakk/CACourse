@@ -64,4 +64,15 @@ class HotelRoom
         $eventChannel->publishHotelRoomBookedEvent($hotelRoomBookedEvent);
         return Booking::bookHotelRoom($this->id, $tenantId, $days);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+
 }

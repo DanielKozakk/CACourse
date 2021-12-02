@@ -24,6 +24,6 @@ class HotelApplicationService
                              string    $city,
                              string    $country): void{
         $hotel = (new HotelFactory)->create($name, $street, $postalCode, $buildingNumber, $city, $country);
-        $this->hotelRepository->save($hotel);
+        $this->hotelRepository->saveHotel($hotel);
     }
 }

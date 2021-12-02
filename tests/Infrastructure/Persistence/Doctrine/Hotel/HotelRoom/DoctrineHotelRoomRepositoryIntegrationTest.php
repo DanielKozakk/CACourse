@@ -19,7 +19,6 @@ class DoctrineHotelRoomRepositoryIntegrationTest extends WebTestCase
     use PropertiesUnwrapper;
 
     private DoctrineHotelRepository $doctrineHotelRepository;
-    private DoctrineHotelRoomRepository $doctrineHotelRoomRepository;
 
     private const HOTEL_ROOM_NUMBER = '1234';
     private const SPACES_DEFINITION = ['FIRST_SPACE' => 201.4, 'SECOND_SPACE' => 20];
@@ -31,7 +30,6 @@ class DoctrineHotelRoomRepositoryIntegrationTest extends WebTestCase
         parent::__construct($name, $data, $dataName);
         self::bootKernel();
         $this->doctrineHotelRepository = $this->getContainer()->get(DoctrineHotelRepository::class);
-        $this->doctrineHotelRoomRepository = $this->getContainer()->get(DoctrineHotelRoomRepository::class);
     }
 
     /**
@@ -42,11 +40,11 @@ class DoctrineHotelRoomRepositoryIntegrationTest extends WebTestCase
         $hotel = $this->givenHotel();
         $hotelId = $this->getReflectionValue(Hotel::class, 'id', $hotel);
         $hotelRoom = $this->givenHotelRoom($hotel);
-        $this->doctrineHotelRoomRepository->save($hotelRoom);
+        $this->doctrineHotelRepository->saveHotelRoom($hotelRoom);
 
         $hotelRoomId = $this->getReflectionValue(HotelRoom::class, 'id', $hotelRoom);
 
-        $fetchedHotelRoom = $this->doctrineHotelRoomRepository->findById($hotelRoomId);
+        $fetchedHotelRoom = $this->doctrineHotelRepository->findHotelRoomById($hotelRoomId);
 
         HotelRoomAssertion::assert($fetchedHotelRoom)
             ->hasSpacesEqualTo(self::SPACES_DEFINITION)
@@ -67,6 +65,9 @@ class DoctrineHotelRoomRepositoryIntegrationTest extends WebTestCase
     }
 
 
+    /**
+     * @throws ReflectionException
+     */
     private function givenHotel(): Hotel
     {
         $hotelName = 'hotel name';
@@ -79,7 +80,7 @@ class DoctrineHotelRoomRepositoryIntegrationTest extends WebTestCase
         $hotelFactory = new HotelFactory();
         $hotel = $hotelFactory->create($hotelName, $hotelStreet, $hotelPostalCode, $hotelFlatNumber, $hotelCity, $hotelCountry);
 
-        $this->doctrineHotelRepository->save($hotel);
+        $this->doctrineHotelRepository->saveHotel($hotel);
         return $hotel;
     }
 

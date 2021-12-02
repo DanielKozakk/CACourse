@@ -5,16 +5,14 @@ namespace Domain\Hotel\HotelBookingHistory;
 
 use DateTime;
 use Domain\Hotel\Hotel;
+use Domain\Hotel\HotelRepository;
 use Domain\Hotel\HotelRoom\HotelRoom;
 use Helpers\PropertiesUnwrapper;
 use Infrastructure\Persistence\Doctrine\Hotel\DoctrineHotelRepository;
-use Infrastructure\Persistence\Doctrine\Hotel\HotelRoom\DoctrineHotelRoomRepository;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Generator;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class HotelBookingHistoryTest extends KernelTestCase
 {
@@ -56,15 +54,18 @@ class HotelBookingHistoryTest extends KernelTestCase
         yield[$hotel, $hotelRoom, new DateTime(), self::TENANT_ID, $days];
     }
 
-    private function getRelatedHotel() : ?Hotel{
+    private function getRelatedHotel() : Hotel{
         $container = self::getContainer();
+        /** @var HotelRepository $hotelRepository */
         $hotelRepository = $container->get(DoctrineHotelRepository::class);
-        return  $hotelRepository->findById(self::HOTEL_ID);
+        return  $hotelRepository->findHotelById(self::HOTEL_ID);
     }
 
-    private function getRelatedHotelRoom() : ?HotelRoom{
+    private function getRelatedHotelRoom() : HotelRoom{
         $container = self::getContainer();
-        $hotelRoomRepository = $container->get(DoctrineHotelRoomRepository::class);
-        return $hotelRoomRepository->findById(self::HOTEL_ROOM_ID);
+        /** @var HotelRepository $hotelRepository */
+        $hotelRepository = $container->get(DoctrineHotelRepository::class);
+
+        return $hotelRepository->findHotelRoomById(self::HOTEL_ROOM_ID);
     }
 }

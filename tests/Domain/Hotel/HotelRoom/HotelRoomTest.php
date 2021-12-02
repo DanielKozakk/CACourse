@@ -119,7 +119,7 @@ class HotelRoomTest extends WebTestCase
     {
         $container = self::getContainer();
 
-        $hotelRoomFactory = new HotelRoomFactory($container->get(DoctrineHotelRepository::class));
+        $hotelRoomFactory = new HotelRoomFactory($container->get(HotelRepository::class));
 
         $hotel = $this->getRelatedHotel();
         $hotelId = $this->getReflectionValue(Hotel::class, 'id', $hotel);
@@ -134,11 +134,11 @@ class HotelRoomTest extends WebTestCase
          * @var DoctrineHotelRepository $hotelRepository
          */
         $hotelRepository = $container->get(DoctrineHotelRepository::class);
-        return $hotelRepository->findById(HotelFixture::HOTEL_ID);
+        return $hotelRepository->findHotelById(HotelFixture::HOTEL_ID);
     }
 
     private function getTestHotelRoomFromDatabase(){
 
-        return $this->getContainer()->get(HotelRoomRepository::class)->findById(HotelFixture::HOTEL_ROOM_ID);
+        return $this->getContainer()->get(HotelRepository::class)->findHotelRoomById(HotelFixture::HOTEL_ROOM_ID);
     }
 }

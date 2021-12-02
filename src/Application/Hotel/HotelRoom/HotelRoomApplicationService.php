@@ -15,23 +15,26 @@ use Infrastructure\Rest\Api\Hotel\HotelRoom\HotelBookingDto;
 
 class HotelRoomApplicationService
 {
-    private HotelRoomRepository $hotelRoomRepository;
     private EventChannel $eventChannel;
     private BookingRepository $bookingRepository;
     private HotelRepository $doctrineHotelRepository;
+    private HotelRepository $hotelRepository;
 
     /**
-     * @param HotelRoomRepository $hotelRoomRepository
+     * @param HotelRepository $hotelRepository
      * @param EventChannel $eventChannel
      * @param BookingRepository $bookingRepository
      * @param HotelRepository $doctrineHotelRepository
      */
-    public function __construct(HotelRoomRepository $hotelRoomRepository, EventChannel $eventChannel, BookingRepository $bookingRepository, HotelRepository $doctrineHotelRepository)
+    public function __construct(HotelRepository   $hotelRepository,
+                                EventChannel      $eventChannel,
+                                BookingRepository $bookingRepository,
+                                HotelRepository   $doctrineHotelRepository)
     {
-        $this->hotelRoomRepository = $hotelRoomRepository;
         $this->eventChannel = $eventChannel;
         $this->bookingRepository = $bookingRepository;
         $this->doctrineHotelRepository = $doctrineHotelRepository;
+        $this->hotelRepository = $hotelRepository;
     }
 
 
@@ -54,7 +57,7 @@ class HotelRoomApplicationService
             $spacesDefinition,
             $description);
 
-        $this->hotelRoomRepository->save($hotelRoom);
+        $this->hotelRepository->saveHotelRoom($hotelRoom);
     }
 
     /**
@@ -67,7 +70,7 @@ class HotelRoomApplicationService
         /**
          * @var HotelRoom
          */
-        $hotelRoom = $this->hotelRoomRepository->findById($hotelRoomId);
+        $hotelRoom = $this->hotelRepository->findHotelRoomById($hotelRoomId);
 
         /**
          * @var Booking
