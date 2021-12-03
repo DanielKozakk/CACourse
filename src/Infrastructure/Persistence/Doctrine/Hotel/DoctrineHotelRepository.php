@@ -49,5 +49,4 @@ class DoctrineHotelRepository implements HotelRepository
     {
         return $this->sqlDoctrineHotelRoomRepository->find($id);
     }
-
 }

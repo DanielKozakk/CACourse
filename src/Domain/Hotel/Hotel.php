@@ -5,6 +5,7 @@ namespace Domain\Hotel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embedded;
+use Domain\Hotel\HotelRoom\HotelRoom;
 use Domain\Hotel\HotelRoom\HotelRoomFactory;
 
 /**
@@ -34,7 +35,7 @@ class Hotel
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Domain\Hotel\HotelRoom\HotelRoom", mappedBy="hotel")
+     * @ORM\OneToMany(targetEntity="Domain\Hotel\HotelRoom\HotelRoom", mappedBy="hotel", cascade={"persist"})
      */
     private $hotelRooms;
 
@@ -53,16 +54,40 @@ class Hotel
         return $this->id;
     }
 
-    public function addRoom(int $hotelNumber, array $spacesDefinition, string $description)
+    public function addRoom(int $hotelRoomNumber, array $spacesDefinition, string $description, HotelRepository $hotelRepository)
     {
-        $hotelRoom = (new HotelRoomFactory($this->doctrineHotelRepository))->create(
+        $hotelRoom = (new HotelRoomFactory($hotelRepository))->create(
             $this->id,
-            $hotelNumber,
+            $hotelRoomNumber,
             $spacesDefinition,
             $description);
 
         $this->hotelRooms->add($hotelRoom);
-
     }
+
+    public function getIdOfRoom(int $hotelRoomNumber): int
+    {
+        return $this->getHotelRoom($hotelRoomNumber)->getId();
+    }
+
+    public function getHotelRoom(int $hotelRoomNumber): HotelRoom|null
+    {
+        $he = array_values(array_filter($this->hotelRooms->toArray(), function(HotelRoom $value) use ($hotelRoomNumber) {
+            return $value->getHotelRoomNumber() === $hotelRoomNumber;
+        }));
+
+        return $he[0];
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getHotelRooms(): mixed
+    {
+        return $this->hotelRooms;
+    }
+
+
+
 
 }

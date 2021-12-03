@@ -10,6 +10,7 @@ use Domain\Hotel\HotelAddress;
 
 use Infrastructure\Persistence\Helper\PropertiesUnwrapper;
 use Query\Hotel\HotelReadModel;
+use Query\Hotel\QueryHotelRepository;
 use ReflectionException;
 
 /**
@@ -23,11 +24,13 @@ class SqlDoctrineHotelRepository extends ServiceEntityRepository
 
     use PropertiesUnwrapper;
     private EntityManagerInterface $entityManager;
+    private QueryHotelRepository $queryHotelRepository;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, QueryHotelRepository $queryHotelRepository)
     {
         parent::__construct($registry, Hotel::class);
         $this->entityManager = $entityManager;
+        $this->queryHotelRepository = $queryHotelRepository;
     }
 
     /**
@@ -38,9 +41,14 @@ class SqlDoctrineHotelRepository extends ServiceEntityRepository
         $this->entityManager->persist($hotel);
         $this->entityManager->flush();
 
-        $this->entityManager->persist($this->createHotelReadModel($hotel));
-        $this->entityManager->flush();
+        $hotelReadModel = $this->queryHotelRepository->findOneById($hotel->getId());
 
+        if(is_null($hotelReadModel)){
+            $this->entityManager->persist($this->createHotelReadModel($hotel));
+        } else {
+            $this->entityManager->persist($hotelReadModel);
+        }
+        $this->entityManager->flush();
     }
 
     /**

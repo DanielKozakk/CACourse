@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method HotelReadModel[]    findAll()
  * @method HotelReadModel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class SqlDoctrineQueryHotelRepository extends ServiceEntityRepository
 {
 

@@ -73,6 +73,11 @@ class HotelRoom
         return $this->id;
     }
 
-
-
+    /**
+     * @return int
+     */
+    public function getHotelRoomNumber(): int
+    {
+        return $this->hotelRoomNumber;
+    }
 }

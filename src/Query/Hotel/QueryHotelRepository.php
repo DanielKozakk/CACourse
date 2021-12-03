@@ -21,7 +21,7 @@ class QueryHotelRepository
     {
          return $this->sqlDoctrineQueryHotelRepository->findAll();
     }
-    public function findOneById(string $id): ?HotelReadModel
+    public function findOneById(int $id): ?HotelReadModel
     {
         return $this->sqlDoctrineQueryHotelRepository->findOneById($id);
     }

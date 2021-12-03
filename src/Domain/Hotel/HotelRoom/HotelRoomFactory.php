@@ -30,6 +30,8 @@ class HotelRoomFactory
                            array  $spacesDefinition,
                            string $description
     ): HotelRoom {
+
+
         $newHotelRoom = new HotelRoom($this->doctrineHotelRepository->findHotelById($hotelId), $hotelRoomNumber,
             $description
         );

@@ -69,6 +69,12 @@ services:
   Infrastructure\Rest\Api\Apartment\ApartmentRestController:
     autowire: true
 
+  Query\Hotel\QueryHotelRepository:
+    autowire: true
+
+  Query\Hotel\SqlDoctrineQueryHotelRepository:
+    autowire: true
+
 
 
   # Application\Apartment\ApartmentBookingHistory\ApartmentBookingHistoryEventSubscriber:
